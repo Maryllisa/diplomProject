@@ -22,8 +22,5 @@ public class Email {
     @JoinColumn(name = "recipientId")
     private Account recipient;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "messageId")
-    private Message message;
 
 }
