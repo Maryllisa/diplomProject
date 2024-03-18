@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: #343a40;
+      color: #fff;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #212529;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 50px;
+    }
+    .form-container label {
+      margin-bottom: 5px;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"],
+    .form-container input[type="date"],
+    .form-container input[type="tel"] {
+      background-color: #343a40;
+      color: #fff;
+      border-color: #6c757d;
+    }
+    .form-container .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .form-container .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    .form-container .modal-content {
+      background-color: #212529;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Регистрация</h1>
+      <form>
+        <div class="form-group">
+          <label for="inputFirstName">Имя</label>
+          <input type="text" class="form-control" id="inputFirstName" placeholder="Имя">
+        </div>
+        <div class="form-group">
+          <label for="inputLastName">Фамилия</label>
+          <input type="text" class="form-control" id="inputLastName" placeholder="Фамилия">
+        </div>
+        <div class="form-group">
+          <label for="inputMiddleName">Отчество</label>
+          <input type="text" class="form-control" id="inputMiddleName" placeholder="Отчество">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="inputUsername">Логин</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Логин">
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Пароль</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Пароль">
+        </div>
+        <div class="form-group">
+          <label for="inputBirthDate">Дата рождения</label>
+          <input type="date" class="form-control" id="inputBirthDate">
+        </div>
+        <div class="form-group">
+          <label for="inputPhoneNumber">Номер телефона</label>
+          <input type="tel" class="form-control" id="inputPhoneNumber" placeholder="Номер телефона">
+        </div>
+        <button type="button" id="registrationButton" class="btn btn-primary" data-toggle="modal" data-target="#secretKeyModal">Зарегистрироваться</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+function onRegistrationButtonClick() {
+  var confirmRegistration = confirm("Продолжить регистрацию, как клиент?");
+  if (confirmRegistration) {
+  } else {
+    var additionalInfo = prompt("Введите код доступа:");
+    if (additionalInfo==31277) {
+      alert("Доступ разрешен ");
+    } else {
+      alert("Доступ запрещен");
+    }
+  }
+}
+
+// Найти кнопку регистрации в документе
+var registrationButton = document.getElementById("registrationButton");
+
+// Добавить обработчик события нажатия на кнопку регистрации
+registrationButton.addEventListener("click", onRegistrationButtonClick);
+</script>
+</body>
+</html>
