@@ -32,8 +32,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     protected String determineTargetUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("EMPLOYEE")) {
-                return "/employee/";
+            if (grantedAuthority.getAuthority().equals("CLIENT")) {
+                return "/client/";
             } else if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 return "/admin/";
             }

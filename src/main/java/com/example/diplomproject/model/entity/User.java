@@ -1,6 +1,6 @@
 package com.example.diplomproject.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +24,8 @@ public class User implements UserDetails {
     @Column
     private String login;
     @Column
+    private String email;
+    @Column
     private String password;
     @Column(name = "active")
     private boolean active;
@@ -37,7 +39,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "ID"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -66,5 +67,8 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+    public void setRoles(Role role) {
+        this.roles.add(role);
     }
 }
