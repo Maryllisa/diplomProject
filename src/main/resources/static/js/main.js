@@ -70,8 +70,12 @@ function onRegistrationButtonClick() {
     }
 }
 
+
+
 // Найти кнопку регистрации в документе
 var registrationButton = document.getElementById("registrationButton");
 
 // Добавить обработчик события нажатия на кнопку регистрации
 registrationButton.addEventListener("click", onRegistrationButtonClick);
+
+

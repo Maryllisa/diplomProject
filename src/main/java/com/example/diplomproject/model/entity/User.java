@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,13 +36,14 @@ public class User implements UserDetails {
     private boolean activationEmail;
     @Column(name = "reset_password_token")
     private String reset_password_token;
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "ID"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();
+    @JoinColumn(name = "role_id")
+    private Role role;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return Collections.singleton(role);
     }
 
     @Override
@@ -69,6 +71,6 @@ public class User implements UserDetails {
         return active;
     }
     public void setRoles(Role role) {
-        this.roles.add(role);
+        this.role = role;
     }
 }
