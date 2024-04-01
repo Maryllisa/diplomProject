@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -18,12 +19,16 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
     private final AccountService accountService;
     private final ChatMessageService chatMessageService;
+    private final SimpMessagingTemplate messagingTemplate;
 
 
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/queue/messages")
     public MessageDTO sendMessage(@Payload MessageDTO MessageDTO) {
         ChatMessage chatMessage = chatMessageService.saveMessage(MessageDTO);
+        String login = MessageDTO.getSenderLogin().equals(chatMessage.getChatRoom().getSender().getLogin()) ?
+                chatMessage.getChatRoom().getRecipient().getLogin() :
+                chatMessage.getChatRoom().getSender().getLogin();
+        messagingTemplate.convertAndSendToUser(login, "/queue/messages", MessageDTO);
         return MessageDTO;
     }
     @MessageMapping("/user.addUser")

@@ -50,6 +50,8 @@ public class ChatRoomService {
                         msg.getSenderId().getSurname() + " " + msg.getSenderId().getName(),
                         msg.getContent(), msg.getTimestamp(),
                         msg.getStatus().toString()));
+                msg.setStatus(MessageStatus.RECEIVED);
+                messageRepository.save(msg);
             }
         }
         return chatRoomDTO;

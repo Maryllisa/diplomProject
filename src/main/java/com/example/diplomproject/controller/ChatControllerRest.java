@@ -36,7 +36,7 @@ public class ChatControllerRest {
     }
 
     @GetMapping("/messages/{sender}/{recipient}")
-    public ResponseEntity<ChatRoomDTO>   findChatMessages(@PathVariable("sender") String senderLogin,
+    public ResponseEntity<ChatRoomDTO>  findChatMessages(@PathVariable("sender") String senderLogin,
                                                                @PathVariable("recipient") String recipientLogin) {
         return ResponseEntity.ok(chatRoomService.findChatMessages(senderLogin, recipientLogin));
     }

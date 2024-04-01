@@ -9,8 +9,6 @@ const chatArea = document.querySelector('#chat-messages');
 const messageForm = document.querySelector('#messageForm');
 const messageInput = document.querySelector('#message');
 messageForm.addEventListener('submit', sendMessage, true);
-
-// let SelectUser = clickedUser.getAttribute('id');
 let selectUserLogin = null;
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -31,13 +29,10 @@ async function onConnected() {
             User = user;
             login = User.login;
             console.log("Полученный объект User:", user);
-            // Дополнительная обработка полученного объекта
         })
         .catch(error => {
             console.error("Ошибка при получении данных:", error);
-            // Обработка ошибки
         });
-
 
     stompClient.subscribe(`/user/${login}/queue/messages`, onMessageReceived);
     stompClient.subscribe(`/user/public`, onUserReceived);
@@ -52,7 +47,39 @@ async function onConnected() {
     await findAndDisplayConnectedUsers();
     await findAndDisplayOfflineUsers();
 }
-
+//-------------------- Обработка новых подключений пользователей-----------------------
+async function onUserReceived(payload) {
+    await findAndDisplayConnectedUsers();
+    await findAndDisplayOfflineUsers();
+    const message = JSON.parse(payload.body);
+    const senders = message.login.split(" ");
+    for (var i = 0; i < senders.length; i++) {
+        if (senders[i] !== login) {
+            selectUserLogin = senders[i];
+        }
+    }
+    if (selectUserLogin && selectUserLogin === message.login) {
+        displayMessage(message.login, message.content);
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+}
+//-------------------- Обработка новых отправки новых сообщений -----------------------
+async function onMessageReceived(payload) {
+    await findAndDisplayConnectedUsers();
+    await findAndDisplayOfflineUsers();
+    await fetchAndDisplayUserChat();
+    const message = JSON.parse(payload.body);
+    const senders = message.login.split(" ");
+    for (var i = 0; i < senders.length; i++) {
+        if (senders[i] !== login) {
+            selectUserLogin = senders[i];
+        }
+    }
+    if (selectUserLogin && selectUserLogin === message.login) {
+        displayMessage(message.login, message.content);
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+}
 //-----------------------------------Отрисовка пользователей-------------------
 async function findAndDisplayConnectedUsers() {
     const connectedUsersResponse = await fetch('/users');
@@ -98,98 +125,33 @@ function findNotReadChat(user, UserList){
     usernameSpan.textContent = user.surname + " " + user.name;
 
     const receivedMsgs = document.createElement('span');
-    receivedMsgs.textContent = '0';
     receivedMsgs.classList.add('nbr-msg', 'hidden');
 
     listItem.appendChild(userImage);
     listItem.appendChild(usernameSpan);
     listItem.appendChild(receivedMsgs);
-
     listItem.addEventListener('click', userItemClick);
-
+    UserList.appendChild(listItem);
+    if (user.chatRoomDTOS !==null) {
+        user.chatRoomDTOS.forEach(chatRoom=>{
+            if (chatRoom.idChatRoom.includes(login)
+                && chatRoom.messageDTOList!==null){
+                for (let msg of chatRoom.messageDTOList) {
+                    if (msg.status === 'DELIVERED') {
+                        const userItem = document.getElementById(user.login);
+                        const receivedMsgs = userItem.querySelector('.nbr-msg');
+                        receivedMsgs.classList.remove('hidden');
+                        break;
+                    }
+                }
+            }
+        });
+    }
+    listItem.appendChild(receivedMsgs);
     UserList.appendChild(listItem);
 }
-// ---------------------Отрисовка непрочитанных сообщений-------------------------
-async function onUserReceived(payload) {
-    await findAndDisplayConnectedUsers();
-    await findAndDisplayOfflineUsers();
-    const message = JSON.parse(payload.body);
-    if (message.login !==login){
-        selectUserLogin = message.login
-        const notifiedUser = document.querySelector(`#${selectUserLogin}`);
-        const allMessagesFromSender = await getAllMessagesFromSender(notifiedUser);
-        if (message.chatRoomDTOS !==null) {
-            message.chatRoomDTOS.forEach(chatRoom=>{
-               if (chatRoom.idChatRoom.includes(login)
-                   && chatRoom.messageDTOList!==null){
-                   for (let msg of chatRoom.messageDTOList) {
-                       if (msg.status === 'DELIVERED') {
-                           const nbrMsg = notifiedUser.querySelector('.nbr-msg');
-                           nbrMsg.classList.remove('hidden');
-                           nbrMsg.textContent = '';
-                           break;
-                       }
-                   }
-               }
-            });
-        }
 
-    }
-}
-async function onMessageReceived(payload) {
-    await findAndDisplayConnectedUsers();
-    await findAndDisplayOfflineUsers();
-    const message = JSON.parse(payload.body);
-    const senders = message.login.split(" ");
-    for (var i = 0; i < senders.length; i++) {
-        if (senders[i] !== login) {
-            selectUserLogin = senders[i];
-        }
-    }
-    if (selectUserLogin && selectUserLogin === message.login) {
-        displayMessage(message.login, message.content);
-        chatArea.scrollTop = chatArea.scrollHeight;
-    }
-
-    if (selectUserLogin) {
-        document.querySelector(`#${selectUserLogin}`).classList.add('active');
-    } else {
-        messageForm.classList.add('hidden');
-    }
-
-    const notifiedUser = document.querySelector(`#${selectUserLogin}`);
-    const allMessagesFromSender = await getAllMessagesFromSender(notifiedUser);
-    console.log(allMessagesFromSender);
-
-    console.log(notifiedUser)
-    if (allMessagesFromSender.some(msg => msg.status === 'DELIVERED')) {
-        const nbrMsg = notifiedUser.querySelector('.nbr-msg');
-        nbrMsg.classList.remove('hidden');
-        nbrMsg.textContent = '';
-    }
-}
-
-
-async function getAllMessagesFromSender(notifiedUser) {
-    try {
-        const response = await fetch(`/messages/${selectUserLogin}`);
-
-        if (response.ok) {
-            const responseBody = await response.text();
-            if (responseBody.trim().length > 0) {
-                const data = JSON.parse(responseBody);
-                return data;
-            }
-        } else {
-            throw new Error('Failed to fetch messages from sender');
-        }
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-}
-
-
+// ---------------------Отклик на открытие чата-------------------------
 function userItemClick(event) {
     document.querySelectorAll('.user-item').forEach(item => {
         item.classList.remove('active');
@@ -207,8 +169,7 @@ function userItemClick(event) {
     nbrMsg.textContent = '0';
 
 }
-
-//Выгрузка и загрузка сообщений чата
+//---------------------------Выгрузка сообщений и отображение их в чате-------------
 async function fetchAndDisplayUserChat() {
     const userChatResponse = await fetch(`/messages/${User.login}/${selectUserLogin}`);
     const chatRoomDTO = await userChatResponse.json();
@@ -237,6 +198,8 @@ function displayMessage(senderId, content) {
     messageContainer.appendChild(message);
     chatArea.appendChild(messageContainer);
 }
+//--------------------------- Отправка сообщения---------
+
 function sendMessage(event) {
     const messageContent = messageInput.value.trim();
     if (messageContent && stompClient) {
@@ -271,6 +234,10 @@ function onLogout() {
     );
     window.location.reload();
 }
+
+messageForm.addEventListener('submit', sendMessage, true);
+logout.addEventListener('click', onLogout, true);
+window.onbeforeunload = () => onLogout();
 
 
 
