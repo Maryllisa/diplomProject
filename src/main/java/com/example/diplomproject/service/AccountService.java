@@ -350,4 +350,15 @@ public class AccountService {
         accountRepository.save(account);
         return userDTO;
     }
+
+    public void changeStatusOnline(String login) {
+        Account account = accountRepository.findByLogin(login);
+        account.setStatus(Status.ONLINE);
+        accountRepository.save(account);
+    }
+    public void changeStatusOffline(String login) {
+        Account account = accountRepository.findByLogin(login);
+        account.setStatus(Status.OFFLINE);
+        accountRepository.save(account);
+    }
 }

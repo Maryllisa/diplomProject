@@ -2,6 +2,7 @@ package com.example.diplomproject;
 
 import com.example.diplomproject.model.dto.AccountDTO;
 import com.example.diplomproject.model.entity.Account;
+import com.example.diplomproject.model.entity.Role;
 import com.example.diplomproject.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,8 +46,25 @@ public class MainController {
     public String getChat(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
+        accountService.changeStatusOnline(login);
         model.addAttribute("login", login);
         return "chat/chatApp";
+    }
+    @GetMapping("/openChat/logout")
+    public String logoutFromChat(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        accountService.changeStatusOffline(login);
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+        if (role.equals(Role.ADMIN.toString())){
+            return "redirect:/admin";
+        }
+        else if (role.equals(Role.CLIENT.toString())){
+            return "redirect:/client";
+        }
+        else {
+            return "redirect:/user";
+        }
     }
     @GetMapping("/login")
     private String getLogin(){
