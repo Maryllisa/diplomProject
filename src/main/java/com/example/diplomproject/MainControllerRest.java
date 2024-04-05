@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class MainControllerRest {
     public ResponseEntity<String> addNewUser(@Valid @ModelAttribute AccountDTO account,
                                              BindingResult result,
                                              @RequestParam String role,
+                                             @RequestParam("file") MultipartFile file,
                                              Model model) {
         if (result.hasErrors()) {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -38,7 +40,7 @@ public class MainControllerRest {
             return ResponseEntity.badRequest().body(objectMapper.writeValueAsString(map));
         }
         else {
-            accountService.addNewAccount(account, role);
+            accountService.addNewAccount(account, role, file);
         }
         return ResponseEntity.ok("User created successfully");
     }

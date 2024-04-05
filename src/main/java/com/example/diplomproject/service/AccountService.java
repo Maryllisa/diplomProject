@@ -9,10 +9,12 @@ import com.example.diplomproject.repository.ChatMessageRepository;
 import com.example.diplomproject.repository.ChatRoomRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -24,6 +26,7 @@ public class AccountService {
     private final MailSender mailSender;
     private final ChatMessageRepository messageRepository;
     private final ChatRoomRepository chatRoomRepository;
+    private final ImageRepository imageRepository;
     public Map<String, String> getCheckAccount(BindingResult result, AccountDTO accountDTO){
         Map<String, String> checkAccountDto = new HashMap<>();
         result.getFieldErrors().forEach(error ->{
@@ -104,25 +107,29 @@ public class AccountService {
 
     }
 
-    public void addNewAccount(AccountDTO account, String role) {
+    public void addNewAccount(AccountDTO account, String role, MultipartFile file) {
         Account newAccount = new Account(account.getSurname(),
                             account.getName(),
                 account.getPatronymic(),
                 account.getDateBirthday(),
                 account.getPhone(),
                 "",new Photo());
-        if (role.equals(Role.ADMIN)) newAccount.setRoles(Role.ADMIN);
-        else if (role.equals(Role.MANAGER)) newAccount.setRoles(Role.MANAGER);
+
+        if (role.equals(Role.EMPLOYEE.toString())) newAccount.setRoles(Role.EMPLOYEE);
         else newAccount.setRoles(Role.CLIENT);
+        Photo photo = addNewPhoto(file);
+
         newAccount.setLogin(account.getLogin());
         newAccount.setEmail(account.getEmail());
+        newAccount.setPhoto(photo);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(account.getPassword());
         newAccount.setPassword(encodedPassword);
         newAccount.setActivationCode(UUID.randomUUID().toString());
         String code = newAccount.getActivationCode();
         newAccount.setStatus(Status.OFFLINE);
-        accountRepository.save(newAccount);
+        photo.setAccount(accountRepository.save(newAccount));
+        imageRepository.save(photo);
         if (!StringUtils.isEmpty(account.getEmail())) {
             String message = String.format(
                     "Здравствуйте, %s %s %s! \n" +
@@ -134,6 +141,18 @@ public class AccountService {
             mailSender.send(account.getEmail(), "Activation code", message);
         }
     }
+
+    @SneakyThrows
+    private Photo addNewPhoto(MultipartFile file) {
+        Photo photo = new Photo();
+        photo.setNamePhoto(file.getName());
+        photo.setSizePhoto(file.getSize());
+        Base64.Encoder encoder = Base64.getEncoder();
+        String encoded = encoder.encodeToString(file.getBytes());
+        photo.setPhoto(encoded);
+        return imageRepository.save(photo);
+    }
+
     public boolean activateUser(String code) {
         Account user = accountRepository.findByActivationCode(code);
         if (user == null) {

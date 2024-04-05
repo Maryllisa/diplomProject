@@ -3,7 +3,6 @@ const sender = ()=> {
         var form = document.getElementById('form');
         var formData = new FormData(form);
         clean();
-        // Отправка формы через AJAX
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/registration', true);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -56,13 +55,13 @@ const displayError = (fieldName, errorMessage)=> {
 function onRegistrationButtonClick() {
     var confirmRegistration = confirm("Продолжить регистрацию, как клиент?");
     if (confirmRegistration) {
-        document.getElementById("role").value = "client";
+        document.getElementById("role").value = "CLIENT";
         sender();
     } else {
         var additionalInfo = prompt("Введите код доступа:");
         if (additionalInfo == 31277) {
             alert("Доступ разрешен ");
-            document.getElementById("role").value = "manager";
+            document.getElementById("role").value = "EMPLOYEE";
             sender();
         } else {
             alert("Доступ запрещен");
