@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller;
+package com.example.diplomproject.controller.chat;
 
 import com.example.diplomproject.model.dto.AccountDTO;
 import com.example.diplomproject.model.dto.message.MessageDTO;

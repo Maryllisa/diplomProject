@@ -36,14 +36,15 @@ public class User implements UserDetails {
     private boolean activationEmail;
     @Column(name = "reset_password_token")
     private String reset_password_token;
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "role_admin", joinColumns = @JoinColumn(name = "id_admin"))
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    private Set<Role> roles = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private Status status;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(role);
+        return roles;
     }
 
     @Override
@@ -71,6 +72,6 @@ public class User implements UserDetails {
         return active;
     }
     public void setRoles(Role role) {
-        this.role = role;
+        this.roles.add(role);
     }
 }

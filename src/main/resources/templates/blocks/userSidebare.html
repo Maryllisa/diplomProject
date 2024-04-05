@@ -1,0 +1,72 @@
+
+<div th:fragment="userSidebare" class="flex-shrink-0 p-3" style="width: 330px;  height: 200vh; background-color: #1a1a1c; margin-top: -7.7%">
+    <a href="/user" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none " style=" border-bottom: #814de5; border-bottom-style: double">
+      <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      <div style=" background-color: #814de5; border-radius: 30%; margin-right: 5%">
+        <img src="/img/logo.png" style="height: 55px; width: 55px; "></div>
+      <span class="fs-4 fw-semibold" style="margin-right: 25%; white-space: nowrap; color: #f2f0f8 ">Панель сотрудника</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1" style=" color: #bab7c9 " >
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true " style=" color: #f2f0f8">
+          <img src="/img/zav.png" style="height: 25px; width: 25px; margin-right: 10px;">
+          <span style="margin-left: 3px;">  Заявки </span>
+        </button>
+        <div class="collapse show " id="home-collapse" >
+          <ul class="btn-toggle-nav ps-4.5  fw-normal pb-1 small">
+            <li><a href="/user/obrApp" class="d-inline-flex text-decoration-none rounded" style="color:#bab7c9;">Обработка заявок </a></li>
+            <li><a href="/user/activeApp" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотр активных заявок</a></li>
+            <li><a href="/user/appHistory" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">История обработанных заявок  </a></li>
+            <li><a href="/user/supplierReg" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Оформление поставщика  </a></li>
+            <li><a href="/user/regOfDeclaration" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Оформление декларации на товар к заявке </a></li>
+            <li><a href="/user/regMark" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Регистрация маркировки </a></li>
+
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1" style=" color: #bab7c9 ">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" style=" color: #f2f0f8">
+          <img src="/img/otgr.png" style="height: 25px; width: 25px; margin-right: 10px;">
+          <span style="margin-left: 3px;">  Отгрузка товара </span>
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+          <ul class="btn-toggle-nav ps-4.5 fw-normal pb-1 small">
+            <li><a href="/user/arrangeShipment" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Оформление отгрузки товара</a></li>
+            <li><a href="/user/showShipment" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотр отгрузок</a></li>
+            <li><a href="/user/showProductOnWH" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотр товара на складе</a></li>
+
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1" style=" color: #bab7c9 ">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false" style="color: #f2f0f8;">
+          <img src="/img/otp.png" style="height: 25px; width: 25px; margin-right: 10px;">
+          <span style="margin-left: 3px;"> Отпуск товара </span>
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav ps-4.5 fw-normal pb-1 small">
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Оформление отпуска товара</a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >История отпусков</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1" style=" color: #bab7c9">
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false" style=" color: #f2f0f8">
+          <img src="/img/otch.png" style="height: 25px; width: 25px; margin-right: 10px;">
+          <span style="margin-left: 3px;">  Отчеты </span>
+        </button>
+        <div class="collapse" id="account-collapse">
+          <ul class="btn-toggle-nav ps-4.5  fw-normal pb-1 small">
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Отчет о товара на складе</a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Отчет по маркировкам товара </a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Отчёт по активным заявкам </a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;">Отчет по истории заявок</a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Отчет по отгрузкам </a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Отчёт по истории отгрузок  </a></li>
+            <li><a href="#" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;">Отчет по отпуску товара</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </div>

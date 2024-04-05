@@ -153,7 +153,7 @@ public class AccountService {
         userDTO.setSurname(account.getSurname());
         userDTO.setName(account.getName());
         userDTO.setPatronymic(account.getPatronymic());
-        userDTO.setRole(account.getRole().toString());
+        userDTO.setRole(account.getRoles().toString());
 
         List<ChatMessage> chatMessage = messageRepository.findAllBySenderIdAndStatus(account, MessageStatus.DELIVERED);
         Set<ChatRoom> chatRoomId = new HashSet<>();
@@ -199,7 +199,7 @@ public class AccountService {
             userDTO.setSurname(account.getSurname());
             userDTO.setName(account.getName());
             userDTO.setPatronymic(account.getPatronymic());
-            userDTO.setRole(account.getRole().toString());
+            userDTO.setRole(account.getRoles().toString());
 
             List<ChatMessage> chatMessage = messageRepository.findAllBySenderIdAndStatus(account, MessageStatus.DELIVERED);
             Set<ChatRoom> chatRoomId = new HashSet<>();
@@ -240,7 +240,7 @@ public class AccountService {
             userDTO.setSurname(account.getSurname());
             userDTO.setName(account.getName());
             userDTO.setPatronymic(account.getPatronymic());
-            userDTO.setRole(account.getRole().toString());
+            userDTO.setRole(account.getRoles().toString());
 
             List<ChatMessage> chatMessage = messageRepository.findAllBySenderIdAndStatus(account, MessageStatus.DELIVERED);
             Set<ChatRoom> chatRoomId = new HashSet<>();
@@ -300,7 +300,7 @@ public class AccountService {
         userDTO.setSurname(account.getSurname());
         userDTO.setName(account.getName());
         userDTO.setPatronymic(account.getPatronymic());
-        userDTO.setRole(account.getRole().toString());
+        userDTO.setRole(account.getRoles().toString());
 
         List<ChatMessage> chatMessage = messageRepository.findAllBySenderIdAndStatus(account, MessageStatus.DELIVERED);
         Set<ChatRoom> chatRoomId = new HashSet<>();

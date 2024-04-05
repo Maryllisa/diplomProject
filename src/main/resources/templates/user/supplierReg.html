@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/userSidebare :: userSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
+    <h4 class="mb-3" style="color: #814de5">Оформление поставщика</h4>
+    <form class="needs-validation" novalidate="">
+      <div class="col-sm-1" style="margin-top: -6%; margin-left: 91%" >
+        <label  class="form-label" style="color: #814de5">ID</label>
+        <input type="text" class="form-control" id="id" placeholder="" value="" required="">
+        <div class="invalid-feedback">
+          Проверьте корректность заполнения id.
+        </div>
+      </div>
+      <div class="row g-3">
+
+        <div class="col-sm-6">
+          <label  class="form-label" style="color: #814de5">Имя</label>
+          <input type="text" class="form-control" id="First Name" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения имени.
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <label  class="form-label" style="color: #814de5">Фамилия</label>
+          <input type="text" class="form-control" id="Last Name" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения фамилии.
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label  class="form-label" style="color: #814de5">Компания <span class="text-body-secondary"></span></label>
+          <input type="email" class="form-control" id="Company" placeholder="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения компании.
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label for="address" class="form-label" style="color: #814de5">Адресс</label>
+          <input type="text" class="form-control" id="Address" placeholder="ул. ..." required="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения адреса.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label  class="form-label" style="color: #814de5">Город</label>
+          <input type="text" class="form-control" id="City" placeholder="г. Минск" required="">
+          <div class="invalid-feedback">
+            Проверьте город.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label  class="form-label" style="color: #814de5">Страна</label>
+          <input type="text" class="form-control" id="Country" placeholder="Беларусь" required="">
+          <div class="invalid-feedback">
+            Проверьте страну.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label  class="form-label" style="color: #814de5">Почтовый индекс</label>
+          <input type="text" class="form-control" id="Postal Code" placeholder="" required="">
+          <div class="invalid-feedback">
+            Проверьте индекс.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label" style="color: #814de5">Дата регистрации</label>
+          <input type="date" class="form-control" id="Registration Date" placeholder="">
+          <div class="invalid-feedback">
+            Неверная дата
+          </div>
+        </div>
+
+
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+      </div>
+
+    </form>
+  </div>
+</main>
+</body>
+
+</html>

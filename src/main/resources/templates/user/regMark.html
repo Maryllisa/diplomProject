@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/userSidebare :: userSidebare"></div>
+<main>
+    <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
+        <h4 class="mb-3" style="color: #814de5">Регистрация маркировки</h4>
+        <form class="needs-validation" novalidate="">
+            <div class="col-sm-1" style="margin-top: -6%; margin-left: 91%" >
+                <label  class="form-label" style="color: #814de5">ID</label>
+                <input type="text" class="form-control" id="id" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                    Проверьте корректность заполнения id.
+                </div>
+            </div>
+            <div class="row g-3">
+
+                <div class="col-sm-6">
+                    <label class="form-label" style="color: #814de5">Тип маркировки</label>
+                    <input type="text" class="form-control" id="marking-type" list="marking-types" placeholder="" value="" required>
+                    <datalist id="marking-types">
+                        <option value="Тип 1">
+                        <option value="Тип 2">
+                        <option value="Тип 3">
+                    </datalist>
+                    <div class="invalid-feedback">
+                        Проверьте корректность заполнения типа.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label  class="form-label" style="color: #814de5">Номер марки/знака/метки</label>
+                    <input type="text" class="form-control" id="Mark/Tag/Stamp Number" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Проверьте корректность заполнения номера.
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label" style="color: #814de5">Дата выпуска</label>
+                    <input type="date" class="form-control" id="Issue Date" placeholder="">
+                    <div class="invalid-feedback">
+                        Неверная дата
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label" style="color: #814de5">Дата нанесения</label>
+                    <input type="date" class="form-control" id="Application Date" placeholder="">
+                    <div class="invalid-feedback">
+                        Неверная дата
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label  class="form-label" style="color: #814de5">Статус</label>
+                    <input type="text" class="form-control" id="status" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Проверьте корректность заполнения статуса.
+                    </div>
+                </div>
+
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+            </div>
+
+        </form>
+    </div>
+</main>
+</body>
+
+</html>
