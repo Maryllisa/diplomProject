@@ -7,6 +7,7 @@ import com.example.diplomproject.model.dto.message.UserDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.repository.ChatMessageRepository;
 import com.example.diplomproject.repository.ChatRoomRepository;
+import com.example.diplomproject.repository.ImageRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;

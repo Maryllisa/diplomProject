@@ -1,4 +1,4 @@
-package com.example.diplomproject.service;
+package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Photo;
 import org.springframework.data.jpa.repository.JpaRepository;
