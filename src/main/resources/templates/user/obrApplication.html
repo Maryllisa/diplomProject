@@ -26,7 +26,7 @@
    <td  style="color: #1a1a1c" th:text="${ap.truck.registrationNumber}"/>
    <td  style="color: #1a1a1c" th:text="${ap.supplier.organizationName}"/>
    <td  style="color: #1a1a1c" th:text="${ap.declarationTD}"/>
-   <td><a th:href="@{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
+   <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
    <td><input type="button" value="Принять" style="font-weight: bold;"></td>
    <td><input type="button" value="Отклонить" style="font-weight: bold;"></td>
     </tr>

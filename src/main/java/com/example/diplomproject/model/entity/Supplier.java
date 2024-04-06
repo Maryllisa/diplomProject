@@ -35,5 +35,7 @@ public class Supplier {
     @Column // ОКПО (Классификатор предприятий и организаций)
     private String registrationCode;
     @OneToOne
+    private ApplicationForStorage applicationForStorage;
+    @OneToOne
     private Account account;
 }

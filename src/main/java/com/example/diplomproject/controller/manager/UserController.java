@@ -1,5 +1,6 @@
 package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.model.entity.StatusApplication;
+import com.example.diplomproject.model.entity.Supplier;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class UserController {
     private final ApplicationService applicationService;
+    private final SupplierService supplierService;
     @GetMapping("/user")
     public String getStart() {
         return "/user/userPanel";
@@ -32,8 +34,11 @@ public class UserController {
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.COMPLETED));
         return "/user/applicationHistory";
     }
-    @GetMapping("/user/supplierReg")
-    public String getSupplierReg() {return "/user/supplierReg";}
+    @GetMapping("/user/showSuppliers")
+    public String getSupplierReg(Model model) {
+        model.addAttribute("suppliers", supplierService.getAllSuppliers());
+        return "/user/showSupplier";
+    }
     @GetMapping("/user/regMark")
     public String getRegistrationMark() {return "/user/regMark";}
     @GetMapping("/user/regOfDeclaration")

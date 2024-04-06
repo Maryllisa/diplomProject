@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/userSidebare :: userSidebare"></div>
+<main>
+  <div class="table-responsive " style="width:950px; margin-top:-88%; margin-left: 27%">
+    <h4 class="mb-3" style="color: #814de5">Обработка заявок</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th style="color: #814de5" scope="col">Наименование органзиации</th>
+        <th style="color: #814de5" scope="col">Юридический адрес</th>
+        <th style="color: #814de5" scope="col">Номер телефона</th>
+        <th style="color: #814de5" scope="col">Адрес</th>
+        <th style="color: #814de5" scope="col">Банковская информация</th>
+        <th style="color: #814de5" scope="col">УНН</th>
+        <th style="color: #814de5" scope="col">ОКПО</th>
+        <th style="color: #814de5" scope="col">Номер заявки</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${suppliers}" th:each="sup:${suppliers}">
+        <td style="color: #1a1a1c" th:text="${sup.organizationName}"/>
+        <td style="color: #1a1a1c" th:text="${sup.legalAddress}"/>
+        <td style="color: #1a1a1c" th:text="${sup.phone}"/>
+        <td style="color: #1a1a1c" th:text="${sup.city + ', ' + sup.postalCode + ' ' + sup.address}"/>
+        <td style="color: #1a1a1c" th:text="${sup.bankName + ', ' + sup.bankCode}"/>
+        <td style="color: #1a1a1c" th:text="${sup.registrationCode}"/>
+        <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
+        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.applicationForStorage.idApplication}"><input type="button" value="Посмотреть подробнее"
+                                                                              style="font-weight: bold;"></a>
+        <td/>
+        <td><input type="button" value="Принять" style="font-weight: bold;"></td>
+        <td><input type="button" value="Отклонить" style="font-weight: bold;"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+
+</html>
