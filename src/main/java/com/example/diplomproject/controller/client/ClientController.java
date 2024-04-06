@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class ClientController {
 
-    @GetMapping("/user/supplierReg")
+    @GetMapping("/client/supplierReg")
     public String getSupplierReg() {return "/client/supplierReg";}
+    @GetMapping("/client/regOfDeclaration")
+    public String getRegOfDeclaration() {return "/client/regOfDeclaration";}
 }

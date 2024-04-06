@@ -41,8 +41,10 @@ public class UserController {
     }
     @GetMapping("/user/regMark")
     public String getRegistrationMark() {return "/user/regMark";}
-    @GetMapping("/user/regOfDeclaration")
-    public String getRegOfDeclaration() {return "/user/regOfDeclaration";}
+    @GetMapping("/user/showAllDeclaration")
+    public String getAllDeclaration() {return "/user/showAllDeclaration";}
+    @GetMapping("/user/showOfDeclaration")
+    public String getRegOfDeclaration() {return "/user/showDeclaration";}
     @GetMapping("/user/showShipment")
     public String getShipmentList() {return "/user/showShipment";}
     @GetMapping("/user/arrangeShipment")
