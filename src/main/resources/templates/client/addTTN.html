@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
+    <h4 class="mb-3" style="color: #814de5">Заполнить ТТН</h4>
+    <form class="needs-validation" novalidate="">
+      <label for="pdfFile" class="form-label" style="color: #814de5; size: 12px">Выберите PDF-документ:</label>
+      <p>
+      <div class="col-12">
+      <input type="file" class="form-control" id="pdfFile" name="pdfFile" accept=".pdf" >
+    </div>
+      </p>
+      <br>
+      <button class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: #814de5; color: #1a1a1c">Отправить</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
+    <h4 class="mb-3" style="color: #814de5">Добавить заявку на хранение</h4>
+    <form class="needs-validation" novalidate="">
+      <div class="col-sm-4" style="margin-top: -4%; margin-left: 67%" >
+        <label  class="form-label" style="color: #814de5">Дата заявления</label>
+        <input type="date" class="form-control" id="dateZav" placeholder="" value="" required="">
+        <div class="invalid-feedback">
+          Проверьте корректность заполнения даты заявления.
+        </div>
+      </div>
+      <div class="row g-3">
+
+
+        <div class="col-sm-4">
+          <label  class="form-label" style="color: #814de5">Номер ТТН</label>
+          <input type="text" class="form-control" id="№TTN" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения номера ТТН.
+          </div>
+        </div>
+
+        <div class="col-4">
+          <label class="form-label" style="color: #814de5">№ Трансп. декларации</label>
+          <input type="text" class="form-control" id="№TD" placeholder="">
+          <div class="invalid-feedback">
+            Неверный номер тд
+          </div>
+        </div>
+
+        <div class="col-sm-4" style="" >
+          <label  class="form-label" style="color: #814de5">Дата поставки</label>
+          <input type="date" class="form-control" id="datePost" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Проверьте корректность заполнения даты поставки.
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label" style="color: #814de5">№ CRM</label>
+          <input type="text" class="form-control" id="№CRM" placeholder="">
+          <div class="invalid-feedback">
+            Неверный номер CRM
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label" style="color: #814de5">№ Авто</label>
+          <input type="text" class="form-control" id="№auto" placeholder="">
+          <div class="invalid-feedback">
+            Неверный номер авто
+          </div>
+        </div>
+
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: #814de5; color: #1a1a1c">Подать заявку</button>
+      </div>
+
+    </form>
+  </div>
+</main>
+</body>
+
+</html>
