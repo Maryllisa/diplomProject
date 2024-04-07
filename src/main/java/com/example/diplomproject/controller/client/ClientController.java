@@ -22,4 +22,6 @@ public class ClientController {
     public String getZavStatus() {return "/client/zavStatus";}
     @GetMapping("/client/prodStatus")
     public String getProdStatus() {return "/client/prodStatus";}
+    @GetMapping("/client/addCMR")
+    public String getAddCMR() {return "/client/addCMR";}
 }
