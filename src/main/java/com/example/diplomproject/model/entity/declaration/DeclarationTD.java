@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 
@@ -12,6 +14,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@TypeDefs({
+        @TypeDef(name = "addressType", typeClass = Address.class),
+        @TypeDef(name = "financialRegulator", typeClass = FinancialRegulator.class)
+})
 public class DeclarationTD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

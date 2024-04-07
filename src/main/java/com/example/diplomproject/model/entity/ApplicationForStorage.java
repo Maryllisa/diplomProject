@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import lombok.*;
 
 import javax.persistence.*;
