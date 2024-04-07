@@ -55,7 +55,6 @@ public class Address implements UserType {
     @Override
     public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner)
             throws HibernateException, SQLException {
-        // Извлечение данных из базы данных и преобразование их в экземпляр класса Address
         String city = rs.getString(names[0]);
         String postalCode = rs.getString(names[1]);
         String region = rs.getString(names[2]);
