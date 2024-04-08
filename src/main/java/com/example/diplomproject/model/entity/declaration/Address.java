@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.entity.declaration;
 
+import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -111,4 +112,12 @@ public class Address implements UserType {
         return original;
     }
 
+    public AddressDTO buildDTO() {
+        return new AddressDTO(city,
+                postalCode,
+                region,
+                settlement,
+                build,
+                ogrnNumber);
+    }
 }

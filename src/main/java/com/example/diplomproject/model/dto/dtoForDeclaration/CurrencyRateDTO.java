@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.dto.dtoForDeclaration;
 
+import com.example.diplomproject.model.entity.declaration.CurrencyRate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,7 @@ public class CurrencyRateDTO {
     private double currencyRate;
     private double euroRate;
     private double usdRate;
+    public CurrencyRate build(){
+        return new CurrencyRate(date, currencyRate, euroRate, usdRate);
+    }
 }

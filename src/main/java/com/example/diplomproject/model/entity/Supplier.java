@@ -1,5 +1,7 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.dto.SupplierDTO;
+import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.entity.declaration.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,4 +39,17 @@ public class Supplier {
     private ApplicationForStorage applicationForStorage;
     @OneToOne
     private Account account;
+
+    public SupplierDTO buildDTO() {
+        SupplierDTO supplierDTO = new SupplierDTO();
+        supplierDTO.setOrganizationName(organizationName);
+        supplierDTO.setAddress(address.buildDTO());
+        supplierDTO.setPhone(phone);
+        supplierDTO.setBankCode(bankCode);
+        supplierDTO.setLegalAddress(legalAddress);
+        supplierDTO.setRegistrationCode(registrationCode);
+        supplierDTO.setTaxId(taxId);
+        supplierDTO.setBankName(bankName);
+        return supplierDTO;
+    }
 }
