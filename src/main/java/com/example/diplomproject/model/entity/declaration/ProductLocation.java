@@ -21,6 +21,7 @@ public class ProductLocation implements UserType {
     private String uzoRegistry;
     private String customsCode;
     private String type;
+    private String quantity;
     private String documentNumber;
     private Date date;
     private String ztkNumber;
@@ -64,18 +65,19 @@ public class ProductLocation implements UserType {
         String uzoRegistry = rs.getString(names[0]);
         String customsCode = rs.getString(names[1]);
         String type = rs.getString(names[2]);
-        String documentNumber = rs.getString(names[3]);
-        Date date = rs.getDate(names[4]);
-        String ztkNumber = rs.getString(names[5]);
-        String transportType = rs.getString(names[6]);
-        String vehicleNumber = rs.getString(names[7]);
-        String stationOrPort = rs.getString(names[8]);
-        String country = rs.getString(names[9]);
-        String postalCode = rs.getString(names[10]);
-        String regionOrDistrict = rs.getString(names[11]);
-        String locality = rs.getString(names[12]);
-        String houseNumber = rs.getString(names[13]);
-        return new ProductLocation(uzoRegistry, customsCode, type,documentNumber,date,ztkNumber, transportType,
+        String quantity = rs.getString(names[3]);
+        String documentNumber = rs.getString(names[4]);
+        Date date = rs.getDate(names[5]);
+        String ztkNumber = rs.getString(names[6]);
+        String transportType = rs.getString(names[7]);
+        String vehicleNumber = rs.getString(names[8]);
+        String stationOrPort = rs.getString(names[9]);
+        String country = rs.getString(names[10]);
+        String postalCode = rs.getString(names[11]);
+        String regionOrDistrict = rs.getString(names[12]);
+        String locality = rs.getString(names[13]);
+        String houseNumber = rs.getString(names[14]);
+        return new ProductLocation(uzoRegistry, customsCode, type,quantity, documentNumber,date,ztkNumber, transportType,
                 vehicleNumber,stationOrPort,country,postalCode,regionOrDistrict,locality,houseNumber);
     }
 
@@ -88,17 +90,18 @@ public class ProductLocation implements UserType {
             st.setString(index, productLocation.getUzoRegistry());
             st.setString(index + 1, productLocation.getCustomsCode());
             st.setString(index + 2, productLocation.getType());
-            st.setString(index + 3, productLocation.getDocumentNumber());
-            st.setDate(index + 4, productLocation.getDate());
-            st.setString(index + 5, productLocation.getZtkNumber());
-            st.setString(index + 6, productLocation.getTransportType());
-            st.setString(index + 7, productLocation.getVehicleNumber());
-            st.setString(index + 8, productLocation.getStationOrPort());
-            st.setString(index + 9, productLocation.getCountry());
-            st.setString(index + 10, productLocation.getPostalCode());
-            st.setString(index + 11, productLocation.getRegionOrDistrict());
-            st.setString(index + 12, productLocation.getLocality());
-            st.setString(index + 13, productLocation.getHouseNumber());
+            st.setString(index + 4, productLocation.getQuantity());
+            st.setString(index + 5, productLocation.getDocumentNumber());
+            st.setDate(index + 6, productLocation.getDate());
+            st.setString(index + 7, productLocation.getZtkNumber());
+            st.setString(index + 8, productLocation.getTransportType());
+            st.setString(index + 9, productLocation.getVehicleNumber());
+            st.setString(index + 10, productLocation.getStationOrPort());
+            st.setString(index +11, productLocation.getCountry());
+            st.setString(index + 12, productLocation.getPostalCode());
+            st.setString(index + 13, productLocation.getRegionOrDistrict());
+            st.setString(index + 14, productLocation.getLocality());
+            st.setString(index + 15, productLocation.getHouseNumber());
         }
     }
 
@@ -109,7 +112,7 @@ public class ProductLocation implements UserType {
         }
 
         ProductLocation productLocation = (ProductLocation) value;
-        return new ProductLocation(productLocation.getUzoRegistry(), productLocation.getCustomsCode(),productLocation.getType(),
+        return new ProductLocation(productLocation.getUzoRegistry(), productLocation.getCustomsCode(),productLocation.getType(), productLocation.getQuantity(),
                 productLocation.getDocumentNumber(), productLocation.getDate(), productLocation.getZtkNumber(), productLocation.getTransportType(),
                 productLocation.getVehicleNumber(), productLocation.getStationOrPort(), productLocation.getCountry(),
                 productLocation.getPostalCode(), productLocation.getRegionOrDistrict(), productLocation.getLocality(),
