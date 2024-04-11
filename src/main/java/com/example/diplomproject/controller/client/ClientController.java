@@ -36,4 +36,6 @@ public class ClientController {
     public String getAddCMR() {return "/client/addCMR";}
     @GetMapping("/client/regAsAComp")
     public String getRegAsAComp() {return "/client/regAsAComp";}
+    @GetMapping("/client/regAuto")
+    public String getRegAuto() {return "/client/regAuto";}
 }
