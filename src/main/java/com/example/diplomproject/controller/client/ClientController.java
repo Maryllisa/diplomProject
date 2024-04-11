@@ -34,4 +34,6 @@ public class ClientController {
     public String getProdStatus() {return "/client/prodStatus";}
     @GetMapping("/client/addCMR")
     public String getAddCMR() {return "/client/addCMR";}
+    @GetMapping("/client/regAsAComp")
+    public String getRegAsAComp() {return "/client/regAsAComp";}
 }
