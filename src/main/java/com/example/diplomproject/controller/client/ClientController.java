@@ -46,4 +46,6 @@ public class ClientController {
     public String getMakeZavForOtp() {return "/client/makeZavForOtp";}
     @GetMapping("/client/showBillForSave")
     public String getShowBillForSave() {return "/client/showBillForSave";}
+    @GetMapping("/client/priceForSave")
+    public String getPriceForSave() {return "/client/priceForSave";}
 }
