@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: #1a1a1c;
+            opacity: 0.9;
+        }
+
+        .modal-content {
+            background-color: #f2f0f8;
+            opacity: 1;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #1a1a1c;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+    <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
+        <h4 class="mb-3" style="color: #814de5">Составить заявление на отпуск товара</h4>
+
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th style="color: #814de5" scope="col">Номер заявления</th>
+                <th style="color: #814de5" scope="col">Товар</th>
+                <th style="color: #814de5" scope="col">Статус</th>
+
+            </tr>
+            </thead>
+            <!--      <tbody>-->
+            <!--      <tr th:each="">-->
+            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
+            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
+            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
+            <!--        -->
+            <!--      </tr>-->
+            <!--      </tbody>-->
+        </table>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
+            Подать новое заявление
+        </button>
+
+
+        <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createRequestModalLabel"> Подать заявление</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="productSelect" class="form-label">Товар</label>
+                                <select class="form-select" id="productSelect">
+                                    <option selected>Выберите товар</option>
+                                    <option value="1">Товар 1</option>
+                                    <option value="2">Товар 2</option>
+                                    <option value="3">Товар 3</option>
+                                    <!-- Добавьте другие варианты товаров здесь -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="desiredDateInput" class="form-label">Желаемая дата отпуска</label>
+                                <input type="date" class="form-control" id="desiredDateInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
+                                <input type="number" class="form-control" id="costInput">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
