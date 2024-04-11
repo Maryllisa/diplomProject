@@ -40,4 +40,6 @@ public class ClientController {
     public String getRegAuto() {return "/client/regAuto";}
     @GetMapping("/client/showMarkedProduct")
     public String getShowMarkedProduct() {return "/client/showMarkedProduct";}
+    @GetMapping("/client/addZavForMark")
+    public String getAddZavForMark() {return "/client/addZavForMark";}
 }
