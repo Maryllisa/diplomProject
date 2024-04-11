@@ -38,4 +38,6 @@ public class ClientController {
     public String getRegAsAComp() {return "/client/regAsAComp";}
     @GetMapping("/client/regAuto")
     public String getRegAuto() {return "/client/regAuto";}
+    @GetMapping("/client/showMarkedProduct")
+    public String getShowMarkedProduct() {return "/client/showMarkedProduct";}
 }
