@@ -54,4 +54,5 @@ public class UserController {
     public String getShowProductOnWH() {return "/user/showProductOnWH";}
     @GetMapping("/user/relesionReg")
     public String getRelesionReg() {return "/user/relesionReg";}
+
 }
