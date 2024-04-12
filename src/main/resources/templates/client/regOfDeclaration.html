@@ -3,6 +3,9 @@
 <head>
   <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <div th:insert="blocks/links :: div"></div>
 <body style="background-color: #f2f0f8">
@@ -11,7 +14,7 @@
 <main>
   <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%; ">
     <h4 class="mb-3" style="color: #814de5"> Оформление декларации на товар к заявке</h4>
-    <form class="needs-validation" novalidate="" th:action="*{'/client/regOfDeclaration'}" method="post" th:object="${declaration}">
+    <form class="needs-validation" novalidate="" id="form" th:action="*{'/client/regOfDeclaration'}" method="post" th:object="${declaration}">
       <div style="height: 80px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px">
         <h5 style="margin-left: 1%">1 Декларация</h5>
         <div style="margin-left: 15%; margin-top: -5%">
@@ -652,7 +655,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">Валюта</label>
-              <input type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.currency}">
+<!--              <input type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.}">-->
               <div class="invalid-feedback">
                 Вы не указали валюту.
               </div>
@@ -884,7 +887,7 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 30px;">
             <div class="col-sm-12">
-              <textarea class="form-control" id="cargoDescription" rows="8" placeholder="Введите описание товаров" required="" style="width: 100%;" th:field="${declaration.cargoDescription}"></textarea>
+              <textarea class="form-control" id="cargoDescription" rows="8" placeholder="Введите описание товаров" required="" style="width: 100%;" th:field="${declaration.productDescription}"></textarea>
               <div class="invalid-feedback">
                 Вы не заполнили описание товаров.
               </div>
@@ -899,97 +902,56 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">32 № товара</label>
-              <input type="text" class="form-control" id="itemNumber" placeholder="Введите № товара" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].itemNumber}">
+              <input type="text" class="form-control" id="itemNumber0" placeholder="Введите № товара" value="" required="" style="width: 100%;" >
             </div>
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">33 Код товара</label>
-              <input type="text" class="form-control" id="productCode" placeholder="Введите код товара" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].productCode}">
+              <input type="text" class="form-control" id="productCode0" placeholder="Введите код товара" value="" required="" style="width: 100%;" >
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">34 Код страны происхождения</label>
-              <input type="text" class="form-control" id="originCountryCode" placeholder="Введите код страны происхождения" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].originCountryCode}">
+              <input type="text" class="form-control" id="originCountryCode0" placeholder="Введите код страны происхождения" value="" required="" style="width: 100%;" >
             </div>
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">35 Вес брутто</label>
-              <input type="text" class="form-control" id="grossWeight" placeholder="Введите вес брутто" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].grossWeight}">
+              <input type="text" class="form-control" id="grossWeight0" placeholder="Введите вес брутто" value="" required="" style="width: 100%;">
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">36 Преференция</label>
-              <input type="text" class="form-control" id="preference" placeholder="Введите преференцию" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].preference}">
+              <input type="text" class="form-control" id="preference0" placeholder="Введите преференцию" value="" required="" style="width: 100%;" >
             </div>
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">37 Процедура</label>
-              <input type="text" class="form-control" id="procedure" placeholder="Введите процедуру" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].procedure}">
+              <input type="text" class="form-control" id="procedure0" placeholder="Введите процедуру" value="" required="" style="width: 100%;">
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">38 Вес нетто</label>
-              <input type="text" class="form-control" id="netWeight" placeholder="Введите вес нетто" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].netWeight}">
+              <input type="text" class="form-control" id="netWeight0" placeholder="Введите вес нетто" value="" required="" style="width: 100%;">
             </div>
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">39 Квота</label>
-              <input type="text" class="form-control" id="quota" placeholder="Введите квоту" value="" required="" style="width: 100%;" th:field="${declaration.productDTOS[0].quota}">
+              <input type="text" class="form-control" id="quota0" placeholder="Введите квоту" value="" required="" style="width: 100%;">
             </div>
           </div>
         </div>
       </div>
 
-      <script>
-        let indexName = 0;
-        function duplicateAndModifyDiv() {
-          indexName++;
-          var originalDiv = document.getElementById("infoDiv");
-          var clonedDiv = originalDiv.cloneNode(true);
-          var inputs = clonedDiv.getElementsByTagName("input");
-
-          for (var i = 0; i < inputs.length; i++) {
-            var input = inputs[i];
-            var id = input.id;
-            var placeholder = input.placeholder;
-
-            var idParts = id.split("_");
-            var number = parseInt(idParts[1]) + 1;
-            var newId = idParts[0] + "_" + number;
-
-            var newPlaceholder = placeholder.replace(/(\d+)/, function(match, p1) {
-              return parseInt(p1) + 1;
-            });
-
-            input.id = newId;
-            input.placeholder = newPlaceholder;
-
-            input.setAttribute('th:field', '${declaration.productDTOS[' + indexName + '].'+ input.id  +'}');
-
-          }
-
-
-          var clonesContainer = document.getElementById("clonesContainer");
-          if (!clonesContainer) {
-            clonesContainer = document.createElement("div");
-            clonesContainer.id = "clonesContainer";
-            var parentDiv = originalDiv.parentNode;
-            parentDiv.insertBefore(clonesContainer, originalDiv.nextSibling);
-          }
-
-          clonesContainer.appendChild(clonedDiv);
-        }
-      </script>
-
       <button class="btn" type="button" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" onclick="duplicateAndModifyDiv()">Добавить товар</button>
       <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
-        <button class="btn  " type="submit" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">Сохранить</button>
+        <button class="btn "  onclick="onSendDeclaration()" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">Сохранить</button>
       </div>
     </form>
 
   </div>
+  <script src="/js/main.js"></script>
 
 </main>
-
 </body>
 
 </html>

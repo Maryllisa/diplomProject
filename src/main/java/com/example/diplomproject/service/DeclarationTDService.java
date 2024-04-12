@@ -1,26 +1,16 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
-import com.example.diplomproject.model.dto.ProductDTO;
-import com.example.diplomproject.model.dto.SupplierDTO;
-import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Supplier;
-import com.example.diplomproject.model.entity.declaration.Address;
 import com.example.diplomproject.model.entity.declaration.CurrencyRate;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.model.entity.declaration.ProductLocation;
-import com.example.diplomproject.repository.DeclarationTDRepository;
-import com.example.diplomproject.repository.ProductRepository;
-import com.example.diplomproject.repository.SupplierRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.model.entity.declaration.FinancialRegulator;
+import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,7 +19,10 @@ public class DeclarationTDService {
     private final DeclarationTDRepository declarationTDRepository;
     private final UserRepository userRepository;
     private final SupplierRepository supplierRepository;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
+    private final AddressRepository addressRepository;
+    private final FinancialRegulatorRepository financialRegulatorRepository;
+    private final CurrencyRateRepository currencyRateRepository;
 
     public DeclarationDTO geFormForNewDeclaration(String login) {
         DeclarationDTO declarationDTO = new DeclarationDTO();
@@ -45,25 +38,29 @@ public class DeclarationTDService {
         return null;
     }
     public void addNewDeclaration(DeclarationDTO declarationDTO, String login){
-        DeclarationTD declarationTD = new DeclarationTD();
-        declarationTD.setDeclarationNumber(declarationDTO.getCustomEDCode() +"/"+declarationDTO.getDirectionOfMovement()+"/" + declarationDTO.getProcedureCode());
+        DeclarationTD declarationTDForDB = declarationDTO.buildWithoutEntity();
         Account account = userRepository.findByLogin(login);
-        Supplier supplier = supplierRepository.findByAccount(account).orElse(null);
-        boolean check = false;
-        if(supplier==null) {
-            supplierRepository.save(declarationDTO.getSenderDTO().build());
-            check = true;
+        Supplier supplierFromDB = new Supplier();
+        if (supplierRepository.findByAccount(account).orElse(null) != null){
+            supplierFromDB = supplierRepository.findByAccount(account).orElse(null);
         }
-        declarationTD = declarationDTO.build();
-
-        declarationTD = declarationTDRepository.save(declarationTD);
-        List<Product>  productList = new ArrayList<>();
-        for(ProductDTO pr: declarationDTO.getProductDTOS()){
-            Product product = pr.build();
-            product.setDeclarationTD(declarationTD);
-            productList.add(productRepository.save(product));
+        else {
+            supplierFromDB = supplierRepository.save(declarationDTO.getSenderDTO().build());
         }
-        declarationTD.setProductList(productList);
-        declarationTDRepository.save(declarationTD);
+        declarationTDForDB.setSupplier(supplierFromDB);
+        declarationTDForDB.setRecipientAddress(addressRepository.save(declarationDTO.getRecipientDTO().build()));
+        declarationTDForDB.setFinancialRegulator(financialRegulatorRepository.save(declarationDTO.getOtvetstvenoeFace().build()));
+        declarationTDForDB.setDeclarant(addressRepository.save(declarationDTO.getDeclarator().build()));
+        if (!declarationDTO.isFreeDeliveryCheckbox()){
+            declarationTDForDB.setCurrency(declarationDTO.getCurrencyCode());
+            declarationTDForDB.setAccountTotalAmount(declarationDTO.getInvoiceAmount());
+        }
+        else {
+            declarationTDForDB.setCurrency("");
+            declarationTDForDB.setAccountTotalAmount("");
+        }
+        declarationTDForDB.setCurrencyRate(currencyRateRepository.save(declarationDTO.getCurrencyRateDTO().build()));
+        declarationTDForDB = declarationTDRepository.save(declarationTDForDB);
+        declarationTDForDB.setProductList(productService.addNewProduct(declarationTDForDB, declarationDTO.getProductDTOS()));
     }
 }

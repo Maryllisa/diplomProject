@@ -1,11 +1,11 @@
 package com.example.diplomproject.model.entity.declaration;
 
+import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
@@ -36,8 +36,6 @@ public class DeclarationTD {
     */
     @OneToOne
     private Supplier supplier;
-    @Column
-    private String customsCode;
     /*
             Формы
     */
@@ -66,16 +64,12 @@ public class DeclarationTD {
     /*
         Получатель
     */
-    @Column
-    private String recipientCompany;
-    @Column
-    @Type(type = "com.example.diplomproject.model.entity.declaration.Address")
-    Address recipientAddress;
+    @OneToOne
+    private Address recipientAddress;
     /*
         Лицо ответственное за финансовое регулирование
     */
-    @Column
-    @Type(type = "com.example.diplomproject.model.entity.declaration.FinancialRegulator")
+    @OneToOne
     private FinancialRegulator financialRegulator;
     // убрать 10 графу, она не заполняется
     /*
@@ -92,9 +86,8 @@ public class DeclarationTD {
     /*
             декларант
     */
-    @Column
-    @Type(type = "com.example.diplomproject.model.entity.declaration.Address")
-    Address declarant;
+    @OneToOne
+    private Address declarant;
     /*
             Страна отправления
             Код
@@ -143,6 +136,7 @@ public class DeclarationTD {
     */
     @Column
     private String upCode;
+    @Column
     private String conditionsOfDeliveryName;
     /*
            Идентификация и страна регистрации активного транспортного средства на границе
@@ -151,6 +145,7 @@ public class DeclarationTD {
     */
     @Column
     private String numberOfVehicles;
+    @Column
     private String vehicleNumbers;
     /*
            Валюта и общая сумма по счету
@@ -159,12 +154,12 @@ public class DeclarationTD {
    */
     @Column
     private String currency;
+    @Column
     private String accountTotalAmount;
     /*
            Курс валюты
     */
-    @Column
-    @Type(type = "com.example.diplomproject.model.entity.declaration.CurrencyRate")
+    @OneToOne
     private CurrencyRate currencyRate;
     /*
            Характер сделки
@@ -209,8 +204,7 @@ public class DeclarationTD {
            Код таможни
            Описание
     */
-    @Column
-    @Type(type = "com.example.diplomproject.model.entity.declaration.ProductLocation")
+    @OneToOne
     private ProductLocation productLocation;
     /*
            Грузовые места и описание товаров
@@ -219,6 +213,10 @@ public class DeclarationTD {
     private String productDescription;
     @OneToMany
     private List<Product> productList;
+    // дописать билдер
+    public DeclarationDTO build(){
+        return new DeclarationDTO();
+    }
 
 
 

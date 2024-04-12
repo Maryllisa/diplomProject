@@ -18,6 +18,6 @@ public class CurrencyRateDTO {
     private double euroRate;
     private double usdRate;
     public CurrencyRate build(){
-        return new CurrencyRate(date, currencyRate, euroRate, usdRate);
+        return new CurrencyRate(date, currency, currencyRate, euroRate, usdRate);
     }
 }
