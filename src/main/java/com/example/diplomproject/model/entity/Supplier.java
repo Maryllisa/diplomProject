@@ -52,7 +52,7 @@ public class Supplier {
     public SupplierDTO buildDTO() {
         SupplierDTO supplierDTO = new SupplierDTO();
         supplierDTO.setOrganizationName(organizationName);
-        supplierDTO.setAddress(address);
+        supplierDTO.setAddress(address.build());
         supplierDTO.setPhone(phone);
         supplierDTO.setBankCode(bankCode);
         supplierDTO.setLegalAddress(legalAddress);
