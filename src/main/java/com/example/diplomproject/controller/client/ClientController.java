@@ -38,4 +38,18 @@ public class ClientController {
     public String getProdStatus() {return "/client/prodStatus";}
     @GetMapping("/client/addCMR")
     public String getAddCMR() {return "/client/addCMR";}
+    @GetMapping("/client/regAsAComp")
+    public String getRegAsAComp() {return "/client/regAsAComp";}
+    @GetMapping("/client/regAuto")
+    public String getRegAuto() {return "/client/regAuto";}
+    @GetMapping("/client/showMarkedProduct")
+    public String getShowMarkedProduct() {return "/client/showMarkedProduct";}
+    @GetMapping("/client/addZavForMark")
+    public String getAddZavForMark() {return "/client/addZavForMark";}
+    @GetMapping("/client/makeZavForOtp")
+    public String getMakeZavForOtp() {return "/client/makeZavForOtp";}
+    @GetMapping("/client/showBillForSave")
+    public String getShowBillForSave() {return "/client/showBillForSave";}
+    @GetMapping("/client/priceForSave")
+    public String getPriceForSave() {return "/client/priceForSave";}
 }

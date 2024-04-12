@@ -317,84 +317,389 @@
         </div>
       </div>
 
+      <div style="height: 200px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">6-9</h5>
+        <div class="row" style="margin-left: 2%; margin-top:  1%;">
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Количество грузовых мест</label>
+            <input type="text" class="form-control" id="CargoQuantity">
+          </div>
 
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Наименование груза</label>
+            <input type="text" class="form-control" id="CargoName">
+          </div>
+        </div>
 
-      <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
-        <h5 style="margin-left: 1%">11 Суммарный вес брутто</h5>
-        <div style="margin-left: 2%; margin-top: -2%">
-          <div class="row" style="margin-top: 20px;">
-            <div class="col-sm-12">
-              <input type="number" class="form-control" id="grossWeight" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
-                Вы не указали суммарный вес брутто.
+        <div class="row" style="margin-left: 2%; ">
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Род упаковки</label>
+            <input type="text" class="form-control" id="PackagingType">
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Номера</label>
+            <input type="text" class="form-control" id="Numbers">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; width: 950px">
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+          <h5 style="margin-left: 1%">10 Статистический код</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <input type="text" class="form-control" id="statistikCode" placeholder="" value="" required="" style="width: 100%;">
+                <div class="invalid-feedback">
+                  Вы не указали статистический код.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+          <h5 style="margin-left: 1%">11 Суммарный вес брутто</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <input type="number" class="form-control" id="grossWeight" placeholder="" value="" required="" style="width: 100%;">
+                <div class="invalid-feedback">
+                  Вы не указали суммарный вес брутто.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 640px;">
+          <h5 style="margin-left: 1%">12 Объем</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <input type="number" step="0.01" class="form-control" id="volume" placeholder="" value="" required="" style="width: 100%;">
+                <div class="invalid-feedback">
+                  Вы не указали объем.
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div style="height: 300px; width: 950px;border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
-        <h5 style="margin-left: 1%">13 Таможня на границе</h5>
+      <div style="height: 300px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">13 Таможенная обработка</h5>
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Название таможенного поста</label>
+              <input type="text" class="form-control" id="customsPostName" placeholder="Введите название таможенного поста" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали название таможенного поста.
+              </div>
+            </div>
+            <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код таможни</label>
-              <input type="number" class="form-control" id="customsCode" placeholder="Введите код таможни" value="" required="" style="width: 100%;">
+              <input type="text" class="form-control" id="customsCode" placeholder="Введите код таможни" value="" required="" style="width: 100%;">
               <div class="invalid-feedback">
                 Вы не указали код таможни.
               </div>
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
-            <div class="col-sm-11">
-              <textarea class="form-control" id="largeTextArea" rows="8" placeholder="Введите текст" required="" style="height: 160px; width: 100%;"></textarea>
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Юридическое название СВХ и его адрес</label>
+              <input type="text" class="form-control" id="svhNameAndAddress" placeholder="Введите юридическое название СВХ и его адрес" value="" required="" style="width: 100%;">
               <div class="invalid-feedback">
-                Вы не заполнили большой текстовый блок.
+                Вы не указали юридическое название СВХ и его адрес.
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Номер лицензии</label>
+              <input type="text" class="form-control" id="licenseNumber" placeholder="Введите номер лицензии" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали номер лицензии.
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Дата выдачи</label>
+              <input type="date" class="form-control" id="issueDate" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали дату выдачи.
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <div style="height: 200px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">14 Возврат</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <input type="text" class="form-control" id="returnCountry" placeholder="Введите страну" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали страну.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Город</label>
+              <input type="text" class="form-control" id="returnCity" placeholder="Введите город" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали город.
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Улица</label>
+              <input type="text" class="form-control" id="returnStreet" placeholder="Введите улицу" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали улицу.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <input type="text" class="form-control" id="returnHouse" placeholder="Введите дом" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали дом.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div style="height: 125px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">15 Условия оплаты</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Условия оплаты</label>
+              <input type="text" class="form-control" id="paymentTerms" placeholder="Введите условия оплаты" value="" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не заполнили поле с условиями оплаты.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!--      <script>-->
-<!--        function duplicateAndModifyDiv() {-->
-<!--          var originalDiv = document.getElementById("infoDiv");-->
-<!--          var clonedDiv = originalDiv.cloneNode(true);-->
-<!--          var inputs = clonedDiv.getElementsByTagName("input");-->
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">16 Перевозчик</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <input type="number" class="form-control" id="perINN/KPP" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили ИНН/КПП.
+              </div>
+            </div>
 
-<!--          for (var i = 0; i < inputs.length; i++) {-->
-<!--            var input = inputs[i];-->
-<!--            var id = input.id;-->
-<!--            var placeholder = input.placeholder;-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <input type="text" class="form-control" id="perorganizationName" placeholder="Название организации" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили название организации.
+              </div>
+            </div>
 
-<!--            var idParts = id.split("_");-->
-<!--            var number = parseInt(idParts[1]) + 1;-->
-<!--            var newId = idParts[0] + "_" + number;-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <input type="text" class="form-control" id="percountry" placeholder="Страна" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили страну.
+              </div>
+            </div>
 
-<!--            var newPlaceholder = placeholder.replace(/(\d+)/, function(match, p1) {-->
-<!--              return parseInt(p1) + 1;-->
-<!--            });-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <input type="text" class="form-control" id="perpostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
+              <div class="invalid-feedback">
+                Вы не заполнили почтовый код.
+              </div>
+            </div>
 
-<!--            input.id = newId;-->
-<!--            input.placeholder = newPlaceholder;-->
-<!--          }-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <input type="text" class="form-control" id="perregion" placeholder="Область" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили область.
+              </div>
+            </div>
 
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <input type="text" class="form-control" id="percity" placeholder="Населённый пункт" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили населённый пункт.
+              </div>
+            </div>
 
-<!--          var clonesContainer = document.getElementById("clonesContainer");-->
-<!--          if (!clonesContainer) {-->
-<!--            clonesContainer = document.createElement("div");-->
-<!--            clonesContainer.id = "clonesContainer";-->
-<!--            var parentDiv = originalDiv.parentNode;-->
-<!--            parentDiv.insertBefore(clonesContainer, originalDiv.nextSibling);-->
-<!--          }-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <input type="text" class="form-control" id="perhouse" placeholder="Дом" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили дом.
+              </div>
+            </div>
 
-<!--          clonesContainer.appendChild(clonedDiv);-->
-<!--        }-->
-<!--      </script>-->
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <input type="number" class="form-control" id="perOGRN" placeholder="" value="" required="" style="margin-left: -5px;">
+              <div class="invalid-feedback">
+                Вы не заполнили ОГРН.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!--      <button class="btn" type="button" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" onclick="duplicateAndModifyDiv()">+Товар</button>-->
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">17 Последующий перевозчик</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <input type="number" class="form-control" id="poslperINN/KPP" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили ИНН/КПП.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <input type="text" class="form-control" id="poslperorganizationName" placeholder="Название организации" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили название организации.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <input type="text" class="form-control" id="poslpercountry" placeholder="Страна" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили страну.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <input type="text" class="form-control" id="poslperpostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
+              <div class="invalid-feedback">
+                Вы не заполнили почтовый код.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <input type="text" class="form-control" id="poslperregion" placeholder="Область" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили область.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <input type="text" class="form-control" id="poslpercity" placeholder="Населённый пункт" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили населённый пункт.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <input type="text" class="form-control" id="poslperhouse" placeholder="Дом" value="" required="">
+              <div class="invalid-feedback">
+                Вы не заполнили дом.
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <input type="number" class="form-control" id="poslperOGRN" placeholder="" value="" required="" style="margin-left: -5px;">
+              <div class="invalid-feedback">
+                Вы не заполнили ОГРН.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 300px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">18 Оговорки и замечания перевозчика</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Оговорки и замечания</label>
+              <textarea class="form-control" id="carrierNotes" rows="12" placeholder="Введите оговорки и замечания перевозчика" required="" style="height: 220px; width: 100%;"></textarea>
+              <div class="invalid-feedback">
+                Вы не заполнили поле с оговорками и замечаниями перевозчика.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 950px; display: flex; justify-content: space-between; margin-top: 2%;">
+        <div style="height: 110px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px;">
+          <h5 style="margin-left: 1%">19 Дата получения груза</h5>
+          <div style="margin-left: 2%; margin-top: -5%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-12">
+                <label class="form-label" style="color: #1a1a1c">Дата получения</label>
+                <input type="date" class="form-control" id="cargoReceivedDate" required="" style="width: 100%;">
+                <div class="invalid-feedback">
+                  Вы не указали дату получения груза.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 110px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px;">
+          <h5 style="margin-left: 1%">20 Дата заполнения СМR</h5>
+          <div style="margin-left: 2%; margin-top: -5%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-12">
+                <label class="form-label" style="color: #1a1a1c">Дата заполнения</label>
+                <input type="date" class="form-control" id="cmrFilledDate" required="" style="width: 100%;">
+                <div class="invalid-feedback">
+                  Вы не указали дату заполнения СМR.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 125px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">21. Регистрационные номера</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Регистрационный номер тягача</label>
+              <input type="text" class="form-control" id="tractorRegistrationNumber" placeholder="Введите регистрационный номер тягача" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали регистрационный номер тягача.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Регистрационный номер прицепа</label>
+              <input type="text" class="form-control" id="trailerRegistrationNumber" placeholder="Введите регистрационный номер прицепа" required="" style="width: 100%;">
+              <div class="invalid-feedback">
+                Вы не указали регистрационный номер прицепа.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
         <button class="btn  " type="submit" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">Сохранить</button>
       </div>

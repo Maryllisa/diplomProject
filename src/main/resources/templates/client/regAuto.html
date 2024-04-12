@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+    <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
+        <h4 class="mb-3" style="color: #814de5">Зарегистрировать автомобиль </h4>
+        <form class="needs-validation" novalidate="">
+
+    <div class="row g-3">
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
+            <input type="text" class="form-control" id="Car Registration Number" placeholder="" required="">
+            <div class="invalid-feedback">
+                Проверьте корректность заполнения регистрационного номера авто.
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Бренд</label>
+            <select class="form-select" id="Brand" required="">
+                <option value="">Выберите бренд</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Audi">Audi</option>
+                <!-- Добавьте другие варианты брендов здесь -->
+            </select>
+            <div class="invalid-feedback">
+                Пожалуйста, выберите бренд.
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Модель</label>
+            <input type="text" class="form-control" id="Model" placeholder="" required="">
+            <div class="invalid-feedback">
+                Проверьте корректность заполнения модели.
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Год</label>
+            <input type="text" class="form-control" id="Year" placeholder="" required="">
+            <div class="invalid-feedback">
+                Проверьте корректность заполнения года.
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Имя водителя</label>
+            <input type="text" class="form-control" id="Driver Name" placeholder="" required="">
+            <div class="invalid-feedback">
+                Проверьте корректность заполнения имени водителя.
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
+            <input type="text" class="form-control" id="Driver License Number" placeholder="" required="">
+            <div class="invalid-feedback">
+                Проверьте корректность заполнения номера лицензии водителя.
+            </div>
+        </div>
+    </div>
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить</button>
+
+        </form>
+    </div>
+</main>
+</body>
+
+</html>
