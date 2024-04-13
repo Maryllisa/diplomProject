@@ -160,10 +160,14 @@ const send = (url, goodMSG, redirect, data) => {
 }
 
 // // itemNumber, productCode, originCountryCode, grossWeight, preference, procedure, netWeight, quota
-function onSendDeclaration() {
+
+document.getElementById('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Остановка автоматической отправки формы
+
     var form = document.getElementById('form');
     var formData = new FormData(form);
-    ProductList = [];
+    var productList = [];
+
     for (let i = 0; i <= Counter.getCount(); i++) {
         var itemNumber = document.getElementById("itemNumber" + i).value;
         var productCode = document.getElementById("productCode" + i).value;
@@ -174,7 +178,7 @@ function onSendDeclaration() {
         var netWeight = document.getElementById("netWeight" + i).value;
         var quota = document.getElementById("quota" + i).value;
 
-        ProductList.push({
+        productList.push({
             itemNumber: itemNumber,
             productCode: productCode,
             originCountryCode: originCountryCode,
@@ -183,12 +187,13 @@ function onSendDeclaration() {
             procedure: procedure,
             netWeight: netWeight,
             quota: quota
-        })
+        });
     }
-    send("/client/registrationProduct", "", "", ProductList);
-    send("/client/regOfDeclaration", "", "", formData);
 
+    send("/client/registrationProduct", "", "", productList);
 
-}
+    // Выполнение отправки формы вручную
+    form.submit();
+});
 
 

@@ -15,22 +15,31 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProduct;
+
     @Column
     private int itemNumber;
+
     @Column
     private String productCode;
+
     @Column
     private String originCountryCode;
+
     @Column
     private double grossWeight;
+
     @Column
     private String preference;
-    @Column
+
+    @Column(name = "procedure_name") // Измененное имя столбца
     private String procedure;
+
     @Column
     private double netWeight;
+
     @Column
     private String quota;
+
     @ManyToOne
     private DeclarationTD declarationTD;
 }
