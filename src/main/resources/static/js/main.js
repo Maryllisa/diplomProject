@@ -135,33 +135,28 @@ function duplicateAndModifyDiv() {
     clonesContainer.appendChild(clonedDiv);
 }
 
-const send = (url, goodMSG, redirect, data) => {
-    fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(function(response) {
-            if (response.ok) {
-                return response.text();
-            }
-            throw new Error("Network response was not ok.");
-        })
-        .then(function(responseText) {
-            // Обработка успешного ответа
-            console.log(responseText);
-        })
-        .catch(function(error) {
-            // Обработка ошибки
-            console.log(error);
+const send = async (url, goodMSG, redirect, data) => {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
-}
 
-// // itemNumber, productCode, originCountryCode, grossWeight, preference, procedure, netWeight, quota
+        if (!response.ok) {
+            throw new Error("Network response was not ok.");
+        }
 
-document.getElementById('form').addEventListener('submit', function(event) {
+        const responseText = await response.text();
+        console.log(responseText);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+document.getElementById('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Остановка автоматической отправки формы
 
     var form = document.getElementById('form');
@@ -190,10 +185,9 @@ document.getElementById('form').addEventListener('submit', function(event) {
         });
     }
 
-    send("/client/registrationProduct", "", "", productList);
+    await send("/client/registrationProduct", "", "", productList);
 
     // Выполнение отправки формы вручную
     form.submit();
 });
-
 

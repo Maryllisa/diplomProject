@@ -80,6 +80,6 @@ public class DeclarationTDService {
         declarationTDForDB.setCurrencyRate(currencyRateRepository.save(declarationDTO.getCurrencyRateDTO().build()));
         declarationTDForDB = declarationTDRepository.save(declarationTDForDB);
         declarationTDForDB.setProductList(productService.addNewProduct(declarationTDForDB, declarationDTO.getProductDTOS()));
-        log.info("Завершение регистрации: " + declarationTDForDB);
+        log.info("Завершение регистрации: " + declarationTDForDB.getDeclarationNumber());
     }
 }

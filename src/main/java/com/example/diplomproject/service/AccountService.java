@@ -11,6 +11,7 @@ import com.example.diplomproject.repository.ImageRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,6 +22,7 @@ import java.util.*;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AccountService {
 
     private final UserRepository accountRepository;
@@ -89,6 +91,7 @@ public class AccountService {
         Map<String, String> checkAccountDto = new HashMap<>();
         if (!accountRepository.existsByLoginAndEmail(accountDTO.getLogin(),
                 accountDTO.getEmail())){
+            log.info("Ошибки регистрации");
             checkAccountDto = getCheckAccount(result,accountDTO);
         }
         else{
@@ -116,8 +119,10 @@ public class AccountService {
                 account.getPhone(),
                 "",new Photo());
 
+
         if (role.equals(Role.EMPLOYEE.toString())) newAccount.setRoles(Role.EMPLOYEE);
         else newAccount.setRoles(Role.CLIENT);
+        log.info("Начло регистрации " + newAccount.getRoles());
         Photo photo = addNewPhoto(file);
 
         newAccount.setLogin(account.getLogin());
@@ -131,6 +136,7 @@ public class AccountService {
         newAccount.setStatus(Status.OFFLINE);
         photo.setAccount(accountRepository.save(newAccount));
         imageRepository.save(photo);
+        log.info("Отправка письмо поддтверждения ");
         if (!StringUtils.isEmpty(account.getEmail())) {
             String message = String.format(
                     "Здравствуйте, %s %s %s! \n" +
@@ -145,6 +151,7 @@ public class AccountService {
 
     @SneakyThrows
     private Photo addNewPhoto(MultipartFile file) {
+        log.info("Добавление нового фото");
         Photo photo = new Photo();
         photo.setNamePhoto(file.getName());
         photo.setSizePhoto(file.getSize());
@@ -159,6 +166,7 @@ public class AccountService {
         if (user == null) {
             return false;
         }
+        log.info("Активация пользователя: " + user.getLogin());
         user.setActivationCode(null);
         user.setActive(true);
         accountRepository.save(user);
@@ -168,6 +176,7 @@ public class AccountService {
 
     public UserDTO changeStatusOnline(Account userDetails) {
         Account account = accountRepository.findByLogin(userDetails.getLogin());
+        log.info("Подключился пользователь " + account.getLogin());
         UserDTO userDTO = new UserDTO();
         userDTO.setLogin(account.getLogin());
         userDTO.setSurname(account.getSurname());
@@ -309,6 +318,7 @@ public class AccountService {
     }
 
     public void disconnect(Account user) {
+        log.info("Отключился пользователь " + user.getLogin());
         user.setStatus(Status.OFFLINE);
         accountRepository.save(user);
     }
