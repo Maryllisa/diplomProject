@@ -26,11 +26,12 @@ public class DeclarationTDService {
 
     public DeclarationDTO geFormForNewDeclaration(String login) { // переписать логику
         DeclarationDTO declarationDTO = new DeclarationDTO();
-//        Account account = userRepository.findByLogin(login);
-//        Individuals individuals = individualsRepository.findByAccount(account).orElse(null);
-//        if(individuals !=null){
-//            declarationDTO.setSenderDTO(individuals.buildDTO());
-//        }
+        Account account = userRepository.findByLogin(login);
+        Individuals supplier = declarationTDRepository.findIndividualsByAccountAndeRole(account).orElse(null);
+        if (supplier==null){
+            supplier = new Individuals();
+        }
+        declarationDTO.setSenderDTO(supplier.buildDTO());
         return declarationDTO;
 
     }

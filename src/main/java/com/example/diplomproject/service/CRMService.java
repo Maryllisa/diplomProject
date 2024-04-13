@@ -1,6 +1,7 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.CRMDTO;
+import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class CRMService {
     private final CustomsProcessingRepository customsProcessingRepository;
     private final AddressRepository addressRepository;
     private final IndividualsRepository individualsRepository;
+    private final DeclarationTDRepository declarationTDRepository;
     private final UserRepository userRepository;
 
     public static Map<String, String> checkNewCRM(BindingResult result, CRMDTO crmdto) {
@@ -85,5 +87,16 @@ public class CRMService {
         crm.setAccount(account);
         crmRepository.save(crm);
 
+    }
+
+    public CRMDTO getCRM(String login) {
+        CRMDTO crmdto = new CRMDTO();
+        Account account = userRepository.findByLogin(login);
+        Individuals supplier = declarationTDRepository.findIndividualsByAccountAndeRole(account).orElse(null);
+        if (supplier==null){
+            supplier = new Individuals();
+        }
+        crmdto.setSender(supplier.buildDTO());
+        return crmdto;
     }
 }

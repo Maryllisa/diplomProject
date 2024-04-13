@@ -1,7 +1,6 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.entity.GoodTransportDocument;
-import com.example.diplomproject.model.entity.Photo;
 import com.example.diplomproject.repository.GoodTransportDocumentRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.Base64;
 
 @Service
