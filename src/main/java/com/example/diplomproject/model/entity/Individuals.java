@@ -50,11 +50,6 @@ public class Individuals {
     private String taxId;
     @Column // ОКПО (Классификатор предприятий и организаций)
     private String registrationCode;
-    @OneToOne
-    private ApplicationForStorage applicationForStorage;
-    @OneToOne
-    private Account account;
-
     public IndividualsDTO buildDTO() {
         IndividualsDTO individualsDTO = new IndividualsDTO();
         individualsDTO.setOrganizationName(organizationName);
