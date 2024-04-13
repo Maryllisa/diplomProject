@@ -12,13 +12,13 @@
     <h4 class="mb-3" style="color: #814de5">Заполнить ТТН</h4>
     <form class="needs-validation" novalidate="" th:action="*{'/client/addTTN'}" method="post" th:object="${gtd}"
           enctype="multipart/form-data">
-          <div style="margin-left: 2%; margin-top: -5%">
-            <div class="row" style="margin-top: 20px;">
+          <div >
+            <div class="row">
               <div class="col-sm-12">
                 <label class="form-label" style="color: #1a1a1c">Номер ТТН</label>
                 <input type="text" class="form-control" id="cargoReceivedDate" required="" style="width: 100%;" th:field="${gtd.goodsTransportDocumentNumbers}">
                 <div class="invalid-feedback">
-                  Вы не указали дату получения груза.
+                  Вы не указали номер ТТН.
                 </div>
               </div>
             </div>
