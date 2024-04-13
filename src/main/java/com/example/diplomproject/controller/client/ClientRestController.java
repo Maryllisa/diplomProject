@@ -77,9 +77,10 @@ public class ClientRestController {
     }
     @PostMapping("/client/addTTN")
     private ResponseEntity<String> addNewGTD(@ModelAttribute GoodTransportDocument goodTransportDocument,
-                                             @RequestParam("pdfFile") MultipartFile file){
+                                             @RequestParam("pdfFile") MultipartFile file,
+                                             Authentication authentication){
 
-        goodTransportDocumentService.addNewGTD(goodTransportDocument, file);
+        goodTransportDocumentService.addNewGTD(goodTransportDocument, file, authentication.getName());
         return  ResponseEntity.ok("ТТН добавлен");
     }
 
