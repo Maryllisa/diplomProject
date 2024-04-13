@@ -10,26 +10,26 @@
 <main>
     <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Зарегистрироваться как компания </h4>
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation" novalidate="" th:object="${supplier}">
 
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label class="form-label" style="color: #814de5">Наименование организации</label>
-                    <input type="text" class="form-control" id="Organization Name" placeholder="" value="" required="">
+                    <input type="text" class="form-control" id="Organization Name" required="" th:field="${supplier.organizationName}" th:value="${supplier.organizationName}">
                     <div class="invalid-feedback">
                         Проверьте корректность заполнения наименования организации.
                     </div>
                 </div>
                 <div class="col-12">
                     <label class="form-label" style="color: #814de5">Юридический адрес</label>
-                    <input type="text" class="form-control" id="Legal Address" placeholder="" required="">
+                    <input type="text" class="form-control" id="Legal Address" th:field="${supplier.legalAddress}" th:value="${supplier.legalAddress}" placeholder="" required="">
                     <div class="invalid-feedback">
                         Проверьте корректность заполнения юридического адреса.
                     </div>
                 </div>
                 <div class="col-6">
                     <label class="form-label" style="color: #814de5">Телефон</label>
-                    <input type="tel" class="form-control" id="Phone" placeholder="" required="">
+                    <input type="tel" class="form-control" id="Phone" th:field="${supplier.phone}" th:value="${supplier.phone}" placeholder="" required="">
                     <div class="invalid-feedback">
                         Проверьте корректность заполнения телефона.
                     </div>
@@ -40,14 +40,14 @@
                     <div class="row g-3">
                         <div class="col-6">
                             <label class="form-label" style="color: #814de5">Индекс</label>
-                            <input type="text" class="form-control" id="Postal Code" placeholder="" required="">
+                            <input type="text" class="form-control" id="Postal Code" placeholder="" th:field="${supplier.address.postalCode}" th:value="${supplier.organizationName}" required="">
                             <div class="invalid-feedback">
                                 Проверьте корректность заполнения почтового индекса.
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label" style="color: #814de5">Город</label>
-                            <input type="text" class="form-control" id="City" placeholder="" required="">
+                            <input type="text" class="form-control" id="City" placeholder="" th:field="${supplier.address.city}" th:value="${supplier.address.city}"required="">
                             <div class="invalid-feedback">
                                 Проверьте корректность заполнения города.
                             </div>
