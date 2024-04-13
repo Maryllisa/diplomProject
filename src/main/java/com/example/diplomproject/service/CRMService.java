@@ -20,8 +20,8 @@ public class CRMService {
     private final CustomsProcessingRepository customsProcessingRepository;
     private final AddressRepository addressRepository;
     private final IndividualsRepository individualsRepository;
-    private final DeclarationTDRepository declarationTDRepository;
     private final UserRepository userRepository;
+    private final IndividualsService individualsService;
 
     public static Map<String, String> checkNewCRM(BindingResult result, CRMDTO crmdto) {
         return new HashMap<>();
@@ -29,12 +29,14 @@ public class CRMService {
 
     public void addNewCRM(CRMDTO crmdto, String login) {
         CRM crm = crmdto.build();
+        Account account = userRepository.findByLogin(login);
         log.info("Проверка отправителя/поставщика");
         if (individualsRepository.findByOrganizationNameAndTaxIdAndRegistrationCodeAndRoleIndividuals(crmdto.getSender().getOrganizationName(),
                 crmdto.getSender().getTaxId(), crmdto.getSender().getRegistrationCode(), RoleIndividuals.SUPPLIER).isEmpty()){
             Individuals individuals = crmdto.getSender().build();
             individuals.setAddress(addressRepository.save(crmdto.getSender().getAddress().build()));
             individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
+            individuals.setAccount(account);
             crm.setSender(individualsRepository.save(individuals));
         }
         else{
@@ -83,7 +85,6 @@ public class CRMService {
             crm.setSubsequentCarrier(individualsRepository.findByOrganizationNameAndTaxIdAndRegistrationCodeAndRoleIndividuals(crmdto.getSubsequentCarrier().getOrganizationName(),
                     crmdto.getSubsequentCarrier().getTaxId(), crmdto.getSubsequentCarrier().getRegistrationCode(), RoleIndividuals.SUBSEQUENTCARRIER).orElse(null));
         }
-        Account account = userRepository.findByLogin(login);
         crm.setAccount(account);
         crmRepository.save(crm);
 
@@ -91,11 +92,7 @@ public class CRMService {
 
     public CRMDTO getCRM(String login) {
         CRMDTO crmdto = new CRMDTO();
-        Account account = userRepository.findByLogin(login);
-        Individuals supplier = declarationTDRepository.findIndividualsByAccountAndeRole(account).orElse(null);
-        if (supplier==null){
-            supplier = new Individuals();
-        }
+        Individuals supplier = individualsService.findRegistrationSupplier(login);
         crmdto.setSender(supplier.buildDTO());
         return crmdto;
     }

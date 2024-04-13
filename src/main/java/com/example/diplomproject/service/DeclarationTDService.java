@@ -23,14 +23,12 @@ public class DeclarationTDService {
     private final ProductService productService;
     private final AddressRepository addressRepository;
     private final CurrencyRateRepository currencyRateRepository;
+    private final IndividualsService individualsService;
 
     public DeclarationDTO geFormForNewDeclaration(String login) { // переписать логику
         DeclarationDTO declarationDTO = new DeclarationDTO();
         Account account = userRepository.findByLogin(login);
-        Individuals supplier = declarationTDRepository.findIndividualsByAccountAndeRole(account).orElse(null);
-        if (supplier==null){
-            supplier = new Individuals();
-        }
+        Individuals supplier = individualsService.findRegistrationSupplier(login);
         declarationDTO.setSenderDTO(supplier.buildDTO());
         return declarationDTO;
 
@@ -49,6 +47,7 @@ public class DeclarationTDService {
                 declarationDTO.getSenderDTO().getTaxId(), declarationDTO.getSenderDTO().getRegistrationCode(), RoleIndividuals.SUPPLIER).isEmpty()){
             Individuals individuals = declarationDTO.getSenderDTO().build();
             individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
+            individuals.setAccount(account);
             individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
             individualsFromDB = individualsRepository.save(individuals);
         }
