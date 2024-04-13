@@ -24,13 +24,13 @@ public class DeclarationTDService {
     private final AddressRepository addressRepository;
     private final CurrencyRateRepository currencyRateRepository;
 
-    public DeclarationDTO geFormForNewDeclaration(String login) {
+    public DeclarationDTO geFormForNewDeclaration(String login) { // переписать логику
         DeclarationDTO declarationDTO = new DeclarationDTO();
-        Account account = userRepository.findByLogin(login);
-        Individuals individuals = individualsRepository.findByAccount(account).orElse(null);
-        if(individuals !=null){
-            declarationDTO.setSenderDTO(individuals.buildDTO());
-        }
+//        Account account = userRepository.findByLogin(login);
+//        Individuals individuals = individualsRepository.findByAccount(account).orElse(null);
+//        if(individuals !=null){
+//            declarationDTO.setSenderDTO(individuals.buildDTO());
+//        }
         return declarationDTO;
 
     }
@@ -43,8 +43,12 @@ public class DeclarationTDService {
         Account account = userRepository.findByLogin(login);
         log.info("Регистрация декларации на клиенте: " + login);
         Individuals individualsFromDB = new Individuals();
-        if (individualsRepository.findByAccount(account).orElse(null) != null){
-            individualsFromDB = individualsRepository.findByAccount(account).orElse(null);
+        if (individualsRepository.findByOrganizationNameAndTaxIdAndRegistrationCodeAndRoleIndividuals(declarationDTO.getSenderDTO().getOrganizationName(),
+                declarationDTO.getSenderDTO().getTaxId(), declarationDTO.getSenderDTO().getRegistrationCode(), RoleIndividuals.SUPPLIER).isEmpty()){
+            Individuals individuals = declarationDTO.getSenderDTO().build();
+            individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
+            individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
+            individualsFromDB = individualsRepository.save(individuals);
         }
         else {
             log.info("Регистрация декларации нового поставщика: " + declarationDTO.getSenderDTO().build());
