@@ -31,6 +31,8 @@ public class Individuals {
     private RoleIndividuals roleIndividuals;
     @OneToOne
     private Address address;
+    @OneToOne
+    private Account account;
 
     public Individuals(String organizationName, String legalAddress, String phone,
                        Address address, String bankCode, String bankName,

@@ -19,4 +19,6 @@ public class GoodTransportDocument {
     @Column
     @Lob
     private String srcTransportDocument;
+    @ManyToOne
+    private Account account;
 }
