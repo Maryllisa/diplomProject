@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface IndividualsRepository extends JpaRepository<Individuals, Long> {
 
-    //    Optional<Individuals> findByAccount(Account account);
+    Optional<Individuals> findByAccount(Account account);
     Optional<Individuals> findByOrganizationNameAndTaxIdAndRegistrationCodeAndRoleIndividuals(String organizationName,
                                                                                               String taxId,
                                                                                               String registrationCode,
