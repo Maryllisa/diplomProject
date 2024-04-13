@@ -106,7 +106,7 @@ public class CRM {
     /*
      * * * Условия оплаты
     */
-    private Date paymentTerms;
+    private String paymentTerms;
     /*
      * * * Перевозчик
      */
@@ -123,17 +123,17 @@ public class CRM {
     @Column
     private String carrierNotes;
     /*
-     * * * Оговорки и замечания перевозчика
+     * * * Дата получения груза
      */
     @Column
     private String cargoReceivedDate;
     /*
-     * * * Оговорки и замечания перевозчика
+     * * * Дата заполнения СМR
      */
     @Column
-    private String cmrFilledDate;
+    private Date cmrFilledDate;
     /*
-     * * * Оговорки и замечания перевозчика
+     * * * Регистрационные номера
      */
     @Column
     private String tractorRegistrationNumber;

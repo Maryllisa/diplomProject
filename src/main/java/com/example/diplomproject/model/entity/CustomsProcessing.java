@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +24,5 @@ public class CustomsProcessing {
     @Column
     private String licenseNumber;
     @Column
-    private String issueDate;
+    private Date issueDate;
 }
