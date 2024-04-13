@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.dto.CRMDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -91,6 +92,60 @@ public class CRM {
      */
     @OneToOne
     private CustomsProcessing customsProcessing;
+
+    public CRM(Individuals sender, Individuals resipient, String countryWH,
+               String cityWH, String streetWH, String houseNumberWH,
+               String loadingCountry, String loadingCity, String loadingStreet,
+               String loadingHouseNumber, Date loadingDate, String invoiceDocument,
+               String shippingSpecificationDocument, String qualityCertificateDocument,
+               String veterinaryCertificateDocument,
+               String quarantineCertificateDocument, String certificateOfOriginDocument,
+               String loadingCertificateDocument, String cargoQuantity, String cargoName,
+               String nackagingType, String numbers, String statistikCode,
+               String grossWeight, String volume, CustomsProcessing customsProcessing,
+               String returnCountry, String returnCity, String returnStreet,
+               String returnHouse, String paymentTerms, Individuals carrier,
+               Individuals subsequentСarrier, String carrierNotes, String cargoReceivedDate, Date cmrFilledDate, String tractorRegistrationNumber, String trailerRegistrationNumber) {
+        this.sender = sender;
+        this.resipient = resipient;
+        this.countryWH = countryWH;
+        this.cityWH = cityWH;
+        this.streetWH = streetWH;
+        this.houseNumberWH = houseNumberWH;
+        this.loadingCountry = loadingCountry;
+        this.loadingCity = loadingCity;
+        this.loadingStreet = loadingStreet;
+        this.loadingHouseNumber = loadingHouseNumber;
+        this.loadingDate = loadingDate;
+        this.invoiceDocument = invoiceDocument;
+        this.shippingSpecificationDocument = shippingSpecificationDocument;
+        this.qualityCertificateDocument = qualityCertificateDocument;
+        this.veterinaryCertificateDocument = veterinaryCertificateDocument;
+        this.quarantineCertificateDocument = quarantineCertificateDocument;
+        this.certificateOfOriginDocument = certificateOfOriginDocument;
+        this.loadingCertificateDocument = loadingCertificateDocument;
+        this.cargoQuantity = cargoQuantity;
+        this.cargoName = cargoName;
+        this.nackagingType = nackagingType;
+        this.numbers = numbers;
+        this.statistikCode = statistikCode;
+        this.grossWeight = grossWeight;
+        this.volume = volume;
+        this.customsProcessing = customsProcessing;
+        this.returnCountry = returnCountry;
+        this.returnCity = returnCity;
+        this.returnStreet = returnStreet;
+        this.returnHouse = returnHouse;
+        this.paymentTerms = paymentTerms;
+        this.carrier = carrier;
+        this.subsequentСarrier = subsequentСarrier;
+        this.carrierNotes = carrierNotes;
+        this.cargoReceivedDate = cargoReceivedDate;
+        this.cmrFilledDate = cmrFilledDate;
+        this.tractorRegistrationNumber = tractorRegistrationNumber;
+        this.trailerRegistrationNumber = trailerRegistrationNumber;
+    }
+
     /*
      * * * Возврат
      */
@@ -140,6 +195,46 @@ public class CRM {
     @Column
     private String trailerRegistrationNumber;
 
+    public CRMDTO build(){
+        return new CRMDTO(sender.buildDTO(),
+                resipient.buildDTO(),
+                countryWH,
+                cityWH,
+                streetWH,
+                houseNumberWH,
+                loadingCountry,
+                loadingCity,
+                loadingStreet,
+                loadingHouseNumber,
+                loadingDate,
+                invoiceDocument,
+                shippingSpecificationDocument,
+                qualityCertificateDocument,
+                veterinaryCertificateDocument,
+                quarantineCertificateDocument,
+                certificateOfOriginDocument,
+                loadingCertificateDocument,
+                cargoQuantity,
+                cargoName,
+                nackagingType,
+                numbers,
+                statistikCode,
+                grossWeight,
+                volume,
+                customsProcessing.build(),
+                returnCountry,
+                returnCity,
+                returnStreet,
+                returnHouse,
+                paymentTerms,
+                carrier.buildDTO(),
+                subsequentСarrier.buildDTO(),
+                carrierNotes,
+                cargoReceivedDate,
+                cmrFilledDate,
+                tractorRegistrationNumber,
+                trailerRegistrationNumber);
+    }
 
 
 }
