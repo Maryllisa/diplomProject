@@ -2,11 +2,13 @@ package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.DeclarationDTO;
+import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.service.CRMService;
 import com.example.diplomproject.service.DeclarationTDService;
 import com.example.diplomproject.service.GoodTransportDocumentService;
+import com.example.diplomproject.service.IndividualsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -29,7 +31,7 @@ public class ClientRestController {
     private final DeclarationTDService declarationTDService;
     private final CRMService crmService;
     private final GoodTransportDocumentService goodTransportDocumentService;
-
+    private final IndividualsService individualsService;
 
     // Добавить валидацию
     @SneakyThrows
@@ -82,6 +84,13 @@ public class ClientRestController {
 
         goodTransportDocumentService.addNewGTD(goodTransportDocument, file, authentication.getName());
         return  ResponseEntity.ok("ТТН добавлен");
+    }
+    @PostMapping("/client/regAsAComp")
+    private ResponseEntity<String> addNewReqAsCompany(@ModelAttribute IndividualsDTO individualsDTO,
+                                                      Authentication authentication){
+
+        individualsService.addNewCompany(individualsDTO, authentication.getName());
+        return  ResponseEntity.ok("Успешная регистрация");
     }
 
 }

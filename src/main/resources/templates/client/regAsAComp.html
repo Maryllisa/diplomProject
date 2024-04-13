@@ -10,7 +10,7 @@
 <main>
     <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Зарегистрироваться как компания </h4>
-        <form class="needs-validation" novalidate="" th:object="${supplier}">
+        <form class="needs-validation" novalidate="" th:object="${supplier}" th:action="*{'/client/regAsAComp'}" method="post">
 
             <div class="row g-3">
                 <div class="col-sm-6">
