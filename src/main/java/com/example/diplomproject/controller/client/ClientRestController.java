@@ -1,7 +1,9 @@
 package com.example.diplomproject.controller.client;
 
+import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.service.CRMService;
 import com.example.diplomproject.service.DeclarationTDService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 @Slf4j
 public class ClientRestController {
     private final DeclarationTDService declarationTDService;
+    private final CRMService crmService;
 
 
     // Добавить валидацию
@@ -40,6 +43,25 @@ public class ClientRestController {
         log.info("Список из сессии: " + productDTOList);
         declarationDTO.setProductDTOS(productDTOList);
         declarationTDService.addNewDeclaration(declarationDTO, authentication.getName());
+
+        return ResponseEntity.ok("Есть контакт!!");
+
+    }
+    @SneakyThrows
+    @PostMapping("/client/addCRM")
+    private ResponseEntity<String> checkAndAddCRM(@ModelAttribute CRMDTO crmdto,
+                                                          BindingResult result,
+                                                          Model model,
+                                                  Authentication authentication,
+                                                  HttpSession session){
+
+        if (result.hasErrors()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String body = objectMapper.writeValueAsString(CRMService.checkNewCRM(result, crmdto));
+            return ResponseEntity.badRequest().body(body);
+        }
+        log.info("Запуск регистрации нового CRM документа");
+        crmService.addNewCRM(crmdto, authentication.getName());
 
         return ResponseEntity.ok("Есть контакт!!");
 
