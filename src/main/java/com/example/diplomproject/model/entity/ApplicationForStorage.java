@@ -24,6 +24,6 @@ public class ApplicationForStorage {
     @OneToOne
     private DeclarationTD declarationTD;
     @OneToOne
-    private Supplier supplier;
+    private Individuals individuals;
 
 }
