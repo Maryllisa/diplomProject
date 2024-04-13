@@ -1,13 +1,10 @@
 package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.model.entity.CRM;
-import com.example.diplomproject.model.entity.CustomsProcessing;
-import com.example.diplomproject.model.entity.Individuals;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.sql.Date;
 
 @Data
@@ -83,7 +80,7 @@ public class CRMDTO {
     /*
      * * * Последующий перевозчик
      */
-    private IndividualsDTO subsequentСarrier;
+    private IndividualsDTO subsequentCarrier;
     /*
      * * * Оговорки и замечания перевозчика
      */
@@ -135,7 +132,7 @@ public class CRMDTO {
                 returnHouse,
                 paymentTerms,
                 carrier.build(),
-                subsequentСarrier.build(),
+                subsequentCarrier.build(),
                 carrierNotes,
                 cargoReceivedDate,
                 cmrFilledDate,

@@ -92,7 +92,56 @@ public class CRM {
      */
     @OneToOne
     private CustomsProcessing customsProcessing;
-
+    /*
+     * * * Возврат
+     */
+    @Column
+    private String returnCountry;
+    @Column
+    private String returnCity;
+    @Column
+    private String returnStreet;
+    @Column
+    private String returnHouse;
+    @Column
+    /*
+     * * * Условия оплаты
+    */
+    private String paymentTerms;
+    /*
+     * * * Перевозчик
+     */
+    @OneToOne
+    private Individuals carrier;
+    /*
+     * * * Последующий перевозчик
+     */
+    @OneToOne
+    private Individuals subsequentCarrier;
+    /*
+     * * * Оговорки и замечания перевозчика
+     */
+    @Column
+    private String carrierNotes;
+    /*
+     * * * Дата получения груза
+     */
+    @Column
+    private String cargoReceivedDate;
+    /*
+     * * * Дата заполнения СМR
+     */
+    @Column
+    private Date cmrFilledDate;
+    /*
+     * * * Регистрационные номера
+     */
+    @Column
+    private String tractorRegistrationNumber;
+    @Column
+    private String trailerRegistrationNumber;
+    @ManyToOne
+    private Account account;
     public CRM(Individuals sender, Individuals resipient, String countryWH,
                String cityWH, String streetWH, String houseNumberWH,
                String loadingCountry, String loadingCity, String loadingStreet,
@@ -105,7 +154,7 @@ public class CRM {
                String grossWeight, String volume, CustomsProcessing customsProcessing,
                String returnCountry, String returnCity, String returnStreet,
                String returnHouse, String paymentTerms, Individuals carrier,
-               Individuals subsequentСarrier, String carrierNotes, String cargoReceivedDate, Date cmrFilledDate, String tractorRegistrationNumber, String trailerRegistrationNumber) {
+               Individuals subsequentCarrier, String carrierNotes, String cargoReceivedDate, Date cmrFilledDate, String tractorRegistrationNumber, String trailerRegistrationNumber) {
         this.sender = sender;
         this.resipient = resipient;
         this.countryWH = countryWH;
@@ -138,7 +187,7 @@ public class CRM {
         this.returnHouse = returnHouse;
         this.paymentTerms = paymentTerms;
         this.carrier = carrier;
-        this.subsequentСarrier = subsequentСarrier;
+        this.subsequentCarrier = subsequentCarrier;
         this.carrierNotes = carrierNotes;
         this.cargoReceivedDate = cargoReceivedDate;
         this.cmrFilledDate = cmrFilledDate;
@@ -146,54 +195,6 @@ public class CRM {
         this.trailerRegistrationNumber = trailerRegistrationNumber;
     }
 
-    /*
-     * * * Возврат
-     */
-    @Column
-    private String returnCountry;
-    @Column
-    private String returnCity;
-    @Column
-    private String returnStreet;
-    @Column
-    private String returnHouse;
-    @Column
-    /*
-     * * * Условия оплаты
-    */
-    private String paymentTerms;
-    /*
-     * * * Перевозчик
-     */
-    @OneToOne
-    private Individuals carrier;
-    /*
-     * * * Последующий перевозчик
-     */
-    @OneToOne
-    private Individuals subsequentСarrier;
-    /*
-     * * * Оговорки и замечания перевозчика
-     */
-    @Column
-    private String carrierNotes;
-    /*
-     * * * Дата получения груза
-     */
-    @Column
-    private String cargoReceivedDate;
-    /*
-     * * * Дата заполнения СМR
-     */
-    @Column
-    private Date cmrFilledDate;
-    /*
-     * * * Регистрационные номера
-     */
-    @Column
-    private String tractorRegistrationNumber;
-    @Column
-    private String trailerRegistrationNumber;
 
     public CRMDTO build(){
         return new CRMDTO(sender.buildDTO(),
@@ -228,13 +229,11 @@ public class CRM {
                 returnHouse,
                 paymentTerms,
                 carrier.buildDTO(),
-                subsequentСarrier.buildDTO(),
+                subsequentCarrier.buildDTO(),
                 carrierNotes,
                 cargoReceivedDate,
                 cmrFilledDate,
                 tractorRegistrationNumber,
                 trailerRegistrationNumber);
     }
-
-
 }
