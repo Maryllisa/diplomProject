@@ -18,4 +18,8 @@ public interface DeclarationTDRepository extends JpaRepository<DeclarationTD, St
             "inner join Individuals sup on sup.idSupplier = dec.individuals.idSupplier " +
             "where dec.account = ?1")
     Optional<Individuals> findIndividualsByAccountAndeRole(Account account);
+    @Query("SELECT sup FROM DeclarationTD dec " +
+            "inner join Individuals sup on sup.idSupplier = dec.recipientAddress.idSupplier " +
+            "where dec.account = ?1")
+    Optional<Individuals> findRecipientByAccountAndeRole(Account account);
 }
