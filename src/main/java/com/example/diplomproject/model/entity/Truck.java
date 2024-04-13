@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Truck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long key;
+    private Long idTruck;
     @Column
     private String registrationNumber;
     @Column
@@ -21,7 +21,7 @@ public class Truck {
     @Column
     private String model;
     @Column
-    private int year;
+    private int yearTruck;
     @OneToOne
     private Driver driver;
     @OneToOne
