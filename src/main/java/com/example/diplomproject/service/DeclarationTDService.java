@@ -41,6 +41,7 @@ public class DeclarationTDService {
         log.info("Регистрация декларации");
         DeclarationTD declarationTDForDB = declarationDTO.buildWithoutEntity();
         Account account = userRepository.findByLogin(login);
+        declarationTDForDB.setAccount(account);
         log.info("Регистрация декларации на клиенте: " + login);
         Individuals individualsFromDB = new Individuals();
         if (individualsRepository.findByOrganizationNameAndTaxIdAndRegistrationCodeAndRoleIndividuals(declarationDTO.getSenderDTO().getOrganizationName(),
