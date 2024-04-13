@@ -1,14 +1,14 @@
 package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.Supplier;
+import com.example.diplomproject.model.entity.Individuals;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface SupplierRepository extends JpaRepository<Supplier, Long> {
+public interface IndividualsRepository extends JpaRepository<Individuals, Long> {
 
-    Optional<Supplier> findByAccount(Account account);
+    Optional<Individuals> findByAccount(Account account);
 }
