@@ -4,8 +4,10 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.service.DeclarationTDService;
+import com.example.diplomproject.service.IndividualsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
     private final DeclarationTDService declarationTDService;
+    private final IndividualsService individualsService;
 
     @GetMapping("/client")
     public String getClient() {
@@ -65,7 +68,8 @@ public class ClientController {
     }
 
     @GetMapping("/client/regAsAComp")
-    public String getRegAsAComp() {
+    public String getRegAsAComp(Model model, Authentication authentication) {
+        model.addAttribute("supplier", individualsService.getSuppliers(authentication.getName()));
         return "/client/regAsAComp";
     }
 
