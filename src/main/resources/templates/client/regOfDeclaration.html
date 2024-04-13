@@ -205,7 +205,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <input type="number" class="form-control" id="RecipINN/KPP" placeholder="" value="" required="" th:field="${declaration.recipientDTO.taxId}">
+              <input type="number" class="form-control" id="RecipINN/KPP" placeholder="" value="" required="" th:field="${declaration.senderDTO.taxId}">
               <div class="invalid-feedback">
                 Вы не заполнили ИНН/КПП.
               </div>
@@ -213,7 +213,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <input type="text" class="form-control" id="RecipOrganizationName" placeholder="Название организации" value="" required="" th:field="${declaration.recipientDTO.organizationName}">
+              <input type="text" class="form-control" id="RecipOrganizationName" placeholder="Название организации" value="" required="" th:field="${declaration.senderDTO.organizationName}">
               <div class="invalid-feedback">
                 Вы не заполнили название организации.
               </div>
@@ -221,7 +221,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <input type="text" class="form-control" id="RecipCountry" placeholder="Страна" value="" required="" th:field="${declaration.recipientDTO.address.city}">
+              <input type="text" class="form-control" id="RecipCountry" placeholder="Страна" value="" required="" th:field="${declaration.senderDTO.address.city}">
               <div class="invalid-feedback">
                 Вы не заполнили страну.
               </div>
@@ -229,7 +229,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <input type="text" class="form-control" id="RecipPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.recipientDTO.address.postalCode}">
+              <input type="text" class="form-control" id="RecipPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.senderDTO.address.postalCode}">
               <div class="invalid-feedback">
                 Вы не заполнили почтовый код.
               </div>
@@ -237,7 +237,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
-              <input type="text" class="form-control" id="RecipRegion" placeholder="Область" value="" required="" th:field="${declaration.recipientDTO.address.region}">
+              <input type="text" class="form-control" id="RecipRegion" placeholder="Область" value="" required="" th:field="${declaration.senderDTO.address.region}">
               <div class="invalid-feedback">
                 Вы не заполнили область.
               </div>
@@ -245,7 +245,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <input type="text" class="form-control" id="RecipCity" placeholder="Населённый пункт" value="" required="" th:field="${declaration.recipientDTO.address.settlement}">
+              <input type="text" class="form-control" id="RecipCity" placeholder="Населённый пункт" value="" required="" th:field="${declaration.senderDTO.address.settlement}">
               <div class="invalid-feedback">
                 Вы не заполнили населённый пункт.
               </div>
@@ -253,7 +253,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <input type="text" class="form-control" id="RecipHouse" placeholder="Дом" value="" required="" th:field="${declaration.recipientDTO.address.build}">
+              <input type="text" class="form-control" id="RecipHouse" placeholder="Дом" value="" required="" th:field="${declaration.senderDTO.address.build}">
               <div class="invalid-feedback">
                 Вы не заполнили дом.
               </div>
@@ -261,7 +261,7 @@
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <input type="number" class="form-control" id="RecipOGRN" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.recipientDTO.registrationCode}">
+              <input type="number" class="form-control" id="RecipOGRN" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.senderDTO.registrationCode}">
               <div class="invalid-feedback">
                 Вы не заполнили ОГРН.
               </div>
@@ -944,7 +944,7 @@
 
       <button class="btn" type="button" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" onclick="duplicateAndModifyDiv()">Добавить товар</button>
       <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
-        <button class="btn "  onclick="onSendDeclaration()" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">Сохранить</button>
+        <button class="btn" type="submit"  style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">Сохранить</button>
       </div>
     </form>
 
