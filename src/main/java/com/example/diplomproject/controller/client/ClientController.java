@@ -3,6 +3,7 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.CRM;
+import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.service.DeclarationTDService;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,8 @@ public class ClientController {
     }
 
     @GetMapping("/client/addTTN")
-    public String getAddTTN() {
+    public String getAddTTN(Model model) {
+        model.addAttribute("gtd", new GoodTransportDocument());
         return "/client/addTTN";
     }
 

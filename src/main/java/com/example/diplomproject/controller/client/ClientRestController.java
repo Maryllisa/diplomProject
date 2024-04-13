@@ -3,8 +3,10 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.service.CRMService;
 import com.example.diplomproject.service.DeclarationTDService;
+import com.example.diplomproject.service.GoodTransportDocumentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -14,9 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -25,6 +28,7 @@ import java.util.List;
 public class ClientRestController {
     private final DeclarationTDService declarationTDService;
     private final CRMService crmService;
+    private final GoodTransportDocumentService goodTransportDocumentService;
 
 
     // Добавить валидацию
@@ -70,6 +74,13 @@ public class ClientRestController {
     private ResponseEntity<String> addNewProduct(@RequestBody List<ProductDTO> productDTOList, HttpSession session){
         session.setAttribute("productDTOList", productDTOList);
         return  ResponseEntity.ok("Товары добавленны");
+    }
+    @PostMapping("/client/addTTN")
+    private ResponseEntity<String> addNewGTD(@ModelAttribute GoodTransportDocument goodTransportDocument,
+                                             @RequestParam("pdfFile") MultipartFile file){
+
+        goodTransportDocumentService.addNewGTD(goodTransportDocument, file);
+        return  ResponseEntity.ok("ТТН добавлен");
     }
 
 }
