@@ -2,12 +2,12 @@ package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.Supplier;
-import com.example.diplomproject.model.entity.declaration.CurrencyRate;
+import com.example.diplomproject.model.entity.Individuals;
+import com.example.diplomproject.model.entity.RoleIndividuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.model.entity.declaration.FinancialRegulator;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -15,21 +15,21 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class DeclarationTDService {
     private final DeclarationTDRepository declarationTDRepository;
     private final UserRepository userRepository;
-    private final SupplierRepository supplierRepository;
+    private final IndividualsRepository individualsRepository;
     private final ProductService productService;
     private final AddressRepository addressRepository;
-    private final FinancialRegulatorRepository financialRegulatorRepository;
     private final CurrencyRateRepository currencyRateRepository;
 
     public DeclarationDTO geFormForNewDeclaration(String login) {
         DeclarationDTO declarationDTO = new DeclarationDTO();
         Account account = userRepository.findByLogin(login);
-        Supplier supplier = supplierRepository.findByAccount(account).orElse(null);
-        if(supplier!=null){
-            declarationDTO.setSenderDTO(supplier.buildDTO());
+        Individuals individuals = individualsRepository.findByAccount(account).orElse(null);
+        if(individuals !=null){
+            declarationDTO.setSenderDTO(individuals.buildDTO());
         }
         return declarationDTO;
 
@@ -38,19 +38,36 @@ public class DeclarationTDService {
         return null;
     }
     public void addNewDeclaration(DeclarationDTO declarationDTO, String login){
+        log.info("Регистрация декларации");
         DeclarationTD declarationTDForDB = declarationDTO.buildWithoutEntity();
         Account account = userRepository.findByLogin(login);
-        Supplier supplierFromDB = new Supplier();
-        if (supplierRepository.findByAccount(account).orElse(null) != null){
-            supplierFromDB = supplierRepository.findByAccount(account).orElse(null);
+        log.info("Регистрация декларации на клиенте: " + login);
+        Individuals individualsFromDB = new Individuals();
+        if (individualsRepository.findByAccount(account).orElse(null) != null){
+            individualsFromDB = individualsRepository.findByAccount(account).orElse(null);
         }
         else {
-            supplierFromDB = supplierRepository.save(declarationDTO.getSenderDTO().build());
+            log.info("Регистрация декларации нового поставщика: " + declarationDTO.getSenderDTO().build());
+            Individuals individuals = declarationDTO.getSenderDTO().build();
+            individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
+            individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
+            individualsFromDB = individualsRepository.save(individuals);
         }
-        declarationTDForDB.setSupplier(supplierFromDB);
-        declarationTDForDB.setRecipientAddress(addressRepository.save(declarationDTO.getRecipientDTO().build()));
-        declarationTDForDB.setFinancialRegulator(financialRegulatorRepository.save(declarationDTO.getOtvetstvenoeFace().build()));
-        declarationTDForDB.setDeclarant(addressRepository.save(declarationDTO.getDeclarator().build()));
+        declarationTDForDB.setIndividuals(individualsFromDB);
+        Individuals individuals = declarationDTO.getSenderDTO().build();
+        individuals.setRoleIndividuals(RoleIndividuals.RECIPIENT);
+        individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
+        declarationTDForDB.setRecipientAddress(individualsRepository.save(individuals));
+
+        individuals = declarationDTO.getSenderDTO().build();
+        individuals.setRoleIndividuals(RoleIndividuals.FINYREG);
+        individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
+        declarationTDForDB.setFinancialRegulator(individualsRepository.save(individuals));
+
+        individuals = declarationDTO.getSenderDTO().build();
+        individuals.setRoleIndividuals(RoleIndividuals.DECLARANT);
+        individuals.setAddress(addressRepository.save(declarationDTO.getSenderDTO().getAddress().build()));
+        declarationTDForDB.setDeclarant(individualsRepository.save(individuals));
         if (!declarationDTO.isFreeDeliveryCheckbox()){
             declarationTDForDB.setCurrency(declarationDTO.getCurrencyCode());
             declarationTDForDB.setAccountTotalAmount(declarationDTO.getInvoiceAmount());
@@ -59,8 +76,10 @@ public class DeclarationTDService {
             declarationTDForDB.setCurrency("");
             declarationTDForDB.setAccountTotalAmount("");
         }
+        log.info("Регистрация курса: " + declarationDTO.getCurrencyRateDTO().build());
         declarationTDForDB.setCurrencyRate(currencyRateRepository.save(declarationDTO.getCurrencyRateDTO().build()));
         declarationTDForDB = declarationTDRepository.save(declarationTDForDB);
         declarationTDForDB.setProductList(productService.addNewProduct(declarationTDForDB, declarationDTO.getProductDTOS()));
+        log.info("Завершение регистрации: " + declarationTDForDB);
     }
 }

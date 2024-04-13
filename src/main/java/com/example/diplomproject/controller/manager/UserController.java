@@ -1,9 +1,7 @@
 package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.model.entity.StatusApplication;
-import com.example.diplomproject.model.entity.Supplier;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class UserController {
     private final ApplicationService applicationService;
-    private final SupplierService supplierService;
+    private final IndividualsService individualsService;
     @GetMapping("/user")
     public String getStart() {
         return "/user/userPanel";
@@ -37,7 +35,7 @@ public class UserController {
     }
     @GetMapping("/user/showSuppliers")
     public String getSupplierReg(Model model) {
-        model.addAttribute("suppliers", supplierService.getAllSuppliers());
+        model.addAttribute("suppliers", individualsService.getAllSuppliers());
         return "/user/showSupplier";
     }
     @GetMapping("/user/regMark")

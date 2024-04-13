@@ -1,7 +1,6 @@
 package com.example.diplomproject.model.entity.declaration;
 
 import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
-import com.example.diplomproject.model.entity.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

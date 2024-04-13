@@ -25,5 +25,5 @@ public class Truck {
     @OneToOne
     private Driver driver;
     @OneToOne
-    private Supplier supplier;
+    private Individuals individuals;
 }

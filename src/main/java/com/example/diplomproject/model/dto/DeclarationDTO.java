@@ -1,8 +1,6 @@
 package com.example.diplomproject.model.dto;
 
-import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
-import com.example.diplomproject.model.dto.dtoForDeclaration.FinancialRegulatorDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import lombok.AllArgsConstructor;
@@ -19,7 +17,7 @@ public class DeclarationDTO {
     private String directionOfMovement;
     private String procedureCode;
 
-    private SupplierDTO senderDTO;
+    private IndividualsDTO senderDTO;
 
     private String numbList;
     private String colList;
@@ -32,15 +30,15 @@ public class DeclarationDTO {
 
     private String osobenOfDeclar;
 
-    private AddressDTO recipientDTO;
+    private IndividualsDTO recipientDTO;
 
-    private FinancialRegulatorDTO otvetstvenoeFace;
+    private IndividualsDTO otvetstvenoeFace;
 
     private String tradingCountry;
 
     private double tamPrice;
 
-    private AddressDTO declarator;
+    private IndividualsDTO declarator;
 
     private String countryCodeDeparture;
     private String countryNameDeparture;

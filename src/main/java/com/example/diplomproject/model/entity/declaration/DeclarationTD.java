@@ -1,8 +1,9 @@
 package com.example.diplomproject.model.entity.declaration;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
+import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Product;
-import com.example.diplomproject.model.entity.Supplier;
+import com.example.diplomproject.model.entity.Individuals;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@TypeDefs({
-        @TypeDef(name = "addressType", typeClass = Address.class),
-        @TypeDef(name = "financialRegulator", typeClass = FinancialRegulator.class),
-        @TypeDef(name = "currencyRate", typeClass = CurrencyRate.class),
-        @TypeDef(name = "productLocation", typeClass = ProductLocation.class)
-})
 public class DeclarationTD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +30,7 @@ public class DeclarationTD {
             Отправитель
     */
     @OneToOne
-    private Supplier supplier;
+    private Individuals individuals;
     /*
             Формы
     */
@@ -65,12 +60,12 @@ public class DeclarationTD {
         Получатель
     */
     @OneToOne
-    private Address recipientAddress;
+    private Individuals recipientAddress;
     /*
         Лицо ответственное за финансовое регулирование
     */
     @OneToOne
-    private FinancialRegulator financialRegulator;
+    private Individuals financialRegulator;
     // убрать 10 графу, она не заполняется
     /*
             Торгующая страна
@@ -87,7 +82,7 @@ public class DeclarationTD {
             декларант
     */
     @OneToOne
-    private Address declarant;
+    private Individuals declarant;
     /*
             Страна отправления
             Код
@@ -211,6 +206,8 @@ public class DeclarationTD {
     */
     @Column
     private String productDescription;
+    @ManyToOne
+    private Account account;
     @OneToMany
     private List<Product> productList;
     // дописать билдер
