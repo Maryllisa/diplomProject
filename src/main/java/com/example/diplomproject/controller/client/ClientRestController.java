@@ -2,10 +2,7 @@ package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
-import com.example.diplomproject.service.CRMService;
-import com.example.diplomproject.service.DeclarationTDService;
-import com.example.diplomproject.service.GoodTransportDocumentService;
-import com.example.diplomproject.service.IndividualsService;
+import com.example.diplomproject.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.List;
 
 @RestController
@@ -29,6 +25,7 @@ public class ClientRestController {
     private final CRMService crmService;
     private final GoodTransportDocumentService goodTransportDocumentService;
     private final IndividualsService individualsService;
+    private final TruckService truckService;
 
     // Добавить валидацию
     @SneakyThrows
