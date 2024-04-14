@@ -40,7 +40,6 @@ public class IndividualsService {
 
     public void addNewCompany(IndividualsDTO individualsDTO, String login) {
         Individuals individuals = individualsDTO.build(RoleIndividuals.SUPPLIER);
-        individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
         individuals.setAccount(accountRepository.findByLogin(login));
         individuals.setAddress(addressRepository.save(individualsDTO.getAddress().build()));
         individualsRepository.save(individuals);
