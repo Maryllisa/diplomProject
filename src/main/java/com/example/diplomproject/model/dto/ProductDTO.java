@@ -22,4 +22,17 @@ public class ProductDTO {
     private double netWeight;
     private String quota;
 
+    public Product build(){
+        return Product.builder()
+                .itemNumber(itemNumber)
+                .productCode(productCode)
+                .originCountryCode(originCountryCode)
+                .grossWeight(grossWeight)
+                .preference(preference)
+                .procedure(procedure)
+                .netWeight(netWeight)
+                .quota(quota)
+                .build();
+    }
+
 }

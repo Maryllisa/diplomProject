@@ -3,7 +3,6 @@ package com.example.diplomproject.model.dto;
 import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.RoleIndividuals;
-import com.example.diplomproject.model.entity.declaration.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,10 +25,11 @@ public class IndividualsDTO {
     private String registrationCode;
     private RoleIndividuals roleIndividuals;
 
-    public Individuals build() {
+    public Individuals build(RoleIndividuals roleIndividuals) {
         return Individuals.builder()
                 .organizationName(organizationName)
                 .legalAddress(legalAddress)
+                .roleIndividuals(roleIndividuals)
                 .phone(phone)
                 .bankCode(bankCode)
                 .bankName(bankName)

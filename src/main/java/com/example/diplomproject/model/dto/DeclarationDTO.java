@@ -1,14 +1,10 @@
 package com.example.diplomproject.model.dto;
 
-import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
 import com.example.diplomproject.model.dto.dtoForDeclaration.ProductLocationDTO;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.RoleIndividuals;
-import com.example.diplomproject.model.entity.declaration.Address;
-import com.example.diplomproject.model.entity.declaration.CurrencyRate;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -99,29 +95,17 @@ public class DeclarationDTO {
                 .declarationNumber(customEDCode + "/"
                         + directionOfMovement +"/"
                         +procedureCode)
-                .individuals(senderDTO.build())
-                .individuals(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.SUPPLIER)
-                        .build())
+                .individuals(senderDTO.build(RoleIndividuals.SUPPLIER))
                 .formGr3(numbList+ "/" +colList)
                 .specification(colSpec +"/"+ colListSpec)
                 .colProducts(colProd)
                 .allPlace(colMest)
                 .declarationDetails(osobenOfDeclar)
-                .recipientAddress(recipientDTO.build())
-                .recipientAddress(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.RECIPIENT)
-                        .build())
-                .financialRegulator(otvetstvenoeFace.build())
-                .financialRegulator(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.FINYREG)
-                        .build())
+                .recipientAddress(recipientDTO.build(RoleIndividuals.RECIPIENT))
+                .financialRegulator(otvetstvenoeFace.build(RoleIndividuals.FINYREG))
                 .torgCountry(tradingCountry)
                 .cost(tamPrice)
-                .declarant(declarator.build())
-                .declarant(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.DECLARANT)
-                        .build())
+                .declarant(declarator.build(RoleIndividuals.DECLARANT))
                 .codeSenderCountry(countryCodeDeparture)
                 .nameSenderCountry(countryNameDeparture)
                 .codeOriginCountry(countryCodeOrigin)

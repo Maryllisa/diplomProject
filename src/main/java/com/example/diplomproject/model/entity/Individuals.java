@@ -40,7 +40,7 @@ public class Individuals {
     @Column // ОКПО (Классификатор предприятий и организаций)
     private String registrationCode;
 
-    public IndividualsDTO build() {
+    public IndividualsDTO build(RoleIndividuals roleIndividuals) {
         return IndividualsDTO.builder()
                 .organizationName(organizationName)
                 .legalAddress(legalAddress)

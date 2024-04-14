@@ -4,13 +4,11 @@ import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.CustomsProcessing;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.RoleIndividuals;
-import com.example.diplomproject.model.entity.declaration.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import java.sql.Date;
 
 @Data
@@ -108,14 +106,8 @@ public class CRMDTO {
 
     public CRM build() {
         return CRM.builder()
-                .sender(sender.build())
-                .sender(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.CARRIER)
-                        .build())
-                .resipient(resipient.build())
-                .resipient(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.SUBSEQUENTCARRIER)
-                        .build())
+                .sender(sender.build(RoleIndividuals.SUPPLIER))
+                .resipient(resipient.build(RoleIndividuals.RECIPIENT))
                 .countryWH(countryWH)
                 .cityWH(cityWH)
                 .streetWH(streetWH)
@@ -150,13 +142,8 @@ public class CRMDTO {
                 .returnStreet(returnStreet)
                 .returnHouse(returnHouse)
                 .paymentTerms(paymentTerms)
-                .carrier(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.CARRIER)
-                        .build())
-                .subsequentCarrier(carrier.build())
-                .subsequentCarrier(Individuals.builder()
-                        .roleIndividuals(RoleIndividuals.SUBSEQUENTCARRIER)
-                        .build())
+                .carrier(carrier.build(RoleIndividuals.CARRIER))
+                .subsequentCarrier(carrier.build(RoleIndividuals.SUBSEQUENTCARRIER))
                 .carrierNotes(carrierNotes)
                 .cargoReceivedDate(cargoReceivedDate)
                 .cmrFilledDate(cmrFilledDate)

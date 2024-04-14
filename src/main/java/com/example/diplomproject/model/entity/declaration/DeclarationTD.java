@@ -9,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.util.List;
@@ -236,15 +234,15 @@ public class DeclarationTD {
                 .colList(colList)
                 .colSpec(colSpec)
                 .colListSpec(colListSpec)
-                .senderDTO(individuals.build())
+                .senderDTO(individuals.build(RoleIndividuals.CARRIER))
                 .colProd(colProducts)
                 .colMest(allPlace)
                 .osobenOfDeclar(declarationDetails)
-                .recipientDTO(recipientAddress.build())
-                .otvetstvenoeFace(financialRegulator.build())
+                .recipientDTO(recipientAddress.build(RoleIndividuals.CARRIER))
+                .otvetstvenoeFace(financialRegulator.build(RoleIndividuals.CARRIER))
                 .tradingCountry(torgCountry)
                 .tamPrice(cost)
-                .declarator(declarant.build())
+                .declarator(declarant.build(RoleIndividuals.CARRIER))
                 .countryCodeDeparture(codeSenderCountry)
                 .countryNameDeparture(nameSenderCountry)
                 .countryCodeOrigin(codeOriginCountry)

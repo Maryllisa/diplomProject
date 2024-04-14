@@ -3,8 +3,6 @@ package com.example.diplomproject.model.entity;
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.CustomsProcessingDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
-import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
-import com.example.diplomproject.model.entity.declaration.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -150,14 +148,8 @@ public class CRM {
     private Account account;
     public CRMDTO build(){
         return CRMDTO.builder()
-                .sender(sender.build())
-                .sender(IndividualsDTO.builder()
-                        .roleIndividuals(RoleIndividuals.CARRIER)
-                        .build())
-                .resipient(resipient.build())
-                .resipient(IndividualsDTO.builder()
-                        .roleIndividuals(RoleIndividuals.SUBSEQUENTCARRIER)
-                        .build())
+                .sender(sender.build(RoleIndividuals.SUPPLIER))
+                .resipient(resipient.build(RoleIndividuals.RECIPIENT))
                 .countryWH(countryWH)
                 .cityWH(cityWH)
                 .streetWH(streetWH)
@@ -192,14 +184,8 @@ public class CRM {
                 .returnStreet(returnStreet)
                 .returnHouse(returnHouse)
                 .paymentTerms(paymentTerms)
-                .carrier(carrier.build())
-                .carrier(IndividualsDTO.builder()
-                        .roleIndividuals(RoleIndividuals.CARRIER)
-                        .build())
-                .subsequentCarrier(carrier.build())
-                .subsequentCarrier(IndividualsDTO.builder()
-                        .roleIndividuals(RoleIndividuals.SUBSEQUENTCARRIER)
-                        .build())
+                .carrier(carrier.build(RoleIndividuals.CARRIER))
+                .subsequentCarrier(carrier.build(RoleIndividuals.SUBSEQUENTCARRIER))
                 .carrierNotes(carrierNotes)
                 .cargoReceivedDate(cargoReceivedDate)
                 .cmrFilledDate(cmrFilledDate)

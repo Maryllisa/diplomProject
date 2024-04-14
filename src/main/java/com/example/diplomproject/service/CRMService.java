@@ -1,7 +1,6 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.CRMDTO;
-import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
@@ -90,7 +89,7 @@ public class CRMService {
     public CRMDTO getCRM(String login) {
         CRMDTO crmdto = new CRMDTO();
         Individuals supplier = individualsService.findRegistrationSupplier(login);
-        crmdto.setSender(supplier.build());
+        crmdto.setSender(supplier.build(RoleIndividuals.CARRIER));
         return crmdto;
     }
 }
