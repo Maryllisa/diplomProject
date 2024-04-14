@@ -4,8 +4,12 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.service.CRMService;
 import com.example.diplomproject.service.DeclarationTDService;
+import com.example.diplomproject.service.GoodTransportDocumentService;
+import com.example.diplomproject.service.IndividualsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
     private final DeclarationTDService declarationTDService;
+    private final IndividualsService individualsService;
+    private final CRMService crmService;
 
     @GetMapping("/client")
     public String getClient() {
@@ -43,7 +49,7 @@ public class ClientController {
     }
 
     @GetMapping("/client/addTTN")
-    public String getAddTTN(Model model) {
+    public String getAddTTN(Model model, Authentication authentication) {
         model.addAttribute("gtd", new GoodTransportDocument());
         return "/client/addTTN";
     }
@@ -59,13 +65,14 @@ public class ClientController {
     }
 
     @GetMapping("/client/addCMR")
-    public String getAddCMR(Model model) {
-        model.addAttribute("crm", new CRM());
+    public String getAddCMR(Model model, Authentication authentication) {
+        model.addAttribute("crm", crmService.getCRM(authentication.getName()));
         return "/client/addCMR";
     }
 
     @GetMapping("/client/regAsAComp")
-    public String getRegAsAComp() {
+    public String getRegAsAComp(Model model, Authentication authentication) {
+        model.addAttribute("supplier", individualsService.getSuppliers(authentication.getName()));
         return "/client/regAsAComp";
     }
 

@@ -4,10 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Truck {
     @Id
@@ -25,5 +25,5 @@ public class Truck {
     @OneToOne
     private Driver driver;
     @OneToOne
-    private Individuals individuals;
+    private Account account;
 }
