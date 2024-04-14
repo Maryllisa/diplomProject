@@ -3,13 +3,11 @@ package com.example.diplomproject.model.entity;
 import javax.persistence.*;
 import lombok.*;
 
-@Entity
-@Table
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
+@Entity
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

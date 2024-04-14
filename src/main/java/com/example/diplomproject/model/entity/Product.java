@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Product {
     @Id

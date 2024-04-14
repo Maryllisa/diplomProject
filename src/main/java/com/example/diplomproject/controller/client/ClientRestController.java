@@ -1,9 +1,6 @@
 package com.example.diplomproject.controller.client;
 
-import com.example.diplomproject.model.dto.CRMDTO;
-import com.example.diplomproject.model.dto.DeclarationDTO;
-import com.example.diplomproject.model.dto.IndividualsDTO;
-import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.service.CRMService;
 import com.example.diplomproject.service.DeclarationTDService;
@@ -90,6 +87,11 @@ public class ClientRestController {
                                                       Authentication authentication){
 
         individualsService.addNewCompany(individualsDTO, authentication.getName());
+        return  ResponseEntity.ok("Успешная регистрация");
+    }
+    @PostMapping("/client/addStorageRequest")
+    private ResponseEntity<String> addStorageRequest(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
+        truckService.addNewTruck(truckDTO, authentication.getName());
         return  ResponseEntity.ok("Успешная регистрация");
     }
 

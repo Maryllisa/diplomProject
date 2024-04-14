@@ -10,13 +10,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements UserDetails {
     @Id

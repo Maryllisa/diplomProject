@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.CustomsProcessingDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class CustomsProcessing {
     @Id
@@ -27,17 +29,4 @@ public class CustomsProcessing {
     @Column
     private Date issueDate;
 
-    public CustomsProcessing(String customsPostName, String customsCode,
-                             String svhNameAndAddress, String licenseNumber,
-                             Date issueDate) {
-        this.customsPostName = customsPostName;
-        this.customsCode = customsCode;
-        this.svhNameAndAddress = svhNameAndAddress;
-        this.licenseNumber = licenseNumber;
-        this.issueDate = issueDate;
-    }
-    public CustomsProcessingDTO build(){
-        return new CustomsProcessingDTO(customsPostName, customsCode,
-                svhNameAndAddress, licenseNumber, issueDate);
-    }
 }

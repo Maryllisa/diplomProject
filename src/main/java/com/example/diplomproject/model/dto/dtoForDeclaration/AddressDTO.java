@@ -2,12 +2,16 @@ package com.example.diplomproject.model.dto.dtoForDeclaration;
 
 import com.example.diplomproject.model.entity.declaration.Address;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AddressDTO {
 
     private String city;
@@ -17,12 +21,4 @@ public class AddressDTO {
     private String build;
     private String ogrnNumber;
 
-    public Address build() {
-        return  new Address(city,
-                postalCode,
-                region,
-                settlement,
-                build,
-                ogrnNumber);
-    }
 }

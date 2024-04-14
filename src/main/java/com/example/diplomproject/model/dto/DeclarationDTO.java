@@ -4,6 +4,7 @@ import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DeclarationDTO {
     private String customEDCode;
     private String directionOfMovement;
@@ -86,43 +88,5 @@ public class DeclarationDTO {
     private String productDescription;
 
     private List<ProductDTO> productDTOS;
-
-    public DeclarationTD buildWithoutEntity(){
-        DeclarationTD declarationTDForDB = new DeclarationTD();
-        declarationTDForDB.setDeclarationNumber(customEDCode+"/"+ directionOfMovement+"/"+ procedureCode);
-        declarationTDForDB.setFormGr3(numbList +"/"+colList);
-        declarationTDForDB.setSpecification(colSpec +"/" +colListSpec);
-        declarationTDForDB.setColProducts(colProd);
-        declarationTDForDB.setAllPlace(colMest);
-        declarationTDForDB.setDeclarationDetails(osobenOfDeclar);
-        declarationTDForDB.setTorgCountry(tradingCountry);
-        declarationTDForDB.setCost(tamPrice);
-        declarationTDForDB.setCodeSenderCountry(countryCodeDeparture);
-        declarationTDForDB.setNameSenderCountry(countryNameDeparture);
-        declarationTDForDB.setCodeOriginCountry(countryCodeOrigin);
-        declarationTDForDB.setNameOriginCountry(countryNameOrigin);
-        declarationTDForDB.setCodeRecipientCountry(countryCodeDestination);
-        declarationTDForDB.setNameRecipientCountry(countryNameDestination);
-        declarationTDForDB.setIdentification(vehicleCount);
-        declarationTDForDB.setVehicleRegistrationCountry(vehicleNumbers);
-        declarationTDForDB.setCodeContiner(conteiner);
-        declarationTDForDB.setUpCode(codeYP);
-        declarationTDForDB.setConditionsOfDeliveryName(nameYP);
-        declarationTDForDB.setNumberOfVehicles(vehicleCountOnBorder);
-        declarationTDForDB.setVehicleNumbers(vehicleNumbersOnBorder);
-        declarationTDForDB.setDealCode(transactionCharacterCode);
-        declarationTDForDB.setSpecialEconomicDealCode(foreignTradeFeatureCode);
-
-        declarationTDForDB.setCodeTransport(borderTransportTypeCode);
-        declarationTDForDB.setCodeTransportInCountry(domesticTransportTypeCode);
-        declarationTDForDB.setTotalGrossWeight(grossWeight);
-        declarationTDForDB.setTotalNetWeight(netWeight);
-        declarationTDForDB.setCustomsBorderCode(customsCode);
-        declarationTDForDB.setCustomsBorderDescription(largeTextArea);
-        declarationTDForDB.setProductDescription(productDescription);
-
-        return declarationTDForDB;
-
-    }
 
 }

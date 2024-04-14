@@ -10,13 +10,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
+@Entity
 public class Account extends User {
     @Column
     private String surname;

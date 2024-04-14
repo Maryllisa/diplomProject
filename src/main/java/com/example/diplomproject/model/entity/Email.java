@@ -4,13 +4,11 @@ import javax.persistence.*;
 import lombok.*;
 
 
-@Entity
-@Table
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
+@Entity
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

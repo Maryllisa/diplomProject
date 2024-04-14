@@ -2,19 +2,16 @@ package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.config.annotation.imp.ValidDateOfBirthRange;
 import com.example.diplomproject.model.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import javax.validation.constraints.*;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AccountDTO extends UserDTO {
 
     @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")

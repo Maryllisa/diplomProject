@@ -2,6 +2,7 @@ package com.example.diplomproject.model.dto.dtoForDeclaration;
 
 import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductLocationDTO {
     private String uzoRegistry;
     private String customsCode;
@@ -26,21 +28,5 @@ public class ProductLocationDTO {
     private String regionOrDistrict;
     private String locality;
     private String houseNumber;
-    public ProductLocation build(){
-        return new ProductLocation(uzoRegistry,
-                customsCode,
-                type,
-                quantity,
-                documentNumber,
-                date,
-                ztkNumber,
-                transportType,
-                vehicleNumber,
-                stationOrPort,
-                country,
-                postalCode,
-                regionOrDistrict,
-                locality,
-                houseNumber);
-    }
+
 }

@@ -2,6 +2,7 @@ package com.example.diplomproject.model.dto.message;
 
 import com.example.diplomproject.model.entity.ChatMessage;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ChatRoomDTO {
     private String idChatRoom;
     private String loginUserSender;

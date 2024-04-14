@@ -2,14 +2,17 @@ package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.model.entity.CRM;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import java.sql.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CRMDTO {
 
     private IndividualsDTO sender;
@@ -100,44 +103,8 @@ public class CRMDTO {
     private String trailerRegistrationNumber;
 
     public CRM build(){
-        return new CRM(sender.build(),
-                resipient.build(),
-                countryWH,
-                cityWH,
-                streetWH,
-                houseNumberWH,
-                loadingCountry,
-                loadingCity,
-                loadingStreet,
-                loadingHouseNumber,
-                loadingDate,
-                invoiceDocument,
-                shippingSpecificationDocument,
-                qualityCertificateDocument,
-                veterinaryCertificateDocument,
-                quarantineCertificateDocument,
-                certificateOfOriginDocument,
-                loadingCertificateDocument,
-                cargoQuantity,
-                cargoName,
-                nackagingType,
-                numbers,
-                statistikCode,
-                grossWeight,
-                volume,
-                customsProcessing.build(),
-                returnCountry,
-                returnCity,
-                returnStreet,
-                returnHouse,
-                paymentTerms,
-                carrier.build(),
-                subsequentCarrier.build(),
-                carrierNotes,
-                cargoReceivedDate,
-                cmrFilledDate,
-                tractorRegistrationNumber,
-                trailerRegistrationNumber);
-    }
+        return CRM.builder()
+                .
+                .build();
 
 }
