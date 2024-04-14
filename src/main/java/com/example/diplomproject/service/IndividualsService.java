@@ -6,10 +6,7 @@ import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.RoleIndividuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.repository.CRMRepository;
-import com.example.diplomproject.repository.DeclarationTDRepository;
-import com.example.diplomproject.repository.IndividualsRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,7 @@ public class IndividualsService {
     private final UserRepository accountRepository;
     private final DeclarationTDRepository declarationTDRepository;
     private final CRMRepository crmRepository;
+    private final AddressRepository addressRepository;
 
     public List<Individuals> getAllSuppliers() {
         return individualsRepository.findAll();
@@ -48,6 +46,7 @@ public class IndividualsService {
         Individuals individuals = individualsDTO.build();
         individuals.setRoleIndividuals(RoleIndividuals.SUPPLIER);
         individuals.setAccount(accountRepository.findByLogin(login));
+        individuals.setAddress(addressRepository.save(individualsDTO.getAddress().build()));
         individualsRepository.save(individuals);
     }
 }
