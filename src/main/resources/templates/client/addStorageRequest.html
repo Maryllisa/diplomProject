@@ -23,17 +23,29 @@
 
         <div class="col-sm-4">
           <label  class="form-label" style="color: #814de5">Номер ТТН</label>
-          <input type="text" class="form-control" id="№TTN" placeholder="" value="" required="">
+          <select class="form-select" id="№TTN" required>
+            <option value="">Выберите номер ТТН</option>
+            <option value="ТТН1">ТТН1</option>
+            <option value="ТТН2">ТТН2</option>
+            <option value="ТТН3">ТТН3</option>
+
+          </select>
           <div class="invalid-feedback">
-            Проверьте корректность заполнения номера ТТН.
+            Проверьте корректность выбора номера ТТН.
           </div>
         </div>
 
         <div class="col-4">
           <label class="form-label" style="color: #814de5">№ Трансп. декларации</label>
-          <input type="text" class="form-control" id="№TD" placeholder="">
+          <select class="form-select" id="№TD">
+            <option value="">Выберите номер ТД</option>
+            <option value="ТД1">ТД1</option>
+            <option value="ТД2">ТД2</option>
+            <option value="ТД3">ТД3</option>
+
+          </select>
           <div class="invalid-feedback">
-            Неверный номер тд
+            Неверный номер ТД.
           </div>
         </div>
 
@@ -47,17 +59,27 @@
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ CRM</label>
-          <input type="text" class="form-control" id="№CRM" placeholder="">
+          <select class="form-select" id="№CRM">
+            <option value="">Выберите номер CRM</option>
+            <option value="CRM1">CRM1</option>
+            <option value="CRM2">CRM2</option>
+            <option value="CRM3">CRM3</option>
+          </select>
           <div class="invalid-feedback">
-            Неверный номер CRM
+            Неверный номер CRM.
           </div>
         </div>
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ Авто</label>
-          <input type="text" class="form-control" id="№auto" placeholder="">
+          <select class="form-select" id="№auto">
+            <option value="">Выберите номер авто</option>
+            <option value="Авто1">Авто1</option>
+            <option value="Авто2">Авто2</option>
+            <option value="Авто3">Авто3</option>
+          </select>
           <div class="invalid-feedback">
-            Неверный номер авто
+            Неверный номер авто.
           </div>
         </div>
 
