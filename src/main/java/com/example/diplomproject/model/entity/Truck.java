@@ -4,10 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Truck {
     @Id
