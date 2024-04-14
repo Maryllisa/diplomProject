@@ -1,10 +1,7 @@
 package com.example.diplomproject.model.entity.declaration;
 
 import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
@@ -14,10 +11,10 @@ import java.io.Serializable;
 import java.sql.*;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class CurrencyRate{
     @Id
@@ -34,14 +31,13 @@ public class CurrencyRate{
     @Column
     private double usdRate;
 
-    public CurrencyRate(Date date, String currency, double currencyRate, double euroRate, double usdRate) {
-        this.date = date;
-        this.currency = currency;
-        this.currencyRate = currencyRate;
-        this.euroRate = euroRate;
-        this.usdRate = usdRate;
-    }
-    public CurrencyRateDTO build(){
-        return new CurrencyRateDTO(date, currency, currencyRate,euroRate,usdRate);
+    public CurrencyRateDTO build() {
+        return CurrencyRateDTO.builder()
+                .date(date)
+                .currency(currency)
+                .currencyRate(currencyRate)
+                .euroRate(euroRate)
+                .usdRate(usdRate)
+                .build();
     }
 }

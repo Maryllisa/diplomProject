@@ -39,4 +39,15 @@ public class Individuals {
     private String taxId;
     @Column // ОКПО (Классификатор предприятий и организаций)
     private String registrationCode;
+
+    public IndividualsDTO build() {
+        return IndividualsDTO.builder()
+                .organizationName(organizationName)
+                .legalAddress(legalAddress)
+                .phone(phone)
+                .bankCode(bankCode)
+                .bankName(bankName)
+                .address(address.build())
+                .build();
+    }
 }

@@ -19,4 +19,14 @@ public class CurrencyRateDTO {
     private double currencyRate;
     private double euroRate;
     private double usdRate;
+
+    public CurrencyRate build() {
+        return CurrencyRate.builder()
+                .date(date)
+                .currency(currency)
+                .currencyRate(currencyRate)
+                .euroRate(euroRate)
+                .usdRate(usdRate)
+                .build();
+    }
 }

@@ -21,4 +21,15 @@ public class AddressDTO {
     private String build;
     private String ogrnNumber;
 
+    public Address build(){
+        return Address.builder()
+                .city(city)
+                .postalCode(postalCode)
+                .region(region)
+                .settlement(settlement)
+                .build(build)
+                .ogrnNumber(ogrnNumber)
+                .build();
+    }
+
 }

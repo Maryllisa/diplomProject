@@ -1,18 +1,15 @@
 package com.example.diplomproject.model.entity.declaration;
 
 import com.example.diplomproject.model.dto.dtoForDeclaration.ProductLocationDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class ProductLocation {
     @Id
@@ -20,26 +17,6 @@ public class ProductLocation {
     private Long id;
     @Column
     private String uzoRegistry;
-
-    public ProductLocation(String uzoRegistry, String customsCode, String type, String quantity, String documentNumber,
-                           Date date, String ztkNumber, String transportType, String vehicleNumber, String stationOrPort,
-                           String country, String postalCode, String regionOrDistrict, String locality, String houseNumber) {
-        this.uzoRegistry = uzoRegistry;
-        this.customsCode = customsCode;
-        this.type = type;
-        this.quantity = quantity;
-        this.documentNumber = documentNumber;
-        this.date = date;
-        this.ztkNumber = ztkNumber;
-        this.transportType = transportType;
-        this.vehicleNumber = vehicleNumber;
-        this.stationOrPort = stationOrPort;
-        this.country = country;
-        this.postalCode = postalCode;
-        this.regionOrDistrict = regionOrDistrict;
-        this.locality = locality;
-        this.houseNumber = houseNumber;
-    }
 
     @Column
     private String customsCode;
@@ -70,22 +47,24 @@ public class ProductLocation {
     @Column
     private String houseNumber;
 
-    public ProductLocationDTO build() {
-        return new ProductLocationDTO(uzoRegistry,
-                customsCode,
-                type,
-                quantity,
-                documentNumber,
-                date,
-                ztkNumber,
-                transportType,
-                vehicleNumber,
-                stationOrPort,
-                country,
-                postalCode,
-                regionOrDistrict,
-                locality,
-                houseNumber);
+    public ProductLocationDTO build(){
+        return ProductLocationDTO.builder()
+                .uzoRegistry(uzoRegistry)
+                .customsCode(customsCode)
+                .type(type)
+                .quantity(quantity)
+                .documentNumber(documentNumber)
+                .date(date)
+                .ztkNumber(ztkNumber)
+                .transportType(transportType)
+                .vehicleNumber(vehicleNumber)
+                .stationOrPort(stationOrPort)
+                .country(country)
+                .postalCode(postalCode)
+                .regionOrDistrict(regionOrDistrict)
+                .locality(locality)
+                .houseNumber(houseNumber)
+                .build();
     }
 
 

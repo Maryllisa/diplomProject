@@ -1,6 +1,12 @@
 package com.example.diplomproject.model.dto;
 
+import com.example.diplomproject.model.dto.dtoForDeclaration.AddressDTO;
 import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
+import com.example.diplomproject.model.dto.dtoForDeclaration.ProductLocationDTO;
+import com.example.diplomproject.model.entity.Individuals;
+import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.declaration.Address;
+import com.example.diplomproject.model.entity.declaration.CurrencyRate;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import lombok.AllArgsConstructor;
@@ -83,10 +89,68 @@ public class DeclarationDTO {
     private String customsCode;
     private String largeTextArea;
 
-    private ProductLocation productLocationDTO;
+    private ProductLocationDTO productLocationDTO;
 
     private String productDescription;
 
     private List<ProductDTO> productDTOS;
+    public DeclarationTD build(){
+        return DeclarationTD.builder()
+                .declarationNumber(customEDCode + "/"
+                        + directionOfMovement +"/"
+                        +procedureCode)
+                .individuals(senderDTO.build())
+                .individuals(Individuals.builder()
+                        .roleIndividuals(RoleIndividuals.SUPPLIER)
+                        .build())
+                .formGr3(numbList+ "/" +colList)
+                .specification(colSpec +"/"+ colListSpec)
+                .colProducts(colProd)
+                .allPlace(colMest)
+                .declarationDetails(osobenOfDeclar)
+                .recipientAddress(recipientDTO.build())
+                .recipientAddress(Individuals.builder()
+                        .roleIndividuals(RoleIndividuals.RECIPIENT)
+                        .build())
+                .financialRegulator(otvetstvenoeFace.build())
+                .financialRegulator(Individuals.builder()
+                        .roleIndividuals(RoleIndividuals.FINYREG)
+                        .build())
+                .torgCountry(tradingCountry)
+                .cost(tamPrice)
+                .declarant(declarator.build())
+                .declarant(Individuals.builder()
+                        .roleIndividuals(RoleIndividuals.DECLARANT)
+                        .build())
+                .codeSenderCountry(countryCodeDeparture)
+                .nameSenderCountry(countryNameDeparture)
+                .codeOriginCountry(countryCodeOrigin)
+                .nameOriginCountry(countryNameOrigin)
+                .codeRecipientCountry(countryCodeDestination)
+                .nameRecipientCountry(countryNameDestination)
+                .identification(vehicleCount)
+                .vehicleRegistrationCountry(vehicleNumbers)
+                .codeContiner(conteiner)
+                .upCode(codeYP)
+                .conditionsOfDeliveryName(nameYP)
+                .numberOfVehicles(vehicleCountOnBorder)
+                .vehicleNumbers(vehicleNumbersOnBorder)
+                .currency(currencyCode)
+                .accountTotalAmount(invoiceAmount)
+                .currencyRate(currencyRateDTO.build())
+                .dealCode(transactionCharacterCode)
+                .specialEconomicDealCode(foreignTradeFeatureCode)
+                .codeTransport(borderTransportTypeCode)
+                .codeTransportInCountry(domesticTransportTypeCode)
+                .totalGrossWeight(grossWeight)
+                .totalNetWeight(netWeight)
+                .customsBorderCode(customsCode)
+                .customsBorderDescription(largeTextArea)
+                .productLocation(productLocationDTO.build())
+                .productDescription(productDescription)
+                .build();
+    }
+
+
 
 }

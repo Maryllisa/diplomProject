@@ -4,7 +4,9 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Individuals;
+import com.example.diplomproject.model.entity.RoleIndividuals;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.TypeDef;
@@ -16,6 +18,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class DeclarationTD {
     @Id
@@ -210,9 +213,65 @@ public class DeclarationTD {
     private Account account;
     @OneToMany
     private List<Product> productList;
-    // дописать билдер
+
     public DeclarationDTO build(){
-        return new DeclarationDTO();
+        String declarationNumberArray [] = declarationNumber.split("/");
+        String customEDCode = declarationNumberArray[0];
+        String directionOfMovement = declarationNumberArray[1];
+        String procedureCode = declarationNumberArray[2];
+
+        String formGr3Array [] = declarationNumber.split("/");
+        String numbList = formGr3Array[0];
+        String colList = formGr3Array[1];
+
+        String specificationArray [] = declarationNumber.split("/");
+        String colSpec = specificationArray[0];
+        String colListSpec = specificationArray[1];
+
+        return DeclarationDTO.builder()
+                .customEDCode(customEDCode)
+                .directionOfMovement(directionOfMovement)
+                .procedureCode(procedureCode)
+                .numbList(numbList)
+                .colList(colList)
+                .colSpec(colSpec)
+                .colListSpec(colListSpec)
+                .senderDTO(individuals.build())
+                .colProd(colProducts)
+                .colMest(allPlace)
+                .osobenOfDeclar(declarationDetails)
+                .recipientDTO(recipientAddress.build())
+                .otvetstvenoeFace(financialRegulator.build())
+                .tradingCountry(torgCountry)
+                .tamPrice(cost)
+                .declarator(declarant.build())
+                .countryCodeDeparture(codeSenderCountry)
+                .countryNameDeparture(nameSenderCountry)
+                .countryCodeOrigin(codeOriginCountry)
+                .countryNameOrigin(nameOriginCountry)
+                .countryCodeDestination(codeRecipientCountry)
+                .countryNameDestination(nameRecipientCountry)
+                .vehicleCount(identification)
+                .vehicleNumbers(vehicleRegistrationCountry)
+                .conteiner(codeContiner)
+                .codeYP(upCode)
+                .nameYP(conditionsOfDeliveryName)
+                .vehicleCountOnBorder(numberOfVehicles)
+                .vehicleNumbersOnBorder(vehicleNumbers)
+                .currencyCode(currency)
+                .invoiceAmount(accountTotalAmount)
+                .currencyRateDTO(currencyRate.build())
+                .transactionCharacterCode(dealCode)
+                .foreignTradeFeatureCode(specialEconomicDealCode)
+                .borderTransportTypeCode(codeTransport)
+                .domesticTransportTypeCode(codeTransportInCountry)
+                .grossWeight(totalGrossWeight)
+                .netWeight(totalNetWeight)
+                .customsCode(customsBorderCode)
+                .largeTextArea(customsBorderDescription)
+                .productLocationDTO(productLocation.build())
+                .productDescription(productDescription)
+                .build();
     }
 
 

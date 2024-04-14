@@ -29,4 +29,23 @@ public class ProductLocationDTO {
     private String locality;
     private String houseNumber;
 
+    public ProductLocation build(){
+        return ProductLocation.builder()
+                .uzoRegistry(uzoRegistry)
+                .customsCode(customsCode)
+                .type(type)
+                .quantity(quantity)
+                .documentNumber(documentNumber)
+                .date(date)
+                .ztkNumber(ztkNumber)
+                .transportType(transportType)
+                .vehicleNumber(vehicleNumber)
+                .stationOrPort(stationOrPort)
+                .country(country)
+                .postalCode(postalCode)
+                .regionOrDistrict(regionOrDistrict)
+                .locality(locality)
+                .houseNumber(houseNumber)
+                .build();
+    }
 }

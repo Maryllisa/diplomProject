@@ -28,4 +28,15 @@ public class Address {
     @Column
     private String ogrnNumber;
 
+    public AddressDTO build(){
+        return AddressDTO.builder()
+                .city(city)
+                .postalCode(postalCode)
+                .region(region)
+                .settlement(settlement)
+                .build(build)
+                .ogrnNumber(ogrnNumber)
+                .build();
+    }
+
 }
