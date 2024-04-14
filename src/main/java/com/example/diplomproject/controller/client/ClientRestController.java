@@ -91,5 +91,10 @@ public class ClientRestController {
         truckService.addNewTruck(truckDTO, authentication.getName());
         return  ResponseEntity.ok("Успешная регистрация");
     }
+    @PostMapping("/client/regAuto")
+    private ResponseEntity<String> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
+        truckService.addNewTruck(truckDTO, authentication.getName());
+        return  ResponseEntity.ok("Успешная регистрация");
+    }
 
 }

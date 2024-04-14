@@ -1,5 +1,10 @@
 package com.example.diplomproject.model.entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public enum Brand {
     VOLVO,
     SCANIA,
@@ -17,5 +22,29 @@ public enum Brand {
     NISSAN,
     CHEVROLET,
     KIA,
-    SUZUKI
+    SUZUKI;
+
+    private static final Map<Brand, String> russianNames = new HashMap<>();
+    static {
+        russianNames.put(VOLVO, "Volvo");
+        russianNames.put(SCANIA, "Scania");
+        russianNames.put(MERCEDES_BENZ, "Mercedes benz");
+        russianNames.put(MAN, "Man");
+        russianNames.put(DAF, "Daf");
+        russianNames.put(IVECO, "Iveco");
+        russianNames.put(RENAULT, "Renault");
+        russianNames.put(VOLKSWAGEN, "Volkswagen");
+        russianNames.put(TOYOTA, "Toyota");
+        russianNames.put(BMW, "BMW");
+        russianNames.put(AUDI, "Audi");
+        russianNames.put(FORD, "Ford");
+        russianNames.put(HYUNDAI, "Hyundai");
+        russianNames.put(NISSAN, "Nissan");
+        russianNames.put(CHEVROLET, "Chevrolet");
+        russianNames.put(KIA, "KIA");
+        russianNames.put(SUZUKI, "Suzuki");
+    }
+    public static Map<Brand, String> getRussianName() {
+        return russianNames;
+    }
 }

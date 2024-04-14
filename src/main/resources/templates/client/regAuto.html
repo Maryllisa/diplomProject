@@ -10,23 +10,20 @@
 <main>
     <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Зарегистрировать автомобиль </h4>
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation" novalidate="" th:object="${truck}" th:action="*{'/client/regAuto'}" method="post" >
 
     <div class="row g-3">
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
-            <input type="text" class="form-control" id="Car Registration Number" placeholder="" required="">
+            <input type="text" class="form-control" id="Car Registration Number" placeholder="" required="" th:field="${truck.registrationNumber}">
             <div class="invalid-feedback">
                 Проверьте корректность заполнения регистрационного номера авто.
             </div>
         </div>
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Бренд</label>
-            <select class="form-select" id="Brand" required="">
-                <option value="">Выберите бренд</option>
-                <option value="BMW">BMW</option>
-                <option value="Mercedes-Benz">Mercedes-Benz</option>
-                <option value="Audi">Audi</option>
+            <select class="form-select" id="Brand"  th:field="${truck.brand}">
+                <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
             </select>
             <div class="invalid-feedback">
                 Пожалуйста, выберите бренд.
@@ -34,28 +31,28 @@
         </div>
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Модель</label>
-            <input type="text" class="form-control" id="Model" placeholder="" required="">
+            <input type="text" class="form-control" id="Model" placeholder="" required="" th:field="${truck.model}">
             <div class="invalid-feedback">
                 Проверьте корректность заполнения модели.
             </div>
         </div>
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Год</label>
-            <input type="text" class="form-control" id="Year" placeholder="" required="">
+            <input type="text" class="form-control" id="Year" placeholder="" required="" th:field="${truck.yearTruck}">
             <div class="invalid-feedback">
                 Проверьте корректность заполнения года.
             </div>
         </div>
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Имя водителя</label>
-            <input type="text" class="form-control" id="Driver Name" placeholder="" required="">
+            <input type="text" class="form-control" id="Driver Name" placeholder="" required="" th:field="${truck.driver.name}">
             <div class="invalid-feedback">
                 Проверьте корректность заполнения имени водителя.
             </div>
         </div>
         <div class="col-6">
             <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
-            <input type="text" class="form-control" id="Driver License Number" placeholder="" required="">
+            <input type="text" class="form-control" id="Driver License Number" placeholder="" required="" th:field="${truck.driver.licenseNumber}">
             <div class="invalid-feedback">
                 Проверьте корректность заполнения номера лицензии водителя.
             </div>

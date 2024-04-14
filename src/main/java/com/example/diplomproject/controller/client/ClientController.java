@@ -2,6 +2,8 @@ package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.model.dto.TruckDTO;
+import com.example.diplomproject.model.entity.Brand;
 import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.model.entity.Individuals;
@@ -77,7 +79,9 @@ public class ClientController {
     }
 
     @GetMapping("/client/regAuto")
-    public String getRegAuto() {
+    public String getRegAuto(Model model) {
+        model.addAttribute("brand", Brand.getRussianName());
+        model.addAttribute("truck", new TruckDTO());
         return "/client/regAuto";
     }
 
