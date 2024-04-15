@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -91,5 +93,10 @@ public class CRMService {
         Individuals supplier = individualsService.findRegistrationSupplier(login);
         crmdto.setSender(supplier.build(RoleIndividuals.CARRIER));
         return crmdto;
+    }
+
+    public List<CRM> findAllByAccount(String name) {
+        Account account = userRepository.findByLogin(name);
+        return crmRepository.findAllByAccount(account);
     }
 }

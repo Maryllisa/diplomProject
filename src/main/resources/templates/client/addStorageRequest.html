@@ -10,10 +10,10 @@
 <main>
   <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
     <h4 class="mb-3" style="color: #814de5">Добавить заявку на хранение</h4>
-    <form class="needs-validation" novalidate="">
+    <form class="needs-validation" novalidate="" th:object="${application}" th:action="*{'/client/addStorageRequest'}" method="post">
       <div class="col-sm-4" style="margin-top: -4%; margin-left: 67%" >
         <label  class="form-label" style="color: #814de5">Дата заявления</label>
-        <input type="date" class="form-control" id="dateZav" placeholder="" value="" required="">
+        <input type="date" class="form-control" id="dateZav" placeholder="" value="" required="" th:field="${application.dateZav}">
         <div class="invalid-feedback">
           Проверьте корректность заполнения даты заявления.
         </div>
@@ -23,12 +23,8 @@
 
         <div class="col-sm-4">
           <label  class="form-label" style="color: #814de5">Номер ТТН</label>
-          <select class="form-select" id="№TTN" required>
-            <option value="">Выберите номер ТТН</option>
-            <option value="ТТН1">ТТН1</option>
-            <option value="ТТН2">ТТН2</option>
-            <option value="ТТН3">ТТН3</option>
-
+          <select th:if="${gpd}" class="form-select" id="№TTN" required th:field="${application.goodTransportDocument}">
+            <option th:each="d:${gpd}" th:value="${d}" th:text="${d.srcTransportDocument}"/>
           </select>
           <div class="invalid-feedback">
             Проверьте корректность выбора номера ТТН.
@@ -37,12 +33,8 @@
 
         <div class="col-4">
           <label class="form-label" style="color: #814de5">№ Трансп. декларации</label>
-          <select class="form-select" id="№TD">
-            <option value="">Выберите номер ТД</option>
-            <option value="ТД1">ТД1</option>
-            <option value="ТД2">ТД2</option>
-            <option value="ТД3">ТД3</option>
-
+          <select th:if="${declaration}" class="form-select" id="№TD" th:field="${application.declarationTD}">
+            <option th:each="d:${declaration}" th:value="${d}" th:text="${d.declarationNumber}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер ТД.
@@ -51,7 +43,7 @@
 
         <div class="col-sm-4" style="" >
           <label  class="form-label" style="color: #814de5">Дата поставки</label>
-          <input type="date" class="form-control" id="datePost" placeholder="" value="" required="">
+          <input type="date" class="form-control" id="datePost" placeholder="" value="" required="" th:field="${application.datePost}">
           <div class="invalid-feedback">
             Проверьте корректность заполнения даты поставки.
           </div>
@@ -59,11 +51,8 @@
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ CRM</label>
-          <select class="form-select" id="№CRM">
-            <option value="">Выберите номер CRM</option>
-            <option value="CRM1">CRM1</option>
-            <option value="CRM2">CRM2</option>
-            <option value="CRM3">CRM3</option>
+          <select th:if="${crm}"  class="form-select" id="№CRM" th:field="${application.crm}">
+            <option th:each="c:${crm}" th:value="${c}" th:text="${c.idCRM}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер CRM.
@@ -72,11 +61,8 @@
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ Авто</label>
-          <select class="form-select" id="№auto">
-            <option value="">Выберите номер авто</option>
-            <option value="Авто1">Авто1</option>
-            <option value="Авто2">Авто2</option>
-            <option value="Авто3">Авто3</option>
+          <select th:if="${truck}"  class="form-select" id="№auto" th:field="${application.truck}">
+            <option th:each="t:${truck}" th:value="${t}" th:text="${t.registrationNumber}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер авто.

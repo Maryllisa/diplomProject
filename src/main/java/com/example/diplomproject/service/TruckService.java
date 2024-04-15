@@ -1,10 +1,8 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
-import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.Driver;
-import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.Truck;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.repository.DriverRepository;
 import com.example.diplomproject.repository.IndividualsRepository;
 import com.example.diplomproject.repository.TruckRepository;
@@ -12,6 +10,9 @@ import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -36,5 +37,9 @@ public class TruckService {
         truck.setDriver(driverRepository.save(truck.getDriver()));
         trackRepository.save(truck);
 
+    }
+
+    public List<Truck> findAll() {
+        return trackRepository.findAll();
     }
 }

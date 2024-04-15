@@ -26,6 +26,7 @@ public class ClientRestController {
     private final GoodTransportDocumentService goodTransportDocumentService;
     private final IndividualsService individualsService;
     private final TruckService truckService;
+    private final ApplicationForStorageService applicationForStorageService;
 
     // Добавить валидацию
     @SneakyThrows
@@ -87,8 +88,8 @@ public class ClientRestController {
         return  ResponseEntity.ok("Успешная регистрация");
     }
     @PostMapping("/client/addStorageRequest")
-    private ResponseEntity<String> addStorageRequest(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
-        truckService.addNewTruck(truckDTO, authentication.getName());
+    private ResponseEntity<String> addStorageRequest(@ModelAttribute ApplicationForStorageDTO applicationForStorageDTO, Authentication authentication){
+        applicationForStorageService.addNewApplication(applicationForStorageDTO, authentication.getName());
         return  ResponseEntity.ok("Успешная регистрация");
     }
     @PostMapping("/client/regAuto")

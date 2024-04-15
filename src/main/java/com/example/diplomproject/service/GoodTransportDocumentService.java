@@ -1,5 +1,6 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.repository.GoodTransportDocumentRepository;
 import com.example.diplomproject.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -26,5 +28,10 @@ public class GoodTransportDocumentService {
         goodTransportDocument.setSrcTransportDocument(encoded);
         goodTransportDocument.setAccount(userRepository.findByLogin(login));
         goodTransportDocumentRepository.save(goodTransportDocument);
+    }
+
+    public List<GoodTransportDocument> getAllByAccaount(String name) {
+        Account account = userRepository.findByLogin(name);
+        return goodTransportDocumentRepository.findAllByAccount(account);
     }
 }

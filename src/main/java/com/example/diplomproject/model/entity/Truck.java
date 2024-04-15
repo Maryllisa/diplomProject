@@ -1,5 +1,7 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.dto.DriverDTO;
+import com.example.diplomproject.model.dto.TruckDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,4 +28,17 @@ public class Truck {
     private Driver driver;
     @OneToOne
     private Individuals individuals;
+
+    public TruckDTO build() {
+        return TruckDTO.builder()
+                .registrationNumber(registrationNumber)
+                .brand(brand)
+                .model(model)
+                .yearTruck(yearTruck)
+                .driver(DriverDTO.builder()
+                        .name(driver.getName())
+                        .LicenseNumber(driver.getLicenseNumber())
+                        .build())
+                .build();
+    }
 }

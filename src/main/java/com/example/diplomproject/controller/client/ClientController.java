@@ -1,25 +1,17 @@
 package com.example.diplomproject.controller.client;
 
-import com.example.diplomproject.model.dto.DeclarationDTO;
-import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Brand;
-import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
-import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.service.CRMService;
-import com.example.diplomproject.service.DeclarationTDService;
-import com.example.diplomproject.service.GoodTransportDocumentService;
-import com.example.diplomproject.service.IndividualsService;
+import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,6 +19,8 @@ public class ClientController {
     private final DeclarationTDService declarationTDService;
     private final IndividualsService individualsService;
     private final CRMService crmService;
+    private final GoodTransportDocumentService goodTransportDocumentService;
+    private final TruckService truckService;
 
     @GetMapping("/client")
     public String getClient() {
@@ -46,7 +40,13 @@ public class ClientController {
     }
 
     @GetMapping("/client/addStorageRequest")
-    public String getAddStorageRequest() {
+    public String getAddStorageRequest(Model model, Authentication authentication) {
+
+        model.addAttribute("gpd", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
+        model.addAttribute("declaration", declarationTDService.findAllByAccount(authentication.getName()));
+        model.addAttribute("crm", crmService.findAllByAccount(authentication.getName()));
+        model.addAttribute("truck", truckService.findAll());
+        model.addAttribute("application", new ApplicationForStorageDTO());
         return "/client/addStorageRequest";
     }
 

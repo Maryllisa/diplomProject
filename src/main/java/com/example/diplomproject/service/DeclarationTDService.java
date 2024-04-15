@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -84,5 +86,10 @@ public class DeclarationTDService {
         declarationTDForDB.setAccount(account);
         declarationTDRepository.save(declarationTDForDB);
         log.info("Завершение регистрации: " + declarationTDForDB.getDeclarationNumber());
+    }
+
+    public List<DeclarationTD> findAllByAccount(String name) {
+        Account account = userRepository.findByLogin(name);
+        return  declarationTDRepository.findAllByAccount(account);
     }
 }
