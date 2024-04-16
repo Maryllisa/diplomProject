@@ -94,8 +94,8 @@
                 Проверьте корректность заполнения регистрационного номера авто.
             </div>
         </div>
-        <div class="col-6">
-            <label class="form-label" style="color: #814de5">Бренд</label>
+        <div class="col-6" style="margin-top: 40px">
+            <label class="form-label" style="color: #814de5;">Бренд</label>
             <select class="form-select" id="Brand"  th:field="${truck.brand}">
                 <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
             </select>
