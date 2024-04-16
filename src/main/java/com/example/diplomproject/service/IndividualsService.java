@@ -24,8 +24,15 @@ public class IndividualsService {
         return individualsRepository.findAll();
     }
 
-    public Individuals getSuppliers(String login) {
-         return findRegistrationSupplier(login);
+    public List<Individuals> getSuppliers(String login) {
+         return individualsRepository.findByAccount(accountRepository.findByLogin(login));
+    }
+    public IndividualsDTO findById(Long id){
+        Individuals individuals =individualsRepository.findById(id).orElse(null);
+        if (individuals!=null){
+            return individuals.build(RoleIndividuals.SUPPLIER);
+        }
+        return new IndividualsDTO();
     }
     public Individuals findRegistrationSupplier(String login){
         Account account = accountRepository.findByLogin(login);

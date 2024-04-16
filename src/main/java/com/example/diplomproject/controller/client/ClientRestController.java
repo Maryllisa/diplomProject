@@ -2,6 +2,7 @@ package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -96,6 +97,12 @@ public class ClientRestController {
     private ResponseEntity<String> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
         truckService.addNewTruck(truckDTO, authentication.getName());
         return  ResponseEntity.ok("Успешная регистрация");
+    }
+
+    @GetMapping("/client/findSupplier/{id}")
+    public IndividualsDTO getProvider(@PathVariable("id") Long id, Authentication authentication) {
+        IndividualsDTO individuals = individualsService.findById(id);
+        return individuals;
     }
 
 }

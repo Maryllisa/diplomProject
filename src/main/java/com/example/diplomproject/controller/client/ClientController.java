@@ -1,6 +1,8 @@
 package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
+import com.example.diplomproject.model.dto.CRMDTO;
+import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Brand;
@@ -35,7 +37,8 @@ public class ClientController {
     @GetMapping("/client/regOfDeclaration")
     public String getRegOfDeclaration(Model model, Authentication authentication) {
         String login = authentication.getName();
-        model.addAttribute("declaration", declarationTDService.geFormForNewDeclaration(login));
+        model.addAttribute("supplier", declarationTDService.getSupplier(login));
+        model.addAttribute("declaration", new DeclarationDTO());
         return "/client/regOfDeclaration";
     }
 
@@ -68,7 +71,8 @@ public class ClientController {
 
     @GetMapping("/client/addCMR")
     public String getAddCMR(Model model, Authentication authentication) {
-        model.addAttribute("crm", crmService.getCRM(authentication.getName()));
+        model.addAttribute("supplier", declarationTDService.getSupplier(authentication.getName()));
+        model.addAttribute("crm", new CRMDTO());
         return "/client/addCMR";
     }
 

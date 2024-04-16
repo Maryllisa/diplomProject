@@ -92,4 +92,8 @@ public class DeclarationTDService {
         Account account = userRepository.findByLogin(name);
         return  declarationTDRepository.findAllByAccount(account);
     }
+
+    public List<Individuals> getSupplier(String login) {
+        return individualsRepository.findByAccount(userRepository.findByLogin(login));
+    }
 }
