@@ -166,6 +166,8 @@ document.getElementById('form').addEventListener('submit', async function(event)
     for (let i = 0; i <= Counter.getCount(); i++) {
         var itemNumber = document.getElementById("itemNumber" + i).value;
         var productCode = document.getElementById("productCode" + i).value;
+        var nameProduct = document.getElementById("nameProduct" + i).value;
+
         var originCountryCode = document.getElementById("originCountryCode" + i).value;
         var grossWeight = document.getElementById("grossWeight" + i).value;
         var preference = document.getElementById("preference" + i).value;
@@ -177,6 +179,7 @@ document.getElementById('form').addEventListener('submit', async function(event)
             itemNumber: itemNumber,
             productCode: productCode,
             originCountryCode: originCountryCode,
+            nameProduct: nameProduct,
             grossWeight: grossWeight,
             preference: preference,
             procedure: procedure,

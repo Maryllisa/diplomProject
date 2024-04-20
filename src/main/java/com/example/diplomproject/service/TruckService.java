@@ -33,13 +33,15 @@ public class TruckService {
             individuals.setAccount(account);
             individualsRepository.save(individuals);
         }
-        truck.setIndividuals(individuals);
         truck.setDriver(driverRepository.save(truck.getDriver()));
+        truck.setAccount(account);
         trackRepository.save(truck);
-
     }
-
-    public List<Truck> findAll() {
-        return trackRepository.findAll();
+    public List<TruckDTO> getTruck(String login) {
+        List<TruckDTO> truckDTOS = new ArrayList<>();
+        trackRepository.findAllByAccount(userRepository.findByLogin(login)).forEach(x->{
+            truckDTOS.add(x.build());
+        });
+        return truckDTOS;
     }
 }

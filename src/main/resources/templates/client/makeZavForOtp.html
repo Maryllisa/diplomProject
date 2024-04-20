@@ -60,14 +60,14 @@
 
             </tr>
             </thead>
-            <!--      <tbody>-->
-            <!--      <tr th:each="">-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        -->
-            <!--      </tr>-->
-            <!--      </tbody>-->
+                  <tbody>
+                  <tr th:if="${!applicationForRelease.isEmpty()}" th:each="ap:${applicationForRelease}">
+                    <td style="color: #1a1a1c" th:text="${ap.idApplicationForRelease}"></td>
+                    <td style="color: #1a1a1c" th:text="${ap.product.idProduct+': '+ ap.product.nameProduct}"></td>
+                    <td style="color: #1a1a1c" th:text="${ap.statusApplicationForRelease.getRussianName.get(ap.statusApplicationForRelease)}"></td>
+
+                  </tr>
+                  </tbody>
         </table>
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
@@ -83,31 +83,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form th:object="${newApplicationForRelease}" th:action="*{'/client/maleZavForOtp'}" method="post">
                             <div class="mb-3">
                                 <label for="productSelect" class="form-label">Товар</label>
-                                <select class="form-select" id="productSelect">
-                                    <option selected>Выберите товар</option>
-                                    <option value="1">Товар 1</option>
-                                    <option value="2">Товар 2</option>
-                                    <option value="3">Товар 3</option>
-                                    <!-- Добавьте другие варианты товаров здесь -->
+                                <select class="form-select" id="productSelect" th:field="${newApplicationForRelease.idProduct}">
+                                    <option th:if="${!productList.isEmpty()}" th:each="pr:${productList}" th:value="${pr.idProduct}" th:text="${pr.nameProduct}"/>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="desiredDateInput" class="form-label">Желаемая дата отпуска</label>
-                                <input type="date" class="form-control" id="desiredDateInput">
+                                <input type="date" class="form-control" id="desiredDateInput" th:field="${newApplicationForRelease.date}">
                             </div>
-                            <div class="mb-3">
-                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
-                                <input type="number" class="form-control" id="costInput">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
-                    </div>
+
                 </div>
             </div>
         </div>

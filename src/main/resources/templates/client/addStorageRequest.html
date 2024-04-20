@@ -23,8 +23,8 @@
 
         <div class="col-sm-4">
           <label  class="form-label" style="color: #814de5">Номер ТТН</label>
-          <select th:if="${gpd}" class="form-select" id="№TTN" required th:field="${application.goodTransportDocument}">
-            <option th:each="d:${gpd}" th:value="${d}" th:text="${d.srcTransportDocument}"/>
+          <select th:if="${gpd}" class="form-select" id="№TTN" required th:field="${application.idGoodTransportDocument}">
+            <option th:each="d:${gpd}" th:value="${d.idGoodTransportDocument}" th:text="${d.goodsTransportDocumentNumbers}"/>
           </select>
           <div class="invalid-feedback">
             Проверьте корректность выбора номера ТТН.
@@ -33,8 +33,8 @@
 
         <div class="col-4">
           <label class="form-label" style="color: #814de5">№ Трансп. декларации</label>
-          <select th:if="${declaration}" class="form-select" id="№TD" th:field="${application.declarationTD}">
-            <option th:each="d:${declaration}" th:value="${d}" th:text="${d.declarationNumber}"/>
+          <select th:if="${declaration}" class="form-select" id="№TD" th:field="${application.idDeclarationTD}">
+            <option th:each="d:${declaration}" th:value="${d.idDeclaration}" th:text="${d.customEDCode + '/' + d.directionOfMovement +'/' +d.procedureCode}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер ТД.
@@ -51,8 +51,8 @@
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ CRM</label>
-          <select th:if="${crm}"  class="form-select" id="№CRM" th:field="${application.crm}">
-            <option th:each="c:${crm}" th:value="${c}" th:text="${c.idCRM}"/>
+          <select th:if="${crm}"  class="form-select" id="№CRM" th:field="${application.idCRM}">
+            <option th:each="c:${crm}" th:value="${c.idCRM}" th:text="${c.numbers}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер CRM.
@@ -61,8 +61,8 @@
 
         <div class="col-6">
           <label class="form-label" style="color: #814de5">№ Авто</label>
-          <select th:if="${truck}"  class="form-select" id="№auto" th:field="${application.truck}">
-            <option th:each="t:${truck}" th:value="${t}" th:text="${t.registrationNumber}"/>
+          <select th:if="${truck}"  class="form-select" id="№auto" th:field="${application.idTruck}">
+            <option th:each="t:${truck}" th:value="${t.idTruck}" th:text="${t.registrationNumber}"/>
           </select>
           <div class="invalid-feedback">
             Неверный номер авто.

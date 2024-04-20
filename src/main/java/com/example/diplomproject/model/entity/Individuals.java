@@ -34,13 +34,14 @@ public class Individuals {
     private RoleIndividuals roleIndividuals;
     @OneToOne
     private Address address;
-    @JsonFormat
-    @OneToOne
-    private Account account;
+
     @Column // УНН (Учетный номер налогоплательщика)
     private String taxId;
     @Column // ОКПО (Классификатор предприятий и организаций)
     private String registrationCode;
+    @JsonFormat
+    @OneToOne
+    private Account account;
 
     public IndividualsDTO build(RoleIndividuals roleIndividuals) {
         return IndividualsDTO.builder()
@@ -50,6 +51,8 @@ public class Individuals {
                 .bankCode(bankCode)
                 .bankName(bankName)
                 .address(address.build())
+                .taxId(taxId)
+                .registrationCode(registrationCode)
                 .build();
     }
 }

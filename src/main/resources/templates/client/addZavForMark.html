@@ -60,15 +60,15 @@
         <th style="color: #814de5" scope="col">Дата отправки</th>
       </tr>
       </thead>
-<!--      <tbody>-->
-<!--      <tr th:each="">-->
-<!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--        -->
-<!--      </tr>-->
-<!--      </tbody>-->
+      <tbody>
+      <tr th:if="${applicationsForMarking}" th:each="list:${applicationsForMarking}">
+        <td style="color: #1a1a1c" th:text="${list.product.productCode}"></td>
+        <td style="color: #1a1a1c" th:text="${list.product.nameProduct}"></td>
+        <td style="color: #1a1a1c" th:text="${list.statusMarkingApplication}"></td>
+        <td style="color: #1a1a1c" th:text="${list.date}"></td>
+
+      </tr>
+      </tbody>
     </table>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
@@ -84,32 +84,24 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form th:action="*{'/client/addZavForMark/'}" th:object="${applicationsForMarking}" method="post">
               <div class="mb-3">
                 <label for="productSelect" class="form-label">Товар</label>
-                <select class="form-select" id="productSelect">
-                  <option selected>Выберите товар</option>
-                  <option value="1">Товар 1</option>
-                  <option value="2">Товар 2</option>
-                  <option value="3">Товар 3</option>
-                  <!-- Добавьте другие варианты товаров здесь -->
+                <select class="form-select" id="productSelect" th:field="${applicationForMarking.idProduct}">
+                  <option th:if="${!productList.isEmpty()}" th:each="p:${productList}" th:value="${p.idProduct}" th:text="${p.productCode + ': ' + p.nameProduct}"/>
                 </select>
               </div>
               <div class="mb-3">
                 <label for="markingTypeSelect" class="form-label">Тип маркировки</label>
-                <select class="form-select" id="markingTypeSelect">
-                  <option selected>Выберите тип маркировки</option>
-                  <option value="Тип 1">Тип 1</option>
-                  <option value="Тип 2">Тип 2</option>
-                  <option value="Тип 3">Тип 3</option>
-                  <!-- Добавьте другие варианты типов маркировки здесь -->
+                <select class="form-select" id="markingTypeSelect" th:field="${applicationForMarking.typeMarking}">
+                  <option th:if="${typeMarkings}" th:each="t:${typeMarkings}" th:value="${t.key}" th:text="${t.value}"/>
                 </select>
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button  type="submit" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
           </div>
         </div>
       </div>

@@ -19,7 +19,4 @@ public class Photo {
     @Column
     @Lob
     private String photo;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idUser")
-    private Account account;
 }

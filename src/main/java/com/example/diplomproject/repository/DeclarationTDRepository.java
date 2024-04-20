@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DeclarationTDRepository extends JpaRepository<DeclarationTD, String> {
+public interface DeclarationTDRepository extends JpaRepository<DeclarationTD, Long> {
 
     boolean existsByDeclarationNumber(String declarationNumber);
     @Query("SELECT sup FROM DeclarationTD dec " +

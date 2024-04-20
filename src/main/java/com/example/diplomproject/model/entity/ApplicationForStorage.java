@@ -32,6 +32,8 @@ public class ApplicationForStorage {
     private CRM crm;
     @OneToOne
     private Truck truck;
+    @ManyToOne
+    private Account account;
 
 
 }

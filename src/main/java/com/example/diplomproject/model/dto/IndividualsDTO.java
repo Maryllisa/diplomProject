@@ -33,6 +33,8 @@ public class IndividualsDTO {
                 .phone(phone)
                 .bankCode(bankCode)
                 .bankName(bankName)
+                .taxId(taxId)
+                .registrationCode(registrationCode)
                 .address(address.build())
                 .build();
     }

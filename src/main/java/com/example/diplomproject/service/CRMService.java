@@ -95,8 +95,12 @@ public class CRMService {
         return crmdto;
     }
 
-    public List<CRM> findAllByAccount(String name) {
+    public List<CRMDTO> findAllByAccount(String name) {
         Account account = userRepository.findByLogin(name);
-        return crmRepository.findAllByAccount(account);
+        List<CRMDTO> crmdtoList =new ArrayList<>();
+        crmRepository.findAllByAccount(account).forEach(x->{
+            crmdtoList.add(x.build());
+        });
+        return crmdtoList;
     }
 }

@@ -1,15 +1,14 @@
 package com.example.diplomproject.controller.client;
 
-import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
-import com.example.diplomproject.model.dto.CRMDTO;
-import com.example.diplomproject.model.dto.DeclarationDTO;
-import com.example.diplomproject.model.dto.TruckDTO;
-import com.example.diplomproject.model.entity.ApplicationForStorage;
+import com.example.diplomproject.model.dto.*;
+import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
+import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.Brand;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.StatusApplicationForRelease;
+import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,9 @@ public class ClientController {
     private final CRMService crmService;
     private final GoodTransportDocumentService goodTransportDocumentService;
     private final TruckService truckService;
+    private final ApplicationForMarkingService applicationForMarkingService;
+    private final ProductService productService;
+    private final ApplicationForReleaseService applicationForRelease;
 
     @GetMapping("/client")
     public String getClient() {
@@ -48,7 +50,7 @@ public class ClientController {
         model.addAttribute("gpd", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
         model.addAttribute("declaration", declarationTDService.findAllByAccount(authentication.getName()));
         model.addAttribute("crm", crmService.findAllByAccount(authentication.getName()));
-        model.addAttribute("truck", truckService.findAll());
+        model.addAttribute("truck", truckService.getTruck(authentication.getName()));
         model.addAttribute("application", new ApplicationForStorageDTO());
         return "/client/addStorageRequest";
     }
@@ -79,13 +81,15 @@ public class ClientController {
     @GetMapping("/client/regAsAComp")
     public String getRegAsAComp(Model model, Authentication authentication) {
         model.addAttribute("supplier", individualsService.getSuppliers(authentication.getName()));
+        model.addAttribute("newSupplier", new IndividualsDTO());
         return "/client/regAsAComp";
     }
 
     @GetMapping("/client/regAuto")
-    public String getRegAuto(Model model) {
+    public String getRegAuto(Model model, Authentication authentication) {
         model.addAttribute("brand", Brand.getRussianName());
         model.addAttribute("truck", new TruckDTO());
+        model.addAttribute("trucks", truckService.getTruck(authentication.getName()));
         return "/client/regAuto";
     }
 
@@ -95,12 +99,21 @@ public class ClientController {
     }
 
     @GetMapping("/client/addZavForMark")
-    public String getAddZavForMark() {
+    public String getAddZavForMark(Model model, Authentication authentication) {
+        model.addAttribute("applicationsForMarking" , applicationForMarkingService.getAllApplicationsForMarking(authentication.getName()));
+        model.addAttribute("applicationForMarking", new ApplicationForMarkingDTO());
+        model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
+        model.addAttribute("typeMarkings", TypeMarking.getRussianName());
         return "/client/addZavForMark";
     }
 
     @GetMapping("/client/makeZavForOtp")
-    public String getMakeZavForOtp() {
+    public String getMakeZavForOtp(Model model, Authentication authentication) {
+
+        model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
+        model.addAttribute("applicationForRelease", applicationForRelease.getAllApplicationForRelease(authentication.getName()));
+        model.addAttribute("newApplicationForRelease", new ApplicationForReleaseDTO());
+        model.addAttribute("StatusEnum", StatusApplicationForRelease.class);
         return "/client/makeZavForOtp";
     }
 

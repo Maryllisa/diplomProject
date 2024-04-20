@@ -134,8 +134,9 @@ public class AccountService {
         newAccount.setActivationCode(UUID.randomUUID().toString());
         String code = newAccount.getActivationCode();
         newAccount.setStatus(Status.OFFLINE);
-        photo.setAccount(accountRepository.save(newAccount));
-        imageRepository.save(photo);
+        newAccount.setPhoto(imageRepository.save(photo));
+        accountRepository.save(newAccount);
+
         log.info("Отправка письмо поддтверждения ");
         if (!StringUtils.isEmpty(account.getEmail())) {
             String message = String.format(

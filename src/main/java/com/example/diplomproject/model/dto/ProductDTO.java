@@ -13,9 +13,11 @@ import javax.persistence.Column;
 @NoArgsConstructor
 @Builder
 public class ProductDTO {
+    private Long idProduct;
     private int itemNumber;
     private String productCode;
     private String originCountryCode;
+    private String nameProduct;
     private double grossWeight;
     private String preference;
     private String procedure;
@@ -27,6 +29,7 @@ public class ProductDTO {
                 .itemNumber(itemNumber)
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)
+                .nameProduct(nameProduct)
                 .grossWeight(grossWeight)
                 .preference(preference)
                 .procedure(procedure)

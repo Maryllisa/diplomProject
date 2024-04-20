@@ -88,9 +88,13 @@ public class DeclarationTDService {
         log.info("Завершение регистрации: " + declarationTDForDB.getDeclarationNumber());
     }
 
-    public List<DeclarationTD> findAllByAccount(String name) {
+    public List<DeclarationDTO> findAllByAccount(String name) {
         Account account = userRepository.findByLogin(name);
-        return  declarationTDRepository.findAllByAccount(account);
+        List<DeclarationDTO> declarationDTOList = new ArrayList<>();
+        declarationTDRepository.findAllByAccount(account).forEach(x->{
+            declarationDTOList.add(x.build());
+        });
+        return declarationDTOList;
     }
 
     public List<Individuals> getSupplier(String login) {

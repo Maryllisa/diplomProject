@@ -148,6 +148,7 @@ public class CRM {
     private Account account;
     public CRMDTO build(){
         return CRMDTO.builder()
+                .idCRM(idCRM)
                 .sender(sender.build(RoleIndividuals.SUPPLIER))
                 .resipient(resipient.build(RoleIndividuals.RECIPIENT))
                 .countryWH(countryWH)

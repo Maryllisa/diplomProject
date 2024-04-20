@@ -16,7 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class CRMDTO {
-
+    private Long idCRM;
     private IndividualsDTO sender;
     private IndividualsDTO resipient;
     /*
@@ -106,6 +106,7 @@ public class CRMDTO {
 
     public CRM build() {
         return CRM.builder()
+                .idCRM(idCRM)
                 .sender(sender.build(RoleIndividuals.SUPPLIER))
                 .resipient(resipient.build(RoleIndividuals.RECIPIENT))
                 .countryWH(countryWH)

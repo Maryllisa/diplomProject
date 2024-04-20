@@ -5,6 +5,7 @@ import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class DeclarationTD {
     /*
             Отправитель
     */
+    @JsonFormat
     @OneToOne
     private Individuals individuals;
     /*
@@ -60,6 +62,7 @@ public class DeclarationTD {
     /*
         Получатель
     */
+    @JsonFormat
     @OneToOne
     private Individuals recipientAddress;
     /*
@@ -82,6 +85,7 @@ public class DeclarationTD {
     /*
             декларант
     */
+    @JsonFormat
     @OneToOne
     private Individuals declarant;
     /*
@@ -155,6 +159,7 @@ public class DeclarationTD {
     /*
            Курс валюты
     */
+    @JsonFormat
     @OneToOne
     private CurrencyRate currencyRate;
     /*
@@ -207,8 +212,10 @@ public class DeclarationTD {
     */
     @Column
     private String productDescription;
+    @JsonFormat
     @ManyToOne
     private Account account;
+    @JsonFormat
     @OneToMany
     private List<Product> productList;
 
@@ -227,6 +234,7 @@ public class DeclarationTD {
         String colListSpec = specificationArray[1];
 
         return DeclarationDTO.builder()
+                .idDeclaration(idDeclaration)
                 .customEDCode(customEDCode)
                 .directionOfMovement(directionOfMovement)
                 .procedureCode(procedureCode)

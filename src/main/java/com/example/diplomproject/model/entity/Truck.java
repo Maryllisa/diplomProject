@@ -26,11 +26,12 @@ public class Truck {
     private int yearTruck;
     @OneToOne
     private Driver driver;
-    @OneToOne
-    private Individuals individuals;
+    @ManyToOne
+    private Account account;
 
     public TruckDTO build() {
         return TruckDTO.builder()
+                .idTruck(idTruck)
                 .registrationNumber(registrationNumber)
                 .brand(brand)
                 .model(model)

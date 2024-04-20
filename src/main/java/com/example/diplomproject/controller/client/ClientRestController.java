@@ -1,6 +1,7 @@
 package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.*;
+import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.service.*;
@@ -28,6 +29,8 @@ public class ClientRestController {
     private final IndividualsService individualsService;
     private final TruckService truckService;
     private final ApplicationForStorageService applicationForStorageService;
+    private final ApplicationForMarkingService applicationForMarkingService;
+    private final ApplicationForReleaseService applicationForReleaseService;
 
     // Добавить валидацию
     @SneakyThrows
@@ -104,5 +107,19 @@ public class ClientRestController {
         IndividualsDTO individuals = individualsService.findById(id);
         return individuals;
     }
+    @PostMapping("/client/addZavForMark")
+    public ResponseEntity<String> addApplicationForMarking(@ModelAttribute ApplicationForMarkingDTO applicationForMarkingDTO,
+                                                           Authentication authentication){
+        applicationForMarkingService.addNewApplicationForMarking
+                (applicationForMarkingDTO, authentication.getName());
+        return  ResponseEntity.ok("Успешная регистрация");
+    }
 
+    @PostMapping("/client/maleZavForOtp")
+    public ResponseEntity<String> addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
+                                                           Authentication authentication){
+        applicationForReleaseService.addNewApplicationForRelease
+                (applicationForReleaseDTO, authentication.getName());
+        return  ResponseEntity.ok("Успешная регистрация");
+    }
 }

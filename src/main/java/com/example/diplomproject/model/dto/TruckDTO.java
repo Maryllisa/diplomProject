@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TruckDTO {
+    private Long idTruck;
     private String registrationNumber;
     private Brand brand;
     private String model;
@@ -22,6 +23,7 @@ public class TruckDTO {
 
     public Truck build() {
         return Truck.builder()
+                .idTruck(idTruck)
                 .registrationNumber(registrationNumber)
                 .brand(brand)
                 .model(model)

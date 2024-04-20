@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class DeclarationDTO {
+    private Long idDeclaration;
     private String customEDCode;
     private String directionOfMovement;
     private String procedureCode;
@@ -92,6 +93,7 @@ public class DeclarationDTO {
     private List<ProductDTO> productDTOS;
     public DeclarationTD build(){
         return DeclarationTD.builder()
+                .idDeclaration(idDeclaration)
                 .declarationNumber(customEDCode + "/"
                         + directionOfMovement +"/"
                         +procedureCode)
