@@ -11,6 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -31,5 +34,14 @@ public class ApplicationForStorageService {
                 truckRepository.getById(applicationForStorageDTO.getIdTruck()));
         applicationForStorage.setAccount(account);
         applicationForStorageRepository.save(applicationForStorage);
+    }
+
+    public List<ApplicationForStorageDTO> getAllApplictionByAccount(String name) {
+        List<ApplicationForStorageDTO> applicationForStorageDTOS = new ArrayList<>();
+        List<ApplicationForStorage> applicationForStorages = applicationForStorageRepository.findAllByAccount(accountRepository.findByLogin(name));
+        applicationForStorages.forEach(x->{
+            applicationForStorageDTOS.add(x.build());
+        });
+        return applicationForStorageDTOS;
     }
 }

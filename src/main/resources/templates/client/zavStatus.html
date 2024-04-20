@@ -15,18 +15,20 @@
             <tr>
                 <th style="color: #814de5" scope="col">№ Заявки</th>
                 <th  style="color: #814de5" scope="col">Дата заявки</th>
+                <th  style="color: #814de5" scope="col">Дата отгрузки</th>
                 <th  style="color: #814de5" scope="col">Статус</th>
                 <th></th>
             </tr>
             </thead>
-            <!--         <tbody>-->
-            <!--          <tr th:each="">-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td><input type="button" value="Подробнее" style="font-weight: bold;"></td>-->
-            <!--          </tr>-->
-            <!--               </tbody>-->
+                     <tbody>
+                      <tr th:if="${!applicationList.isEmpty()}" th:each="apl:${applicationList}">
+                     <td  style="color: #1a1a1c" th:text="${apl.idApplication}"/>
+                     <td  style="color: #1a1a1c" th:text="${apl.dateZav}"/>
+                          <td  style="color: #1a1a1c" th:text="${apl.datePost}"/>
+                     <td  style="color: #1a1a1c" th:text="${apl.statusApplication.getRussianName().get(apl.statusApplication)}"/>
+                     <td><input type="button" value="Подробнее" style="font-weight: bold;"></td>
+                      </tr>
+                           </tbody>
         </table>
 
 

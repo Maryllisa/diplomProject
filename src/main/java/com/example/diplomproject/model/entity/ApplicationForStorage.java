@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import lombok.*;
 
@@ -36,4 +37,21 @@ public class ApplicationForStorage {
     private Account account;
 
 
+    public ApplicationForStorageDTO build() {
+        return ApplicationForStorageDTO.builder()
+                .idApplication(idApplication)
+                .idDeclarationTD(declarationTD.getIdDeclaration())
+                .idCRM(crm.getIdCRM())
+                .idGoodTransportDocument(goodTransportDocument.getIdGoodTransportDocument())
+                .idTruck(truck.getIdTruck())
+                .countPositionProducts(countPositionProducts)
+                .datePost(datePost)
+                .dateZav(dateZav)
+                .statusApplication(statusApplication)
+                .goodTransportDocument(goodTransportDocument)
+                .declarationTD(declarationTD.build())
+                .crm(crm.build())
+                .truck(truck.build())
+                .build();
+    }
 }

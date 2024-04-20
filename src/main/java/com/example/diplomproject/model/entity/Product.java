@@ -58,6 +58,7 @@ public class Product {
                 .procedure(procedure)
                 .netWeight(netWeight)
                 .quota(quota)
+                .numberDeclaration(declarationTD.getDeclarationNumber())
                 .build();
     }
 }

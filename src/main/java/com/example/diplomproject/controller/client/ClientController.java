@@ -2,10 +2,7 @@ package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
-import com.example.diplomproject.model.entity.ApplicationForRelease;
-import com.example.diplomproject.model.entity.Brand;
-import com.example.diplomproject.model.entity.GoodTransportDocument;
-import com.example.diplomproject.model.entity.StatusApplicationForRelease;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +22,7 @@ public class ClientController {
     private final ApplicationForMarkingService applicationForMarkingService;
     private final ProductService productService;
     private final ApplicationForReleaseService applicationForRelease;
+    private final ApplicationForStorageService applicationForStorage;
 
     @GetMapping("/client")
     public String getClient() {
@@ -62,12 +60,14 @@ public class ClientController {
     }
 
     @GetMapping("/client/zavStatus")
-    public String getZavStatus() {
+    public String getZavStatus(Model model, Authentication authentication) {
+        model.addAttribute("applicationList", applicationForStorage.getAllApplictionByAccount(authentication.getName()));
         return "/client/zavStatus";
     }
 
     @GetMapping("/client/prodStatus")
-    public String getProdStatus() {
+    public String getProdStatus(Model model, Authentication authentication) {
+        model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
         return "/client/prodStatus";
     }
 

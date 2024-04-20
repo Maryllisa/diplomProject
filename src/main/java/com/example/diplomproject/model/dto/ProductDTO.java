@@ -23,6 +23,7 @@ public class ProductDTO {
     private String procedure;
     private double netWeight;
     private String quota;
+    private String numberDeclaration;
 
     public Product build(){
         return Product.builder()

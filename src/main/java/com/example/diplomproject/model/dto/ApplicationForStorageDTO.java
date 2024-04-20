@@ -18,6 +18,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class ApplicationForStorageDTO {
+    private Long idApplication;
 
     private int countPositionProducts;
     private Date datePost;
@@ -26,22 +27,23 @@ public class ApplicationForStorageDTO {
     private Long idGoodTransportDocument;
     private GoodTransportDocument goodTransportDocument;
     private Long idDeclarationTD;
-    private DeclarationTD declarationTD;
+    private DeclarationDTO declarationTD;
     private Long idCRM;
-    private CRM crm;
+    private CRMDTO crm;
     private Long idTruck;
-    private Truck truck;
+    private TruckDTO truck;
 
     public ApplicationForStorage build(StatusApplication statusApplication) {
         return ApplicationForStorage.builder()
-                .countPositionProducts(declarationTD.getColProducts())
+
+                .countPositionProducts(declarationTD.getColProd())
                 .datePost(datePost)
                 .dateZav(dateZav)
                 .statusApplication(statusApplication)
                 .goodTransportDocument(goodTransportDocument)
-                .declarationTD(declarationTD)
-                .crm(crm)
-                .truck(truck)
+                .declarationTD(declarationTD.build())
+                .crm(crm.build())
+                .truck(truck.build())
                 .statusApplication(statusApplication)
                 .build();
     }
