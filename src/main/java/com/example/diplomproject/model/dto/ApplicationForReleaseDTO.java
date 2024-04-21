@@ -2,16 +2,12 @@ package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.Product;
-import com.example.diplomproject.model.entity.StatusApplication;
-import com.example.diplomproject.model.entity.StatusApplicationForRelease;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.sql.Date;
 
 @Data

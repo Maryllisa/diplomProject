@@ -1,6 +1,5 @@
-package com.example.diplomproject.model.entity;
+package com.example.diplomproject.model.entity.enumStatus;
 
-import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
 import lombok.Getter;
 
 import java.util.HashMap;

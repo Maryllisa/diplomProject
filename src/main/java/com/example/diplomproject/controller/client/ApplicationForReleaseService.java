@@ -4,7 +4,7 @@ import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.Product;
-import com.example.diplomproject.model.entity.StatusApplicationForRelease;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.repository.ProductRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;

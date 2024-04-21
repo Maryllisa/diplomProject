@@ -1,4 +1,4 @@
-package com.example.diplomproject.model.entity;
+package com.example.diplomproject.model.entity.enumStatus;
 
 import lombok.Getter;
 

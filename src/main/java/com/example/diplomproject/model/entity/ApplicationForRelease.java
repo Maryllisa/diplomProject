@@ -1,6 +1,7 @@
 package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
