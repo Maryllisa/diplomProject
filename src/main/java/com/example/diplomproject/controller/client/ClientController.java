@@ -4,6 +4,8 @@ import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
+import com.example.diplomproject.model.entity.enumStatus.Brand;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

@@ -1,23 +1,14 @@
 package com.example.diplomproject;
 
 import com.example.diplomproject.model.dto.AccountDTO;
-import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.Role;
+import com.example.diplomproject.model.entity.enumStatus.Role;
 import com.example.diplomproject.service.AccountService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor

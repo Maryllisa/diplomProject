@@ -1,10 +1,9 @@
 package com.example.diplomproject.controller.chat;
 
-import com.example.diplomproject.model.dto.AccountDTO;
 import com.example.diplomproject.model.dto.message.MessageDTO;
 import com.example.diplomproject.model.dto.message.UserDTO;
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.ChatMessage;
+import com.example.diplomproject.model.entity.chat.ChatMessage;
 import com.example.diplomproject.service.AccountService;
 import com.example.diplomproject.service.ChatMessageService;
 import lombok.RequiredArgsConstructor;

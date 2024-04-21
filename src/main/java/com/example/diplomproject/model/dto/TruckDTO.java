@@ -1,6 +1,6 @@
 package com.example.diplomproject.model.dto;
 
-import com.example.diplomproject.model.entity.Brand;
+import com.example.diplomproject.model.entity.enumStatus.Brand;
 import com.example.diplomproject.model.entity.Driver;
 import com.example.diplomproject.model.entity.Truck;
 import lombok.AllArgsConstructor;

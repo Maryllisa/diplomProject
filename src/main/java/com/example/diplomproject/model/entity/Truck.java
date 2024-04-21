@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.DriverDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
+import com.example.diplomproject.model.entity.enumStatus.Brand;
 import lombok.*;
 
 import javax.persistence.*;
