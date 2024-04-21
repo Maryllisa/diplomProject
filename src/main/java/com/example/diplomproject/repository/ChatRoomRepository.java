@@ -1,7 +1,7 @@
 package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.ChatRoom;
+import com.example.diplomproject.model.entity.chat.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

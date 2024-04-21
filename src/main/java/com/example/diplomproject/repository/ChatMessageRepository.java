@@ -1,13 +1,12 @@
 package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.ChatMessage;
-import com.example.diplomproject.model.entity.ChatRoom;
-import com.example.diplomproject.model.entity.MessageStatus;
+import com.example.diplomproject.model.entity.chat.ChatMessage;
+import com.example.diplomproject.model.entity.chat.ChatRoom;
+import com.example.diplomproject.model.entity.enumStatus.MessageStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 

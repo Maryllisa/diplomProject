@@ -1,5 +1,6 @@
-package com.example.diplomproject.model.entity;
+package com.example.diplomproject.model.entity.chat;
 
+import com.example.diplomproject.model.entity.Account;
 import lombok.*;
 
 import javax.persistence.*;
