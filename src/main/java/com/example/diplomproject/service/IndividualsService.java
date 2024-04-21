@@ -3,7 +3,7 @@ package com.example.diplomproject.service;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

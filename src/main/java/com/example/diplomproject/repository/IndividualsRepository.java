@@ -2,9 +2,8 @@ package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

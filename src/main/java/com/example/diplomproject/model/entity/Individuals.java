@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.entity.declaration.Address;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
