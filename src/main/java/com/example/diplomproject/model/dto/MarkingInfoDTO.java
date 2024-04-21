@@ -1,6 +1,7 @@
-package com.example.diplomproject.model.entity;
+package com.example.diplomproject.model.dto;
 
-import com.example.diplomproject.model.dto.MarkingInfoDTO;
+import com.example.diplomproject.model.entity.MarkingInfo;
+import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,29 +14,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-public class MarkingInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MarkingInfoDTO {
+
     private Long idMarkingInfo;
-    @Column
-    @Enumerated(EnumType.STRING)
+
     private TypeMarking typeMarking;
-    @Column
-    @Lob
+
     private String srcCode;
-    @Column
+
     private String size;
-    @Column
-    private String originalFileName;
-    @Column
-    private String contentType;
-    @OneToOne
-    private Product product;
-    public MarkingInfoDTO build(){
-        return MarkingInfoDTO.builder()
+    private Long idProduct;
+    private ProductDTO product;
+
+    public MarkingInfo build(){
+        return MarkingInfo.builder()
                 .idMarkingInfo(idMarkingInfo)
-                .idProduct(product.getIdProduct())
                 .typeMarking(typeMarking)
                 .srcCode(srcCode)
                 .size(size)

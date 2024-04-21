@@ -9,7 +9,7 @@ import java.io.File;
 
 public interface GenerateCodeForMarking<T> {
 
-    public File generate(T data);
+    public MultipartFile generate(T data);
     public default BufferedImage generateImage(BitMatrix bitMatrix, int width, int height) {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x < width; x++) {

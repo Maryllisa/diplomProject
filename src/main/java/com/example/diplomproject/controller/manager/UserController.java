@@ -1,5 +1,8 @@
 package com.example.diplomproject.controller.manager;
+import com.example.diplomproject.model.dto.MarkingInfoDTO;
+import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -45,6 +48,8 @@ public class UserController {
     @GetMapping("/user/regMark")
     public String getRegistrationMark(Model model) {
         model.addAttribute("applicationList", applicationForMarking.getAllApplicationsForMarking());
+        model.addAttribute("newMarking", new MarkingInfoDTO());
+        model.addAttribute("typeMarking", TypeMarking.getRussianName());
         return "/user/regMark";
     }
     @GetMapping("/user/showAllDeclaration")

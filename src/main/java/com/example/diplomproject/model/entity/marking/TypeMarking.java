@@ -1,6 +1,8 @@
 package com.example.diplomproject.model.entity.marking;
 
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import java.util.Map;
 // знаками с радиочастотной меткой (RFID-меткой),
 // стикеровку,
 // нанесение кодов DataMatrix.
+@Getter
 public enum TypeMarking {
     ACCISE_MARK,
     CONTROL_MARK,
