@@ -1,7 +1,8 @@
 package com.example.diplomproject.controller.manager;
-import com.example.diplomproject.model.entity.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
     private final ApplicationService applicationService;
     private final IndividualsService individualsService;
+    private final DeclarationTDService declarationTDService;
     @GetMapping("/user")
     public String getStart() {
         return "/user/userPanel";
     }
     @GetMapping("/user/obrApp")
-    public String getObrApplication(Model model) {
+    public String getObrApplication(Model model, Authentication authentication) {
 
-        model.addAttribute("applications", applicationService.getAllApplication());
+        model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.PENDING));
         return "/user/obrApplication";
     }
     @GetMapping("/user/activeApp")
@@ -41,7 +43,10 @@ public class UserController {
     @GetMapping("/user/regMark")
     public String getRegistrationMark() {return "/user/regMark";}
     @GetMapping("/user/showAllDeclaration")
-    public String getAllDeclaration() {return "/user/showAllDeclaration";}
+    public String getAllDeclaration(Model model) {
+        model.addAttribute("declaration", declarationTDService.getAllDeclaration());
+        return "/user/showAllDeclaration";
+    }
     @GetMapping("/user/showOfDeclaration")
     public String getRegOfDeclaration() {return "/user/showDeclaration";}
     @GetMapping("/user/showShipment")

@@ -1,12 +1,14 @@
 package com.example.diplomproject.model.entity;
 
 import javax.persistence.*;
+
+import com.example.diplomproject.model.entity.enumStatus.Role;
+import com.example.diplomproject.model.entity.enumStatus.Status;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
