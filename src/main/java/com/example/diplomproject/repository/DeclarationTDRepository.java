@@ -1,9 +1,7 @@
 package com.example.diplomproject.repository;
 
-import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

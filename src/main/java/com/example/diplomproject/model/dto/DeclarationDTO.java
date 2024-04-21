@@ -2,8 +2,7 @@ package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.model.dto.dtoForDeclaration.CurrencyRateDTO;
 import com.example.diplomproject.model.dto.dtoForDeclaration.ProductLocationDTO;
-import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

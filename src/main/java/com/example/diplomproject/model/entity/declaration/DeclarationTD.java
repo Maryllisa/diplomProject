@@ -4,7 +4,7 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

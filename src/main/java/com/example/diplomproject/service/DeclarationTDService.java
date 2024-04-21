@@ -3,9 +3,8 @@ package com.example.diplomproject.service;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
-import com.example.diplomproject.model.entity.RoleIndividuals;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -99,5 +98,14 @@ public class DeclarationTDService {
 
     public List<Individuals> getSupplier(String login) {
         return individualsRepository.findByAccount(userRepository.findByLogin(login));
+    }
+
+    public List<DeclarationDTO> getAllDeclaration() {
+        List<DeclarationTD> declarationTDList = declarationTDRepository.findAll();
+        List<DeclarationDTO> declarationDTOList = new ArrayList<>();
+        declarationTDList.forEach(x->{
+            declarationDTOList.add(x.build());
+        });
+        return declarationDTOList;
     }
 }
