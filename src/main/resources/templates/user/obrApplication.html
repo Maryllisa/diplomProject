@@ -14,21 +14,24 @@
       <thead>
       <tr>
         <th style="color: #814de5" scope="col">Гос номер авто</th>
-        <th  style="color: #814de5" scope="col">Поставщик</th>
-        <th  style="color: #814de5" scope="col">Количество видов товара</th>
-        <th  style="color: #814de5" scope="col">Номер договора СВХ</th>
-        <th ></th>
+        <th  style="color: #814de5" scope="col">ТТН</th>
+        <th  style="color: #814de5" scope="col">Номер декларации</th>
+        <th  style="color: #814de5" scope="col">Номер CRM</th>
+        <th  style="color: #814de5" scope="col">Статус</th>
+          <th ></th>
         <th></th>
       </tr>
           </thead>
    <tbody>
     <tr th:if="${applications}" th:each="ap:${applications}">
-   <td  style="color: #1a1a1c" th:text="${ap.truck.registrationNumber}"/>
-   <td  style="color: #1a1a1c" th:text="${ap.individuals.organizationName}"/>
-   <td  style="color: #1a1a1c" th:text="${ap.declarationTD}"/>
-   <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
-   <td><input type="button" value="Принять" style="font-weight: bold;"></td>
-   <td><input type="button" value="Отклонить" style="font-weight: bold;"></td>
+        <td  style="color: #1a1a1c" th:text="${ap.truck.registrationNumber}"/>
+        <td  style="color: #1a1a1c" th:text="${ap.goodTransportDocument.goodsTransportDocumentNumbers}"/>
+        <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
+        <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
+        <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
+        <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
+        <td><input type="button" value="Принять" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/PROCESSING/' + ${ap.idApplication}|" style="font-weight: bold;"></td>
+        <td><input type="button" value="Отклонить" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/CANCELLED/' + ${ap.idApplication}|" ></td>
     </tr>
          </tbody>
     </table>

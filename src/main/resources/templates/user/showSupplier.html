@@ -25,15 +25,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:if="${suppliers}" th:each="sup:${suppliers}">
+      <tr th:if="${!suppliers.isEmpty()}" th:each="sup:${suppliers}">
         <td style="color: #1a1a1c" th:text="${sup.organizationName}"/>
         <td style="color: #1a1a1c" th:text="${sup.legalAddress}"/>
         <td style="color: #1a1a1c" th:text="${sup.phone}"/>
-        <td style="color: #1a1a1c" th:text="${sup.city + ', ' + sup.postalCode + ' ' + sup.address}"/>
+        <td style="color: #1a1a1c" th:text="${sup.address.city + ', ' + sup.address.postalCode + ' ' + sup.address.build}"/>
         <td style="color: #1a1a1c" th:text="${sup.bankName + ', ' + sup.bankCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.registrationCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
-        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.applicationForStorage.idApplication}"><input type="button" value="Посмотреть подробнее"
+        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.idSupplier}"><input type="button" value="Посмотреть подробнее"
                                                                               style="font-weight: bold;"></a>
         <td/>
       </tr>

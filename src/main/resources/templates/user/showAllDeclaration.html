@@ -14,27 +14,24 @@
     <table class="table table-striped table-sm">
       <thead>
       <tr>
-        <th style="color: #814de5" scope="col">Наименование органзиации</th>
-        <th style="color: #814de5" scope="col">Юридический адрес</th>
-        <th style="color: #814de5" scope="col">Номер телефона</th>
-        <th style="color: #814de5" scope="col">Адрес</th>
-        <th style="color: #814de5" scope="col">Банковская информация</th>
-        <th style="color: #814de5" scope="col">УНН</th>
-        <th style="color: #814de5" scope="col">ОКПО</th>
-        <th style="color: #814de5" scope="col">Номер заявки</th>
+        <th style="color: #814de5" scope="col">Номер декларации</th>
+        <th style="color: #814de5" scope="col">Количество продуктов</th>
+        <th style="color: #814de5" scope="col">Вес брутто</th>
+        <th style="color: #814de5" scope="col">Вес нетто</th>
+        <th style="color: #814de5" scope="col">Поставщик</th>
+        <th style="color: #814de5" scope="col">Получатель</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:if="${suppliers}" th:each="sup:${suppliers}">
-        <td style="color: #1a1a1c" th:text="${sup.organizationName}"/>
-        <td style="color: #1a1a1c" th:text="${sup.legalAddress}"/>
-        <td style="color: #1a1a1c" th:text="${sup.phone}"/>
-        <td style="color: #1a1a1c" th:text="${sup.city + ', ' + sup.postalCode + ' ' + sup.address}"/>
-        <td style="color: #1a1a1c" th:text="${sup.bankName + ', ' + sup.bankCode}"/>
-        <td style="color: #1a1a1c" th:text="${sup.registrationCode}"/>
-        <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
-        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.applicationForStorage.idApplication}"><input type="button" value="Посмотреть подробнее"
-                                                                              style="font-weight: bold;"></a>
+      <tr th:if="${!declaration.isEmpty()}" th:each="dec:${declaration}">
+        <td style="color: #1a1a1c" th:text="${dec.customEDCode + '/' + dec.directionOfMovement + '/'+ dec.procedureCode}"/>
+        <td style="color: #1a1a1c" th:text="${dec.colProd}"/>
+        <td style="color: #1a1a1c" th:text="${dec.netWeight}"/>
+        <td style="color: #1a1a1c" th:text="${dec.grossWeight}"/>
+        <td style="color: #1a1a1c" th:text="${dec.senderDTO.organizationName}"/>
+        <td style="color: #1a1a1c" th:text="${dec.recipientDTO.organizationName}"/>
+        <td><a th:href="*{'/user/readApplicationBySupplier/'+ dec.idDeclaration}">
+          <input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a>
         <td/>
       </tr>
       </tbody>
