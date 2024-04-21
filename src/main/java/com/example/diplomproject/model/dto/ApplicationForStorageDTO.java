@@ -2,15 +2,12 @@ package com.example.diplomproject.model.dto;
 
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
 import java.sql.Date;
 
 @Data

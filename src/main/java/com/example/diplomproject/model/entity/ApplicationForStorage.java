@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,8 @@ public class ApplicationForStorage {
     private Truck truck;
     @ManyToOne
     private Account account;
+    @ManyToOne
+    private Account accountManager;
 
 
     public ApplicationForStorageDTO build() {

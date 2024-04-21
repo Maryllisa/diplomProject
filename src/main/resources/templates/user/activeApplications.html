@@ -23,13 +23,13 @@
             </thead>
             <tbody>
             <tr th:if="${applications}" th:each="ap:${applications}">
-                <td style="color: #1a1a1c" th:text="${ap.truck.registrationNumber}"/>
-                <td style="color: #1a1a1c" th:text="${ap.individuals.organizationName}"/>
-                <td style="color: #1a1a1c" th:text="${ap.declarationTD}"/>
-                <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}">
-                    <input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a>
-                </td>
-                <td><input type="button" value="Завершиь" style="font-weight: bold;"></td>
+                <td  style="color: #1a1a1c" th:text="${ap.truck.registrationNumber}"/>
+                <td  style="color: #1a1a1c" th:text="${ap.goodTransportDocument.goodsTransportDocumentNumbers}"/>
+                <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
+                <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
+                <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
+                <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
+                <td><input type="button" value="Завершить обработку" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/COMPLETED/' + ${ap.idApplication}|" style="font-weight: bold;"></td>
             </tr>
             </tbody>
         </table>

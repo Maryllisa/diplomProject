@@ -1,11 +1,9 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
-import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
-import com.example.diplomproject.model.entity.StatusApplication;
-import com.example.diplomproject.model.entity.Truck;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
