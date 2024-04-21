@@ -27,6 +27,7 @@ public class ProductDTO {
 
     public Product build(){
         return Product.builder()
+                .idProduct(idProduct)
                 .itemNumber(itemNumber)
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)

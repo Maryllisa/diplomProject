@@ -13,6 +13,8 @@ public class UserController {
     private final ApplicationService applicationService;
     private final IndividualsService individualsService;
     private final DeclarationTDService declarationTDService;
+    private final ApplicationForMarkingService applicationForMarking;
+
     @GetMapping("/user")
     public String getStart() {
         return "/user/userPanel";
@@ -41,7 +43,10 @@ public class UserController {
         return "/user/showSupplier";
     }
     @GetMapping("/user/regMark")
-    public String getRegistrationMark() {return "/user/regMark";}
+    public String getRegistrationMark(Model model) {
+        model.addAttribute("applicationList", applicationForMarking.getAllApplicationsForMarking());
+        return "/user/regMark";
+    }
     @GetMapping("/user/showAllDeclaration")
     public String getAllDeclaration(Model model) {
         model.addAttribute("declaration", declarationTDService.getAllDeclaration());

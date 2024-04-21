@@ -36,6 +36,7 @@ public class ApplicationForMarking {
     public ApplicationForMarkingDTO build() {
         return ApplicationForMarkingDTO.builder()
                 .idProduct(product.getIdProduct())
+                .nameProduct(product.getNameProduct())
                 .product(product.build())
                 .typeMarking(typeMarking)
                 .statusMarkingApplication(statusMarkingApplication)

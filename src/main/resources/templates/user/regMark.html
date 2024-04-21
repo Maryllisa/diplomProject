@@ -60,15 +60,14 @@
                 <th style="color: #814de5" scope="col">Дата отправки</th>
             </tr>
             </thead>
-            <!--      <tbody>-->
-            <!--      <tr th:each="">-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        -->
-            <!--      </tr>-->
-            <!--      </tbody>-->
+                  <tbody>
+                  <tr th:if="${!applicationList.isEmpty()}" th:each="ap:${applicationList}">
+                    <td style="color: #1a1a1c" th:text="${ap.idProduct}"></td>
+                    <td style="color: #1a1a1c" th:text="${ap.nameProduct}"></td>
+                    <td style="color: #1a1a1c" th:text="${ap.statusMarkingApplication.getRussianName().get(ap.statusMarkingApplication)}"></td>
+                    <td style="color: #1a1a1c" th:text="${ap.date}"></td>
+                  </tr>
+                  </tbody>
         </table>
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">

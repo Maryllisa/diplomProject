@@ -41,4 +41,13 @@ public class ApplicationForMarkingService {
         applicationForMarking.setDate(Date.valueOf(LocalDate.now()));
         applicationForMarkingRepository.save(applicationForMarking);
     }
+
+    public List<ApplicationForMarkingDTO> getAllApplicationsForMarking() {
+        List<ApplicationForMarking> applicationForMarking = applicationForMarkingRepository.findAll();
+        List<ApplicationForMarkingDTO> applicationForMarkingDTOList = new ArrayList<>();
+        applicationForMarking.forEach(x->{
+            applicationForMarkingDTOList.add(x.build());
+        });
+        return applicationForMarkingDTOList;
+    }
 }
