@@ -2,6 +2,7 @@ package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.entity.*;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -2,7 +2,7 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.CustomsProcessingDTO;
-import com.example.diplomproject.model.dto.IndividualsDTO;
+import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
