@@ -1,8 +1,11 @@
 package com.example.diplomproject.service.mark;
 
+import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.MarkingInfo;
+import com.example.diplomproject.model.entity.Product;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.oned.EAN13Writer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mock.web.MockMultipartFile;
@@ -17,17 +20,19 @@ import java.io.IOException;
 
 @Service
 @Slf4j
-public class BarcodeService implements GenerateCodeForMarking<MarkingInfo>  {
+public class BarcodeService implements GenerateCodeForMarking<ProductDTO>  {
     private static final int width = 300;
     private static final int  height = 150;
 
     @Override
-    public MultipartFile generate(MarkingInfo data) {
+    public MultipartFile generate(ProductDTO data) {
         MultipartFile multipartFile = null;
         try {
-            EAN13Writer writer = new EAN13Writer();
 
-            BitMatrix bitMatrix = writer.encode(data.toString(), BarcodeFormat.EAN_13, width, height);
+            String productInformation = data.getIdProduct() + ' ' + data.getNumberDeclaration();
+            Code128Writer writer = new Code128Writer();
+
+            BitMatrix bitMatrix = writer.encode(productInformation, BarcodeFormat.CODE_128, width, height);
 
             BufferedImage image = generateImage(bitMatrix, width, height);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

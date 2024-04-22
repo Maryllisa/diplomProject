@@ -21,6 +21,7 @@ public class MarkingInfoDTO {
     private TypeMarking typeMarking;
 
     private String srcCode;
+    private Long idApplicationForMarking;
 
     private String size;
     private Long idProduct;

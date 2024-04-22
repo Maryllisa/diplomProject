@@ -2,6 +2,7 @@ package com.example.diplomproject.model.entity.marking;
 
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.Account;
+import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,8 @@ public class ApplicationForMarking {
     private Date date;
     @ManyToOne
     private Account account;
+    @OneToOne
+    private MarkingInfo markingInfo;
 
     public ApplicationForMarkingDTO build() {
         return ApplicationForMarkingDTO.builder()

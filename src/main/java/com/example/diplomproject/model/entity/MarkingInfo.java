@@ -2,12 +2,13 @@ package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javassist.bytecode.analysis.MultiType;
+import lombok.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.Base64;
 
 @Data
 @AllArgsConstructor
@@ -41,6 +42,15 @@ public class MarkingInfo {
                 .size(size)
                 .product(product.build())
                 .build();
+    }
+    @SneakyThrows
+    public void addMarking(MultipartFile file){
+        Base64.Encoder encoder = Base64.getEncoder();
+        String encoded = encoder.encodeToString(file.getBytes());
+        this.size = String.valueOf(file.getSize());
+        this.srcCode = encoded;
+        this.originalFileName = file.getName();
+        this.contentType = MediaType.IMAGE_PNG.getType();
     }
 
 }

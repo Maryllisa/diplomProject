@@ -3,8 +3,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import javax.imageio.ImageIO;
 
+import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.MarkingInfo;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
@@ -16,16 +18,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Slf4j
-public class DataMatrixCodeService implements GenerateCodeForMarking<MarkingInfo> {
+public class DataMatrixCodeService implements GenerateCodeForMarking<ProductDTO> {
     private static final int width = 300;
     private static final int height =300;
     @Override
-    public MultipartFile generate(MarkingInfo data){
+    public MultipartFile generate(ProductDTO data){
         MultipartFile multipartFile = null;
         try {
             DataMatrixWriter writer = new DataMatrixWriter();
 
-            BitMatrix bitMatrix = writer.encode(data.toString(), BarcodeFormat.DATA_MATRIX, width, height);
+            byte[] encodedData = data.toString().getBytes(StandardCharsets.UTF_8);
+
+            // Generate the BitMatrix using the encoded data
+            BitMatrix bitMatrix = writer.encode(new String(encodedData, StandardCharsets.ISO_8859_1),
+                    BarcodeFormat.DATA_MATRIX, width, height);
 
             BufferedImage image = generateImage(bitMatrix, width, height);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -23,10 +23,21 @@ public class UserRestController {
         markingInfoService.addNewMarking(markingInfoDTO);
         return ResponseEntity.ok("Добавлено");
     }
-    @GetMapping("/qr")
-    private ResponseEntity<?> getImageByID()
+    @GetMapping("/user/qr/{id}")
+    private ResponseEntity<?> getImageByIDUser(@PathVariable String id)
     {
-        MarkingInfo qr = markingInfoService.findById(2);
+        MarkingInfo qr = markingInfoService.findById(Integer.parseInt(id));
+        Base64.Decoder decoder = Base64.getDecoder();
+        return ResponseEntity.ok()
+                .header("fileName", qr.getOriginalFileName())
+                .contentType(MediaType.IMAGE_PNG)
+                .contentLength(Long.parseLong(qr.getSize()))
+                .body(new InputStreamResource(new ByteArrayInputStream(decoder.decode(qr.getSrcCode()))));
+    }
+    @GetMapping("/client/qr/{id}")
+    private ResponseEntity<?> getImageByIDClient(@PathVariable String id)
+    {
+        MarkingInfo qr = markingInfoService.findById(Integer.parseInt(id));
         Base64.Decoder decoder = Base64.getDecoder();
         return ResponseEntity.ok()
                 .header("fileName", qr.getOriginalFileName())

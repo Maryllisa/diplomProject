@@ -43,7 +43,7 @@ public class ApplicationForMarkingService {
     }
 
     public List<ApplicationForMarkingDTO> getAllApplicationsForMarking() {
-        List<ApplicationForMarking> applicationForMarking = applicationForMarkingRepository.findAll();
+        List<ApplicationForMarking> applicationForMarking = applicationForMarkingRepository.findAllByStatusMarkingApplication(StatusMarkingApplication.PENDING);
         List<ApplicationForMarkingDTO> applicationForMarkingDTOList = new ArrayList<>();
         applicationForMarking.forEach(x->{
             applicationForMarkingDTOList.add(x.build());

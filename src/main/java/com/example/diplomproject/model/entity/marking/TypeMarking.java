@@ -22,8 +22,8 @@ public enum TypeMarking {
     static {
         russianNames.put(ACCISE_MARK, "акцизными марками");
         russianNames.put(CONTROL_MARK, "контрольными (идентификационными) знаками");
-        russianNames.put(STICKER, "знаками с радиочастотной меткой (RFID-меткой)");
-        russianNames.put(RFID_MARK, "стикеровку");
+        russianNames.put(RFID_MARK, "знаками с радиочастотной меткой (RFID-меткой)");
+        russianNames.put(STICKER, "стикеровку");
         russianNames.put(DATAMATRIX_CODE, "нанесение кодов DataMatrix");
 
     }
