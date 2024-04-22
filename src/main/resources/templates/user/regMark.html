@@ -84,15 +84,7 @@
                     <div class="modal-body">
 
         <form class="needs-validation" novalidate="" th:action="*{'/user/registration/marking'}" method="post" th:object="${newMarking}">
-            <div class="col-sm-1" style="margin-top: -6%; margin-left: 91%" >
-                <label  class="form-label" style="color: #814de5">Код продукта</label>
-                <select th:if="${!applicationList.isEmpty()}" class="form-select" id="№TTN" required th:field="${newMarking.idProduct}">
-                    <option th:each="a:${applicationList}" th:value="${a.idProduct}" th:text="${a.idProduct}"/>
-                </select>
-                <div class="invalid-feedback">
-                    Проверьте корректность заполнения id.
-                </div>
-            </div>
+
             <div class="row g-3">
 
                 <div class="col-sm-6">
@@ -104,7 +96,15 @@
                         Проверьте корректность заполнения типа.
                     </div>
                 </div>
-
+                <div class="col-sm-6" >
+                    <label  class="form-label" style="color: #814de5">Код продукта</label>
+                    <select th:if="${!applicationList.isEmpty()}" class="form-select" id="№TTN" required th:field="${newMarking.idProduct}">
+                        <option th:each="a:${applicationList}" th:value="${a.idProduct}" th:text="${a.idProduct}"/>
+                    </select>
+                    <div class="invalid-feedback">
+                        Проверьте корректность заполнения id.
+                    </div>
+                </div>
 <!--                <div class="col-sm-6">-->
 <!--                    <label  class="form-label" style="color: #814de5">Номер марки/знака/метки</label>-->
 <!--                    <input type="text" class="form-control" id="Mark/Tag/Stamp Number" placeholder="" value="" required="">-->
