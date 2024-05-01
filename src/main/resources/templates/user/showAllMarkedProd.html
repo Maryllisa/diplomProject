@@ -15,30 +15,33 @@
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">Название</th>
-                <th  style="color: #814de5" scope="col">Дата поставки</th>
-                <th  style="color: #814de5" scope="col"> Срок годности</th>
+                <th style="color: #814de5" scope="col">Код товара</th>
+                <th style="color: #814de5" scope="col"> Срок годности</th>
                 <th style="color: #814de5" scope="col">Вид маркировки</th>
                 <th></th>
             </tr>
             </thead>
-            <!--         <tbody>-->
-            <!--          <tr th:each="">-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal"style="font-weight: bold;" >
-            Подробнее
-        </button></td>-->
-            <!--          </tr>-->
-            <!--               </tbody>-->
-        </table>
+            <tbody>
+            <tr th:if="${!markingInfoList.isEmpty()}" th:each="m:${markingInfoList}">
+                <td style="color: #1a1a1c" th:text="${m.product.nameProduct}"/>
+                <td style="color: #1a1a1c" th:text="${m.product.productCode}"/>
+                <td style="color: #1a1a1c" th:text="${m.product.date}"/>
+                <td style="color: #1a1a1c" th:text="${m.typeMarking.getRussianName().get(m.typeMarking)}"/>
+                <td>
+                    <input type="hidden" id="idProduct" th:value="${m.idMarkingInfo}">
+                    <button type="button" class="btn btn-primary" id="moreInfo" data-bs-toggle="modal"
+                            data-bs-target="#createRequestModal"
+                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c"
+                            th:data-mark-id="${m.idMarkingInfo}" onclick="getProductInfo(this)">
+                        Подробнее
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>  
 
-<!--        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">-->
-<!--            Подробнее об маркировке-->
-<!--        </button>-->
-
-        <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -46,91 +49,84 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
-                        <form>
-                            <div class="row g-3">
+                        <div class="row g-3 card">
+                            <div class="card-body">
+                                <label class="card-title" style="color: #814de5"><strong>Наименование: </strong>
+                                    <span id="product-name"></span>
+                                </label>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Наименование</label>
-                                    <input type="text" class="form-control" id="name" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения наименования.
-                                    </div>
+                                    <p class="card-text"><strong>Код:</strong>
+                                        <span id="product-code">123456</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Срок поставки</label>
-                                    <input type="text" class="form-control" id="delivery time" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Пожалуйста, выберите срок поставки.
-                                    </div>
+                                    <p class="card-text"><strong>Вес брутто:</strong>
+                                        <span id="product-gross-weight">10 кг</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Код товара</label>
-                                    <input type="text" class="form-control" id="prodCode" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения кода товара.
-                                    </div>
+                                    <p class="card-text"><strong>Вес нетто:</strong>
+                                        <span id="product-weight">8 кг</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Квота</label>
-                                    <input type="text" class="form-control" id="quota" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения квоты.
-                                    </div>
+                                    <p class="card-text"><strong>Количество:</strong>
+                                        <span id="product-net-weight">7 кг</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Срок годности</label>
-                                    <input type="text" class="form-control" id="srGod" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения срока годности.
-                                    </div>
+                                    <p class="card-text"><strong>Дата доставки:</strong>
+                                        <span id="product-delivery-date">2024-04-30</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Вес брутто</label>
-                                    <input type="text" class="form-control" id="bruttoWei" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения веса брутто.
-                                    </div>
+                                    <p class="card-text"><strong>Срок годности:</strong>
+                                        <span id="product-delivery-period">5 дней</span>
+                                    </p>
                                 </div>
                                 <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Вес нетто</label>
-                                    <input type="text" class="form-control" id="nettoWei" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения веса нетто.
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Количество</label>
-                                    <input type="text" class="form-control" id="colvo" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения количества.
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Поставщик</label>
-                                    <input type="text" class="form-control" id="supplier" placeholder="" required="">
-                                    <div class="invalid-feedback">
-                                        Проверьте корректность заполнения поставщика.
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" style="color: #814de5">Картинка</label>
-                                    <input type="file" class="form-control" id="image" accept="image/jpeg, image/png" required="">
-                                    <div class="invalid-feedback">
-                                        Пожалуйста, выберите изображение.
-                                    </div>
+                                    <p class="card-text"><strong>Штрихкод:</strong>
+                                        <img src="barcode.jpg" id="product-barcode" class="barcode-image"
+                                             alt="Штрих-код">
+                                    </p>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
 </main>
 </body>
+<script>
+        function getProductInfo(button) {
+            fetch('/user/productsInfo/' + button.getAttribute('data-mark-id'))
+                .then(response => response.json())
+                .then(data => {
+                    // Заполнение значений в элементах span
+                    document.getElementById('product-name').textContent = data.product.nameProduct;
+                    document.getElementById('product-code').textContent = data.product.productCode;
+                    document.getElementById('product-gross-weight').textContent = data.product.grossWeight;
+                    document.getElementById('product-weight').textContent = data.product.netWeight;
+                    document.getElementById('product-net-weight').textContent = data.product.netWeight;
+                    document.getElementById('product-delivery-date').textContent = data.product.quota;
+                    var byteCharacters = atob(data.srcCode);
+                    var byteArrays = [];
+                    for (var i = 0; i < byteCharacters.length; i++) {
+                        byteArrays.push(byteCharacters.charCodeAt(i));
+                    }
+                    var blob = new Blob([new Uint8Array(byteArrays)], {type: 'image/png'});
 
+                    document.getElementById('product-barcode').src = URL.createObjectURL(blob);
+                })
+                .catch(error => {
+                    console.error('Ошибка получения информации о товаре:', error);
+                });
+        }
+
+</script>
 </html>

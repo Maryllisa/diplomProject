@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Base64;
 
 @Data
@@ -30,6 +31,8 @@ public class MarkingInfo {
     @Column
     private String originalFileName;
     @Column
+    private Date date;
+    @Column
     private String contentType;
     @OneToOne
     private Product product;
@@ -38,6 +41,7 @@ public class MarkingInfo {
                 .idMarkingInfo(idMarkingInfo)
                 .idProduct(product.getIdProduct())
                 .typeMarking(typeMarking)
+                .date(date)
                 .srcCode(srcCode)
                 .size(size)
                 .product(product.build())

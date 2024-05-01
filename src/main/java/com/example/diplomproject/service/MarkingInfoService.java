@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -66,5 +68,9 @@ public class MarkingInfoService {
 
     public MarkingInfo findById(int i) {
         return markingInfoRepository.findById(Long.valueOf(i)).orElse(null);
+    }
+
+    public List<MarkingInfo> getAllMarking() {
+        return markingInfoRepository.findAll();
     }
 }

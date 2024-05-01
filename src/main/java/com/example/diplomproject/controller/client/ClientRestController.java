@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -92,9 +94,13 @@ public class ClientRestController {
         return  ResponseEntity.ok("Успешная регистрация");
     }
     @PostMapping("/client/addStorageRequest")
-    private ResponseEntity<String> addStorageRequest(@ModelAttribute ApplicationForStorageDTO applicationForStorageDTO, Authentication authentication){
+    private ResponseEntity<Map<String,String>> addStorageRequest(@ModelAttribute ApplicationForStorageDTO applicationForStorageDTO, Authentication authentication){
         applicationForStorageService.addNewApplication(applicationForStorageDTO, authentication.getName());
-        return  ResponseEntity.ok("Успешная регистрация");
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "Заявка на хронение уcпешно оформлена");
+
+        return ResponseEntity.ok(response);
     }
     @PostMapping("/client/regAuto")
     private ResponseEntity<String> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
@@ -116,10 +122,14 @@ public class ClientRestController {
     }
 
     @PostMapping("/client/maleZavForOtp")
-    public ResponseEntity<String> addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
-                                                           Authentication authentication){
+    public ResponseEntity<Map<String, String>> addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
+                                                                        Authentication authentication){
         applicationForReleaseService.addNewApplicationForRelease
                 (applicationForReleaseDTO, authentication.getName());
-        return  ResponseEntity.ok("Успешная регистрация");
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "Заявка на хронение умпешно оформлена");
+
+        return ResponseEntity.ok(response);
     }
 }

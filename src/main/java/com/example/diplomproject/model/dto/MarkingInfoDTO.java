@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +23,7 @@ public class MarkingInfoDTO {
 
     private String srcCode;
     private Long idApplicationForMarking;
+    private Date date;
 
     private String size;
     private Long idProduct;

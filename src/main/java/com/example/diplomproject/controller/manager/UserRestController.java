@@ -45,4 +45,9 @@ public class UserRestController {
                 .contentLength(Long.parseLong(qr.getSize()))
                 .body(new InputStreamResource(new ByteArrayInputStream(decoder.decode(qr.getSrcCode()))));
     }
+
+    @GetMapping("/user/productsInfo/{idProduct}")
+    private ResponseEntity<MarkingInfoDTO> getMarkInfo(@PathVariable int idProduct){
+        return ResponseEntity.ok(markingInfoService.findById(idProduct).build());
+    }
 }
