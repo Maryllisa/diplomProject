@@ -11,7 +11,7 @@
 <main>
   <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%; ">
     <h4 class="mb-3" style="color: #814de5"> Оформление CMR</h4>
-    <form class="needs-validation" novalidate="" th:object="${crm}" th:action="*{'/client/addCRM'}" method="post">
+    <form class="needs-validation" id="addCRM" novalidate="" th:object="${crm}" th:action="*{'/client/addCRM'}" method="post">
 
       <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
         <h5 style="margin-left: 1%">1 Отправитель</h5>
@@ -728,6 +728,26 @@
 
   <script src="/js/model.js"></script>
   <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('addCRM').addEventListener('submit', function (event) {
+      event.preventDefault();
+      fetch('/client/addCRM', {
+        method: 'POST',
+        body: new FormData(this)
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.status === "success") {
+                  alert(data.message);
+                  window.location.href = '/client/addCRM';
+                } else if (data.status === "bad") {
+                  alert(data.message);
+                } else {
+                  console.error('Произошла ошибка:', data.message);
+                }
+              })
+    });
+  </script>
 </main>
 
 </body>
