@@ -711,6 +711,7 @@
       <div class="modal-content">
 
         <div class="modal-body">
+          <label class="label" style="color: #1a1a1c;">Выберите поставщика</label>
           <select th:if="${supplier}" class="form-select" id="supplier" required>
             <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>
           </select>
