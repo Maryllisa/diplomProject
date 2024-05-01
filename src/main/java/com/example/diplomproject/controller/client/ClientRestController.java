@@ -1,5 +1,6 @@
 package com.example.diplomproject.controller.client;
 
+import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,13 +96,19 @@ public class ClientRestController {
         return  ResponseEntity.ok("Успешная регистрация");
     }
     @PostMapping("/client/addStorageRequest")
-    private ResponseEntity<Map<String,String>> addStorageRequest(@ModelAttribute ApplicationForStorageDTO applicationForStorageDTO, Authentication authentication){
-        applicationForStorageService.addNewApplication(applicationForStorageDTO, authentication.getName());
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "success");
-        response.put("message", "Заявка на хронение уcпешно оформлена");
+    private ResponseEntity<Map<String,String>> addStorageRequest(@ModelAttribute @Valid ApplicationForStorageDTO applicationForStorageDTO,
+                                                                 BindingResult result,
+                                                                 Authentication authentication){
 
-        return ResponseEntity.ok(response);
+        if (result.hasErrors()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+//            String body = objectMapper.writeValueAsString(CRMService.checkNewCRM(result, crmdto));
+//           return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(body));
+        }
+        log.info("РЕГИСТРАЦИЯ НОВОГО ЗАЯВЛЕНИЯ НА ХРАНЕНИЕ");
+        applicationForStorageService.addNewApplication(applicationForStorageDTO, authentication.getName());
+
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Заявка на хранение успешнр зарегистрированна"));
     }
     @PostMapping("/client/regAuto")
     private ResponseEntity<String> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication){

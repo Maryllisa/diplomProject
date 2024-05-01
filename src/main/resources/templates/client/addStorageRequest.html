@@ -94,13 +94,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
-                    alert(data.message); // Показываем сообщение из ответа
-                    window.location.href = '/client/addStorageRequest/'; // Перенаправляем на другую страницу
+                    alert(data.message);
+                    window.location.href = '/client/addStorageRequest/';
+                } else if (data.status === "bad") {
+                    alert(data.message);
                 } else {
                     console.error('Произошла ошибка:', data.message);
                 }
             })
     });
 </script>
-
 </html>
