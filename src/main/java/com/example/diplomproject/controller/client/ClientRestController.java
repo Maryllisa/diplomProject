@@ -39,38 +39,36 @@ public class ClientRestController {
 
     @SneakyThrows
     @PostMapping("/regOfDeclaration")
-    private ResponseEntity<Map<String,String>> checkAddNewDeclaration(@ModelAttribute DeclarationDTO declarationDTO,
-                                                          BindingResult result,
-                                                          Model model, Authentication authentication, HttpSession session){
+    private ResponseEntity<Map<String, String>> checkAddNewDeclaration(@ModelAttribute DeclarationDTO declarationDTO,
+                                                                       BindingResult result,
+                                                                       Model model, Authentication authentication, HttpSession session) {
 
-//        if (result.hasErrors()) {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            String body = objectMapper.writeValueAsString(declarationTDService.checkNewDeclaration(result, declarationDTO));
-//            return ResponseEntity.badRequest().body(body);
-//        }
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(
+                    AnswerMessage.getBadMessage(declarationTDService.checkNewDeclaration(result, declarationDTO)));
+        }
         List<ProductDTO> productDTOList = (List<ProductDTO>) session.getAttribute("productDTOList");
         log.info("Список из сессии: " + productDTOList);
         declarationDTO.setProductDTOS(productDTOList);
         declarationTDService.addNewDeclaration(declarationDTO, authentication.getName());
 
-        return ResponseEntity.ok(AnswerMessage.getOKMessage("Регистрация декларации "+
-                declarationDTO.getCustomEDCode() +"/"+
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Регистрация декларации " +
+                declarationDTO.getCustomEDCode() + "/" +
                 declarationDTO.getDirectionOfMovement() + "/" +
-                declarationDTO.getProcedureCode() +" успешно пройдена"));
+                declarationDTO.getProcedureCode() + " успешно пройдена"));
 
     }
+
     @SneakyThrows
     @PostMapping("/addCRM")
     private ResponseEntity<Map<String, String>> checkAndAddCRM(@ModelAttribute CRMDTO crmdto,
-                                                          BindingResult result,
-                                                          Model model,
-                                                  Authentication authentication,
-                                                  HttpSession session){
+                                                               BindingResult result,
+                                                               Model model,
+                                                               Authentication authentication,
+                                                               HttpSession session) {
 
         if (result.hasErrors()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            String body = objectMapper.writeValueAsString(CRMService.checkNewCRM(result, crmdto));
-            return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(body));
+            return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(CRMService.checkNewCRM(result, crmdto)));
         }
         log.info("Запуск регистрации нового CRM документа");
         crmService.addNewCRM(crmdto, authentication.getName());
@@ -78,31 +76,35 @@ public class ClientRestController {
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Регистрация CRM прошла успешно"));
 
     }
+
     @PostMapping("/registrationProduct")
-    private ResponseEntity<String> addNewProduct(@RequestBody List<ProductDTO> productDTOList, HttpSession session){
+    private ResponseEntity<String> addNewProduct(@RequestBody List<ProductDTO> productDTOList, HttpSession session) {
         session.setAttribute("productDTOList", productDTOList);
-        return  ResponseEntity.ok("Товары добавленны");
+        return ResponseEntity.ok("Товары добавленны");
     }
+
     @PostMapping("/addTTN")
-    private ResponseEntity<Map<String,String>> addNewGTD(@ModelAttribute GoodTransportDocument goodTransportDocument,
-                                             @RequestParam("pdfFile") MultipartFile file,
-                                             Authentication authentication){
+    private ResponseEntity<Map<String, String>> addNewGTD(@ModelAttribute GoodTransportDocument goodTransportDocument,
+                                                          @RequestParam("pdfFile") MultipartFile file,
+                                                          Authentication authentication) {
 
         goodTransportDocumentService.addNewGTD(goodTransportDocument, file, authentication.getName());
-        return  ResponseEntity.ok(AnswerMessage.getOKMessage("ТТН "+ goodTransportDocument.getGoodsTransportDocumentNumbers()
-                +" успешно добавлен"));
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("ТТН " + goodTransportDocument.getGoodsTransportDocumentNumbers()
+                + " успешно добавлен"));
     }
+
     @PostMapping("/regAsAComp")
     private ResponseEntity<Map<String, String>> addNewReqAsCompany(@ModelAttribute IndividualsDTO individualsDTO,
-                                                      Authentication authentication){
+                                                                   Authentication authentication) {
 
         individualsService.addNewCompany(individualsDTO, authentication.getName());
-        return  ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно добавлен"));
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно добавлен"));
     }
+
     @PostMapping("/addStorageRequest")
-    private ResponseEntity<Map<String,String>> addStorageRequest(@ModelAttribute @Valid ApplicationForStorageDTO applicationForStorageDTO,
-                                                                 BindingResult result,
-                                                                 Authentication authentication){
+    private ResponseEntity<Map<String, String>> addStorageRequest(@ModelAttribute @Valid ApplicationForStorageDTO applicationForStorageDTO,
+                                                                  BindingResult result,
+                                                                  Authentication authentication) {
 
         if (result.hasErrors()) {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -114,10 +116,11 @@ public class ClientRestController {
 
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Заявка на хранение успешнр зарегистрированна"));
     }
+
     @PostMapping("/regAuto")
-    private ResponseEntity<Map<String, String>> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication){
+    private ResponseEntity<Map<String, String>> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication) {
         truckService.addNewTruck(truckDTO, authentication.getName());
-        return  ResponseEntity.ok(AnswerMessage.getOKMessage("Авто успешно зарегистрированно"));
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Авто успешно зарегистрированно"));
     }
 
     @GetMapping("/findSupplier/{id}")
@@ -125,16 +128,18 @@ public class ClientRestController {
         IndividualsDTO individuals = individualsService.findById(id);
         return individuals;
     }
+
     @PostMapping("/addZavForMark")
     public ResponseEntity<Map<String, String>> addApplicationForMarking(@ModelAttribute ApplicationForMarkingDTO applicationForMarkingDTO,
-                                                           Authentication authentication){
+                                                                        Authentication authentication) {
         applicationForMarkingService.addNewApplicationForMarking
                 (applicationForMarkingDTO, authentication.getName());
-        return  ResponseEntity.ok(AnswerMessage.getOKMessage("Заявка на маркировку успешно оформлена"));    }
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Заявка на маркировку успешно оформлена"));
+    }
 
     @PostMapping("/maleZavForOtp")
     public ResponseEntity<Map<String, String>> addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
-                                                                        Authentication authentication){
+                                                                        Authentication authentication) {
         applicationForReleaseService.addNewApplicationForRelease
                 (applicationForReleaseDTO, authentication.getName());
 

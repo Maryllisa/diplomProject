@@ -10,10 +10,8 @@ public class AnswerMessage {
         response.put("message", msg);
         return response;
     }
-    public static Map<String, String> getBadMessage(String msg){
-        Map<String, String> response = new HashMap<>();
+    public static Map<String, String> getBadMessage(Map<String, String> response){
         response.put("status", "bad");
-        response.put("message", msg);
         return response;
     }
 }

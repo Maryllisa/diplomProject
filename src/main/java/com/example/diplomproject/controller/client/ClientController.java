@@ -8,6 +8,7 @@ import com.example.diplomproject.model.entity.enumStatus.Brand;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class ClientController {
     private final ProductService productService;
     private final ApplicationForReleaseService applicationForRelease;
     private final ApplicationForStorageService applicationForStorage;
+    private final MarkingInfoService markingInfoService;
 
     @GetMapping("/")
     public String getClient() {
@@ -99,7 +101,8 @@ public class ClientController {
     }
 
     @GetMapping("/showMarkedProduct")
-    public String getShowMarkedProduct() {
+    public String getShowMarkedProduct(Model model, Authentication authentication) {
+        model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName()));
         return "/client/showMarkedProduct";
     }
 

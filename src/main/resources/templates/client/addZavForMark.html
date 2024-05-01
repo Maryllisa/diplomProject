@@ -64,7 +64,7 @@
       <tr th:if="${applicationsForMarking}" th:each="list:${applicationsForMarking}">
         <td style="color: #1a1a1c" th:text="${list.product.productCode}"></td>
         <td style="color: #1a1a1c" th:text="${list.product.nameProduct}"></td>
-        <td style="color: #1a1a1c" th:text="${list.statusMarkingApplication}"></td>
+        <td style="color: #1a1a1c" th:text="${list.statusMarkingApplication.getRussianName().get(list.statusMarkingApplication)}"></td>
         <td style="color: #1a1a1c" th:text="${list.date}"></td>
 
       </tr>

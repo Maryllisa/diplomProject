@@ -22,19 +22,19 @@
                 <th></th>
             </tr>
             </thead>
-<!--            <tbody>-->
-<!--            <tr th:each="">-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-<!--                <td>-->
-<!--                    <input type="button" value="Подробнее" style="font-weight: bold;">-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
+            <tbody>
+            <tr th:if="${!marks.isEmpty()}" th:each="m:${marks}">
+                <td style="color: #1a1a1c" th:text="${m.idMarkingInfo}"></td>
+                <td style="color: #1a1a1c" th:text="${m.typeMarking.getRussianName().get(m.typeMarking)}"></td>
+                <td style="color: #1a1a1c" th:text="${m.product.productCode}"></td>
+                <td style="color: #1a1a1c" th:text="${m.date}"></td>
+                <td style="color: #1a1a1c" th:text="${m.datePut}"></td>
+                <td style="color: #1a1a1c" th:text="${m.applicationForMarking.statusMarkingApplication.getRussianName().get(m.applicationForMarking.statusMarkingApplication)}"></td>
+                <td>
+                    <input type="button" value="Подробнее" style="font-weight: bold;">
+                </td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </main>
