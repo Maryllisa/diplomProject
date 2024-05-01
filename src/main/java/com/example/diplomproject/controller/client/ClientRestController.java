@@ -36,10 +36,9 @@ public class ClientRestController {
     private final ApplicationForMarkingService applicationForMarkingService;
     private final ApplicationForReleaseService applicationForReleaseService;
 
-    // Добавить валидацию
     @SneakyThrows
     @PostMapping("/client/regOfDeclaration")
-    private ResponseEntity<String> checkAddNewDeclaration(@ModelAttribute DeclarationDTO declarationDTO,
+    private ResponseEntity<Map<String,String>> checkAddNewDeclaration(@ModelAttribute DeclarationDTO declarationDTO,
                                                           BindingResult result,
                                                           Model model, Authentication authentication, HttpSession session){
 
@@ -53,7 +52,10 @@ public class ClientRestController {
         declarationDTO.setProductDTOS(productDTOList);
         declarationTDService.addNewDeclaration(declarationDTO, authentication.getName());
 
-        return ResponseEntity.ok("Есть контакт!!");
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Регистрация декларации "+
+                declarationDTO.getCustomEDCode() +"/"+
+                declarationDTO.getDirectionOfMovement() + "/" +
+                declarationDTO.getProcedureCode() +" успешно пройдена"));
 
     }
     @SneakyThrows

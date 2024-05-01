@@ -932,11 +932,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
   <script src="/js/model.js"></script>
   <script src="/js/main.js"></script>
-
+  <script>
+    document.getElementById('form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      fetch('/client/regOfDeclaration', {
+        method: 'POST',
+        body: new FormData(this)
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.status === "success") {
+                  alert(data.message);
+                  window.location.href = '/client/regOfDeclaration';
+                } else if (data.status === "bad") {
+                  alert(data.message);
+                } else {
+                  console.error('Произошла ошибка:', data.message);
+                }
+              })
+    });
+  </script>
 </main>
 </body>
 
