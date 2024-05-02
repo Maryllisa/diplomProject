@@ -27,7 +27,7 @@ public class AccountDTO extends UserDTO {
     @ValidDateOfBirthRange
     private Date dateBirthday;
     @NotEmpty
-    @Pattern(regexp = "^(375|80)(29|33|25)\\d{7}$")
+    @Pattern(regexp = "^\\+(375|80)(29|33|25)\\d{7}$")
     private String phone;
 
 

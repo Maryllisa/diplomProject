@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class ProductDTO {
     private String productCode;
     private String originCountryCode;
     private String nameProduct;
+    private Date date;
     private double grossWeight;
     private String preference;
     private String procedure;
@@ -32,6 +34,7 @@ public class ProductDTO {
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)
                 .nameProduct(nameProduct)
+                .date(date)
                 .grossWeight(grossWeight)
                 .preference(preference)
                 .procedure(procedure)

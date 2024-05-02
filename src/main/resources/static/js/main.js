@@ -188,9 +188,25 @@ document.getElementById('form').addEventListener('submit', async function(event)
         });
     }
 
-    await send("/client/registrationProduct", "", "", productList);
-
-    // Выполнение отправки формы вручную
-    form.submit();
+    await send("/client/registrationProduct", "", "", productList).then(
+        fetch('/client/regOfDeclaration', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message);
+                    window.location.href = '/client/regOfDeclaration';
+                } else if (data.status === "bad") {
+                    for (const x of data.values()) {
+                        if (!x.equals("bad")){
+                            alert(x);
+                        }}
+                    }
+                else {
+                    console.error('Произошла ошибка:', data.message);
+                }
+            }));
 });
 

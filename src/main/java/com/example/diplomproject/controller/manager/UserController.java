@@ -1,6 +1,5 @@
 package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
-import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
@@ -17,6 +16,7 @@ public class UserController {
     private final IndividualsService individualsService;
     private final DeclarationTDService declarationTDService;
     private final ApplicationForMarkingService applicationForMarking;
+    private final MarkingInfoService markingInfoService;
 
     @GetMapping("/user")
     public String getStart() {
@@ -68,6 +68,9 @@ public class UserController {
     @GetMapping("/user/relesionReg")
     public String getRelesionReg() {return "/user/relesionReg";}
     @GetMapping("/user/showAllMarkedProd")
-    public String getShowAllMarkedProd() {return "/user/showAllMarkedProd";}
+    public String getShowAllMarkedProd(Model model) {
+        model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
+        return "/user/showAllMarkedProd";
+    }
 
 }

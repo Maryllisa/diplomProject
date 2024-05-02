@@ -1,6 +1,6 @@
 
 <div th:fragment="clientSidebare" class="flex-shrink-0 p-3" style="width: 330px;  height: 200vh; background-color: #1a1a1c; margin-top: -7.7%">
-  <a href="/client" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none " style=" border-bottom: #814de5; border-bottom-style: double">
+  <a href="/client/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none " style=" border-bottom: #814de5; border-bottom-style: double">
     <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
     <div style=" background-color: #814de5; border-radius: 30%; margin-right: 5%">
       <img src="/img/logo.png" style="height: 55px; width: 55px; "></div>
@@ -18,9 +18,6 @@
           <li><a href="/client/regOfDeclaration" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Заполнить транспортную декларацию</a></li>
           <li><a href="/client/addTTN" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Заполнить товарно-транспортная накладную </a></li>
           <li><a href="/client/addCMR" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Заполнить CRM </a></li>
-          <li><a href="/client/zavStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус существующих заявок </a></li>
-          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус товара </a></li>
-
         </ul>
       </div>
     </li>
@@ -33,19 +30,9 @@
         <ul class="btn-toggle-nav ps-4.5 fw-normal pb-1 small">
           <li><a href="/client/regAsAComp" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Зарегистрироваться как компания</a></li>
           <li><a href="/client/regAuto" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Зарегистрировать автомобиль</a></li>
-
-        </ul>
-      </div>
-    </li>
-    <li class="mb-1" style=" color: #bab7c9 ">
-      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false" style="color: #f2f0f8;">
-        <img src="/img/mark.png" style="height: 25px; width: 25px; margin-right: 10px;">
-        <span style="margin-left: 3px;"> Маркировки </span>
-      </button>
-      <div class="collapse" id="orders-collapse">
-        <ul class="btn-toggle-nav ps-4.5 fw-normal pb-1 small">
-          <li><a href="/client/showMarkedProduct" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотреть промаркированный товар</a></li>
           <li><a href="/client/addZavForMark" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Оставить заявку на маркировку товара</a></li>
+
+
         </ul>
       </div>
     </li>
@@ -57,9 +44,27 @@
       <div class="collapse" id="account-collapse">
         <ul class="btn-toggle-nav ps-4.5  fw-normal pb-1 small">
           <li><a href="/client/makeZavForOtp" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Составить заявление на отпуск товара</a></li>
-          <li><a href="/client/showBillForSave" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотреть чек за хранение </a></li>
           <li><a href="/client/priceForSave" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Оплата хранения </a></li>
-
+          <li><a href="/client/showBillForSave" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотреть чеки за хранение </a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1" style=" color: #bab7c9 " >
+      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#monitoring-collapse" aria-expanded="false" style=" color: #f2f0f8">
+        <img src="/img/mark.png" style="height: 25px; width: 25px; margin-right: 10px;">
+        <span style="margin-left: 3px;"> Мониторинг </span>
+      </button>
+      <div class="collapse" id="monitoring-collapse" >
+        <ul class="btn-toggle-nav ps-4.5  fw-normal pb-1 small">
+          <li><a href="/client/zavStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус существующих заявок </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус маркировоного товара </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные ТТН </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные транспортные декларации </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные CRM </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные поставщиков </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленных водителей </a></li>
+          <li><a href="/client/showMarkedProduct" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотреть промаркированный товар</a></li>
+          <li><a href="/client/showMarkedProduct" class=" d-inline-flex text-decoration-none rounded" style="color:#bab7c9;" >Просмотреть статус заявок на отпуск</a></li>
         </ul>
       </div>
     </li>

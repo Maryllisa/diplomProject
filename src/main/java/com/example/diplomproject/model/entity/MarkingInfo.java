@@ -1,6 +1,7 @@
 package com.example.diplomproject.model.entity;
 
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
+import com.example.diplomproject.model.entity.marking.ApplicationForMarking;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import javassist.bytecode.analysis.MultiType;
 import lombok.*;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Base64;
 
 @Data
@@ -30,7 +32,14 @@ public class MarkingInfo {
     @Column
     private String originalFileName;
     @Column
+    private Date date;
+    @Column
+    private Date datePut;
+    @Column
     private String contentType;
+    @OneToOne
+    private ApplicationForMarking applicationForMarking;
+
     @OneToOne
     private Product product;
     public MarkingInfoDTO build(){
@@ -38,6 +47,7 @@ public class MarkingInfo {
                 .idMarkingInfo(idMarkingInfo)
                 .idProduct(product.getIdProduct())
                 .typeMarking(typeMarking)
+                .date(date)
                 .srcCode(srcCode)
                 .size(size)
                 .product(product.build())

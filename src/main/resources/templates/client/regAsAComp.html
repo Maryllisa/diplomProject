@@ -85,7 +85,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" novalidate="" th:object="${newSupplier}"
+                        <form class="needs-validation" id="regAsAComp" novalidate="" th:object="${newSupplier}"
                               th:action="*{'/client/regAsAComp'}" method="post">
 
                             <div class="row g-3">
@@ -203,5 +203,24 @@
     </div>
 </main>
 </body>
-
+<script>
+    document.getElementById('regAsAComp').addEventListener('submit', function (event) {
+        event.preventDefault();
+        fetch('/client/regAsAComp', {
+            method: 'POST',
+            body: new FormData(this)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message);
+                    window.location.href = '/client/regAsAComp';
+                } else if (data.status === "bad") {
+                    alert(data.message);
+                } else {
+                    console.error('Произошла ошибка:', data.message);
+                }
+            })
+    });
+</script>
 </html>

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -31,6 +32,8 @@ public class Product {
 
     @Column
     private double grossWeight;
+    @Column
+    private Date date;
 
     @Column
     private String preference;
@@ -51,6 +54,7 @@ public class Product {
                 .idProduct(idProduct)
                 .itemNumber(itemNumber)
                 .nameProduct(nameProduct)
+                .date(date)
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)
                 .grossWeight(grossWeight)
