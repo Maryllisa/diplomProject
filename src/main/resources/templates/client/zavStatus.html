@@ -26,11 +26,53 @@
                      <td  style="color: #1a1a1c" th:text="${apl.dateZav}"/>
                           <td  style="color: #1a1a1c" th:text="${apl.datePost}"/>
                      <td  style="color: #1a1a1c" th:text="${apl.statusApplication.getRussianName().get(apl.statusApplication)}"/>
-                     <td><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
+                     <td><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal" data-bs-target="#detailsRequestModal"></td>
                       </tr>
                            </tbody>
         </table>
 
+
+        <div class="modal fade" id="detailsRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createRequestModalLabel">Подробнее о заявке</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label  class="form-label">№ Заявки</label>
+                            <span>вставить номер</span>
+                        </div>
+                            <div class="mb-3">
+                                <label  class="form-label">Товар</label>
+                                <span>вставить товар</span>
+                            </div>
+                            <div class="mb-3">
+                                <label  class="form-label">Тип маркировки</label>
+                                <span>вставить тип марк</span>
+                            </div>
+                        <div class="mb-3">
+                            <label  class="form-label">Дата заявки</label>
+                            <span>вставить дату</span>
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">Дата Отгрузки</label>
+                            <span>вставить дату отгрузки</span>
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">Статус</label>
+                            <span>тут будет статус</span>
+                        </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </main>
