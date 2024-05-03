@@ -51,12 +51,39 @@
     <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Оплата хранения</h4>
 
-        <table class="table table-striped table-sm">
+        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <select class="form-select" style="margin-left: 10px; width: 150px">
+                    <option value="" selected disabled>По признаку</option>
+                    <option value="признак1">Признак 1</option>
+                    <option value="признак2">Признак 2</option>
+                    <option value="признак3">Признак 3</option>
+                </select>
+            </div>
+
+
+            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                </form>
+                <select class="form-select" style="margin-left: 10px; width: 160px">
+                    <option value="" selected disabled>По параметру</option>
+                    <option value="признак1">Параметр 1</option>
+                    <option value="признак2">Параметр 2</option>
+                    <option value="признак3">Параметр 3</option>
+                </select>
+            </div>
+        </div>
+
+
+        <table class="table table-striped table-sm" style="margin-top: 20px">
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">Номер оплаты</th>
-                <th style="color: #814de5" scope="col">Товар</th>
+                <th style="color: #814de5" scope="col">Заявки</th>
                 <th style="color: #814de5" scope="col">Статус</th>
+                <th></th>
                 <th></th>
             </tr>
             </thead>
@@ -66,16 +93,19 @@
             <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
             <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
             <!--            <td>-->
-<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="background-color: #814de5; color: #1a1a1c">-->
+<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details" style="background-color: #814de5; color: #1a1a1c">-->
 <!--                Подробнее-->
 <!--            </button>-->
+<!--            <td><input type="button" value="Отменить заявку" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>-->
             <!--                </td>-->
             <!--      </tr>-->
             <!--      </tbody>-->
         </table>
 
 
-
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
+            Подать новое заявление
+        </button>
 
         <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -87,8 +117,12 @@
                     <div class="modal-body">
                         <form>
                             <div class="mb-3">
-                                <label for="productInput" class="form-label">Товар</label>
-                                <input type="text" class="form-control" id="productInput">
+                                <label for="productSelect" class="form-label">Заявка</label>
+                                <select class="form-select" id="productSelect">
+                                    <option value="option1">Опция 1</option>
+                                    <option value="option2">Опция 2</option>
+                                    <option value="option3">Опция 3</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="costInput" class="form-label">Сумма за содержание товара</label>
@@ -107,6 +141,36 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="details" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detailslLabel"> Подробнее</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Заявка</label>
+                                <span>Заявка</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
+                                <span>поститаешь цену</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="receiptFileInput" class="form-label">Файл с чеком</label>
+                                <span>а тут вероятно файл</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </main>
 </body>
