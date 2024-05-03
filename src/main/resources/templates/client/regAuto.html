@@ -50,7 +50,37 @@
     <div class="col-md-7 col-lg-8" style="margin-top: -88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Зарегистрировать автомобиль </h4>
 
-        <table class="table table-striped table-sm">
+        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <select class="form-select" style="margin-left: 10px; width: 150px">
+                    <option value="" selected disabled>По признаку</option>
+                    <option value="признак1">Признак 1</option>
+                    <option value="признак2">Признак 2</option>
+                    <option value="признак3">Признак 3</option>
+                </select>
+            </div>
+            <div style="width: 475px; display: flex; align-items: end;">
+                <span>с</span>
+                <input class="form-control" type="date" placeholder="С" style="margin-left: 10px; width: 120px">
+                <span>по</span>
+                <input class="form-control" type="date" placeholder="По" style="margin-left: 10px; width: 120px">
+            </div>
+
+            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                </form>
+                <select class="form-select" style="margin-left: 10px; width: 160px">
+                    <option value="" selected disabled>По параметру</option>
+                    <option value="признак1">Параметр 1</option>
+                    <option value="признак2">Параметр 2</option>
+                    <option value="признак3">Параметр 3</option>
+                </select>
+            </div>
+        </div>
+
+        <table class="table table-striped table-sm" style="margin-top: 20px">
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">№ Авто</th>
@@ -66,7 +96,7 @@
                 <td style="color: #1a1a1c" th:text="${t.brand + ' ' + t.model}"/>
                 <td style="color: #1a1a1c" th:text="${t.driver.name}"/>
                 <td style="color: #1a1a1c" th:text="${t.driver.licenseNumber}"/>
-                <td><input type="button" value="Подробнее" style="font-weight: bold;"></td>
+                <td><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal" data-bs-target="#details"></td>
             </tr>
             </tbody>
         </table>
@@ -150,6 +180,130 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="details" tabindex="-1" aria-labelledby="createRequestModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detailsRequestModalLabel"> Подробнее об автомобиле</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
+                                    <span>вставишь номер</span>
+                                </div>
+                                <div class="col-6" style="margin-top: 40px">
+                                    <label class="form-label" style="color: #814de5;">Бренд</label>
+                                    <span>бред</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Модель</label>
+                                    <span>маделька</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Год</label>
+                                   <span>годик</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Имя водителя</label>
+                                    <span>наме</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
+                                   <span>номер лицухи</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                        style="margin-top: 20px;background-color: #814de5; color: #1a1a1c" data-bs-toggle="modal" data-bs-target="#changeRequestModal">Изменить
+                                </button>
+                                <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                        style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Удалить
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changeRequestModalLabel"> Зарегистрировать ещё один автомобиль</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="needs-validation" id="changeAuto" novalidate="" th:object="${truck}"
+                              th:action="*{'/client/regAuto'}" method="post">
+
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
+                                    <input type="text" class="form-control" id="change Car Registration Number" placeholder=""
+                                           required="" th:field="${truck.registrationNumber}">
+                                    <div class="invalid-feedback">
+                                        Проверьте корректность заполнения регистрационного номера авто.
+                                    </div>
+                                </div>
+                                <div class="col-6" style="margin-top: 40px">
+                                    <label class="form-label" style="color: #814de5;">Бренд</label>
+                                    <select class="form-select" id="change Brand" th:field="${truck.brand}">
+                                        <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Пожалуйста, выберите бренд.
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Модель</label>
+                                    <input type="text" class="form-control" id="change Model" placeholder="" required=""
+                                           th:field="${truck.model}">
+                                    <div class="invalid-feedback">
+                                        Проверьте корректность заполнения модели.
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Год</label>
+                                    <input type="text" class="form-control" id="change Year" placeholder="" required=""
+                                           th:field="${truck.yearTruck}">
+                                    <div class="invalid-feedback">
+                                        Проверьте корректность заполнения года.
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Имя водителя</label>
+                                    <input type="text" class="form-control" id="change Driver Name" placeholder="" required=""
+                                           th:field="${truck.driver.name}">
+                                    <div class="invalid-feedback">
+                                        Проверьте корректность заполнения имени водителя.
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
+                                    <input type="text" class="form-control" id="change Driver License Number" placeholder=""
+                                           required="" th:field="${truck.driver.licenseNumber}">
+                                    <div class="invalid-feedback">
+                                        Проверьте корректность заполнения номера лицензии водителя.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                        style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </main>
 </body>
