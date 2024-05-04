@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Data
@@ -14,38 +15,53 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class ProductLocationDTO {
+    @NotNull
     @NotEmpty
     private String uzoRegistry;
+    @NotNull
     @NotEmpty
     private String customsCode;
+    @NotNull
     @NotEmpty
     private String type;
+    @NotNull
     @NotEmpty
     private String quantity;
+    @NotNull
     @NotEmpty
     private String documentNumber;
+    @NotNull
     @NotEmpty
     private Date date;
+    @NotNull
     @NotEmpty
     private String ztkNumber;
+    @NotNull
     @NotEmpty
     private String transportType;
+    @NotNull
     @NotEmpty
     private String vehicleNumber;
+    @NotNull
     @NotEmpty
     private String stationOrPort;
+    @NotNull
     @NotEmpty
     private String country;
+    @NotNull
     @NotEmpty
     private String postalCode;
+    @NotNull
     @NotEmpty
     private String regionOrDistrict;
+    @NotNull
     @NotEmpty
     private String locality;
+    @NotNull
     @NotEmpty
     private String houseNumber;
 
-    public ProductLocation build(){
+    public ProductLocation build() {
         return ProductLocation.builder()
                 .uzoRegistry(uzoRegistry)
                 .customsCode(customsCode)

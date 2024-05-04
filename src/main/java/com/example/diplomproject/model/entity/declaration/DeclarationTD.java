@@ -219,17 +219,17 @@ public class DeclarationTD {
     @OneToMany
     private List<Product> productList;
 
-    public DeclarationDTO build(){
+    public DeclarationDTO build(RoleIndividuals roleIndividuals){
         String declarationNumberArray [] = declarationNumber.split("/");
         String customEDCode = declarationNumberArray[0];
         String directionOfMovement = declarationNumberArray[1];
         String procedureCode = declarationNumberArray[2];
 
-        String formGr3Array [] = declarationNumber.split("/");
+        String formGr3Array [] = formGr3.split("/");
         String numbList = formGr3Array[0];
         String colList = formGr3Array[1];
 
-        String specificationArray [] = declarationNumber.split("/");
+        String specificationArray [] = specification.split("/");
         String colSpec = specificationArray[0];
         String colListSpec = specificationArray[1];
 
@@ -242,15 +242,14 @@ public class DeclarationTD {
                 .colList(colList)
                 .colSpec(colSpec)
                 .colListSpec(colListSpec)
-                .senderDTO(individuals.build(RoleIndividuals.CARRIER))
+                .senderDTO(individuals.build(RoleIndividuals.SUPPLIER))
                 .colProd(colProducts)
-                .colMest(allPlace)
                 .osobenOfDeclar(declarationDetails)
-                .recipientDTO(recipientAddress.build(RoleIndividuals.CARRIER))
-                .otvetstvenoeFace(financialRegulator.build(RoleIndividuals.CARRIER))
+                .recipientDTO(recipientAddress.build(RoleIndividuals.RECIPIENT))
+                .otvetstvenoeFace(financialRegulator.build(RoleIndividuals.FINYREG))
                 .tradingCountry(torgCountry)
                 .tamPrice(cost)
-                .declarator(declarant.build(RoleIndividuals.CARRIER))
+                .declarator(declarant.build(RoleIndividuals.DECLARANT))
                 .countryCodeDeparture(codeSenderCountry)
                 .countryNameDeparture(nameSenderCountry)
                 .countryCodeOrigin(codeOriginCountry)
@@ -279,7 +278,64 @@ public class DeclarationTD {
                 .productDescription(productDescription)
                 .build();
     }
+    public DeclarationDTO build(){
+        String declarationNumberArray [] = declarationNumber.split("/");
+        String customEDCode = declarationNumberArray[0];
+        String directionOfMovement = declarationNumberArray[1];
+        String procedureCode = declarationNumberArray[2];
 
+        String formGr3Array [] = formGr3.split("/");
+        String numbList = formGr3Array[0];
+        String colList = formGr3Array[1];
 
+        String specificationArray [] = specification.split("/");
+        String colSpec = specificationArray[0];
+        String colListSpec = specificationArray[1];
+
+        return DeclarationDTO.builder()
+                .idDeclaration(idDeclaration)
+                .customEDCode(customEDCode)
+                .directionOfMovement(directionOfMovement)
+                .procedureCode(procedureCode)
+                .numbList(numbList)
+                .colList(colList)
+                .colSpec(colSpec)
+                .colListSpec(colListSpec)
+                .senderDTO(individuals.build(individuals.getRoleIndividuals()))
+                .colProd(colProducts)
+                .osobenOfDeclar(declarationDetails)
+                .recipientDTO(recipientAddress.build(recipientAddress.getRoleIndividuals()))
+                .otvetstvenoeFace(financialRegulator.build(financialRegulator.getRoleIndividuals()))
+                .tradingCountry(torgCountry)
+                .tamPrice(cost)
+                .declarator(declarant.build(declarant.getRoleIndividuals()))
+                .countryCodeDeparture(codeSenderCountry)
+                .countryNameDeparture(nameSenderCountry)
+                .countryCodeOrigin(codeOriginCountry)
+                .countryNameOrigin(nameOriginCountry)
+                .countryCodeDestination(codeRecipientCountry)
+                .countryNameDestination(nameRecipientCountry)
+                .vehicleCount(identification)
+                .vehicleNumbers(vehicleRegistrationCountry)
+                .conteiner(codeContiner)
+                .codeYP(upCode)
+                .nameYP(conditionsOfDeliveryName)
+                .vehicleCountOnBorder(numberOfVehicles)
+                .vehicleNumbersOnBorder(vehicleNumbers)
+                .currencyCode(currency)
+                .invoiceAmount(accountTotalAmount)
+                .currencyRateDTO(currencyRate.build())
+                .transactionCharacterCode(dealCode)
+                .foreignTradeFeatureCode(specialEconomicDealCode)
+                .borderTransportTypeCode(codeTransport)
+                .domesticTransportTypeCode(codeTransportInCountry)
+                .grossWeight(totalGrossWeight)
+                .netWeight(totalNetWeight)
+                .customsCode(customsBorderCode)
+                .largeTextArea(customsBorderDescription)
+                .productLocationDTO(productLocation.build())
+                .productDescription(productDescription)
+                .build();
+    }
 
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Data
@@ -15,16 +16,14 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class CurrencyRateDTO {
+    @NotNull
     @NotEmpty
-    @ValidDateOfBirthRange
     private Date date;
+    @NotNull
     @NotEmpty
     private String currency;
-    @NotEmpty
     private double currencyRate;
-    @NotEmpty
     private double euroRate;
-    @NotEmpty
     private double usdRate;
 
     public CurrencyRate build() {

@@ -39,9 +39,10 @@ public class ClientRestController {
 
     @SneakyThrows
     @PostMapping("/regOfDeclaration")
-    private ResponseEntity<Map<String, String>> checkAddNewDeclaration(@ModelAttribute DeclarationDTO declarationDTO,
+    private ResponseEntity<Map<String, String>> checkAddNewDeclaration(@Valid @ModelAttribute DeclarationDTO declarationDTO,
                                                                        BindingResult result,
-                                                                       Model model, Authentication authentication, HttpSession session) {
+                                                                       Model model, Authentication authentication,
+                                                                       HttpSession session) {
 
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(

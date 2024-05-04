@@ -15,18 +15,18 @@ import java.sql.Date;
 public class AccountDTO extends UserDTO {
 
     @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
-    @NotEmpty
+    @NotEmpty@NotNull
     private String surname;
-    @NotEmpty
+    @NotEmpty@NotNull
     @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String name;
-    @NotEmpty
+    @NotEmpty@NotNull
     @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String patronymic;
     @NotNull
     @ValidDateOfBirthRange
     private Date dateBirthday;
-    @NotEmpty
+    @NotEmpty@NotNull
     @Pattern(regexp = "^\\+(375|80)(29|33|25)\\d{7}$")
     private String phone;
 

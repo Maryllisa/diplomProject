@@ -9,13 +9,13 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-    @NotEmpty
+    @NotEmpty@NotNull
     @Size(min = 4, max = 20)
     private String login;
-    @NotEmpty
+    @NotEmpty@NotNull
     @Size(min = 4, max = 20)
     private String password;
-    @NotEmpty
+    @NotEmpty@NotNull
     @Email
     private String email;
 }

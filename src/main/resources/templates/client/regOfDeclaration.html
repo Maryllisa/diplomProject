@@ -35,10 +35,7 @@
 
             <div class="col-sm-4" style="margin-left: -1%">
               <label class="form-label" style="color: #1a1a1c">Код таможенной процедуры</label>
-              <input type="number" class="form-control" id="procedureCode" placeholder="" value="" required="" th:field="${declaration.procedureCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили код заявляемой таможенной процедуры.
-              </div>
+              <input type="text" class="form-control" id="procedureCode" placeholder="" value="" required="" th:field="${declaration.procedureCode}">
             </div>
           </div>
         </div>
@@ -51,65 +48,42 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="INN/KPP" placeholder="" value="" required="" th:field="${declaration.senderDTO.taxId}" >
-              <div class="invalid-feedback">
-                Вы не заполнили ИНН/КПП.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="organizationName" placeholder="Название организации" value="" required="" th:field="${declaration.senderDTO.organizationName}">
-              <div class="invalid-feedback">
-                Вы не заполнили название организации.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="country" placeholder="Страна" value="" required="" th:field="${declaration.senderDTO.address.city}" >
-              <div class="invalid-feedback">
-                Вы не заполнили страну.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="postalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.senderDTO.address.postalCode}" >
-              <div class="invalid-feedback">
-                Вы не заполнили почтовый код.
-              </div>
+
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="region" placeholder="Область" value="" required="" th:field="${declaration.senderDTO.address.region}" >
-              <div class="invalid-feedback">
-                Вы не заполнили область.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="city" placeholder="Населённый пункт" value="" required="" th:field="${declaration.senderDTO.address.settlement}" >
-              <div class="invalid-feedback">
-                Вы не заполнили населённый пункт.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="house" placeholder="Дом" value="" required="" th:field="${declaration.senderDTO.address.build}" >
-              <div class="invalid-feedback">
-                Вы не заполнили дом.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="OGRN" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.senderDTO.registrationCode}" >
-              <div class="invalid-feedback">
-                Вы не заполнили ОГРН.
-              </div>
             </div>
           </div>
         </div>
@@ -122,15 +96,9 @@
             <label class="form-label" style="color: #1a1a1c">№/колличество листов</label>
             <div class="col-sm-6">
               <input type="number" class="form-control" id="numbList" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.numbList}">
-              <div class="invalid-feedback">
-                Вы не заполнили Номер листа.
-              </div>
             </div>
             <div class="col-sm-6" >
               <input type="number" class="form-control" id="colList" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.colList}">
-              <div class="invalid-feedback">
-                Вы не заполнили общее количество листов.
-              </div>
             </div>
           </div>
         </div>
@@ -143,15 +111,9 @@
             <label class="form-label" style="color: #1a1a1c">Кол.специф./кол.листов</label>
             <div class="col-sm-6">
               <input type="number" class="form-control" id="colSpec" placeholder="" value="" required="" style="width: 100%;"  th:field="${declaration.colSpec}">
-              <div class="invalid-feedback">
-                Вы не заполнили Номер листа.
-              </div>
             </div>
             <div class="col-sm-6" >
               <input type="number" class="form-control" id="colListSpec" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.colListSpec}">
-              <div class="invalid-feedback">
-                Вы не заполнили общее количество листов.
-              </div>
             </div>
           </div>
         </div>
@@ -163,9 +125,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="number" class="form-control" id="colProd" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.colProd}">
-              <div class="invalid-feedback">
-                Вы не заполнили количество товаров.
-              </div>
             </div>
           </div>
         </div>
@@ -178,9 +137,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="text" class="form-control" id="osobenOfDeclar" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.osobenOfDeclar}">
-              <div class="invalid-feedback">
-                Вы не заполнили особенности.
-              </div>
             </div>
           </div>
         </div>
@@ -193,65 +149,41 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="RecipINN/KPP" placeholder="" value="" required="" th:field="${declaration.recipientDTO.taxId}">
-              <div class="invalid-feedback">
-                Вы не заполнили ИНН/КПП.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="RecipOrganizationName" placeholder="Название организации" value="" required="" th:field="${declaration.recipientDTO.organizationName}">
-              <div class="invalid-feedback">
-                Вы не заполнили название организации.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="RecipCountry" placeholder="Страна" value="" required="" th:field="${declaration.recipientDTO.address.city}">
-              <div class="invalid-feedback">
-                Вы не заполнили страну.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="RecipPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.recipientDTO.address.postalCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили почтовый код.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="RecipRegion" placeholder="Область" value="" required="" th:field="${declaration.recipientDTO.address.region}">
-              <div class="invalid-feedback">
-                Вы не заполнили область.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="RecipCity" placeholder="Населённый пункт" value="" required="" th:field="${declaration.recipientDTO.address.settlement}">
-              <div class="invalid-feedback">
-                Вы не заполнили населённый пункт.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="RecipHouse" placeholder="Дом" value="" required="" th:field="${declaration.recipientDTO.address.build}">
-              <div class="invalid-feedback">
-                Вы не заполнили дом.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="RecipOGRN" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.recipientDTO.registrationCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили ОГРН.
-              </div>
             </div>
           </div>
         </div>
@@ -264,65 +196,41 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="FinYregINN/KPP" placeholder="" value="" required="" th:field="${declaration.otvetstvenoeFace.taxId}">
-              <div class="invalid-feedback">
-                Вы не заполнили ИНН/КПП.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="FinYregOrganizationName" placeholder="Название организации" value="" required="" th:field="${declaration.otvetstvenoeFace.organizationName}">
-              <div class="invalid-feedback">
-                Вы не заполнили название организации.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="FinYregCountry" placeholder="Страна" value="" required="" th:field="${declaration.otvetstvenoeFace.address.city}">
-              <div class="invalid-feedback">
-                Вы не заполнили страну.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="FinYregPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.otvetstvenoeFace.address.postalCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили почтовый код.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="FinYregRegion" placeholder="Область" value="" required="" th:field="${declaration.otvetstvenoeFace.address.region}">
-              <div class="invalid-feedback">
-                Вы не заполнили область.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="FinYregCity" placeholder="Населённый пункт" value="" required="" th:field="${declaration.otvetstvenoeFace.address.settlement}">
-              <div class="invalid-feedback">
-                Вы не заполнили населённый пункт.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="FinYregHouse" placeholder="Дом" value="" required="" th:field="${declaration.otvetstvenoeFace.address.build}">
-              <div class="invalid-feedback">
-                Вы не заполнили дом.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="FinYregOGRN" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.otvetstvenoeFace.registrationCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили ОГРН.
-              </div>
             </div>
           </div>
         </div>
@@ -335,9 +243,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <input type="text" class="form-control" id="tradingCountry" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.tradingCountry}">
-              <div class="invalid-feedback">
-                Вы не заполнили торгующую страну.
-              </div>
             </div>
         </div>
       </div>
@@ -349,9 +254,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="number" step="any" class="form-control" id="tamPrice" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.tamPrice}">
-              <div class="invalid-feedback">
-                Вы не заполнили общую таможенную стоимость.
-              </div>
             </div>
           </div>
         </div>
@@ -365,65 +267,41 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="INN/KPPDeklarant" placeholder="" value="" required="" th:field="${declaration.declarator.taxId}">
-              <div class="invalid-feedback">
-                Вы не заполнили ИНН/КПП.
-              </div>
-            </div>
+                   </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="organizationNameDeklarant" placeholder="Название организации" value="" required="" th:field="${declaration.declarator.organizationName}">
-              <div class="invalid-feedback">
-                Вы не заполнили название организации.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="countryDeklarant" placeholder="Страна" value="" required="" th:field="${declaration.declarator.address.city}">
-              <div class="invalid-feedback">
-                Вы не заполнили страну.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="postalCodeDeklarant" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;" th:field="${declaration.declarator.address.postalCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили почтовый код.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="regionDeklarant" placeholder="Область" value="" required="" th:field="${declaration.declarator.address.region}">
-              <div class="invalid-feedback">
-                Вы не заполнили область.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="cityDeklarant" placeholder="Населённый пункт" value="" required="" th:field="${declaration.declarator.address.settlement}">
-              <div class="invalid-feedback">
-                Вы не заполнили населённый пункт.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="houseDeklarant" placeholder="Дом" value="" required="" th:field="${declaration.declarator.address.build}">
-              <div class="invalid-feedback">
-                Вы не заполнили дом.
-              </div>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="OGRNDeklarant" placeholder="" value="" required="" style="margin-left: -5px;" th:field="${declaration.declarator.registrationCode}">
-              <div class="invalid-feedback">
-                Вы не заполнили ОГРН.
-              </div>
             </div>
           </div>
         </div>
@@ -435,17 +313,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <input type="number" class="form-control" id="countryCodeDeparture" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeDeparture}">
-              <div class="invalid-feedback">
-                Вы не заполнили код страны.
-              </div>
+              <input type="text" class="form-control" id="countryCodeDeparture" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeDeparture}">
             </div>
             <div class="col-sm-7"  style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameDeparture" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.countryNameDeparture}">
-              <div class="invalid-feedback">
-                Вы не заполнили название страны.
-              </div>
             </div>
           </div>
         </div>
@@ -457,17 +329,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <input type="number" class="form-control" id="countryCodeOrigin" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeOrigin}">
-              <div class="invalid-feedback">
-                Вы не заполнили код страны.
-              </div>
+              <input type="text" class="form-control" id="countryCodeOrigin" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeOrigin}">
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameOrigin" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.countryNameOrigin}">
-              <div class="invalid-feedback">
-                Вы не заполнили название страны.
-              </div>
             </div>
           </div>
         </div>
@@ -479,17 +345,11 @@
           <div class="row" style=" margin-top: -5%;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <input type="number" class="form-control" id="countryCodeDestination" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeDestination}">
-              <div class="invalid-feedback">
-                Вы не заполнили код страны.
-              </div>
+              <input type="text" class="form-control" id="countryCodeDestination" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.countryCodeDestination}">
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameDestination" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.countryNameDestination}">
-              <div class="invalid-feedback">
-                Вы не заполнили название страны.
-              </div>
             </div>
           </div>
         </div>
@@ -501,17 +361,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
-              <input type="number" class="form-control" id="vehicleCount" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.vehicleCount}">
-              <div class="invalid-feedback">
-                Вы не указали количество транспортных средств.
-              </div>
+              <input type="text" class="form-control" id="vehicleCount" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.vehicleCount}">
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Номера т.с.</label>
               <input type="text" class="form-control" id="vehicleNumbers" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.vehicleNumbers}">
-              <div class="invalid-feedback">
-                Вы не указали номера транспортных средств.
-              </div>
             </div>
           </div>
         </div>
@@ -527,14 +381,8 @@
                 <option value="1">1</option>
                 <option value="0">0</option>
               </select>
-              <div class="invalid-feedback">
-              <div class="invalid-feedback">
-                Вы не заполнили контейнер.
-              </div>
-          </div>
         </div>
       </div>
-
         </div>
       </div>
 
@@ -545,16 +393,10 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c"> код у.п.</label>
               <input type="text" class="form-control" id="YPcode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.codeYP}">
-              <div class="invalid-feedback">
-                Вы не указали код условия поставки.
-              </div>
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Наименование условий поставки</label>
               <input type="text" class="form-control" id="YPname" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.nameYP}">
-              <div class="invalid-feedback">
-                Вы не указали наименование условий поставки.
-              </div>
             </div>
           </div>
         </div>
@@ -567,16 +409,10 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
               <input type="number" class="form-control" id="vehicleCountOnBorder" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.vehicleCountOnBorder}">
-              <div class="invalid-feedback">
-                Вы не указали количество транспортных средств.
-              </div>
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Номера транспортного средства</label>
               <input type="text" class="form-control" id="vehicleNumbersOnBorder" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.vehicleNumbersOnBorder}">
-              <div class="invalid-feedback">
-                Вы не указали номера транспортных средств.
-              </div>
             </div>
           </div>
         </div>
@@ -589,16 +425,10 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">Код валюты</label>
               <input type="text" class="form-control" id="currencyCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyCode}">
-              <div class="invalid-feedback">
-                Вы не указали код валюты.
-              </div>
             </div>
             <div class="col-sm-6" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Сумма по счету</label>
               <input type="number" class="form-control" id="invoiceAmount" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.invoiceAmount}">
-              <div class="invalid-feedback">
-                Вы не указали сумму по счету.
-              </div>
             </div>
             <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
                 <div class="form-check">
@@ -617,40 +447,25 @@
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">Валюта</label>
 <!--              <input type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.}">-->
-              <div class="invalid-feedback">
-                Вы не указали валюту.
-              </div>
             </div>
           </div>
             <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
               <label class="form-label" style="color: #1a1a1c">Считать по курсам</label>
               <input type="date" class="form-control" id="exchangeRateDate" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.date}">
-              <div class="invalid-feedback">
-                Вы не указали дату.
-              </div>
             </div>
 
 
             <div class="col-sm-5">
               <label class="form-label" style="color: #1a1a1c">Курс евро</label>
               <input type="number" class="form-control" id="euroExchangeRate" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.euroRate}">
-              <div class="invalid-feedback">
-                Вы не указали курс евро.
-              </div>
             </div>
             <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
               <label class="form-label" style="color: #1a1a1c">Курс USD</label>
               <input type="number" class="form-control" id="usdExchangeRate" placeholder="" value="" required="" style="width: 100%; margin-left: -7%" th:field="${declaration.currencyRateDTO.usdRate}">
-              <div class="invalid-feedback">
-                Вы не указали курс USD.
-              </div>
             </div>
             <div class="col-sm-12" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Курс валют для расчета</label>
               <input type="number" class="form-control" id="calculationExchangeRate" placeholder="" value="" required="" style="width: 100%; margin-left: -6%" th:field="${declaration.currencyRateDTO.currencyRate}">
-              <div class="invalid-feedback">
-                Вы не указали курс валюты для расчета.
-              </div>
             </div>
 
         </div>
@@ -662,17 +477,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
               <label class="form-label" style="color: #1a1a1c">Код сделки</label>
-              <input type="number" class="form-control" id="transactionCharacterCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.transactionCharacterCode}">
-              <div class="invalid-feedback">
-                Вы не указали код характера сделки.
-              </div>
+              <input type="text" class="form-control" id="transactionCharacterCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.transactionCharacterCode}">
             </div>
             <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
               <label class="form-label" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</label>
-              <input type="number" class="form-control" id="foreignTradeFeatureCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.foreignTradeFeatureCode}">
-              <div class="invalid-feedback">
-                Вы не указали код особенности внешнеэкономической сделки.
-              </div>
+              <input type="text" class="form-control" id="foreignTradeFeatureCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.foreignTradeFeatureCode}">
             </div>
           </div>
         </div>
@@ -684,10 +493,7 @@
           <div style="margin-left: 20px; ">
               <div class="col-sm-6">
                 <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
-                <input type="number" class="form-control" id="borderTransportTypeCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.borderTransportTypeCode}">
-                <div class="invalid-feedback">
-                  Вы не указали код вида транспортного средства.
-                </div>
+                <input type="text" class="form-control" id="borderTransportTypeCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.borderTransportTypeCode}">
               </div>
             </div>
         </div>
@@ -697,10 +503,7 @@
           <div style="margin-left: 2%;">
               <div class="col-sm-6">
                 <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
-                <input type="number" class="form-control" id="domesticTransportTypeCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.domesticTransportTypeCode}">
-                <div class="invalid-feedback">
-                  Вы не указали код вида транспортного средства.
-                </div>
+                <input type="text" class="form-control" id="domesticTransportTypeCode" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.domesticTransportTypeCode}">
             </div>
           </div>
         </div>
@@ -712,9 +515,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
               <input type="number" class="form-control" id="grossWeights" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.grossWeight}">
-              <div class="invalid-feedback">
-                Вы не указали суммарный вес брутто.
-              </div>
             </div>
           </div>
         </div>
@@ -726,9 +526,6 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
               <input type="number" class="form-control" id="netWeights" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.netWeight}">
-              <div class="invalid-feedback">
-                Вы не указали суммарный вес нетто.
-              </div>
             </div>
           </div>
         </div>
@@ -740,18 +537,12 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код таможни</label>
-              <input type="number" class="form-control" id="customsCode" placeholder="Введите код таможни" value="" required="" style="width: 100%;" th:field="${declaration.customsCode}">
-              <div class="invalid-feedback">
-                Вы не указали код таможни.
-              </div>
+              <input type="text" class="form-control" id="customsCode" placeholder="Введите код таможни" value="" required="" style="width: 100%;" th:field="${declaration.customsCode}">
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-11">
               <textarea class="form-control" id="largeTextArea" rows="8" placeholder="Введите текст" required="" style="height: 160px; width: 100%;" th:field="${declaration.largeTextArea}"></textarea>
-              <div class="invalid-feedback">
-                Вы не заполнили большой текстовый блок.
-              </div>
             </div>
           </div>
         </div>
@@ -849,9 +640,6 @@
           <div class="row" style="margin-top: 30px;">
             <div class="col-sm-12">
               <textarea class="form-control" id="cargoDescription" rows="8" placeholder="Введите описание товаров" required="" style="width: 100%;" th:field="${declaration.productDescription}"></textarea>
-              <div class="invalid-feedback">
-                Вы не заполнили описание товаров.
-              </div>
             </div>
           </div>
         </div>

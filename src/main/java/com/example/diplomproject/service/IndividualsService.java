@@ -1,5 +1,6 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
@@ -7,8 +8,11 @@ import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +54,69 @@ public class IndividualsService {
         individuals.setAccount(accountRepository.findByLogin(login));
         individuals.setAddress(addressRepository.save(individualsDTO.getAddress().build()));
         individualsRepository.save(individuals);
+    }
+
+    public Map<String, String> check(BindingResult result, DeclarationDTO declarationDTO, String check) {
+        Map<String,String> resultMap = new HashMap<>();
+        if (check.contains("senderDTO")) check = check.substring(10);
+        else if (check.contains("recipientDTO")) check = check.substring(13);
+        else if (check.contains("otvetstvenoeFace")) check = check.substring(17);
+        else check = check.substring(11);
+        switch (check){
+            case "organizationName":{
+                resultMap.put("organizationName", "Ошибка при заполнении графы название организации");
+                break;
+            }
+            case "legalAddress":{
+                resultMap.put("legalAddress", "Ошибка при заполнении графы адреса");
+                break;
+            }
+            case "phone":{
+                resultMap.put("phone", "Ошибка при заполнении графы телефона");
+                break;
+            }
+            case "bankCode":{
+                resultMap.put("bankCode", "Ошибка при заполнении графы код банка");
+                break;
+            }
+            case "bankName":{
+                resultMap.put("bankName", "Ошибка при заполнении графы название банка");
+                break;
+            }
+            case "address.city":{
+                resultMap.put("city", "Ошибка при заполнении графы страны");
+                break;
+            }
+            case "address.postalCode":{
+                resultMap.put("postalCode", "Ошибка при заполнении графы почтового индекса");
+                break;
+            }
+            case "address.region":{
+                resultMap.put("region", "Ошибка при заполнении графы название региона");
+                break;
+            }
+            case "address.settlement":{
+                resultMap.put("settlement", "Ошибка при заполнении графы название области");
+                break;
+            }
+            case "address.build":{
+                resultMap.put("build", "Ошибка при заполнении графы название адреса");
+                break;
+            }
+            case "address.ogrnNumber":{
+                resultMap.put("ogrnNumber", "Ошибка при заполнении графы ОГРН");
+                break;
+            }
+            case "taxId":{
+                resultMap.put("taxId", "Ошибка при заполнении графы ОНП");
+                break;
+            }
+            case "registrationCode":{
+                resultMap.put("registrationCode", "Ошибка при заполнении графы регистрационного кода");
+                break;
+            }
+
+        }
+        return resultMap;
     }
 }
