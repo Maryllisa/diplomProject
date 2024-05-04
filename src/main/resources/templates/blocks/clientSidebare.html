@@ -1,5 +1,5 @@
 
-<div th:fragment="clientSidebare" class="flex-shrink-0 p-3" style="width: 330px;  height: 200vh; background-color: #1a1a1c; margin-top: -7.7%">
+<div th:fragment="clientSidebare" class="flex-shrink-0 p-3" style="position: fixed; width: 330px;  height: 200vh; background-color: #1a1a1c; margin-top: -6%">
   <a href="/client/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none " style=" border-bottom: #814de5; border-bottom-style: double">
     <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
     <div style=" background-color: #814de5; border-radius: 30%; margin-right: 5%">
@@ -49,7 +49,7 @@
         </ul>
       </div>
     </li>
-    <li class="mb-1" style=" color: #bab7c9 " >
+    <li class="mb-1" style=" color: #bab7c9;" >
       <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#monitoring-collapse" aria-expanded="false" style=" color: #f2f0f8">
         <img src="/img/mark.png" style="height: 25px; width: 25px; margin-right: 10px;">
         <span style="margin-left: 3px;"> Мониторинг </span>
@@ -57,7 +57,7 @@
       <div class="collapse" id="monitoring-collapse" >
         <ul class="btn-toggle-nav ps-4.5  fw-normal pb-1 small">
           <li><a href="/client/zavStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус существующих заявок </a></li>
-          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть статус маркировоного товара </a></li>
+          <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть товары </a></li>
           <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные ТТН </a></li>
           <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные транспортные декларации </a></li>
           <li><a href="/client/prodStatus" class=" d-inline-flex text-decoration-none rounded" style="color: #bab7c9;">Просмотреть добавленные CRM </a></li>
