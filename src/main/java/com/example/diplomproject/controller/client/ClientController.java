@@ -134,4 +134,9 @@ public class ClientController {
     public String getPriceForSave() {
         return "/client/priceForSave";
     }
+
+    @GetMapping("/showListTTN")
+    public String getShowListTTN() {
+        return "/client/showListTTN";
+    }
 }
