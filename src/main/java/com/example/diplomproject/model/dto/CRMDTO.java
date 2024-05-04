@@ -1,5 +1,7 @@
 package com.example.diplomproject.model.dto;
 
+import com.example.diplomproject.config.annotation.imp.ValidDate;
+import com.example.diplomproject.config.annotation.imp.ValidDateFetcher;
 import com.example.diplomproject.model.entity.CRM;
 import com.example.diplomproject.model.entity.CustomsProcessing;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
@@ -7,7 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.sql.Date;
 
 @Data
@@ -21,46 +28,101 @@ public class CRMDTO {
     /*
     * * * Место разгрузки
     */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String countryWH;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String cityWH;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String streetWH;
+    @NotNull
+    @NotEmpty
     private String houseNumberWH;
     /*
      * * * Место и дата погрузки
      */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String loadingCountry;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String loadingCity;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String loadingStreet;
+    @NotNull
+    @NotEmpty
     private String loadingHouseNumber;
+    @NotNull
+    @ValidDateFetcher
     private Date loadingDate;
     /*
      * * * Прилагаемые документы
      */
+    @NotNull
+    @NotEmpty
     private String invoiceDocument;
+    @NotNull
+    @NotEmpty
     private String shippingSpecificationDocument;
+    @NotNull
+    @NotEmpty
     private String qualityCertificateDocument;
+    @NotNull
+    @NotEmpty
     private String veterinaryCertificateDocument;
+    @NotNull
+    @NotEmpty
     private String quarantineCertificateDocument;
+    @NotNull
+    @NotEmpty
     private String certificateOfOriginDocument;
+    @NotNull
+    @NotEmpty
     private String loadingCertificateDocument;
     /*
      * * * 6-9
      */
+    @NotNull
+    @NotEmpty
     private String cargoQuantity;
+    @NotNull
+    @NotEmpty
     private String cargoName;
+    @NotNull
+    @NotEmpty
     private String nackagingType;
+    @NotNull
+    @NotEmpty
     private String numbers;
     /*
      * * * Статистический код
      */
+    @NotNull
+    @NotEmpty
     private String statistikCode;
     /*
      * * * Суммарный вес брутто
      */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[-+]?\\d*\\.\\d+$")
+
     private String grossWeight;
     /*
      * * * Объем
      */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[-+]?\\d*\\.\\d+$")
     private String volume;
     /*
      * * * Таможенная обработка
@@ -69,13 +131,26 @@ public class CRMDTO {
     /*
      * * * Возврат
      */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String returnCountry;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String returnCity;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String returnStreet;
+    @NotNull
+    @NotEmpty
     private String returnHouse;
     /*
      * * * Условия оплаты
     */
+    @NotNull
+    @NotEmpty
     private String paymentTerms;
     /*
      * * * Перевозчик
@@ -88,19 +163,25 @@ public class CRMDTO {
     /*
      * * * Оговорки и замечания перевозчика
      */
+    @NotNull
+    @NotEmpty
     private String carrierNotes;
-    /*
-     * * * Дата получения груза
-     */
-    private String cargoReceivedDate;
-    /*
-     * * * Дата заполнения СМR
-     */
+    @NotNull
+    @ValidDateFetcher
+    private Date cargoReceivedDate;
+    @NotNull
+    @ValidDate
     private Date cmrFilledDate;
     /*
      * * * Регистрационные номера
      */
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^[A-ZА-Я]{2}\\d{4}[A-ZА-Я]{2}$")
     private String tractorRegistrationNumber;
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = "^\\d{6}$")
     private String trailerRegistrationNumber;
 
     public CRM build() {

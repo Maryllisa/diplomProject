@@ -131,7 +131,7 @@ public class CRM {
      * * * Дата получения груза
      */
     @Column
-    private String cargoReceivedDate;
+    private Date cargoReceivedDate;
     /*
      * * * Дата заполнения СМR
      */

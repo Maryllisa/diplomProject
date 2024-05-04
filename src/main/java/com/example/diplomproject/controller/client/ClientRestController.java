@@ -62,14 +62,15 @@ public class ClientRestController {
 
     @SneakyThrows
     @PostMapping("/addCRM")
-    private ResponseEntity<Map<String, String>> checkAndAddCRM(@ModelAttribute CRMDTO crmdto,
+    private ResponseEntity<Map<String, String>> checkAndAddCRM(@ModelAttribute @Valid CRMDTO crmdto,
                                                                BindingResult result,
                                                                Model model,
                                                                Authentication authentication,
                                                                HttpSession session) {
 
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(CRMService.checkNewCRM(result, crmdto)));
+            return ResponseEntity.badRequest().body(
+                    AnswerMessage.getBadMessage(crmService.checkNewCRM(result, crmdto)));
         }
         log.info("Запуск регистрации нового CRM документа");
         crmService.addNewCRM(crmdto, authentication.getName());

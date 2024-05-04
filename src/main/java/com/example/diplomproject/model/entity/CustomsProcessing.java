@@ -18,6 +18,7 @@ public class CustomsProcessing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCustomsProcessing;
+
     @Column
     private String customsPostName;
     @Column
