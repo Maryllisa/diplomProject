@@ -200,7 +200,7 @@ document.getElementById('form').addEventListener('submit', async function(event)
                     window.location.href = '/client/regOfDeclaration';
                 } else if (data.status === "bad") {
                     for (const x in data) {
-                        if (x!="bad"){
+                        if (x!=="bad"){
                             alert(data[x]);
                         }}
                     }

@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class IndividualsDTO {
+public class  IndividualsDTO {
     @NotEmpty@NotNull@NotNull
     @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
     private String organizationName;
@@ -24,6 +24,7 @@ public class IndividualsDTO {
     @Pattern(regexp = "^\\+(375|80)(29|33|25)\\d{7}$")
     private String phone;
     private AddressDTO address;
+    @Pattern(regexp = "^BNK\\d{2,6}$")
     private String bankCode;
     private String bankName;
     //id="INN/KPP"

@@ -51,7 +51,9 @@
         <h4 class="mb-3" style="color: #814de5">Зарегистрироваться как компания </h4>
         <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
             <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
-                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <button class="btn btn-primary rounded-pill px-3" type="button"
+                        style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать
+                </button>
                 <select class="form-select" style="margin-left: 10px; width: 150px">
                     <option value="" selected disabled>По признаку</option>
                     <option value="признак1">Признак 1</option>
@@ -62,7 +64,8 @@
 
             <div th:name="search" style="width: 475px; display: flex; align-items: end;">
                 <form role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                           style="background-color: #814de5; color: #f2f0f8">
                 </form>
                 <select class="form-select" style="margin-left: 10px; width: 160px">
                     <option value="" selected disabled>По параметру</option>
@@ -89,7 +92,9 @@
                 <td style="color: #1a1a1c" th:text="${sup.legalAddress}"/>
                 <td style="color: #1a1a1c" th:text="${sup.phone}"/>
                 <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
-                <td><input type="button" value="Подробнее" style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" data-bs-target="#moreDetails"></td>
+                <td><input type="button" value="Подробнее"
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal"
+                           data-bs-target="#moreDetails"></td>
             </tr>
             </tbody>
         </table>
@@ -233,51 +238,52 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                            <div class="row g-3">
-                                <div class="col-sm-12">
-                                    <label class="form-label" style="color: #814de5">Наименование организации</label>
-                                   <span>Тут напишешь вывод названия</span>
-                                    <span>тут айди</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" style="color: #814de5">Юридический адрес</label>
-                                    <span>Жестко вставишь адрес этого бро</span>
-                                </div>
+                    <div class="row g-3">
+                        <div class="col-sm-12">
+                            <label class="form-label" style="color: #814de5">Наименование организации</label>
+                            <span>Тут напишешь вывод названия</span>
+                            <span>тут айди</span>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" style="color: #814de5">Юридический адрес</label>
+                            <span>Жестко вставишь адрес этого бро</span>
+                        </div>
 
 
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
-                                    <span> Лучший код банка</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" style="color: #814de5">Наименование банка</label>
-                                   <span> Невероятное название банка(не то где надо ехать в ебеня)</span>
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">УНН</label>
-                                    <span>Обычный Унн</span>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">ОКПО</label>
-                                    <span>Умопомрачительный ОКПО</span>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="w-100 btn btn-primary btn-lg" type="submit" data-bs-toggle="modal" data-bs-target="#changeRequestModal"
-                                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Изменить
-                                    </button>
-                                    <button class="w-100 btn btn-primary btn-lg" type="submit"
-                                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Удалить
-                                    </button>
-                                </div>
-                            </div>
-
-                        </form>
+                        <div class="col-6">
+                            <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
+                            <span> Лучший код банка</span>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" style="color: #814de5">Наименование банка</label>
+                            <span> Невероятное название банка(не то где надо ехать в ебеня)</span>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label class="form-label" style="color: #814de5">УНН</label>
+                            <span>Обычный Унн</span>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" style="color: #814de5">ОКПО</label>
+                            <span>Умопомрачительный ОКПО</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="w-100 btn btn-primary btn-lg" type="submit" data-bs-toggle="modal"
+                                    data-bs-target="#changeRequestModal"
+                                    style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Изменить
+                            </button>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                    style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Удалить
+                            </button>
+                        </div>
                     </div>
 
+                    </form>
                 </div>
+
             </div>
+        </div>
 
         <div class="modal fade" id="changeRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel"
              aria-hidden="true">
@@ -310,7 +316,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" style="color: #814de5">Телефон</label>
-                                    <input type="tel" class="form-control" id="change Phone" th:field="${newSupplier.phone}"
+                                    <input type="tel" class="form-control" id="change Phone"
+                                           th:field="${newSupplier.phone}"
                                            placeholder="" required="">
                                     <div class="invalid-feedback">
                                         Проверьте корректность заполнения телефона.
@@ -322,7 +329,8 @@
                                     <div class="row g-3">
                                         <div class="col-6">
                                             <label class="form-label" style="color: #814de5">Индекс</label>
-                                            <input type="text" class="form-control" id="change Postal Code" placeholder=""
+                                            <input type="text" class="form-control" id="change Postal Code"
+                                                   placeholder=""
                                                    th:field="${newSupplier.address.postalCode}" required="">
                                             <div class="invalid-feedback">
                                                 Проверьте корректность заполнения почтового индекса.
@@ -340,7 +348,8 @@
 
                                     <div class="col-12">
                                         <label class="form-label" style="color: #814de5">Адрес</label>
-                                        <input type="text" class="form-control" id="change Address" placeholder="" required=""
+                                        <input type="text" class="form-control" id="change Address" placeholder=""
+                                               required=""
                                                th:field="${newSupplier.address.settlement}">
                                         <div class="invalid-feedback">
                                             Проверьте корректность заполнения адреса.
@@ -349,7 +358,8 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Номер</label>
-                                    <input type="text" class="form-control" id="change Number" placeholder="" required=""
+                                    <input type="text" class="form-control" id="change Number" placeholder=""
+                                           required=""
                                            th:field="${newSupplier.address.build}">
                                     <div class="invalid-feedback">
                                         Проверьте корректность заполнения номера.
@@ -365,7 +375,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" style="color: #814de5">Наименование банка</label>
-                                    <input type="text" class="form-control" id="change Bank Name" placeholder="" required=""
+                                    <input type="text" class="form-control" id="change Bank Name" placeholder=""
+                                           required=""
                                            th:field="${newSupplier.bankName}">
                                     <div class="invalid-feedback">
                                         Проверьте корректность заполнения наименования банка.
@@ -422,7 +433,11 @@
                     alert(data.message);
                     window.location.href = '/client/regAsAComp';
                 } else if (data.status === "bad") {
-                    alert(data.message);
+                    for (const x in data) {
+                        if (x !== "bad") {
+                            alert(data[x]);
+                        }
+                    }
                 } else {
                     console.error('Произошла ошибка:', data.message);
                 }

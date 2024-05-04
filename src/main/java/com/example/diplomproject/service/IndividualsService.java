@@ -184,4 +184,66 @@ public class IndividualsService {
         }
         return resultMap;
     }
+
+    public Map<String, String> check(BindingResult result, IndividualsDTO individualsDTO) {
+        Map<String,String> resultMap = new HashMap<>();
+        result.getFieldErrors().forEach(x->{
+            switch (x.getField()){
+                case "organizationName":{
+                    resultMap.put("organizationName", "Ошибка при заполнении графы название организации");
+                    break;
+                }
+                case "legalAddress":{
+                    resultMap.put("legalAddress", "Ошибка при заполнении поля адреса");
+                    break;
+                }
+                case "phone":{
+                    resultMap.put("phone", "Ошибка при заполнении поля телефона");
+                    break;
+                }
+                case "bankCode":{
+                    resultMap.put("bankCode", "Ошибка при заполнении поля код банка");
+                    break;
+                }
+                case "bankName":{
+                    resultMap.put("bankName", "Ошибка при заполнении поля название банка");
+                    break;
+                }
+                case "address.city":{
+                    resultMap.put("city", "Ошибка при заполнении поля страны");
+                    break;
+                }
+                case "address.postalCode":{
+                    resultMap.put("postalCode", "Ошибка при заполнении поля почтового индекса");
+                    break;
+                }
+                case "address.region":{
+                    resultMap.put("region", "Ошибка при заполнении поля название региона");
+                    break;
+                }
+                case "address.settlement":{
+                    resultMap.put("settlement", "Ошибка при заполнении поля название области");
+                    break;
+                }
+                case "address.build":{
+                    resultMap.put("build", "Ошибка при заполнении графы название адреса");
+                    break;
+                }
+                case "address.ogrnNumber":{
+                    resultMap.put("ogrnNumber", "Ошибка при заполнении графы ОГРН");
+                    break;
+                }
+                case "taxId":{
+                    resultMap.put("taxId", "Ошибка при заполнении графы ОНП");
+                    break;
+                }
+                case "registrationCode":{
+                    resultMap.put("registrationCode", "Ошибка при заполнении графы регистрационного кода");
+                    break;
+                }
+
+            }
+        });
+        return resultMap;
+    }
 }

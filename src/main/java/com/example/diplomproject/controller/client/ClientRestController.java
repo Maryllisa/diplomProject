@@ -96,9 +96,13 @@ public class ClientRestController {
     }
 
     @PostMapping("/regAsAComp")
-    private ResponseEntity<Map<String, String>> addNewReqAsCompany(@ModelAttribute IndividualsDTO individualsDTO,
+    private ResponseEntity<Map<String, String>> addNewReqAsCompany(@ModelAttribute @Valid IndividualsDTO individualsDTO,
+                                                                   BindingResult result,
                                                                    Authentication authentication) {
-
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(
+                    AnswerMessage.getBadMessage(individualsService.check(result, individualsDTO)));
+        }
         individualsService.addNewCompany(individualsDTO, authentication.getName());
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно добавлен"));
     }
