@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style=" margin-left: 27%; ">
+    <h4 class="mb-3" style="color: #814de5"> Просмотр CMR</h4>
+    <form class="needs-validation" id="formAddCRM" novalidate="" th:object="${crm}" th:action="*{'/client/addCRM'}" method="post">
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">1 Отправитель</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">2 Получатель</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px; border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">3 Место разгрузки</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Город</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Улица</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Номер дома</label>
+              <span></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px; border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">4 Место и дата погрузки</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Город</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Улица</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">Номер дома</label>
+              <span></span>
+            </div>
+
+
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Дата погрузки</label>
+              <span></span>
+            </div>
+
+        </div>
+      </div>
+
+      <div style="height: 350px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 13%">
+        <h5 style="margin-left: 1%">5 Прилагаемые документы</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Счет-фактура (invoice)</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Отгрузочная спецификация</label>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Сертификат качества</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Ветеринарный сертификат</label>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Карантинный сертификат</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Сертификат о происхождении</label>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Акт загрузки</label>
+              <span></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">6-9</h5>
+        <div class="row" style="margin-left: 2%; margin-top:  1%;">
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Количество грузовых мест</label>
+            <span></span>
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Наименование груза</label>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="row" style="margin-left: 2%; ">
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Род упаковки</label>
+            <span></span>
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label" style="color: #1a1a1c">Номера</label>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; width: 950px">
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+          <h5 style="margin-left: 1%">10 Статистический код</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+          <h5 style="margin-left: 1%">11 Суммарный вес брутто</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 100px; width: 310px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 640px;">
+          <h5 style="margin-left: 1%">12 Объем</h5>
+          <div style="margin-left: 2%; margin-top: -2%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-11">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 300px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">13 Таможенная обработка</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Название таможенного поста</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Код таможни</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Юридическое название СВХ и его адрес</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Номер лицензии</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Дата выдачи</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">14 Возврат</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Город</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Улица</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 125px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">15 Условия оплаты</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Условия оплаты</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">16 Перевозчик</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">17 Последующий перевозчик</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 300px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">18 Оговорки и замечания перевозчика</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <label class="form-label" style="color: #1a1a1c">Оговорки и замечания</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 950px; display: flex; justify-content: space-between; margin-top: 2%;">
+        <div style="height: 110px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px;">
+          <h5 style="margin-left: 1%">19 Дата получения груза</h5>
+          <div style="margin-left: 2%; margin-top: -5%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-12">
+                <label class="form-label" style="color: #1a1a1c">Дата получения</label>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 110px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px;">
+          <h5 style="margin-left: 1%">20 Дата заполнения СМR</h5>
+          <div style="margin-left: 2%; margin-top: -5%">
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm-12">
+                <label class="form-label" style="color: #1a1a1c">Дата заполнения</label>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 125px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">21. Регистрационные номера</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Регистрационный номер тягача</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Регистрационный номер прицепа</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
+        <button class="btn  " type="submit" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
+      </div>
+      </div>
+    </form>
+
+  </div>
+<!--  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+
+<!--        <div class="modal-body">-->
+<!--          <label class="label" style="color: #1a1a1c;">Выберите поставщика</label>-->
+<!--          <select th:if="${supplier}" class="form-select" id="supplier" required>-->
+<!--            <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
+<!--          </select>-->
+<!--          <button class="btn" type="button" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Выбрать</button>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <script src="/js/model.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('addCRM').addEventListener('submit', function (event) {
+      event.preventDefault();
+      fetch('/client/addCRM', {
+        method: 'POST',
+        body: new FormData(this)
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.status === "success") {
+                  alert(data.message);
+                  window.location.href = '/client/addCRM';
+                } else if (data.status === "bad") {
+                  alert(data.message);
+                } else {
+                  console.error('Произошла ошибка:', data.message);
+                }
+              })
+    });
+  </script>
+</main>
+
+</body>
+<script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+  document.getElementById('formAddCRM').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Остановка автоматической отправки формы
+
+    var form = document.getElementById('formAddCRM');
+    var formData = new FormData(form);
+
+    await fetch('/client/addCRM', {
+
+      method: 'POST',
+      body: formData
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === "success") {
+                alert(data.message);
+                window.location.href = '/client/regOfDeclaration';
+              } else if (data.status === "bad") {
+                for (const x in data) {
+                  if (x!="bad"){
+                    alert(data[x]);
+                  }}
+              }
+              else {
+                console.error('Произошла ошибка:', data.message);
+              }
+            });
+  });
+</script>
+</html>
+

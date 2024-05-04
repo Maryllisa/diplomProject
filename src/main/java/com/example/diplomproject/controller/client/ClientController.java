@@ -147,4 +147,12 @@ public class ClientController {
     public String getShowTD() {
         return "/client/showTD";
     }
+    @GetMapping("/showListCMR")
+    public String getShowListCMR() {
+        return "/client/showListCMR";
+    }
+    @GetMapping("/showCMR")
+    public String getShowCMR() {
+        return "/client/showCMR";
+    }
 }

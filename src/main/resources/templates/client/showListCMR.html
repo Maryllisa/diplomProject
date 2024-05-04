@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style=" margin-left: 27%">
+    <h4 class="mb-3" style="color: #814de5">Просмотреть добавленные CMR</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th style="color: #814de5" scope="col">№ CMR</th>
+        <th style="color: #814de5" scope="col">Отправитель</th>
+        <th style="color: #814de5" scope="col">Получатель</th>
+        <th style="color: #814de5" scope="col">Количество товара</th>
+        <th style="color: #814de5" scope="col">Дата получения груза</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="" th:each="">
+        <td style="color: #1a1a1c" th:text=""></td>
+        <td style="color: #1a1a1c" th:text=""></td>
+        <td style="color: #1a1a1c" th:text=""></td>
+        <td style="color: #1a1a1c" th:text=""></td>
+        <td style="color: #1a1a1c" th:text=""></td>
+        <button onclick="window.location.href='/client/showCMR'" style="font-weight: bold; background-color: #814de5; color: #f2f0f8">Подробнее</button>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+</main>
+</body>
+</html>
