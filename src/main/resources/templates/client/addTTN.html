@@ -11,12 +11,12 @@
     <div class="col-md-7 col-lg-8" style="margin-top:-88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Заполнить ТТН</h4>
         <form class="needs-validation" novalidate="" th:action="*{'/client/addTTN'}" method="post" th:object="${gtd}"
-              enctype="multipart/form-data">
+              enctype="multipart/form-data" id="formTTH">
             <div>
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="form-label" style="color: #1a1a1c">Номер ТТН</label>
-                        <input type="text" class="form-control" id="cargoReceivedDate" required="" style="width: 100%;"
+                        <input type="text" class="form-control" id="cargoReceivedDate" required style="width: 100%;"
                                th:field="${gtd.goodsTransportDocumentNumbers}">
                         <div class="invalid-feedback">
                             Вы не указали номер ТТН.
@@ -27,7 +27,7 @@
             <label for="pdfFile" class="form-label" style="color: #814de5; size: 12px">Выберите PDF-документ:</label>
             <p>
             <div class="col-12">
-                <input type="file" class="form-control" id="pdfFile" name="pdfFile" accept=".pdf">
+                <input type="file" required class="form-control" id="pdfFile" name="pdfFile" accept=".pdf">
             </div>
             </p>
             <br>
@@ -39,23 +39,29 @@
 </main>
 </body>
 <script>
-    document.getElementById('form').addEventListener('submit', function (event) {
+    document.getElementById('formTTH').addEventListener('submit', function (event) {
         event.preventDefault();
-        fetch('/client/addTTN', {
-            method: 'POST',
-            body: new FormData(this)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert(data.message);
-                    window.location.href = '/client/addTTN';
-                } else if (data.status === "bad") {
-                    alert(data.message);
-                } else {
-                    console.error('Произошла ошибка:', data.message);
-                }
+        const form = document.getElementById("formTTH");
+        if(form.checkValidity()) {
+            fetch('/client/addTTN', {
+                method: 'POST',
+                body: new FormData(this)
             })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        alert(data.message);
+                        window.location.href = '/client/addTTN';
+                    } else if (data.status === "bad") {
+                        alert(data.message);
+                    } else {
+                        console.error('Произошла ошибка:', data.message);
+                    }
+                });
+        }
+        else {
+            alert('Пожалуйста, заполните все поля.');
+        }
     });
 </script>
 </html>
