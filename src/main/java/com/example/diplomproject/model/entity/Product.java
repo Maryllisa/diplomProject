@@ -20,8 +20,6 @@ public class Product {
     private Long idProduct;
 
     @Column
-    private int itemNumber;
-    @Column
     private String nameProduct;
 
     @Column
@@ -33,17 +31,15 @@ public class Product {
     @Column
     private double grossWeight;
     @Column
+    private Date finalDate;
+    @Column
     private Date date;
-
     @Column
     private String preference;
-
     @Column(name = "procedure_name") // Измененное имя столбца
     private String procedure;
-
     @Column
     private double netWeight;
-
     @Column
     private String quota;
     @ManyToOne
@@ -52,8 +48,8 @@ public class Product {
     public ProductDTO build() {
         return ProductDTO.builder()
                 .idProduct(idProduct)
-                .itemNumber(itemNumber)
                 .nameProduct(nameProduct)
+                .finalDate(finalDate)
                 .date(date)
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)

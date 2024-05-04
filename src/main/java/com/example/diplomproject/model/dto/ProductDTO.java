@@ -15,11 +15,11 @@ import java.sql.Date;
 @Builder
 public class ProductDTO {
     private Long idProduct;
-    private int itemNumber;
     private String productCode;
     private String originCountryCode;
     private String nameProduct;
     private Date date;
+    private Date finalDate;
     private double grossWeight;
     private String preference;
     private String procedure;
@@ -30,11 +30,11 @@ public class ProductDTO {
     public Product build(){
         return Product.builder()
                 .idProduct(idProduct)
-                .itemNumber(itemNumber)
                 .productCode(productCode)
                 .originCountryCode(originCountryCode)
                 .nameProduct(nameProduct)
                 .date(date)
+                .finalDate(finalDate)
                 .grossWeight(grossWeight)
                 .preference(preference)
                 .procedure(procedure)
