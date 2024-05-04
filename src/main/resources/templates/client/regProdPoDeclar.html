@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: #1a1a1c;
+            opacity: 0.9;
+        }
+
+        .modal-content {
+            background-color: #f2f0f8;
+            opacity: 1;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #1a1a1c;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<main>
+    <div class="col-md-7 col-lg-8" style=" margin-left: 27%">
+        <h4 class="mb-3" style="color: #814de5">Регистрация товара по декларации</h4>
+        <form class="needs-validation" id="newForm" novalidate="">
+            <div class="row g-3">
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Название товара</label>
+                    <input type="text" class="form-control" id="productName" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения названия товара.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Код товара</label>
+                    <input type="text" class="form-control" id="productCode" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения кода товара.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Код страны производства</label>
+                    <input type="text" class="form-control" id="countryCode" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения кода страны производства.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Масса брутто</label>
+                    <input type="text" class="form-control" id="grossWeight" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения массы брутто.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Масса нетто</label>
+                    <input type="text" class="form-control" id="netWeight" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения массы нетто.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Дата производства</label>
+                    <input type="date" class="form-control" id="productionDate" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения даты производства.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Дата истечения срока годности</label>
+                    <input type="date" class="form-control" id="expirationDate" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения даты истечения срока годности.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Преференция</label>
+                    <input type="text" class="form-control" id="preference" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения преференции.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Процедура</label>
+                    <input type="text" class="form-control" id="procedure" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения процедуры.
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label" style="color: #814de5">Квота</label>
+                    <input type="text" class="form-control" id="quota" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                    Проверьте корректность заполнения квоты.
+                </div>
+            </div>
+            <button class="w-100 btn btn-primary btn-lg" type="submit"
+                    style="background-color: #814de5; color: #1a1a1c">Подать заявку
+            </button>
+
+            </div>
+    </form>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <label class="label" style="color: #1a1a1c;">Выберите декларацию</label>
+                    <select  class="form-select" id="supplier" required>
+                        <option  />
+                    </select>
+                    <button class="btn" type="button" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Выбрать</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/js/model.js"></script>
+    <script src="/js/main.js"></script>
+</main>
+</body>
+</html>

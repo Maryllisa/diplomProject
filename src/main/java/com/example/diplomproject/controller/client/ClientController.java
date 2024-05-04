@@ -155,4 +155,8 @@ public class ClientController {
     public String getShowCMR() {
         return "/client/showCMR";
     }
+    @GetMapping("/regProdPoDeclar")
+    public String getRegProdPoDeclar() {
+        return "/client/regProdPoDeclar";
+    }
 }
