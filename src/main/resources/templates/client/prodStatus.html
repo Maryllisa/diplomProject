@@ -30,11 +30,81 @@
                    <td  style="color: #1a1a1c" th:text="${pr.grossWeight}"/>
                    <td  style="color: #1a1a1c" th:text="${pr.netWeight}"/>
 
-               <td><input type="button" value="Подробнее" style="font-weight: bold;"></td>
+               <td><input type="button" value="Подробнее"  data-bs-toggle="modal" data-bs-target="#moreDetails" style="font-weight: bold;"></td>
                 </tr>
                      </tbody>
     </table>
 
+
+      <div class="modal fade" id="moreDetails" tabindex="-1" aria-labelledby="createRequestModalLabel"
+           aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="moreDetailsLabel"> Подробнее</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <div class="row g-3"  style="margin-left: 20px">
+                      <div class="col-sm-12">
+                          <label class="form-label" style="color: #814de5">Название продукта и № декларации</label>
+                          <span>Тут напишешь вывод названия</span>
+                          <span>Тут напишешь номер декларации</span>
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label" style="color: #814de5">Код продукта</label>
+                          <span>Жестко вставишь код этого бро</span>
+                      </div>
+
+
+                      <div class="col-6">
+                          <label class="form-label" style="color: #814de5">Код страны производства</label>
+                          <span> Лучший код страны</span>
+                      </div>
+                      <div class="col-3">
+                          <label class="form-label" style="color: #814de5">Вес брутто</label>
+                          <span> брутально</span>
+                      </div>
+                  </div>
+                  <div class="row g-3" style="margin-left: 20px">
+                      <div class="col-6">
+                          <label class="form-label" style="color: #814de5">Вес нетто</label>
+                          <span>Обычный нетто</span>
+                      </div>
+                      <div class="col-6">
+                          <label class="form-label" style="color: #814de5">Дата производства</label>
+                          <span>дата</span>
+                      </div>
+                      <div class="col-6">
+                          <label class="form-label" style="color: #814de5">Годен до</label>
+                          <span>дата</span>
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label" style="color: #814de5">Преференция</label>
+                          <span>Преференция</span>
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label" style="color: #814de5">Процедура</label>
+                          <span>Процедура</span>
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label" style="color: #814de5">Квота</label>
+                          <span>Квота</span>
+                      </div>
+
+                      <div class="modal-footer">
+
+                          <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                  style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Ок
+                          </button>
+                      </div>
+                  </div>
+
+                  </form>
+              </div>
+
+          </div>
+      </div>
 
   </div>
 </main>
