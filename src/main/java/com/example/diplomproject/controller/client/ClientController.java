@@ -139,4 +139,12 @@ public class ClientController {
     public String getShowListTTN() {
         return "/client/showListTTN";
     }
+    @GetMapping("/showListTD")
+    public String getShowListTD() {
+        return "/client/showListTD";
+    }
+    @GetMapping("/showTD")
+    public String getShowTD() {
+        return "/client/showTD";
+    }
 }
