@@ -124,7 +124,13 @@ public class ClientRestController {
     }
 
     @PostMapping("/regAuto")
-    private ResponseEntity<Map<String, String>> addNewAuto(@ModelAttribute TruckDTO truckDTO, Authentication authentication) {
+    private ResponseEntity<Map<String, String>> addNewAuto(@ModelAttribute @Valid TruckDTO truckDTO,
+                                                           BindingResult result,
+                                                           Authentication authentication) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(
+                    AnswerMessage.getBadMessage(truckService.check(result, truckDTO)));
+        }
         truckService.addNewTruck(truckDTO, authentication.getName());
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Авто успешно зарегистрированно"));
     }

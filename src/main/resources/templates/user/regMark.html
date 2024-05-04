@@ -92,7 +92,7 @@
                     <select th:if="${!applicationList.isEmpty()}" class="form-select" id="typeMarking" required th:field="${newMarking.typeMarking}">
                         <option th:each="t:${typeMarking}" th:value="${t.key}" th:text="${t.value}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Проверьте корректность заполнения типа.
                     </div>
                 </div>
@@ -101,14 +101,14 @@
                     <select th:if="${!applicationList.isEmpty()}" class="form-select" id="№TTN" required th:field="${newMarking.idProduct}">
                         <option th:each="a:${applicationList}" th:value="${a.idProduct}" th:text="${a.idProduct}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Проверьте корректность заполнения id.
                     </div>
                 </div>
 <!--                <div class="col-sm-6">-->
 <!--                    <label  class="form-label" style="color: #814de5">Номер марки/знака/метки</label>-->
 <!--                    <input type="text" class="form-control" id="Mark/Tag/Stamp Number" placeholder="" value="" required="">-->
-<!--                    <div class="invalid-feedback">-->
+<!--                    <div class="invalid-feedback" style="color: red">-->
 <!--                        Проверьте корректность заполнения номера.-->
 <!--                    </div>-->
 <!--                </div>-->
@@ -116,7 +116,7 @@
 <!--                <div class="col-6">-->
 <!--                    <label class="form-label" style="color: #814de5">Дата выпуска</label>-->
 <!--                    <input type="date" class="form-control" id="Issue Date" placeholder="">-->
-<!--                    <div class="invalid-feedback">-->
+<!--                    <div class="invalid-feedback" style="color: red">-->
 <!--                        Неверная дата-->
 <!--                    </div>-->
 <!--                </div>-->
@@ -124,7 +124,7 @@
 <!--                <div class="col-6">-->
 <!--                    <label class="form-label" style="color: #814de5">Дата нанесения</label>-->
 <!--                    <input type="date" class="form-control" id="Application Date" placeholder="">-->
-<!--                    <div class="invalid-feedback">-->
+<!--                    <div class="invalid-feedback" style="color: red">-->
 <!--                        Неверная дата-->
 <!--                    </div>-->
 <!--                </div>-->
@@ -132,7 +132,7 @@
 <!--                <div class="col-12">-->
 <!--                    <label  class="form-label" style="color: #814de5">Статус</label>-->
 <!--                    <input type="text" class="form-control" id="status" placeholder="" required="">-->
-<!--                    <div class="invalid-feedback">-->
+<!--                    <div class="invalid-feedback" style="color: red">-->
 <!--                        Проверьте корректность заполнения статуса.-->
 <!--                    </div>-->
 <!--                </div>-->

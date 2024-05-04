@@ -19,7 +19,7 @@
             <div class="col-sm-4" style="margin-top: 3.8%">
 
               <input type="text" class="form-control" id="ED" placeholder="ЭД" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили пометку электронной декларации.
               </div>
             </div>
@@ -31,7 +31,7 @@
                 <option value="ИМ">
                 <option value="ЭК">
               </datalist>
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили направление перемещения.
               </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-sm-4" style="margin-left: -1%">
               <label class="form-label" style="color: #1a1a1c">Код таможенной процедуры</label>
               <input type="number" class="form-control" id="procedureCode" placeholder="" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили код заявляемой таможенной процедуры.
               </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="INN/KPP" placeholder="" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ИНН/КПП.
               </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="organizationName" placeholder="Название организации" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название организации.
               </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="country" placeholder="Страна" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили страну.
               </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="postalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили почтовый код.
               </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="region" placeholder="Область" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили область.
               </div>
             </div>
@@ -94,7 +94,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="city" placeholder="Населённый пункт" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили населённый пункт.
               </div>
             </div>
@@ -102,7 +102,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="house" placeholder="Дом" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили дом.
               </div>
             </div>
@@ -110,7 +110,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="OGRN" placeholder="" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ОГРН.
               </div>
             </div>
@@ -125,13 +125,13 @@
             <label class="form-label" style="color: #1a1a1c">№/колличество листов</label>
             <div class="col-sm-6">
               <input type="number" class="form-control" id="numbList" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили Номер листа.
               </div>
             </div>
             <div class="col-sm-6" >
               <input type="number" class="form-control" id="colList" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили общее количество листов.
               </div>
             </div>
@@ -146,13 +146,13 @@
             <label class="form-label" style="color: #1a1a1c">Кол.специф./кол.листов</label>
             <div class="col-sm-6">
               <input type="number" class="form-control" id="colSpec" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили Номер листа.
               </div>
             </div>
             <div class="col-sm-6" >
               <input type="number" class="form-control" id="colListSpec" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили общее количество листов.
               </div>
             </div>
@@ -166,7 +166,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="number" class="form-control" id="colProd" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили количество товаров.
               </div>
             </div>
@@ -180,7 +180,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="number" class="form-control" id="colMest" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили количество мест.
               </div>
             </div>
@@ -194,7 +194,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="text" class="form-control" id="osobenOfDeclar" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили особенности.
               </div>
             </div>
@@ -209,7 +209,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="RecipINN/KPP" placeholder="" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ИНН/КПП.
               </div>
             </div>
@@ -217,7 +217,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="RecipOrganizationName" placeholder="Название организации" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название организации.
               </div>
             </div>
@@ -225,7 +225,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="RecipCountry" placeholder="Страна" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили страну.
               </div>
             </div>
@@ -233,7 +233,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="RecipPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили почтовый код.
               </div>
             </div>
@@ -241,7 +241,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="RecipRegion" placeholder="Область" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили область.
               </div>
             </div>
@@ -249,7 +249,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="RecipCity" placeholder="Населённый пункт" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили населённый пункт.
               </div>
             </div>
@@ -257,7 +257,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="RecipHouse" placeholder="Дом" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили дом.
               </div>
             </div>
@@ -265,7 +265,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="RecipOGRN" placeholder="" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ОГРН.
               </div>
             </div>
@@ -280,7 +280,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="FinYregINN/KPP" placeholder="" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ИНН/КПП.
               </div>
             </div>
@@ -288,7 +288,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="FinYregOrganizationName" placeholder="Название организации" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название организации.
               </div>
             </div>
@@ -296,7 +296,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="FinYregCountry" placeholder="Страна" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили страну.
               </div>
             </div>
@@ -304,7 +304,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="FinYregPostalCode" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили почтовый код.
               </div>
             </div>
@@ -312,7 +312,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="FinYregRegion" placeholder="Область" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили область.
               </div>
             </div>
@@ -320,7 +320,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="FinYregCity" placeholder="Населённый пункт" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили населённый пункт.
               </div>
             </div>
@@ -328,7 +328,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="FinYregHouse" placeholder="Дом" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили дом.
               </div>
             </div>
@@ -336,7 +336,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="FinYregOGRN" placeholder="" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ОГРН.
               </div>
             </div>
@@ -350,7 +350,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <input type="text" class="form-control" id="firstStation" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ствнцию 1-го назначения.
               </div>
             </div>
@@ -364,7 +364,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
               <input type="text" class="form-control" id="tradingCountry" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили торгующую страну.
               </div>
             </div>
@@ -378,7 +378,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="number" step="any" class="form-control" id="tamPrice" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили общую таможенную стоимость.
               </div>
             </div>
@@ -392,7 +392,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
               <input type="text" class="form-control" id="13" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили графу 13.
               </div>
             </div>
@@ -407,7 +407,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
               <input type="text" class="form-control" id="INN/KPPDeklarant" placeholder="" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ИНН/КПП.
               </div>
             </div>
@@ -415,7 +415,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
               <input type="text" class="form-control" id="organizationNameDeklarant" placeholder="Название организации" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название организации.
               </div>
             </div>
@@ -423,7 +423,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
               <input type="text" class="form-control" id="countryDeklarant" placeholder="Страна" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили страну.
               </div>
             </div>
@@ -431,7 +431,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
               <input type="text" class="form-control" id="postalCodeDeklarant" placeholder="Почтовый код" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили почтовый код.
               </div>
             </div>
@@ -439,7 +439,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
               <input type="text" class="form-control" id="regionDeklarant" placeholder="Область" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили область.
               </div>
             </div>
@@ -447,7 +447,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
               <input type="text" class="form-control" id="cityDeklarant" placeholder="Населённый пункт" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили населённый пункт.
               </div>
             </div>
@@ -455,7 +455,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
               <input type="text" class="form-control" id="houseDeklarant" placeholder="Дом" value="" required="">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили дом.
               </div>
             </div>
@@ -463,7 +463,7 @@
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
               <input type="text" class="form-control" id="OGRNDeklarant" placeholder="" value="" required="" style="margin-left: -5px;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили ОГРН.
               </div>
             </div>
@@ -478,14 +478,14 @@
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
               <input type="number" class="form-control" id="countryCodeDeparture" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили код страны.
               </div>
             </div>
             <div class="col-sm-7"  style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameDeparture" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название страны.
               </div>
             </div>
@@ -500,14 +500,14 @@
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
               <input type="number" class="form-control" id="countryCodeOrigin" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили код страны.
               </div>
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameOrigin" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название страны.
               </div>
             </div>
@@ -522,14 +522,14 @@
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
               <input type="number" class="form-control" id="countryCodeDestination" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили код страны.
               </div>
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
               <input type="text" class="form-control" id="countryNameDestination" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили название страны.
               </div>
             </div>
@@ -544,14 +544,14 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
               <input type="number" class="form-control" id="vehicleCount" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали количество транспортных средств.
               </div>
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Номера т.с.</label>
               <input type="text" class="form-control" id="vehicleNumbers" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали номера транспортных средств.
               </div>
             </div>
@@ -569,8 +569,8 @@
                 <option value="1">1</option>
                 <option value="0">0</option>
               </select>
-              <div class="invalid-feedback">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили контейнер.
               </div>
           </div>
@@ -587,14 +587,14 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c"> код у.п.</label>
               <input type="text" class="form-control" id="YPcode" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали код условия поставки.
               </div>
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Наименование условий поставки</label>
               <input type="text" class="form-control" id="YPname" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали наименование условий поставки.
               </div>
             </div>
@@ -609,14 +609,14 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
               <input type="number" class="form-control" id="vehicleCountOnBorder" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали количество транспортных средств.
               </div>
             </div>
             <div class="col-sm-9" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Номера транспортного средства</label>
               <input type="text" class="form-control" id="vehicleNumbersOnBorder" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали номера транспортных средств.
               </div>
             </div>
@@ -631,14 +631,14 @@
             <div class="col-sm-2">
               <label class="form-label" style="color: #1a1a1c">Код валюты</label>
               <input type="text" class="form-control" id="currencyCode" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали код валюты.
               </div>
             </div>
             <div class="col-sm-6" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Сумма по счету</label>
               <input type="number" class="form-control" id="invoiceAmount" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали сумму по счету.
               </div>
             </div>
@@ -659,7 +659,7 @@
             <div class="col-sm-6">
               <label class="form-label" style="color: #1a1a1c">Валюта</label>
               <input type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали валюту.
               </div>
             </div>
@@ -667,7 +667,7 @@
             <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
               <label class="form-label" style="color: #1a1a1c">Считать по курсам</label>
               <input type="date" class="form-control" id="exchangeRateDate" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали дату.
               </div>
             </div>
@@ -676,21 +676,21 @@
             <div class="col-sm-5">
               <label class="form-label" style="color: #1a1a1c">Курс евро</label>
               <input type="number" class="form-control" id="euroExchangeRate" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали курс евро.
               </div>
             </div>
             <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
               <label class="form-label" style="color: #1a1a1c">Курс USD</label>
               <input type="number" class="form-control" id="usdExchangeRate" placeholder="" value="" required="" style="width: 100%; margin-left: -7%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали курс USD.
               </div>
             </div>
             <div class="col-sm-12" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Курс валют для расчета</label>
               <input type="number" class="form-control" id="calculationExchangeRate" placeholder="" value="" required="" style="width: 100%; margin-left: -6%">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали курс валюты для расчета.
               </div>
             </div>
@@ -705,14 +705,14 @@
             <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
               <label class="form-label" style="color: #1a1a1c">Код сделки</label>
               <input type="number" class="form-control" id="transactionCharacterCode" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали код характера сделки.
               </div>
             </div>
             <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
               <label class="form-label" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</label>
               <input type="number" class="form-control" id="foreignTradeFeatureCode" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали код особенности внешнеэкономической сделки.
               </div>
             </div>
@@ -727,7 +727,7 @@
               <div class="col-sm-6">
                 <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
                 <input type="number" class="form-control" id="borderTransportTypeCode" placeholder="" value="" required="" style="width: 100%;">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" style="color: red">
                   Вы не указали код вида транспортного средства.
                 </div>
               </div>
@@ -740,7 +740,7 @@
               <div class="col-sm-6">
                 <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
                 <input type="number" class="form-control" id="domesticTransportTypeCode" placeholder="" value="" required="" style="width: 100%;">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" style="color: red">
                   Вы не указали код вида транспортного средства.
                 </div>
             </div>
@@ -754,7 +754,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
               <input type="number" class="form-control" id="grossWeight" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали суммарный вес брутто.
               </div>
             </div>
@@ -768,7 +768,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
               <input type="number" class="form-control" id="netWeight" placeholder="" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали суммарный вес нетто.
               </div>
             </div>
@@ -783,7 +783,7 @@
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код таможни</label>
               <input type="number" class="form-control" id="customsCode" placeholder="Введите код таможни" value="" required="" style="width: 100%;">
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не указали код таможни.
               </div>
             </div>
@@ -791,7 +791,7 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-11">
               <textarea class="form-control" id="largeTextArea" rows="8" placeholder="Введите текст" required="" style="height: 160px; width: 100%;"></textarea>
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили большой текстовый блок.
               </div>
             </div>
@@ -891,7 +891,7 @@
           <div class="row" style="margin-top: 30px;">
             <div class="col-sm-12">
               <textarea class="form-control" id="cargoDescription" rows="8" placeholder="Введите описание товаров" required="" style="width: 100%;"></textarea>
-              <div class="invalid-feedback">
+              <div class="invalid-feedback" style="color: red">
                 Вы не заполнили описание товаров.
               </div>
             </div>

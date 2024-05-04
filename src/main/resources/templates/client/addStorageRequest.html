@@ -16,7 +16,7 @@
                 <label class="form-label" style="color: #814de5">Дата заявления</label>
                 <input type="date" class="form-control" id="dateZav" placeholder="" value="" required=""
                        th:field="${application.dateZav}">
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" style="color: red">
                     Проверьте корректность заполнения даты заявления.
                 </div>
             </div>
@@ -30,7 +30,7 @@
                         <option th:each="d:${gpd}" th:value="${d.idGoodTransportDocument}"
                                 th:text="${d.goodsTransportDocumentNumbers}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Проверьте корректность выбора номера ТТН.
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <option th:each="d:${declaration}" th:value="${d.idDeclaration}"
                                 th:text="${d.customEDCode + '/' + d.directionOfMovement +'/' +d.procedureCode}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Неверный номер ТД.
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <label class="form-label" style="color: #814de5">Дата поставки</label>
                     <input type="date" class="form-control" id="datePost" placeholder="" value="" required=""
                            th:field="${application.datePost}">
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Проверьте корректность заполнения даты поставки.
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <select th:if="${crm}" class="form-select" id="№CRM" th:field="${application.idCRM}">
                         <option th:each="c:${crm}" th:value="${c.idCRM}" th:text="${c.numbers}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Неверный номер CRM.
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <select th:if="${truck}" class="form-select" id="№auto" th:field="${application.idTruck}">
                         <option th:each="t:${truck}" th:value="${t.idTruck}" th:text="${t.registrationNumber}"/>
                     </select>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" style="color: red">
                         Неверный номер авто.
                     </div>
                 </div>

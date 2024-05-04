@@ -121,7 +121,7 @@
                                     <label class="form-label" style="color: #814de5">Наименование организации</label>
                                     <input type="text" class="form-control" id="Organization Name" required=""
                                            th:field="${newSupplier.organizationName}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения наименования организации.
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                                     <label class="form-label" style="color: #814de5">Юридический адрес</label>
                                     <input type="text" class="form-control" id="Legal Address"
                                            th:field="${newSupplier.legalAddress}" placeholder="" required="">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения юридического адреса.
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                     <label class="form-label" style="color: #814de5">Телефон</label>
                                     <input type="tel" class="form-control" id="Phone" th:field="${newSupplier.phone}"
                                            placeholder="" required="">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения телефона.
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                             <label class="form-label" style="color: #814de5">Индекс</label>
                                             <input type="text" class="form-control" id="Postal Code" placeholder=""
                                                    th:field="${newSupplier.address.postalCode}" required="">
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения почтового индекса.
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@
                                             <label class="form-label" style="color: #814de5">Город</label>
                                             <input type="text" class="form-control" id="City" placeholder=""
                                                    th:field="${newSupplier.address.city}" required="">
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения города.
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
                                         <label class="form-label" style="color: #814de5">Адрес</label>
                                         <input type="text" class="form-control" id="Address" placeholder="" required=""
                                                th:field="${newSupplier.address.settlement}">
-                                        <div class="invalid-feedback">
+                                        <div class="invalid-feedback" style="color: red">
                                             Проверьте корректность заполнения адреса.
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@
                                     <label class="form-label" style="color: #814de5">Номер</label>
                                     <input type="text" class="form-control" id="Number" placeholder="" required=""
                                            th:field="${newSupplier.address.build}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения номера.
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
                                     <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
                                     <input type="text" class="form-control" id="Bank Code (BIC)" placeholder=""
                                            required="" th:field="${newSupplier.bankCode}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения кода банка (BIC).
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                     <label class="form-label" style="color: #814de5">Наименование банка</label>
                                     <input type="text" class="form-control" id="Bank Name" placeholder="" required=""
                                            th:field="${newSupplier.bankName}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения наименования банка.
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                     <label class="form-label" style="color: #814de5">УНН</label>
                                     <input type="text" class="form-control" id="UNN" placeholder="" required=""
                                            th:field="${newSupplier.taxId}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения УНН.
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                     <label class="form-label" style="color: #814de5">ОКПО</label>
                                     <input type="text" class="form-control" id="OKPO" placeholder="" required=""
                                            th:field="${newSupplier.registrationCode}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения ОКПО.
                                     </div>
                                 </div>
@@ -302,7 +302,7 @@
                                     <label class="form-label" style="color: #814de5">Наименование организации</label>
                                     <input type="text" class="form-control" id="change Organization Name" required=""
                                            th:field="${newSupplier.organizationName}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения наименования организации.
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@
                                     <label class="form-label" style="color: #814de5">Юридический адрес</label>
                                     <input type="text" class="form-control" id="change Legal Address"
                                            th:field="${newSupplier.legalAddress}" placeholder="" required="">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения юридического адреса.
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@
                                     <input type="tel" class="form-control" id="change Phone"
                                            th:field="${newSupplier.phone}"
                                            placeholder="" required="">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения телефона.
                                     </div>
                                 </div>
@@ -332,7 +332,7 @@
                                             <input type="text" class="form-control" id="change Postal Code"
                                                    placeholder=""
                                                    th:field="${newSupplier.address.postalCode}" required="">
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения почтового индекса.
                                             </div>
                                         </div>
@@ -340,7 +340,7 @@
                                             <label class="form-label" style="color: #814de5">Город</label>
                                             <input type="text" class="form-control" id="change City" placeholder=""
                                                    th:field="${newSupplier.address.city}" required="">
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения города.
                                             </div>
                                         </div>
@@ -351,7 +351,7 @@
                                         <input type="text" class="form-control" id="change Address" placeholder=""
                                                required=""
                                                th:field="${newSupplier.address.settlement}">
-                                        <div class="invalid-feedback">
+                                        <div class="invalid-feedback" style="color: red">
                                             Проверьте корректность заполнения адреса.
                                         </div>
                                     </div>
@@ -361,7 +361,7 @@
                                     <input type="text" class="form-control" id="change Number" placeholder=""
                                            required=""
                                            th:field="${newSupplier.address.build}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения номера.
                                     </div>
                                 </div>
@@ -369,7 +369,7 @@
                                     <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
                                     <input type="text" class="form-control" id="change Bank Code (BIC)" placeholder=""
                                            required="" th:field="${newSupplier.bankCode}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения кода банка (BIC).
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@
                                     <input type="text" class="form-control" id="change Bank Name" placeholder=""
                                            required=""
                                            th:field="${newSupplier.bankName}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения наименования банка.
                                     </div>
                                 </div>
@@ -388,7 +388,7 @@
                                     <label class="form-label" style="color: #814de5">УНН</label>
                                     <input type="text" class="form-control" id="change UNN" placeholder="" required=""
                                            th:field="${newSupplier.taxId}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения УНН.
                                     </div>
                                 </div>
@@ -396,7 +396,7 @@
                                     <label class="form-label" style="color: #814de5">ОКПО</label>
                                     <input type="text" class="form-control" id="change OKPO" placeholder="" required=""
                                            th:field="${newSupplier.registrationCode}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения ОКПО.
                                     </div>
                                 </div>

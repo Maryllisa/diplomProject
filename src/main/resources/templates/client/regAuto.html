@@ -124,7 +124,7 @@
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
                                     <input type="text" class="form-control" id="Car Registration Number" placeholder=""
                                            required="" th:field="${truck.registrationNumber}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" id="registrationNumber" style="color: red">
                                         Проверьте корректность заполнения регистрационного номера авто.
                                     </div>
                                 </div>
@@ -133,15 +133,12 @@
                                     <select class="form-select" id="Brand" th:field="${truck.brand}">
                                         <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
                                     </select>
-                                    <div class="invalid-feedback">
-                                        Пожалуйста, выберите бренд.
-                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Модель</label>
-                                    <input type="text" class="form-control" id="Model" placeholder="" required=""
+                                    <input type="text" class="form-control" id="Models" placeholder="" required=""
                                            th:field="${truck.model}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" id="model">
                                         Проверьте корректность заполнения модели.
                                     </div>
                                 </div>
@@ -149,7 +146,7 @@
                                     <label class="form-label" style="color: #814de5">Год</label>
                                     <input type="text" class="form-control" id="Year" placeholder="" required=""
                                            th:field="${truck.yearTruck}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" id="yearTruck">
                                         Проверьте корректность заполнения года.
                                     </div>
                                 </div>
@@ -157,7 +154,7 @@
                                     <label class="form-label" style="color: #814de5">Имя водителя</label>
                                     <input type="text" class="form-control" id="Driver Name" placeholder="" required=""
                                            th:field="${truck.driver.name}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" id="driver.name">
                                         Проверьте корректность заполнения имени водителя.
                                     </div>
                                 </div>
@@ -165,7 +162,7 @@
                                     <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
                                     <input type="text" class="form-control" id="Driver License Number" placeholder=""
                                            required="" th:field="${truck.driver.licenseNumber}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" id="driver.LicenseNumber">
                                         Проверьте корректность заполнения номера лицензии водителя.
                                     </div>
                                 </div>
@@ -189,7 +186,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
@@ -238,7 +234,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                         <form class="needs-validation" id="changeAuto" novalidate="" th:object="${truck}"
                               th:action="*{'/client/regAuto'}" method="post">
 
@@ -247,7 +242,7 @@
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
                                     <input type="text" class="form-control" id="change Car Registration Number" placeholder=""
                                            required="" th:field="${truck.registrationNumber}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения регистрационного номера авто.
                                     </div>
                                 </div>
@@ -256,7 +251,7 @@
                                     <select class="form-select" id="change Brand" th:field="${truck.brand}">
                                         <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
                                     </select>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Пожалуйста, выберите бренд.
                                     </div>
                                 </div>
@@ -264,7 +259,7 @@
                                     <label class="form-label" style="color: #814de5">Модель</label>
                                     <input type="text" class="form-control" id="change Model" placeholder="" required=""
                                            th:field="${truck.model}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения модели.
                                     </div>
                                 </div>
@@ -272,7 +267,7 @@
                                     <label class="form-label" style="color: #814de5">Год</label>
                                     <input type="text" class="form-control" id="change Year" placeholder="" required=""
                                            th:field="${truck.yearTruck}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" >
                                         Проверьте корректность заполнения года.
                                     </div>
                                 </div>
@@ -280,7 +275,7 @@
                                     <label class="form-label" style="color: #814de5">Имя водителя</label>
                                     <input type="text" class="form-control" id="change Driver Name" placeholder="" required=""
                                            th:field="${truck.driver.name}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения имени водителя.
                                     </div>
                                 </div>
@@ -288,7 +283,7 @@
                                     <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
                                     <input type="text" class="form-control" id="change Driver License Number" placeholder=""
                                            required="" th:field="${truck.driver.licenseNumber}">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="color: red" >
                                         Проверьте корректность заполнения номера лицензии водителя.
                                     </div>
                                 </div>
@@ -307,10 +302,19 @@
     </div>
 </main>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
-    document.getElementById('regAuto').addEventListener('submit', function (event) {
+    let datesError = [];
+    document.getElementById('regAuto').addEventListener('submit', async function (event) {
         event.preventDefault();
-        fetch('/client/regAuto', {
+        for (let x in datesError) {
+            document.getElementById(x).classList.add('invalid-feedback');
+            document.getElementById(x).classList.remove('show-feedback');
+        }
+        datesError = [];
+        await fetch('/client/regAuto', {
             method: 'POST',
             body: new FormData(this)
         })
@@ -320,7 +324,12 @@
                     alert(data.message);
                     window.location.href = '/client/regAuto';
                 } else if (data.status === "bad") {
-                    alert(data.message);
+                    for (let x in data) {
+                        alert(data[x]);
+                        datesError.push(x);
+                        document.getElementById(x).classList.remove('invalid-feedback');
+                        document.getElementById(x).classList.add('show-feedback');
+                    }
                 } else {
                     console.error('Произошла ошибка:', data.message);
                 }

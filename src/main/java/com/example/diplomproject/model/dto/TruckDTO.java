@@ -8,6 +8,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Data
 @Builder
@@ -15,9 +20,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TruckDTO {
     private Long idTruck;
+    @NotNull
+    @NotEmpty
     private String registrationNumber;
     private Brand brand;
+    @NotNull
+    @NotEmpty
     private String model;
+    @NotNull
+    @Min(value =1050)
+    @Max(value = 2024)
     private int yearTruck;
     private DriverDTO driver;
 
