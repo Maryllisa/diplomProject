@@ -159,4 +159,9 @@ public class ClientController {
     public String getRegProdPoDeclar() {
         return "/client/regProdPoDeclar";
     }
+    @GetMapping("/markQuality")
+    public String getMarkQuality() {
+        return "/client/markQuality";
+    }
+
 }
