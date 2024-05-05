@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 public class DriverDTO {
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String name;
     @NotNull
     @NotEmpty

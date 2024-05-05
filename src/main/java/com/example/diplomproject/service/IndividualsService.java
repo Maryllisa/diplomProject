@@ -5,6 +5,7 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
+import com.example.diplomproject.model.entity.declaration.Address;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -245,5 +246,14 @@ public class IndividualsService {
             }
         });
         return resultMap;
+    }
+
+    public void change(IndividualsDTO individualsDTO,  Long id) {
+        Individuals supplier = individualsRepository.getById(id);
+        Address address = addressRepository.findById(supplier.getAddress().getIdAddress()).orElse(null);
+        supplier.getAddress().change(individualsDTO.getAddress());
+        supplier.change(individualsDTO);
+        supplier.setAddress(addressRepository.save(supplier.getAddress()));
+        individualsRepository.save(supplier);
     }
 }

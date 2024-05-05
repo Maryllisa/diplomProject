@@ -39,4 +39,12 @@ public class Address {
                 .build();
     }
 
+    public void change(AddressDTO address) {
+        this.city = address.getCity();
+        this.ogrnNumber = address.getOgrnNumber();
+        this.postalCode = address.getPostalCode();
+        this.region = address.getRegion();
+        this.settlement = address.getSettlement();
+        this.build = address.getBuild();
+    }
 }

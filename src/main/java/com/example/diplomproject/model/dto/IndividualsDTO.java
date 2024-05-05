@@ -18,7 +18,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class  IndividualsDTO {
     @NotEmpty@NotNull@NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String organizationName;
     private String legalAddress;
     @Pattern(regexp = "^\\+(375|80)(29|33|25)\\d{7}$")
@@ -49,3 +49,4 @@ public class  IndividualsDTO {
                 .build();
     }
 }
+

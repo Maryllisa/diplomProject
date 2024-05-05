@@ -56,4 +56,13 @@ public class Individuals {
                 .registrationCode(registrationCode)
                 .build();
     }
+
+    public void change(IndividualsDTO individualsDTO) {
+        this.organizationName = individualsDTO.getOrganizationName();
+        this.legalAddress = individualsDTO.getLegalAddress();
+        this.bankCode = individualsDTO.getBankCode();
+        this.bankName = individualsDTO.getBankName();
+        this.taxId = individualsDTO.getTaxId();
+        this.registrationCode = individualsDTO.getRegistrationCode();
+    }
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class AddressDTO {
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String city;
     @NotEmpty
     @NotNull
@@ -27,11 +27,11 @@ public class AddressDTO {
     private String postalCode;
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String region;
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String settlement;
     @NotEmpty
     @NotNull

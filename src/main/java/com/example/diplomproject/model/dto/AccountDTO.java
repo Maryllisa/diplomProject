@@ -14,14 +14,14 @@ import java.sql.Date;
 @Builder
 public class AccountDTO extends UserDTO {
 
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     @NotEmpty@NotNull
     private String surname;
     @NotEmpty@NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String name;
     @NotEmpty@NotNull
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String patronymic;
     @NotNull
     @ValidDateOfBirthRange

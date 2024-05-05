@@ -136,9 +136,22 @@ public class ClientRestController {
     }
 
     @GetMapping("/findSupplier/{id}")
-    public IndividualsDTO getProvider(@PathVariable("id") Long id, Authentication authentication) {
+    public IndividualsDTO getProvider(@PathVariable("id") Long id,
+                                      Authentication authentication,
+                                      Model model) {
         IndividualsDTO individuals = individualsService.findById(id);
         return individuals;
+    }
+    @PostMapping("/changeSupplier/{idSup}")
+    private ResponseEntity<Map<String, String>> changeCompany(@PathVariable Long idSup,@ModelAttribute @Valid IndividualsDTO individualsDTO,
+                                                                   BindingResult result,
+                                                                   Authentication authentication) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(
+                    AnswerMessage.getBadMessage(individualsService.check(result, individualsDTO)));
+        }
+        individualsService.change(individualsDTO, idSup);
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно изменен"));
     }
 
     @PostMapping("/addZavForMark")

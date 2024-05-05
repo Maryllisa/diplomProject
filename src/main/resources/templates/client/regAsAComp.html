@@ -93,7 +93,7 @@
                 <td style="color: #1a1a1c" th:text="${sup.phone}"/>
                 <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
                 <td><input type="button" value="Подробнее"
-                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal"
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" th:onclick="|findSuppliers(${sup.idSupplier})|"
                            data-bs-target="#moreDetails"></td>
             </tr>
             </tbody>
@@ -113,8 +113,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" id="regAsAComp" novalidate="" th:object="${newSupplier}"
-                              th:action="*{'/client/regAsAComp'}" method="post">
+                        <form class="needs-validation" id="regAsAComp" novalidate="" th:object="${newSupplier}" method="post">
 
                             <div class="row g-3">
                                 <div class="col-sm-12">
@@ -134,14 +133,6 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label" style="color: #814de5">Телефон</label>
-                                    <input type="tel" class="form-control" id="Phone" th:field="${newSupplier.phone}"
-                                           placeholder="" required="">
-                                    <div class="invalid-feedback" style="color: red">
-                                        Проверьте корректность заполнения телефона.
-                                    </div>
-                                </div>
-                                <div class="col-12">
                                     <label class="form-label" style="color: #20202c; size: 30px">Почтовый адрес:</label>
 
                                     <div class="row g-3">
@@ -154,6 +145,20 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
+                                            <label class="form-label" style="color: #814de5">Регион</label>
+                                            <input type="text" class="form-control" th:field="${newSupplier.address.region}" id="region" placeholder="" required="">
+                                            <div class="invalid-feedback" style="color: red">
+                                                Проверьте корректность заполнения города.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label" style="color: #814de5">Область</label>
+                                            <input type="text" class="form-control" th:field="${newSupplier.address.settlement}" id="settlement" placeholder="" required="">
+                                            <div class="invalid-feedback" style="color: red">
+                                                Проверьте корректность заполнения города.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
                                             <label class="form-label" style="color: #814de5">Город</label>
                                             <input type="text" class="form-control" id="City" placeholder=""
                                                    th:field="${newSupplier.address.city}" required="">
@@ -161,8 +166,6 @@
                                                 Проверьте корректность заполнения города.
                                             </div>
                                         </div>
-                                    </div>
-
                                     <div class="col-12">
                                         <label class="form-label" style="color: #814de5">Адрес</label>
                                         <input type="text" class="form-control" id="Address" placeholder="" required=""
@@ -196,6 +199,7 @@
                                         Проверьте корректность заполнения наименования банка.
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             <div class="row g-3">
                                 <div class="col-6">
@@ -240,38 +244,36 @@
 
                     <div class="row g-3">
                         <div class="col-sm-12">
-                            <label class="form-label" style="color: #814de5">Наименование организации</label>
-                            <span>Тут напишешь вывод названия</span>
-                            <span>тут айди</span>
+                            <label class="form-label" style="color: #814de5">Наименование организации: </label>
+                            <span id="nameCompany"></span>
                         </div>
                         <div class="col-12">
-                            <label class="form-label" style="color: #814de5">Юридический адрес</label>
-                            <span>Жестко вставишь адрес этого бро</span>
+                            <label class="form-label" style="color: #814de5">Юридический адрес: </label>
+                            <span id="legacyAddress"></span>
                         </div>
-
-
                         <div class="col-6">
-                            <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
-                            <span> Лучший код банка</span>
+                            <label class="form-label" style="color: #814de5">Код банка (BIC): </label>
+                            <span id="bankKode"></span>
                         </div>
                         <div class="col-12">
-                            <label class="form-label" style="color: #814de5">Наименование банка</label>
-                            <span> Невероятное название банка(не то где надо ехать в ебеня)</span>
+                            <label class="form-label" style="color: #814de5">Наименование банка: </label>
+                            <span id="nameBank"></span>
                         </div>
                     </div>
                     <div class="row g-3">
                         <div class="col-6">
-                            <label class="form-label" style="color: #814de5">УНН</label>
-                            <span>Обычный Унн</span>
+                            <label class="form-label" style="color: #814de5">УНН: </label>
+                            <span id="UNNCode"></span>
                         </div>
                         <div class="col-6">
-                            <label class="form-label" style="color: #814de5">ОКПО</label>
-                            <span>Умопомрачительный ОКПО</span>
+                            <label class="form-label" style="color: #814de5">ОКПО: </label>
+                            <span id="OKPOCode"></span>
                         </div>
                         <div class="modal-footer">
                             <button class="w-100 btn btn-primary btn-lg" type="submit" data-bs-toggle="modal"
                                     data-bs-target="#changeRequestModal"
-                                    style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Изменить
+                                    style="margin-top: 20px;background-color: #814de5; color: #1a1a1c"
+                            onclick="findChangeSuppliers()">Изменить
                             </button>
                             <button class="w-100 btn btn-primary btn-lg" type="submit"
                                     style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Удалить
@@ -294,33 +296,21 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" id="changeAsAComp" novalidate="" th:object="${newSupplier}"
-                              th:action="*{'/client/regAsAComp'}" method="post">
+                        <form th:object="${newSupplier}"  class="needs-validation" id="changeAsAComp" novalidate="" method="post">
 
                             <div class="row g-3">
                                 <div class="col-sm-12">
                                     <label class="form-label" style="color: #814de5">Наименование организации</label>
-                                    <input type="text" class="form-control" id="change Organization Name" required=""
-                                           th:field="${newSupplier.organizationName}">
-                                    <div class="invalid-feedback" style="color: red">
+                                    <input type="text" class="form-control" th:field="${newSupplier.organizationName}" id="organizationNameInput" required="">
+                                    <div class="invalid-feedback" style="color: red" >
                                         Проверьте корректность заполнения наименования организации.
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" style="color: #814de5">Юридический адрес</label>
-                                    <input type="text" class="form-control" id="change Legal Address"
-                                           th:field="${newSupplier.legalAddress}" placeholder="" required="">
+                                    <input th:field="${newSupplier.legalAddress}" type="text" class="form-control" id="legalAddressInput" placeholder="" required="">
                                     <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения юридического адреса.
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" style="color: #814de5">Телефон</label>
-                                    <input type="tel" class="form-control" id="change Phone"
-                                           th:field="${newSupplier.phone}"
-                                           placeholder="" required="">
-                                    <div class="invalid-feedback" style="color: red">
-                                        Проверьте корректность заполнения телефона.
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -329,17 +319,22 @@
                                     <div class="row g-3">
                                         <div class="col-6">
                                             <label class="form-label" style="color: #814de5">Индекс</label>
-                                            <input type="text" class="form-control" id="change Postal Code"
-                                                   placeholder=""
-                                                   th:field="${newSupplier.address.postalCode}" required="">
+                                            <input type="text" class="form-control" id="postalCodeInput"
+                                                   th:field="${newSupplier.address.postalCode}" placeholder="" required="">
                                             <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения почтового индекса.
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-label" style="color: #814de5">Город</label>
-                                            <input type="text" class="form-control" id="change City" placeholder=""
-                                                   th:field="${newSupplier.address.city}" required="">
+                                            <label class="form-label" style="color: #814de5">Регион</label>
+                                            <input type="text" class="form-control" th:field="${newSupplier.address.region}" id="regionInput" placeholder="" required="">
+                                            <div class="invalid-feedback" style="color: red">
+                                                Проверьте корректность заполнения города.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label" style="color: #814de5">Область</label>
+                                            <input type="text" class="form-control" th:field="${newSupplier.address.settlement}" id="settlementInput" placeholder="" required="">
                                             <div class="invalid-feedback" style="color: red">
                                                 Проверьте корректность заполнения города.
                                             </div>
@@ -348,36 +343,24 @@
 
                                     <div class="col-12">
                                         <label class="form-label" style="color: #814de5">Адрес</label>
-                                        <input type="text" class="form-control" id="change Address" placeholder=""
-                                               required=""
-                                               th:field="${newSupplier.address.settlement}">
+                                        <input type="text" class="form-control" id="buildInput" th:field="${newSupplier.address.build}" placeholder="" required="">
                                         <div class="invalid-feedback" style="color: red">
                                             Проверьте корректность заполнения адреса.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label" style="color: #814de5">Номер</label>
-                                    <input type="text" class="form-control" id="change Number" placeholder=""
-                                           required=""
-                                           th:field="${newSupplier.address.build}">
-                                    <div class="invalid-feedback" style="color: red">
-                                        Проверьте корректность заполнения номера.
-                                    </div>
-                                </div>
+
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Код банка (BIC)</label>
-                                    <input type="text" class="form-control" id="change Bank Code (BIC)" placeholder=""
-                                           required="" th:field="${newSupplier.bankCode}">
+                                    <input type="text" class="form-control" id="bankCodeInput" th:field="${newSupplier.bankCode}" placeholder="">
                                     <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения кода банка (BIC).
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" style="color: #814de5">Наименование банка</label>
-                                    <input type="text" class="form-control" id="change Bank Name" placeholder=""
-                                           required=""
-                                           th:field="${newSupplier.bankName}">
+                                    <input type="text" class="form-control" id="bankNameInput" th:field="${newSupplier.bankName}" placeholder=""
+                                           required="">
                                     <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения наименования банка.
                                     </div>
@@ -386,16 +369,14 @@
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">УНН</label>
-                                    <input type="text" class="form-control" id="change UNN" placeholder="" required=""
-                                           th:field="${newSupplier.taxId}">
+                                    <input type="text" class="form-control" id="taxIdInput" placeholder="" th:field="${newSupplier.taxId}" required="">
                                     <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения УНН.
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">ОКПО</label>
-                                    <input type="text" class="form-control" id="change OKPO" placeholder="" required=""
-                                           th:field="${newSupplier.registrationCode}">
+                                    <input type="text" class="form-control" id="registrationCodeInput"  th:field="${newSupplier.registrationCode}" placeholder="" required="">
                                     <div class="invalid-feedback" style="color: red">
                                         Проверьте корректность заполнения ОКПО.
                                     </div>
@@ -420,28 +401,12 @@
     </div>
 </main>
 </body>
-<script>
-    document.getElementById('regAsAComp').addEventListener('submit', function (event) {
-        event.preventDefault();
-        fetch('/client/regAsAComp', {
-            method: 'POST',
-            body: new FormData(this)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert(data.message);
-                    window.location.href = '/client/regAsAComp';
-                } else if (data.status === "bad") {
-                    for (const x in data) {
-                        if (x !== "bad") {
-                            alert(data[x]);
-                        }
-                    }
-                } else {
-                    console.error('Произошла ошибка:', data.message);
-                }
-            })
-    });
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/changer.js">
+
 </script>
+
 </html>

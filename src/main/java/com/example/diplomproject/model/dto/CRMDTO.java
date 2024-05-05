@@ -30,15 +30,15 @@ public class CRMDTO {
     */
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String countryWH;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String cityWH;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String streetWH;
     @NotNull
     @NotEmpty
@@ -48,15 +48,15 @@ public class CRMDTO {
      */
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String loadingCountry;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String loadingCity;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String loadingStreet;
     @NotNull
     @NotEmpty
@@ -133,15 +133,15 @@ public class CRMDTO {
      */
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String returnCountry;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String returnCity;
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[А-ЯЁ][а-яё]+$")
+    @Pattern(regexp = "^[А-ЯЁа-яё\s]+$")
     private String returnStreet;
     @NotNull
     @NotEmpty
