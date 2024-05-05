@@ -167,5 +167,9 @@ public class ClientController {
     public String getPrinProdQuality() {
         return "/client/prinProdQuality";
     }
+    @GetMapping("/otpProdQuality")
+    public String getOtpProdQuality() {
+        return "/client/otpProdQuality";
+    }
 
 }
