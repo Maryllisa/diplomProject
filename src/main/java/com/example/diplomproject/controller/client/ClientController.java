@@ -163,5 +163,9 @@ public class ClientController {
     public String getMarkQuality() {
         return "/client/markQuality";
     }
+    @GetMapping("/prinProdQuality")
+    public String getPrinProdQuality() {
+        return "/client/prinProdQuality";
+    }
 
 }
