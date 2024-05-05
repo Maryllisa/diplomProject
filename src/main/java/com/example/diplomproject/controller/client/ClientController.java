@@ -171,5 +171,9 @@ public class ClientController {
     public String getOtpProdQuality() {
         return "/client/otpProdQuality";
     }
+    @GetMapping("/comunicationQuality")
+    public String getComunicationQuality() {
+        return "/client/comunicationQuality";
+    }
 
 }
