@@ -60,14 +60,76 @@
         <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
         <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
         <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
-        <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8  "></a><td/>
+        <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></a><td/>
         <td><input type="button" value="Принять" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/PROCESSING/' + ${ap.idApplication}|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8 "></td>
         <td><input type="button" value="Отклонить" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/CANCELLED/' + ${ap.idApplication}|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8"></td>
     </tr>
          </tbody>
     </table>
+
   </div>
+
+    <div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDetailsLabel">Подробности заказа</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">№ заявки:</label>
+                            <span id="orderNumber"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Количество позиций товаров:</label>
+                            <span id="itemCount"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Дата поставки:</label>
+                            <span id="deliveryDate"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Дата заявки:</label>
+                            <span id="orderDate"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Статус заявки:</label>
+                            <span id="orderStatus"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">ТТН:</label>
+                            <span id="ttn"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Декларация:</label>
+                            <span id="declaration"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">CMR:</label>
+                            <span id="cmr"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/changer.js">
 
+</script>
 </html>
