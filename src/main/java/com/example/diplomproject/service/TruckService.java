@@ -71,4 +71,11 @@ public class TruckService {
         });
         return resultDescription;
     }
+
+    public TruckDTO getTruck(Long id) {
+        return trackRepository.getById(id).build();
+    }
+
+    public void changeTruck(TruckDTO truckDTO, String name) {
+    }
 }

@@ -96,16 +96,14 @@
                 <td style="color: #1a1a1c" th:text="${t.brand + ' ' + t.model}"/>
                 <td style="color: #1a1a1c" th:text="${t.driver.name}"/>
                 <td style="color: #1a1a1c" th:text="${t.driver.licenseNumber}"/>
-                <td><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal" data-bs-target="#details"></td>
+                <td><input type="button" th:onclick="|findTruck(${t.idTruck})|" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal" data-bs-target="#details"></td>
             </tr>
             </tbody>
         </table>
-
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal"
                 style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
             Зарегистрировать ещё один автомобиль
         </button>
-
         <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
@@ -115,16 +113,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
-                        <form class="needs-validation" id="regAuto" novalidate="" th:object="${truck}"
-                              th:action="*{'/client/regAuto'}" method="post">
+                        <form class="needs-validation" id="regAuto" novalidate="" th:object="${truck}" method="post">
 
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
                                     <input type="text" class="form-control" id="Car Registration Number" placeholder=""
                                            required="" th:field="${truck.registrationNumber}">
-                                    <div class="invalid-feedback" style="color: red" id="registrationNumber" style="color: red">
+                                    <div class="invalid-feedback" style="color: red" id="registrationNumber">
                                         Проверьте корректность заполнения регистрационного номера авто.
                                     </div>
                                 </div>
@@ -138,7 +134,7 @@
                                     <label class="form-label" style="color: #814de5">Модель</label>
                                     <input type="text" class="form-control" id="Models" placeholder="" required=""
                                            th:field="${truck.model}">
-                                    <div class="invalid-feedback" style="color: red" id="model">
+                                    <div class="invalid-feedback" style="color: red" id="model" >
                                         Проверьте корректность заполнения модели.
                                     </div>
                                 </div>
@@ -189,27 +185,27 @@
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
-                                    <span>вставишь номер</span>
+                                    <span id="registrationNumberGet"></span>
                                 </div>
                                 <div class="col-6" style="margin-top: 40px">
                                     <label class="form-label" style="color: #814de5;">Бренд</label>
-                                    <span>бред</span>
+                                    <span id="brandGet"></span>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Модель</label>
-                                    <span>маделька</span>
+                                    <span id="modelGet"></span>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Год</label>
-                                   <span>годик</span>
+                                   <span id="yearTruckGet"></span>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Имя водителя</label>
-                                    <span>наме</span>
+                                    <span id="nameGet"></span>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
-                                   <span>номер лицухи</span>
+                                   <span id="LicenseNumberGet"></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -234,57 +230,54 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
-                        <form class="needs-validation" id="changeAuto" novalidate="" th:object="${truck}"
-                              th:action="*{'/client/regAuto'}" method="post">
-
+                        <form class="needs-validation" id="changeAuto" novalidate="" th:object="${truck}" method="post">
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Регистрационный номер авто</label>
-                                    <input type="text" class="form-control" id="change Car Registration Number" placeholder=""
+                                    <input type="text" class="form-control" id="registrationNumberInput" placeholder=""
                                            required="" th:field="${truck.registrationNumber}">
-                                    <div class="invalid-feedback" style="color: red">
+                                    <div class="invalid-feedback" style="color: red" id="registrationNumber1">
                                         Проверьте корректность заполнения регистрационного номера авто.
                                     </div>
                                 </div>
                                 <div class="col-6" style="margin-top: 40px">
                                     <label class="form-label" style="color: #814de5;">Бренд</label>
-                                    <select class="form-select" id="change Brand" th:field="${truck.brand}">
+                                    <select class="form-select" id="brandInput" th:field="${truck.brand}">
                                         <option th:each="b:${brand}" th:value="${b.key}" th:text="${b.value}"/>
                                     </select>
-                                    <div class="invalid-feedback" style="color: red">
+                                    <div class="invalid-feedback" style="color: red" >
                                         Пожалуйста, выберите бренд.
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Модель</label>
-                                    <input type="text" class="form-control" id="change Model" placeholder="" required=""
+                                    <input type="text" class="form-control" id="modelInput" placeholder="" required=""
                                            th:field="${truck.model}">
-                                    <div class="invalid-feedback" style="color: red">
+                                    <div class="invalid-feedback" style="color: red" id="model1" >
                                         Проверьте корректность заполнения модели.
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Год</label>
-                                    <input type="text" class="form-control" id="change Year" placeholder="" required=""
+                                    <input type="text" class="form-control" id="yearTruckInput" placeholder="" required=""
                                            th:field="${truck.yearTruck}">
-                                    <div class="invalid-feedback" style="color: red" >
+                                    <div class="invalid-feedback" style="color: red" id="yearTruck1" >
                                         Проверьте корректность заполнения года.
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Имя водителя</label>
-                                    <input type="text" class="form-control" id="change Driver Name" placeholder="" required=""
+                                    <input type="text" class="form-control" id="nameInput" placeholder="" required=""
                                            th:field="${truck.driver.name}">
-                                    <div class="invalid-feedback" style="color: red">
+                                    <div class="invalid-feedback" style="color: red" id="driver.name1" >
                                         Проверьте корректность заполнения имени водителя.
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" style="color: #814de5">Номер лицензии водителя</label>
-                                    <input type="text" class="form-control" id="change Driver License Number" placeholder=""
+                                    <input type="text" class="form-control" id="LicenseNumberInput" placeholder=""
                                            required="" th:field="${truck.driver.licenseNumber}">
-                                    <div class="invalid-feedback" style="color: red" >
+                                    <div class="invalid-feedback" style="color: red" id="driver.LicenseNumber1">
                                         Проверьте корректность заполнения номера лицензии водителя.
                                     </div>
                                 </div>
@@ -299,42 +292,110 @@
                 </div>
             </div>
         </div>
-
     </div>
 </main>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-    let datesError = [];
-    document.getElementById('regAuto').addEventListener('submit', async function (event) {
-        event.preventDefault();
-        for (let x in datesError) {
-            document.getElementById(x).classList.add('invalid-feedback');
-            document.getElementById(x).classList.remove('show-feedback');
-        }
-        datesError = [];
-        await fetch('/client/regAuto', {
-            method: 'POST',
-            body: new FormData(this)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert(data.message);
-                    window.location.href = '/client/regAuto';
-                } else if (data.status === "bad") {
-                    for (let x in data) {
-                        alert(data[x]);
-                        datesError.push(x);
-                        document.getElementById(x).classList.remove('invalid-feedback');
-                        document.getElementById(x).classList.add('show-feedback');
-                    }
-                } else {
-                    console.error('Произошла ошибка:', data.message);
+<script >let idAuto = null;
+let datesError = [];
+document.getElementById('regAuto').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    for (let x in datesError) {
+        document.getElementById(x).classList.add('invalid-feedback');
+        document.getElementById(x).classList.remove('show-feedback');
+    }
+    datesError = [];
+    await fetch('/client/regAuto', {
+        method: 'POST',
+        body: new FormData(this)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                window.location.href = '/client/regAuto';
+            } else if (data.status === "bad") {
+                for (let x in data) {
+                    alert(data[x]);
+                    datesError.push(x);
+                    document.getElementById(x).classList.remove('invalid-feedback');
+                    document.getElementById(x).classList.add('show-feedback');
                 }
-            })
-    });
-</script>
+            } else {
+                console.error('Произошла ошибка:', data.message);
+            }
+        })
+});
+function findTruck(idAutos){
+    idAuto = idAutos;
+    fetch('/client/findTruck/'+idAuto, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(truck => {
+            const registrationNumber = document.getElementById("registrationNumberGet");
+            const brand = document.getElementById("brandGet");
+            const model = document.getElementById("modelGet");
+            const yearTruck =document.getElementById("yearTruckGet");
+            const name =document.getElementById("nameGet");
+            const LicenseNumber =document.getElementById("LicenseNumberGet");
+            registrationNumber.textContent = truck.registrationNumber;
+            brand.textContent = truck.brand;
+            model.textContent = truck.model;
+            yearTruck.textContent = truck.yearTruck;
+            name.textContent = truck.name;
+            LicenseNumber.textContent = truck.LicenseNumber;
+        });
+}
+function findChangeTruck(){
+    fetch('/client/findTruck/'+idAuto, {
+        method: 'GET'})
+        .then(response => response.json())
+        .then(data => {
+            const registrationNumber = document.getElementById("registrationNumberInput");
+            const brand = document.getElementById("brandInput");
+            const model = document.getElementById("modelInput");
+            const yearTruck =document.getElementById("yearTruckInput");
+            const name =document.getElementById("nameInput");
+            const LicenseNumber =document.getElementById("LicenseNumberInput");
+            registrationNumber.value = truck.registrationNumber;
+            brand.value = truck.brand;
+            model.value = truck.model;
+            yearTruck.value = truck.yearTruck;
+            name.value = truck.name;
+            LicenseNumber.value = truck.LicenseNumber;
+        });
+}
+document.getElementById('changeAuto').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    for (let x in datesError) {
+        document.getElementById(x).classList.add('invalid-feedback');
+        document.getElementById(x).classList.remove('show-feedback');
+    }
+    datesError = [];
+    await fetch('/client/changeAuto/' + idAuto, {
+        method: 'POST',
+        body: new FormData(this)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                window.location.href = '/client/regAuto';
+            } else if (data.status === "bad") {
+                for (let x in data) {
+                    alert(data[x]);
+                    if (x !== 'brand' && x!=='status'){
+                        datesError.push(x + '1');
+                        document.getElementById(x + '1').classList.remove('invalid-feedback');
+                        document.getElementById(x + '1').classList.add('show-feedback');
+                    }
+                }
+            } else {
+                console.error('Произошла ошибка:', data.message);
+            }
+        })
+});</script>
 </html>
