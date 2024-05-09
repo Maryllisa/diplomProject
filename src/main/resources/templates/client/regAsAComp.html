@@ -81,7 +81,6 @@
             <tr>
                 <th style="color: #814de5" scope="col">Наименование организации</th>
                 <th style="color: #814de5" scope="col">Юридический адрес</th>
-                <th style="color: #814de5" scope="col">Телефон</th>
                 <th style="color: #814de5" scope="col"> УНН</th>
                 <th></th>
             </tr>
@@ -90,7 +89,6 @@
             <tr th:if="${supplier}" th:each="sup:${supplier}">
                 <td style="color: #1a1a1c" th:text="${sup.organizationName}"/>
                 <td style="color: #1a1a1c" th:text="${sup.legalAddress}"/>
-                <td style="color: #1a1a1c" th:text="${sup.phone}"/>
                 <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
                 <td><input type="button" value="Подробнее"
                            style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" th:onclick="|findSuppliers(${sup.idSupplier})|"
