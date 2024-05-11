@@ -50,4 +50,8 @@ public class ApplicationForMarkingService {
         });
         return applicationForMarkingDTOList;
     }
+
+    public void deleteApplication(Long id) {
+        applicationForMarkingRepository.delete(applicationForMarkingRepository.getById(id));
+    }
 }

@@ -20,6 +20,7 @@ import java.sql.Date;
 public class ApplicationForMarkingDTO {
 
     private Long idProduct;
+    private Long idApplication;
     private String nameProduct;
     private ProductDTO product;
 

@@ -96,9 +96,9 @@
       <tr th:if="${applicationsForMarking}" th:each="list:${applicationsForMarking}">
         <td style="color: #1a1a1c" th:text="${list.product.productCode}"></td>
         <td style="color: #1a1a1c" th:text="${list.product.nameProduct}"></td>
-        <td style="color: #1a1a1c" th:text="${list.statusMarkingApplication.getRussianName().get(list.statusMarkingApplication)}"></td>
+        <td style="color: #1a1a1c" id="status" th:text="${list.statusMarkingApplication.getRussianName().get(list.statusMarkingApplication)}"></td>
         <td style="color: #1a1a1c" th:text="${list.date}"></td>
-        <td><input type="button" value="Отменить заявку" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
+        <td><input type="button" value="Отменить заявку" th:onclick="|deleteZavForMarking(${list.idApplication})|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
 
       </tr>
       </tbody>
@@ -161,5 +161,24 @@
               }
             })
   });
+  function deleteZavForMarking(idApplication){
+    const status = document.getElementById("status").textContent;
+    if (status !== "В ожидании")
+      alert("К сожелению заявку нельзя отменить, так как марикровка в обработке у работников склада. Для подробной информации можете свявться с нами через чат...");
+    fetch('/client/deleteZavForMark/' + idApplication, {
+      method: 'GET',
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === "success") {
+                alert("Заяка отмененв");
+                window.location.href = '/client/addZavForMark';
+              } else if (data.status === "bad") {
+                alert("Ошибка на сервере, попробуйте позже!");
+              } else {
+                console.error('Произошла ошибка:', data.message);
+              }
+            });
+  }
 </script>
 </html>

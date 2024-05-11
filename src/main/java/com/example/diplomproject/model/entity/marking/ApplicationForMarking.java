@@ -38,6 +38,7 @@ public class ApplicationForMarking {
 
     public ApplicationForMarkingDTO build() {
         return ApplicationForMarkingDTO.builder()
+                .idApplication(idApplicationForMarking)
                 .idProduct(product.getIdProduct())
                 .nameProduct(product.getNameProduct())
                 .product(product.build())

@@ -3,6 +3,7 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
+import com.example.diplomproject.service.ApplicationForMarkingService;
 import com.example.diplomproject.service.IndividualsService;
 import com.example.diplomproject.service.TruckService;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class ChangeRestController {
 
     private final IndividualsService individualsService;
     private final TruckService truckService;
+    private final ApplicationForMarkingService applicationForMarkingService;
 
     @GetMapping("/findTruck/{id}")
     public TruckDTO getTruckDTO(@PathVariable("id") Long id,
@@ -62,6 +64,11 @@ public class ChangeRestController {
         }
         individualsService.change(individualsDTO, idSup);
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно изменен"));
+    }
+    @GetMapping("/deleteZavForMark/{id}")
+    private ResponseEntity<Map<String, String>> deleteZavForMark(@PathVariable Long id){
+        applicationForMarkingService.deleteApplication(id);
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Заяка успешно отменена"));
     }
 
 }
