@@ -6,6 +6,7 @@ import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -212,11 +213,11 @@ public class DeclarationTD {
     */
     @Column
     private String productDescription;
-    @JsonFormat
+    @JsonIgnore
     @ManyToOne
     private Account account;
-    @JsonFormat
-    @OneToMany
+    @JsonIgnore
+    @OneToMany()
     private List<Product> productList;
 
     public DeclarationDTO build(RoleIndividuals roleIndividuals){

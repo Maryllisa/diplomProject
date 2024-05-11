@@ -30,7 +30,7 @@
                    <td  style="color: #1a1a1c" th:text="${pr.grossWeight}"/>
                    <td  style="color: #1a1a1c" th:text="${pr.netWeight}"/>
 
-               <td><input type="button" value="Подробнее"  data-bs-toggle="modal" data-bs-target="#moreDetails" style="font-weight: bold;"></td>
+               <td><input type="button" value="Подробнее" th:onclick="|findProduct(${pr.idProduct})|"  data-bs-toggle="modal" data-bs-target="#moreDetails" style="font-weight: bold;"></td>
                 </tr>
                      </tbody>
     </table>
@@ -47,50 +47,52 @@
 
                   <div class="row g-3"  style="margin-left: 20px">
                       <div class="col-sm-12">
-                          <label class="form-label" style="color: #814de5">Название продукта и № декларации</label>
-                          <span>Тут напишешь вывод названия</span>
-                          <span>Тут напишешь номер декларации</span>
+                          <label class="form-label" style="color: #814de5">Название продукта и № декларации: </label>
+                          <span id="productName"></span>
+                          <span id="declarationNumber"></span>
                       </div>
                       <div class="col-12">
-                          <label class="form-label" style="color: #814de5">Код продукта</label>
-                          <span>Жестко вставишь код этого бро</span>
+                          <label class="form-label" style="color: #814de5">Код продукта: </label>
+                          <span id="productCode"></span>
                       </div>
 
 
                       <div class="col-6">
-                          <label class="form-label" style="color: #814de5">Код страны производства</label>
-                          <span> Лучший код страны</span>
+                          <label class="form-label" style="color: #814de5">Код страны производства: </label>
+                          <span id="countryCode"></span>
                       </div>
                       <div class="col-3">
-                          <label class="form-label" style="color: #814de5">Вес брутто</label>
-                          <span> брутально</span>
+                          <label class="form-label" style="color: #814de5">Вес брутто: </label>
+                          <span id="grossWeight"></span>
                       </div>
                   </div>
+
                   <div class="row g-3" style="margin-left: 20px">
                       <div class="col-6">
-                          <label class="form-label" style="color: #814de5">Вес нетто</label>
-                          <span>Обычный нетто</span>
+                          <label class="form-label" style="color: #814de5">Вес нетто: </label>
+                          <span id="netWeight"></span>
                       </div>
                       <div class="col-6">
-                          <label class="form-label" style="color: #814de5">Дата производства</label>
-                          <span>дата</span>
+                          <label class="form-label" style="color: #814de5">Дата производства: </label>
+                          <span id="productionDate"></span>
                       </div>
                       <div class="col-6">
-                          <label class="form-label" style="color: #814de5">Годен до</label>
-                          <span>дата</span>
+                          <label class="form-label" style="color: #814de5">Годен до: </label>
+                          <span id="expirationDate"></span>
                       </div>
                       <div class="col-12">
-                          <label class="form-label" style="color: #814de5">Преференция</label>
-                          <span>Преференция</span>
+                          <label class="form-label" style="color: #814de5">Преференция: </label>
+                          <span id="preference"></span>
                       </div>
                       <div class="col-12">
-                          <label class="form-label" style="color: #814de5">Процедура</label>
-                          <span>Процедура</span>
+                          <label class="form-label" style="color: #814de5">Процедура: </label>
+                          <span id="procedure"></span>
                       </div>
                       <div class="col-12">
-                          <label class="form-label" style="color: #814de5">Квота</label>
-                          <span>Квота</span>
+                          <label class="form-label" style="color: #814de5">Квота: </label>
+                          <span id="quota"></span>
                       </div>
+                  </div>
 
                       <div class="modal-footer">
 
@@ -99,8 +101,6 @@
                           </button>
                       </div>
                   </div>
-
-                  </form>
               </div>
 
           </div>
@@ -109,4 +109,36 @@
   </div>
 </main>
 </body>
+<script>
+    function findProduct(id){
+        fetch("/client/findProduct/" + id, {
+            method: 'GET'
+        }).then(response=> response.json())
+            .then(data=>{
+                const productName = document.getElementById('productName');
+                const declarationNumber = document.getElementById('declarationNumber');
+                const productCode = document.getElementById('productCode');
+                const countryCode = document.getElementById('countryCode');
+                const grossWeight = document.getElementById('grossWeight');
+                const netWeight = document.getElementById('netWeight');
+                const productionDate = document.getElementById('productionDate');
+                const expirationDate = document.getElementById('expirationDate');
+                const preference = document.getElementById('preference');
+                const procedure = document.getElementById('procedure');
+                const quota = document.getElementById('quota');
+
+                productName.textContent = data.nameProduct;
+                declarationNumber.textContent = data.numberDeclaration;
+                productCode.textContent = data.productCode;
+                countryCode.textContent = data.originCountryCode;
+                grossWeight.textContent = data.grossWeight;
+                netWeight.textContent = data.netWeight;
+                productionDate.textContent = data.date;
+                expirationDate.textContent = data.finalDate;
+                preference.textContent = data.preference;
+                procedure.textContent = data.procedure;
+                quota.textContent = data.quota;
+            })
+    }
+</script>
 </html>

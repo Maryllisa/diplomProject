@@ -3,6 +3,7 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
+import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Product;
@@ -95,6 +96,10 @@ public class ChangeRestController {
     @GetMapping("/findApplicationForStorage/{id}")
     private ApplicationForStorageDTO findApplicationForStorage(@PathVariable Long id){
         return applicationForStorageService.findAllById(id).build();
+    }
+    @GetMapping("/findProduct/{id}")
+    private ProductDTO findProduct(@PathVariable Long id){
+        return productService.findById(id);
     }
 
 }

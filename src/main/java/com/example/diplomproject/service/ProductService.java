@@ -76,4 +76,8 @@ public class ProductService {
         });
         return productDTOList;
     }
+
+    public ProductDTO findById(Long id) {
+        return productRepository.getById(id).build();
+    }
 }
