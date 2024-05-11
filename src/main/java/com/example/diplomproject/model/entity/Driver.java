@@ -17,4 +17,8 @@ public class Driver {
     private String name;
     @Column
     private String LicenseNumber;
+
+    public boolean check() {
+        return this.name!=null && this.getLicenseNumber()!=null;
+    }
 }

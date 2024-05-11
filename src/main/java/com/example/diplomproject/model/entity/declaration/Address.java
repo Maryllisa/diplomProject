@@ -47,4 +47,13 @@ public class Address {
         this.settlement = address.getSettlement();
         this.build = address.getBuild();
     }
+
+    public boolean check() {
+        return this.city!=null
+                && this.ogrnNumber!=null
+                && this.postalCode!=null
+                && this.region!=null
+                && this.settlement!=null
+                && this.build!=null;
+    }
 }

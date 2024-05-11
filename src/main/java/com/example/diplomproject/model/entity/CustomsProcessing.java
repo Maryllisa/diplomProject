@@ -30,4 +30,11 @@ public class CustomsProcessing {
     @Column
     private Date issueDate;
 
+    public boolean check() {
+        return this.customsPostName!=null
+                && this.customsCode!=null
+                && this.svhNameAndAddress!=null
+                && this.licenseNumber!=null
+                && this.issueDate!=null;
+    }
 }

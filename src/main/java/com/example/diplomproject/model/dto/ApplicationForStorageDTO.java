@@ -1,5 +1,7 @@
 package com.example.diplomproject.model.dto;
 
+import com.example.diplomproject.config.annotation.imp.ValidDate;
+import com.example.diplomproject.config.annotation.imp.ValidDateFetcher;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
@@ -7,7 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Data
@@ -18,15 +22,24 @@ public class ApplicationForStorageDTO {
     private Long idApplication;
 
     private int countPositionProducts;
+    @NotNull
+    @ValidDateFetcher
     private Date datePost;
+    @NotNull
+    @ValidDate
     private Date dateZav;
     private StatusApplication statusApplication;
+    @NotNull
     private Long idGoodTransportDocument;
     private GoodTransportDocument goodTransportDocument;
+    @NotNull
     private Long idDeclarationTD;
+
     private DeclarationDTO declarationTD;
+    @NotNull
     private Long idCRM;
     private CRMDTO crm;
+    @NotNull
     private Long idTruck;
     private TruckDTO truck;
 
@@ -44,6 +57,7 @@ public class ApplicationForStorageDTO {
                 .statusApplication(statusApplication)
                 .build();
     }
+
     public ApplicationForStorage build(StatusApplication statusApplication,
                                        GoodTransportDocument goodTransportDocument,
                                        DeclarationTD declarationTD,

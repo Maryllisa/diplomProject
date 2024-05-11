@@ -40,4 +40,8 @@ public class CurrencyRate{
                 .usdRate(usdRate)
                 .build();
     }
+
+    public boolean check() {
+        return this.date!=null && this.currency!=null && this.currencyRate!=0 && this.euroRate!=0 && this.usdRate!=0;
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller.client;
+package com.example.diplomproject.repository;
 
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.ApplicationForRelease;

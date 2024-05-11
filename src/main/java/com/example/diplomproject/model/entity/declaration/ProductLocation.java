@@ -47,7 +47,7 @@ public class ProductLocation {
     @Column
     private String houseNumber;
 
-    public ProductLocationDTO build(){
+    public ProductLocationDTO build() {
         return ProductLocationDTO.builder()
                 .uzoRegistry(uzoRegistry)
                 .customsCode(customsCode)
@@ -68,4 +68,21 @@ public class ProductLocation {
     }
 
 
+    public boolean check() {
+        return this.uzoRegistry != null
+                && this.customsCode != null
+                && this.type != null
+                && this.quantity != null
+                && this.documentNumber != null
+                && this.date != null
+                && this.ztkNumber != null
+                && this.transportType != null
+                && this.vehicleNumber != null
+                && this.stationOrPort != null
+                && this.country != null
+                && this.postalCode != null
+                && this.regionOrDistrict != null
+                && this.locality != null
+                && this.houseNumber != null;
+    }
 }

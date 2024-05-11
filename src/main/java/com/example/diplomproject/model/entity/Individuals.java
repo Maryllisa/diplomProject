@@ -65,4 +65,14 @@ public class Individuals {
         this.taxId = individualsDTO.getTaxId();
         this.registrationCode = individualsDTO.getRegistrationCode();
     }
+
+    public boolean check() {
+        return this.organizationName != null
+                && this.legalAddress != null
+                && this.bankCode != null
+                && this.address.check()
+                && this.bankName != null
+                && this.taxId != null
+                && this.registrationCode != null;
+    }
 }

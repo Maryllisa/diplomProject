@@ -4,7 +4,6 @@ import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
-import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,10 +111,12 @@ public class ClientRestController {
                                                                   Authentication authentication) {
 
         if (result.hasErrors()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-//            String body = objectMapper.writeValueAsString(CRMService.checkNewCRM(result, crmdto));
-//           return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(body));
+
+            return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(applicationForStorageService.checkApplication(applicationForStorageDTO, result)));
         }
+        Map<String, String> map = applicationForStorageService.checkApplication(applicationForStorageDTO);
+        if (!map.isEmpty())
+            return ResponseEntity.badRequest().body(AnswerMessage.getBadMessage(map));
         log.info("РЕГИСТРАЦИЯ НОВОГО ЗАЯВЛЕНИЯ НА ХРАНЕНИЕ");
         applicationForStorageService.addNewApplication(applicationForStorageDTO, authentication.getName());
 
@@ -133,43 +133,6 @@ public class ClientRestController {
         }
         truckService.addNewTruck(truckDTO, authentication.getName());
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Авто успешно зарегистрированно"));
-    }
-
-    @GetMapping("/findTruck/{id}")
-    public TruckDTO getTruckDTO(@PathVariable("id") Long id,
-                                Authentication authentication,
-                                Model model){
-        return truckService.getTruck(id);
-    }
-    @PostMapping("/changeAuto/{idAuto}")
-    private ResponseEntity<Map<String, String>> changeAuto(@PathVariable Long idAuto, @ModelAttribute @Valid TruckDTO truckDTO,
-                                                           BindingResult result,
-                                                           Authentication authentication) {
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(
-                    AnswerMessage.getBadMessage(truckService.check(result, truckDTO)));
-        }
-        truckService.changeTruck(truckDTO, authentication.getName());
-        return ResponseEntity.ok(AnswerMessage.getOKMessage("Авто успешно перерегистрированно"));
-    }
-
-    @GetMapping("/findSupplier/{id}")
-    public IndividualsDTO getProvider(@PathVariable("id") Long id,
-                                      Authentication authentication,
-                                      Model model) {
-        IndividualsDTO individuals = individualsService.findById(id);
-        return individuals;
-    }
-    @PostMapping("/changeSupplier/{idSup}")
-    private ResponseEntity<Map<String, String>> changeCompany(@PathVariable Long idSup,@ModelAttribute @Valid IndividualsDTO individualsDTO,
-                                                                   BindingResult result,
-                                                                   Authentication authentication) {
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(
-                    AnswerMessage.getBadMessage(individualsService.check(result, individualsDTO)));
-        }
-        individualsService.change(individualsDTO, idSup);
-        return ResponseEntity.ok(AnswerMessage.getOKMessage("Поставщик успешно изменен"));
     }
 
     @PostMapping("/addZavForMark")
