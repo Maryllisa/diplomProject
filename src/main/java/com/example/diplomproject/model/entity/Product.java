@@ -3,6 +3,7 @@ package com.example.diplomproject.model.entity;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ public class Product {
     private double netWeight;
     @Column
     private String quota;
+    @JsonIgnore
     @ManyToOne
     private DeclarationTD declarationTD;
 

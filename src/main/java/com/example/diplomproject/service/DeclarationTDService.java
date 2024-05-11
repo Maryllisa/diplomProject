@@ -3,6 +3,7 @@ package com.example.diplomproject.service;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.Individuals;
+import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.declaration.CurrencyRate;
 import com.example.diplomproject.model.entity.declaration.ProductLocation;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
@@ -275,5 +276,9 @@ public class DeclarationTDService {
             declarationDTOList.add(x.build());
         });
         return declarationDTOList;
+    }
+
+    public List<Product> findAllByDeclarationId(Long declarationId) {
+        return productService.getAllProductByDeclaration(declarationId);
     }
 }

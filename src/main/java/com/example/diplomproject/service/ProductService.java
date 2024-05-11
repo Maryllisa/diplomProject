@@ -3,6 +3,7 @@ package com.example.diplomproject.service;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.repository.DeclarationTDRepository;
 import com.example.diplomproject.repository.ProductRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final DeclarationTDRepository declarationTDRepository;
     public List<Product> addNewProduct(DeclarationTD declarationTDForDB, List<ProductDTO> productList){
         List<Product> products = new ArrayList<>();
         for (ProductDTO productDTO : productList){
@@ -34,5 +36,33 @@ public class ProductService {
         });
 
         return productDTOList;
+    }
+
+    public List<Product> getAllProductByDeclaration(Long declarationId) {
+        return productRepository.findAllByDeclarationTD(declarationTDRepository.getById(declarationId));
+    }
+
+    public void updateProduct(List<Product> productList, Long id) {
+        DeclarationTD declarationTD = declarationTDRepository.getById(id);
+        for (Product p: productList) {
+            declarationTD.getProductList().forEach(data -> {
+                if (data.getNameProduct().equals(p.getNameProduct())){
+                    Product product = productRepository.findById(data.getIdProduct()).orElse(null);
+                    if (product != null) {
+                        product.setProductCode(p.getProductCode());
+                        product.setQuota(p.getQuota());
+                        product.setPreference(p.getPreference());
+                        product.setProcedure(p.getProcedure());
+                        product.setNameProduct(p.getNameProduct());
+                        product.setNetWeight(p.getNetWeight());
+                        product.setGrossWeight(p.getGrossWeight());
+                        product.setDate(p.getDate());
+                        product.setFinalDate(p.getFinalDate());
+                        product.setOriginCountryCode(p.getOriginCountryCode());
+                        productRepository.save(product);
+                    }
+                }
+            });
+        }
     }
 }

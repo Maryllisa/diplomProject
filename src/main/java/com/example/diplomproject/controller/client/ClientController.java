@@ -154,9 +154,10 @@ public class ClientController {
     public String getShowCMR() {
         return "/client/showCMR";
     }
-    @GetMapping("/regProdPoDeclar")
-    public String getRegProdPoDeclar() {
-        return "/client/regProdPoDeclar";
+    @GetMapping("/regProdPoDeclare")
+    public String getRegProdPoDeclare(Model model, Authentication authentication) {
+        model.addAttribute("declarationList", declarationTDService.getAllDeclaration());
+        return "/client/regProdPoDeclare";
     }
     @GetMapping("/markQuality")
     public String getMarkQuality() {

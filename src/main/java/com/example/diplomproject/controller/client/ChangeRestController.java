@@ -3,18 +3,19 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
-import com.example.diplomproject.service.ApplicationForMarkingService;
-import com.example.diplomproject.service.IndividualsService;
-import com.example.diplomproject.service.TruckService;
+import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,6 +27,8 @@ public class ChangeRestController {
     private final IndividualsService individualsService;
     private final TruckService truckService;
     private final ApplicationForMarkingService applicationForMarkingService;
+    private final DeclarationTDService declarationTDService;
+    private final ProductService productService;
 
     @GetMapping("/findTruck/{id}")
     public TruckDTO getTruckDTO(@PathVariable("id") Long id,
@@ -69,6 +72,15 @@ public class ChangeRestController {
     private ResponseEntity<Map<String, String>> deleteZavForMark(@PathVariable Long id){
         applicationForMarkingService.deleteApplication(id);
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Заяка успешно отменена"));
+    }
+    @GetMapping("/findDeclaration/{declarationId}")
+    private List<Product> findApplication(@PathVariable Long declarationId){
+        return declarationTDService.findAllByDeclarationId(declarationId);
+    }
+    @PostMapping("/regProduct/{id}")
+    private ResponseEntity<Map<String, String>> regProduct(@RequestBody List<Product> productList, @PathVariable Long id){
+        productService.updateProduct(productList, id);
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Товар успешно изменен"));
     }
 
 }
