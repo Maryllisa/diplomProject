@@ -58,6 +58,7 @@
                 <th style="color: #814de5" scope="col">Наименование</th>
                 <th style="color: #814de5" scope="col">Статус заявки</th>
                 <th style="color: #814de5" scope="col">Дата отправки</th>
+                <th></th>
             </tr>
             </thead>
                   <tbody>
@@ -66,6 +67,8 @@
                     <td style="color: #1a1a1c" th:text="${ap.nameProduct}"></td>
                     <td style="color: #1a1a1c" th:text="${ap.statusMarkingApplication.getRussianName().get(ap.statusMarkingApplication)}"></td>
                     <td style="color: #1a1a1c" th:text="${ap.date}"></td>
+                      <th><input type="button" value="Отменить регистрацию"
+                                 style="font-weight: bold; background-color: #814de5; color: #f2f0f8 "></th>
                   </tr>
                   </tbody>
         </table>

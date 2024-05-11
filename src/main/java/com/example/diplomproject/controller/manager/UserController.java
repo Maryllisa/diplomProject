@@ -72,5 +72,7 @@ public class UserController {
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
         return "/user/showAllMarkedProd";
     }
+    @GetMapping("/user/showTD")
+    public String getShowTD() {return "/user/showTD";}
 
 }

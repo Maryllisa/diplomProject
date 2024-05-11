@@ -11,7 +11,32 @@
 <main>
   <div class="table-responsive " style="width:1200px; margin-top:-88%; margin-left: 27%">
     <h4 class="mb-3" style="color: #814de5">Обработка заявок</h4>
-    <table class="table table-striped table-sm">
+    <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+      <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+        <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+        <select class="form-select" style="margin-left: 10px; width: 150px">
+          <option value="" selected disabled>По признаку</option>
+          <option value="признак1">Признак 1</option>
+          <option value="признак2">Признак 2</option>
+          <option value="признак3">Признак 3</option>
+        </select>
+      </div>
+   
+
+      <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+        </form>
+        <select class="form-select" style="margin-left: 10px; width: 160px">
+          <option value="" selected disabled>По параметру</option>
+          <option value="признак1">Параметр 1</option>
+          <option value="признак2">Параметр 2</option>
+          <option value="признак3">Параметр 3</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="table table-striped table-sm" style="margin-top: 20px">
       <thead>
       <tr>
         <th style="color: #814de5" scope="col">Наименование органзиации</th>
@@ -33,12 +58,54 @@
         <td style="color: #1a1a1c" th:text="${sup.bankName + ', ' + sup.bankCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.registrationCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
-        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.idSupplier}"><input type="button" value="Посмотреть подробнее"
-                                                                              style="font-weight: bold;"></a>
+        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.idSupplier}"><input type="button" value="Подробнее" style="font-weight: bold; background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal"  data-bs-target="#modalOrganizationInfo"></a>
         <td/>
       </tr>
       </tbody>
     </table>
+
+  </div>
+
+  <div class="modal fade" id="modalOrganizationInfo" tabindex="-1" role="dialog" aria-labelledby="modalOrganizationInfoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalOrganizationInfoLabel">Информация об организации</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="organizationName">Наименование организации:</label>
+            <span id="organizationName"></span>
+          </div>
+          <div class="form-group">
+            <label for="legalAddress">Юр. адрес:</label>
+            <span id="legalAddress"></span>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Телефон:</label>
+            <span id="phoneNumber"></span>
+          </div>
+          <div class="form-group">
+            <label for="bankCode">Код банка (BIC):</label>
+            <span id="bankCode"></span>
+          </div>
+          <div class="form-group">
+            <label for="bankName">Наименование банка:</label>
+            <span id="bankName"></span>
+          </div>
+          <div class="form-group">
+            <label for="taxIdentificationNumber">УНН:</label>
+            <span id="taxIdentificationNumber"></span>
+          </div>
+          <div class="form-group">
+            <label for="enterpriseCode">ОКПО:</label>
+            <span id="enterpriseCode"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 </body>
