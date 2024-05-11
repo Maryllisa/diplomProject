@@ -117,7 +117,7 @@ public class ClientController {
     @GetMapping("/makeZavForOtp")
     public String getMakeZavForOtp(Model model, Authentication authentication) {
 
-        model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
+        model.addAttribute("productList", productService.getAllProductByApplication(authentication.getName()));
         model.addAttribute("applicationForRelease", applicationForRelease.getAllApplicationForRelease(authentication.getName()));
         model.addAttribute("newApplicationForRelease", new ApplicationForReleaseDTO());
         model.addAttribute("StatusEnum", StatusApplicationForRelease.class);

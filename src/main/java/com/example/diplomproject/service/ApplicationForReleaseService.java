@@ -37,6 +37,19 @@ public class ApplicationForReleaseService {
         Product product = productRepository.findById(applicationForReleaseDTO.getIdProduct()).orElse(null);
         ApplicationForRelease applicationForRelease = applicationForReleaseDTO.build(product, StatusApplicationForRelease.IN_PROCESSING);
         applicationForRelease.setAccount(account);
-        applicationForReleaseRepository.save(applicationForRelease);
+        ApplicationForRelease application = applicationForReleaseRepository.save(applicationForRelease);
+        if (product != null) {
+            product.setApplicationForRelease(applicationForRelease);
+            productRepository.save(product);
+        }
+
+    }
+
+    public void deleteApplication(Long id) {
+        ApplicationForRelease application = applicationForReleaseRepository.getById(id);
+        Product product = productRepository.getById(application.getProduct().getIdProduct());
+        product.setApplicationForRelease(null);
+        productRepository.save(product);
+        applicationForReleaseRepository.delete(application);
     }
 }

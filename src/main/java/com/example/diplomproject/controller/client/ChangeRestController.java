@@ -4,6 +4,7 @@ import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
 import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.repository.ApplicationForReleaseRepository;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class ChangeRestController {
     private final ApplicationForMarkingService applicationForMarkingService;
     private final DeclarationTDService declarationTDService;
     private final ProductService productService;
+    private final ApplicationForReleaseService applicationForReleaseService;
 
     @GetMapping("/findTruck/{id}")
     public TruckDTO getTruckDTO(@PathVariable("id") Long id,
@@ -81,6 +83,11 @@ public class ChangeRestController {
     private ResponseEntity<Map<String, String>> regProduct(@RequestBody List<Product> productList, @PathVariable Long id){
         productService.updateProduct(productList, id);
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Товар успешно изменен"));
+    }
+    @GetMapping("/deleteZavForOtp/{id}")
+    private ResponseEntity<Map<String, String>> deleteZavForOtp(@PathVariable Long id){
+        applicationForReleaseService.deleteApplication(id);
+        return ResponseEntity.ok(AnswerMessage.getOKMessage("Заяка успешно отменена"));
     }
 
 }

@@ -15,9 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -144,11 +147,11 @@ public class ClientRestController {
     }
 
     @PostMapping("/maleZavForOtp")
-    public ResponseEntity<Map<String, String>> addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
-                                                                        Authentication authentication) {
+    public RedirectView addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
+                                           Authentication authentication, RedirectView redirectView) {
         applicationForReleaseService.addNewApplicationForRelease
                 (applicationForReleaseDTO, authentication.getName());
-
-        return ResponseEntity.ok(AnswerMessage.getOKMessage("Заявка на хронение умпешно оформлена"));
+        redirectView.setUrl("/client/makeZavForOtp");
+        return redirectView;
     }
 }

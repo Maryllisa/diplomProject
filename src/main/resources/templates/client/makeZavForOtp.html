@@ -89,8 +89,8 @@
                   <tr th:if="${!applicationForRelease.isEmpty()}" th:each="ap:${applicationForRelease}">
                     <td style="color: #1a1a1c" th:text="${ap.idApplicationForRelease}"></td>
                     <td style="color: #1a1a1c" th:text="${ap.product.idProduct+': '+ ap.product.nameProduct}"></td>
-                    <td style="color: #1a1a1c" th:text="${ap.statusApplicationForRelease.getRussianName.get(ap.statusApplicationForRelease)}"></td>
-                      <td><input type="button" value="Отменить заявку" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
+                    <td style="color: #1a1a1c" th:id="${'status' + ap.idApplicationForRelease}" th:text="${ap.statusApplicationForRelease.getRussianName.get(ap.statusApplicationForRelease)}"></td>
+                      <td><input type="button" value="Отменить заявку" th:onclick="|deleteZav(${ap.idApplicationForRelease})|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
 
                   </tr>
                   </tbody>
@@ -109,7 +109,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form th:object="${newApplicationForRelease}" th:action="*{'/client/maleZavForOtp'}" method="post">
+                        <form th:object="${newApplicationForRelease}" id="formZavForOtp" th:action="*{'/client/maleZavForOtp'}" method="post">
                             <div class="mb-3">
                                 <label for="productSelect" class="form-label">Товар</label>
                                 <select class="form-select" id="productSelect" th:field="${newApplicationForRelease.idProduct}">
@@ -118,11 +118,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="desiredDateInput" class="form-label">Желаемая дата отпуска</label>
-                                <input type="date" class="form-control" id="desiredDateInput" th:field="${newApplicationForRelease.date}">
+                                <input type="date" class="form-control" id="desiredDateInput" required min="2024-05-11" max="2026-05-11" th:field="${newApplicationForRelease.date}">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                                <button type="submit" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
+                                <button type="submit" class="btn btn-primary" onclick="showAlert()" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
                             </div>
                         </form>
                     </div>
@@ -133,4 +133,34 @@
     </div>
 </main>
 </body>
+<script>
+    function showAlert() {
+        const form = document.getElementById('formZavForOtp');
+        const  valid = form.checkValidity();
+        if (valid) {
+            alert('Заявление на отпуск успешно оформлено!');
+        } else {
+            alert('Пожалуйста, заполните все обязательные поля формы.');
+        }
+    }
+    function deleteZav(id){
+        const status = document.getElementById("status" + id).textContent;
+        if (status !== "В обработке")
+            alert("К сожелению заявку нельзя отменить, так как заявление в обработке у работников склада. Для подробной информации можете свявться с нами через чат...");
+        fetch('/client/deleteZavForOtp/' + id, {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Заяка отменена");
+                    window.location.href = '/client/makeZavForOtp';
+                } else if (data.status === "bad") {
+                    alert("Ошибка на сервере, попробуйте позже!");
+                } else {
+                    console.error('Произошла ошибка:', data.message);
+                }
+            });
+    }
+</script>
 </html>

@@ -45,6 +45,8 @@ public class Product {
     @JsonIgnore
     @ManyToOne
     private DeclarationTD declarationTD;
+    @OneToOne
+    private ApplicationForRelease applicationForRelease;
 
     public ProductDTO build() {
         return ProductDTO.builder()

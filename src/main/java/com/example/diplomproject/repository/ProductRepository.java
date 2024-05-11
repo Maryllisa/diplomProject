@@ -16,5 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "WHERE dec.account =?1 ")
     List<Product> findAllByDeclarationAndAccount(Account account);
 
+    List<Product> findAllByApplicationForReleaseIsNull();
+
     List<Product> findAllByDeclarationTD(DeclarationTD byId);
 }
