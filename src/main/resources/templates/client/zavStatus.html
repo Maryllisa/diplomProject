@@ -26,7 +26,7 @@
                      <td  style="color: #1a1a1c" th:text="${apl.dateZav}"/>
                           <td  style="color: #1a1a1c" th:text="${apl.datePost}"/>
                      <td  style="color: #1a1a1c" th:text="${apl.statusApplication.getRussianName().get(apl.statusApplication)}"/>
-                     <td><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal" data-bs-target="#detailsRequestModal"></td>
+                     <td><input type="button" value="Подробнее" th:onclick="|findById(${apl.idApplication})|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal" data-bs-target="#detailsRequestModal"></td>
                       </tr>
                            </tbody>
         </table>
@@ -41,28 +41,24 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label  class="form-label">№ Заявки</label>
-                            <span>вставить номер</span>
+                            <label  class="form-label">№ Заявки: </label>
+                            <span id="numberZav"></span>
                         </div>
                             <div class="mb-3">
-                                <label  class="form-label">Товар</label>
-                                <span>вставить товар</span>
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">Тип маркировки</label>
-                                <span>вставить тип марк</span>
+                                <label  class="form-label">Товар: </label>
+                                <span id="nameProduct"></span>
                             </div>
                         <div class="mb-3">
-                            <label  class="form-label">Дата заявки</label>
-                            <span>вставить дату</span>
+                            <label  class="form-label">Дата заявки: </label>
+                            <span id="dateZav"></span>
                         </div>
                         <div class="mb-3">
-                            <label  class="form-label">Дата Отгрузки</label>
-                            <span>вставить дату отгрузки</span>
+                            <label  class="form-label">Дата отгрузки: </label>
+                            <span id="datePost"></span>
                         </div>
                         <div class="mb-3">
-                            <label  class="form-label">Статус</label>
-                            <span>тут будет статус</span>
+                            <label  class="form-label">Статус: </label>
+                            <span id="status"></span>
                         </div>
 
                             <div class="modal-footer">
@@ -77,4 +73,31 @@
     </div>
 </main>
 </body>
+<script>
+    function findById(id){
+        fetch('/client/findApplicationForStorage/' + id, {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => {
+                const numberZav = document.getElementById("numberZav");
+                const nameProduct = document.getElementById("nameProduct");
+                const dateZav = document.getElementById("dateZav");
+                const datePost = document.getElementById("datePost");
+                const status = document.getElementById("status");
+
+                numberZav.textContent = data.idApplication;
+                nameProduct.textContent = data.countPositionProducts;
+                dateZav.textContent = data.dateZav;
+                datePost.textContent = data.datePost;
+                let russianNames = new Map();
+                russianNames.set('PENDING', "В ожидании");
+                russianNames.set('PROCESSING', "Обрабатывается");
+                russianNames.set('COMPLETED', "Завершено");
+                russianNames.set('CANCELLED', "Отменено");
+                status.textContent = russianNames.get(data.statusApplication);
+
+            });
+    }
+</script>
 </html>

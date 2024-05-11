@@ -210,4 +210,8 @@ public class ApplicationForStorageService {
         }
         return false;
     }
+
+    public ApplicationForStorage findAllById(Long id) {
+        return applicationForStorageRepository.getById(id);
+    }
 }

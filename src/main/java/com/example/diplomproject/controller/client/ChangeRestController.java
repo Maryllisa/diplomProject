@@ -1,8 +1,10 @@
 package com.example.diplomproject.controller.client;
 
 import com.example.diplomproject.message.AnswerMessage;
+import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.repository.ApplicationForReleaseRepository;
 import com.example.diplomproject.service.*;
@@ -31,6 +33,7 @@ public class ChangeRestController {
     private final DeclarationTDService declarationTDService;
     private final ProductService productService;
     private final ApplicationForReleaseService applicationForReleaseService;
+    private final ApplicationForStorageService applicationForStorageService;
 
     @GetMapping("/findTruck/{id}")
     public TruckDTO getTruckDTO(@PathVariable("id") Long id,
@@ -88,6 +91,10 @@ public class ChangeRestController {
     private ResponseEntity<Map<String, String>> deleteZavForOtp(@PathVariable Long id){
         applicationForReleaseService.deleteApplication(id);
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Заяка успешно отменена"));
+    }
+    @GetMapping("/findApplicationForStorage/{id}")
+    private ApplicationForStorageDTO findApplicationForStorage(@PathVariable Long id){
+        return applicationForStorageService.findAllById(id).build();
     }
 
 }

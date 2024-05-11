@@ -5,6 +5,7 @@ import com.example.diplomproject.config.annotation.imp.ValidDateFetcher;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,13 +35,15 @@ public class ApplicationForStorageDTO {
     private GoodTransportDocument goodTransportDocument;
     @NotNull
     private Long idDeclarationTD;
-
+    @JsonIgnore
     private DeclarationDTO declarationTD;
     @NotNull
     private Long idCRM;
+    @JsonIgnore
     private CRMDTO crm;
     @NotNull
     private Long idTruck;
+    @JsonIgnore
     private TruckDTO truck;
 
     public ApplicationForStorage build(StatusApplication statusApplication) {
