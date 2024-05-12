@@ -10,13 +10,38 @@
 <main>
     <div class="table-responsive " style="width:950px; margin-top:-88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Активные заявки</h4>
-        <table class="table table-striped table-sm">
+        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <select class="form-select" style="margin-left: 10px; width: 150px">
+                    <option value="" selected disabled>По признаку</option>
+                    <option value="признак1">Признак 1</option>
+                    <option value="признак2">Признак 2</option>
+                    <option value="признак3">Признак 3</option>
+                </select>
+            </div>
+
+            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                </form>
+                <select class="form-select" style="margin-left: 10px; width: 160px">
+                    <option value="" selected disabled>По параметру</option>
+                    <option value="признак1">Параметр 1</option>
+                    <option value="признак2">Параметр 2</option>
+                    <option value="признак3">Параметр 3</option>
+                </select>
+            </div>
+        </div>
+
+        <table class="table table-striped table-sm" style="margin-top: 20px">
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">Гос номер авто</th>
                 <th style="color: #814de5" scope="col">Поставщик</th>
                 <th style="color: #814de5" scope="col">Количество видов товара</th>
                 <th style="color: #814de5" scope="col">Номер договора СВХ</th>
+                <th style="color: #814de5" scope="col">Статус заявки</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -28,12 +53,70 @@
                 <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
                 <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
                 <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
-                <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Посмотреть подробнее" style="font-weight: bold;"></a><td/>
-                <td><input type="button" value="Завершить обработку" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/COMPLETED/' + ${ap.idApplication}|" style="font-weight: bold;"></td>
+                <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Подробнее"style="font-weight: bold; background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal"  data-bs-target="#modalDetails"></a><td/>
+                <td><input type="button" value="Завершить обработку" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/COMPLETED/' + ${ap.idApplication}|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
             </tr>
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDetailsLabel">Подробности заказа</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">№ заявки:</label>
+                            <span id="orderNumber"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Количество позиций товаров:</label>
+                            <span id="itemCount"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Дата поставки:</label>
+                            <span id="deliveryDate"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Дата заявки:</label>
+                            <span id="orderDate"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Статус заявки:</label>
+                            <span id="orderStatus"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">ТТН:</label>
+                            <span id="ttn"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Декларация:</label>
+                            <span id="declaration"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">CMR:</label>
+                            <span id="cmr"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit"
+                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c" data-bs-toggle="modal" data-bs-target="#modalChangeStatus"> Изменить статус
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 </body>
 
