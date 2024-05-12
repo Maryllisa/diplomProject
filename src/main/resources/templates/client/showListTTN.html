@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <style>
+        .show {
+            display: block !important;
+        }
+    </style>
 </head>
 <div th:insert="blocks/links :: div"></div>
 <body style="background-color: #f2f0f8">
@@ -20,14 +25,32 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="" th:each="">
-                <td style="color: #1a1a1c" th:text=""></td>
-                <td style="color: #1a1a1c"><a></a></td>// МАША ТУТ ВСТАВИШЬ ССЫЛКИ НА ПДФ
+            <tr th:if="${!ttn.isEmpty()}" th:each="t:${ttn}">
+                <td style="color: #1a1a1c" th:text="${t.goodsTransportDocumentNumbers}"></td>
+                <td style="color: #1a1a1c" > <button type="button" th:id="${'ttnModel' + t.idGoodTransportDocument}"
+                    th:onclick="|getFile(${t.idGoodTransportDocument})|"
+                >Просмотреть ТТН</button>
+                </td>
 
             </tr>
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="content">
+                    <iframe id="pdf"></iframe>
+                    <button class="btn" type="button" onclick="closeModel()" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Закрыть</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+<script src="/js/getFile.js">
+</script>
 </html>

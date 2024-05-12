@@ -8,6 +8,7 @@ import com.example.diplomproject.model.entity.enumStatus.Brand;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,7 +136,8 @@ public class ClientController {
     }
 
     @GetMapping("/showListTTN")
-    public String getShowListTTN() {
+    public String getShowListTTN(Authentication authentication, Model model) {
+        model.addAttribute("ttn", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
         return "/client/showListTTN";
     }
     @GetMapping("/showListTD")

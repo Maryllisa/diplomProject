@@ -34,4 +34,8 @@ public class GoodTransportDocumentService {
         Account account = userRepository.findByLogin(name);
         return goodTransportDocumentRepository.findAllByAccount(account);
     }
+
+    public GoodTransportDocument getSrcById(Long id) {
+        return goodTransportDocumentRepository.getById(id);
+    }
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Base64;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +24,8 @@ public class GoodTransportDocument {
     private String srcTransportDocument;
     @ManyToOne
     private Account account;
+
+    public String getEncoding(){
+       return Base64.getEncoder().encodeToString(this.srcTransportDocument.getBytes());
+    }
 }

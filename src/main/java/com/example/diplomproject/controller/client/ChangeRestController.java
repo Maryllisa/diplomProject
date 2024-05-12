@@ -6,11 +6,15 @@ import com.example.diplomproject.model.dto.IndividualsDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
+import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.repository.ApplicationForReleaseRepository;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
@@ -19,6 +23,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +41,7 @@ public class ChangeRestController {
     private final ProductService productService;
     private final ApplicationForReleaseService applicationForReleaseService;
     private final ApplicationForStorageService applicationForStorageService;
+    private final GoodTransportDocumentService goodTransportDocumentService;
 
     @GetMapping("/findTruck/{id}")
     public TruckDTO getTruckDTO(@PathVariable("id") Long id,
@@ -101,5 +108,6 @@ public class ChangeRestController {
     private ProductDTO findProduct(@PathVariable Long id){
         return productService.findById(id);
     }
+
 
 }
