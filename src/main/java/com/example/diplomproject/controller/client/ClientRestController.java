@@ -4,8 +4,9 @@ import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
+import com.example.diplomproject.model.entity.MarkForAgency;
+import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.service.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +36,7 @@ public class ClientRestController {
     private final ApplicationForStorageService applicationForStorageService;
     private final ApplicationForMarkingService applicationForMarkingService;
     private final ApplicationForReleaseService applicationForReleaseService;
-
+    private final MarkForAgencyService markForAgencyService;
     @SneakyThrows
     @PostMapping("/regOfDeclaration")
     private ResponseEntity<Map<String, String>> checkAddNewDeclaration(@Valid @ModelAttribute DeclarationDTO declarationDTO,
@@ -152,6 +151,18 @@ public class ClientRestController {
         applicationForReleaseService.addNewApplicationForRelease
                 (applicationForReleaseDTO, authentication.getName());
         redirectView.setUrl("/client/makeZavForOtp");
+        return redirectView;
+    }
+
+    @PostMapping("/markQuality")
+    public RedirectView addMarkQuality(Model model,
+                                            Authentication authentication,
+                                            @RequestParam("idMark") Long idMark,
+                                            @ModelAttribute MarkForAgency markForAgency,
+                                       RedirectView redirectView){
+        markForAgency.setTypeEvaluation(TypeEvaluation.markQuality);
+        markForAgencyService.addNewMarkQuality(idMark, markForAgency, authentication.getName());
+        redirectView.setUrl("/client/markQuality");
         return redirectView;
     }
 }

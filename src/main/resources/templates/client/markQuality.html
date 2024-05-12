@@ -31,9 +31,9 @@
                 <td style="color: #1a1a1c" th:text="${m.date}"></td>
                 <td style="color: #1a1a1c" th:text="${m.datePut}"></td>
                 <td style="color: #1a1a1c" th:text="${m.applicationForMarking.statusMarkingApplication.getRussianName().get(m.applicationForMarking.statusMarkingApplication)}"></td>
-                <td style="color: #1a1a1c">Тут поставишь оценку</td>
+                <td style="color: #1a1a1c" th:if="${m.markForAgency!=null}" th:text="${m.markForAgency.evaluation}"></td>
                 <td><input type="button" value="Оценить"
-                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal"
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" th:onclick="|setId(${m.idMarkingInfo})|"
                            data-bs-target="#createRequestModal"></td>
 
             </tr>
@@ -48,17 +48,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" id="otpProdQuality" novalidate="" >
-
+                        <form class="needs-validation" id="otpProdQuality" th:action="*{'/client/markQuality'}" method="post">
                             <div class="row g-3">
                                 <div class="col-sm-12">
                                     <label class="form-label" style="color: #814de5">Оцените пожалуйста качество маркировки</label>
-                                    <input type="number" class="form-control" id="Ocenka" required="">
-                                    <div class="invalid-feedback" style="color: red">
-                                        Проверьте корректность заполнения оценки.
-                                    </div>
+                                    <input type="number" class="form-control" id="Ocenka" min="1" max="10" required th:field="${newMarkForAgency.evaluation}">
                                 </div>
-
+                                <input type="hidden" name="idMark" id="idMark">
                                 <div class="modal-footer">
                                     <button class="w-100 btn btn-primary btn-lg" type="submit"
                                             style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить
@@ -77,4 +73,10 @@
     </div>
 </main>
 </body>
+<script>
+    function setId(id){
+        const idMark = document.getElementById("idMark");
+        idMark.value = id;
+    }
+</script>
 </html>

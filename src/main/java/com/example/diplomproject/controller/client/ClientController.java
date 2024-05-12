@@ -168,8 +168,9 @@ public class ClientController {
         return "/client/regProdPoDeclare";
     }
     @GetMapping("/markQuality")
-    public String getMarkQuality() {
-
+    public String getMarkQuality(Model model, Authentication authentication) {
+        model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName()));
+        model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/markQuality";
     }
     @GetMapping("/prinProdQuality")

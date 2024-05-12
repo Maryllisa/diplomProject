@@ -39,9 +39,10 @@ public class MarkingInfo {
     private String contentType;
     @OneToOne
     private ApplicationForMarking applicationForMarking;
-
     @OneToOne
     private Product product;
+    @OneToOne
+    private MarkForAgency markForAgency;
     public MarkingInfoDTO build(){
         return MarkingInfoDTO.builder()
                 .idMarkingInfo(idMarkingInfo)
