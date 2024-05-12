@@ -169,18 +169,22 @@ public class ClientController {
     }
     @GetMapping("/markQuality")
     public String getMarkQuality() {
+
         return "/client/markQuality";
     }
     @GetMapping("/prinProdQuality")
     public String getPrinProdQuality() {
+
         return "/client/prinProdQuality";
     }
     @GetMapping("/otpProdQuality")
     public String getOtpProdQuality() {
+
         return "/client/otpProdQuality";
     }
     @GetMapping("/comunicationQuality")
     public String getComunicationQuality() {
+
         return "/client/comunicationQuality";
     }
 
