@@ -13,29 +13,24 @@
 <div th:insert="blocks/clientSidebare :: clientSidebare"></div>
 <main>
     <div class="col-md-7 col-lg-8" style=" margin-left: 27%; ">
-        <h4 class="mb-3" style="color: #814de5"> Оформление декларации на товар к заявке</h4>
-        <form class="needs-validation" novalidate="" id="form" th:action="*{'/client/regOfDeclaration'}" method="post" th:object="${declaration}">
+        <h4 class="mb-3" style="color: #814de5"> Декларации на товар к заявке</h4>
             <div style="height: 80px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px">
                 <h5 style="margin-left: 1%">1 Декларация</h5>
                 <div style="margin-left: 15%; margin-top: -5%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4" style="margin-top: 3.8%">
-
-                            <span></span>
+                            <span id="ED" aria-description="ЭД"  th:text="${td.customEDCode}"></span>
                         </div>
 
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c;">Направление перемещения</label>
-                            <span></span>
-                            <datalist id="marking-types">
-                                <option value="ИМ">
-                                <option value="ЭК">
-                            </datalist>
+                            <h5 class="form-h5" style="color: #1a1a1c;">Направление перемещения</h5>
+                            <span id="directionOfMovement" list="marking-types" aria-description="ИМ/ЭК" th:text="${td.directionOfMovement}">
+                            </span>
                         </div>
 
                         <div class="col-sm-4" style="margin-left: -1%">
-                            <label class="form-label" style="color: #1a1a1c">Код таможенной процедуры</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код таможенной процедуры</h5>
+                            <span id="procedureCode"  th:text="${td.procedureCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -46,43 +41,44 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                            <span id="INN/KPP"  th:text="${td.senderDTO.taxId}" ></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Название организации</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                            <span id="organizationName" aria-description="Название организации"  th:text="${td.senderDTO.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Страна</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                            <span id="country" aria-description="Страна"  th:text="${td.senderDTO.address.city}" ></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                            <span id="postalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.senderDTO.address.postalCode}" ></span>
+
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Область</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                            <span id="region" aria-description="Область"  th:text="${td.senderDTO.address.region}" ></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                            <span id="city" aria-description="Населённый пункт"  th:text="${td.senderDTO.address.settlement}" ></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Дом</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                            <span id="house" aria-description="Дом"  th:text="${td.senderDTO.address.build}" ></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                            <span id="OGRN"  style="margin-left: -5px;" th:text="${td.senderDTO.registrationCode}" ></span>
                         </div>
                     </div>
                 </div>
@@ -92,12 +88,12 @@
                 <h5 style="margin-left: 1%">3 Формы</h5>
                 <div style="margin-left: 2%; margin-top: -15%">
                     <div class="row" style="margin-top: 20px;">
-                        <label class="form-label" style="color: #1a1a1c">№/колличество листов</label>
+                        <h5 class="form-h5" style="color: #1a1a1c">№/колличество листов</h5>
                         <div class="col-sm-6">
-                            <span></span>
+                            <span id="numbList"  style="width: 100%;" th:text="${td.numbList}"></span>
                         </div>
                         <div class="col-sm-6" >
-                            <span></span>
+                            <span id="colList"  style="width: 100%; margin-left: -7%" th:text="${td.colList}"></span>
                         </div>
                     </div>
                 </div>
@@ -107,12 +103,12 @@
                 <h5 style="margin-left: 1%">4 Спецификации</h5>
                 <div style="margin-left: 2%; margin-top: -15%">
                     <div class="row" style="margin-top: 20px;">
-                        <label class="form-label" style="color: #1a1a1c">Кол.специф./кол.листов</label>
+                        <h5 class="form-h5" style="color: #1a1a1c">Кол.специф./кол.листов</h5>
                         <div class="col-sm-6">
-                            <span></span>
+                            <span id="colSpec"  style="width: 100%;"  th:text="${td.colSpec}"></span>
                         </div>
                         <div class="col-sm-6" >
-                            <span></span>
+                            <span id="colListSpec"  style="width: 100%; margin-left: -7%" th:text="${td.colListSpec}"></span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +119,7 @@
                 <div style="margin-left: 2%; ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-7">
-                            <span></span>
+                            <span id="colProd"  style="width: 100%;" th:text="${td.colProd}"></span>
                         </div>
                     </div>
                 </div>
@@ -135,7 +131,7 @@
                 <div style="margin-left: 2%; ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-7">
-                            <span></span>
+                            <span id="osobenOfDeclar"  style="width: 100%;" th:text="${td.osobenOfDeclar}"></span>
                         </div>
                     </div>
                 </div>
@@ -146,43 +142,43 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                            <span id="RecipINN/KPP"  th:field="${td.recipientDTO.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Название организации</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                            <span id="RecipOrganizationName" aria-description="Название организации"  th:field="${td.recipientDTO.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Страна</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                            <span id="RecipCountry" aria-description="Страна"  th:field="${td.recipientDTO.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                            <span id="RecipPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:field="${td.recipientDTO.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Область</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                            <span id="RecipRegion" aria-description="Область"  th:field="${td.recipientDTO.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                            <span id="RecipCity" aria-description="Населённый пункт"  th:field="${td.recipientDTO.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Дом</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                            <span id="RecipHouse" aria-description="Дом"  th:field="${td.recipientDTO.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                            <span id="RecipOGRN"  style="margin-left: -5px;" th:field="${td.recipientDTO.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -193,43 +189,43 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                            <span id="FinYregINN/KPP"  th:field="${td.otvetstvenoeFace.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Название организации</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                            <span id="FinYregOrganizationName" aria-description="Название организации"  th:field="${td.otvetstvenoeFace.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Страна</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                            <span id="FinYregCountry" aria-description="Страна"  th:field="${td.otvetstvenoeFace.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                            <span id="FinYregPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:field="${td.otvetstvenoeFace.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Область</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                            <span id="FinYregRegion" aria-description="Область"  th:field="${td.otvetstvenoeFace.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                            <span id="FinYregCity" aria-description="Населённый пункт"  th:field="${td.otvetstvenoeFace.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Дом</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                            <span id="FinYregHouse" aria-description="Дом"  th:field="${td.otvetstvenoeFace.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                            <span id="FinYregOGRN"  style="margin-left: -5px;" th:field="${td.otvetstvenoeFace.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -241,7 +237,7 @@
                 <div style="margin-left: 2%; ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <span></span>
+                            <span id="tradingCountry"  style="width: 100%;" th:field="${td.tradingCountry}"></span>
                         </div>
                     </div>
                 </div>
@@ -252,7 +248,7 @@
                 <div style="margin-left: 2%;  ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-7">
-                            <span></span>
+                            <span id="tamPrice"  style="width: 100%;" th:field="${td.tamPrice}"></span>
                         </div>
                     </div>
                 </div>
@@ -264,43 +260,43 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                            <span id="INN/KPPDeklarant"  th:field="${td.declarator.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Название организации</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                            <span id="organizationNameDeklarant" th:field="${td.declarator.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Страна</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                            <span id="countryDeklarant"  th:field="${td.declarator.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                            <span id="postalCodeDeklarant"   style="margin-left: -5px;" th:field="${td.declarator.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Область</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                            <span id="regionDeklarant" aria-description="Область"  th:field="${td.declarator.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                            <span id="cityDeklarant" aria-description="Населённый пункт"  th:field="${td.declarator.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Дом</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                            <span id="houseDeklarant" aria-description="Дом"  th:field="${td.declarator.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                            <span id="OGRNDeklarant"  style="margin-left: -5px;" th:field="${td.declarator.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -311,12 +307,12 @@
                 <div style="margin-left: 2%; margin-top: -12%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                            <span id="countryCodeDeparture"  style="width: 100%;" th:field="${td.countryCodeDeparture}"></span>
                         </div>
                         <div class="col-sm-7"  style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Название страны</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                            <span id="countryNameDeparture"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameDeparture}"></span>
                         </div>
                     </div>
                 </div>
@@ -327,12 +323,12 @@
                 <div style="margin-left: 2%; margin-top: -12%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                            <span id="countryCodeOrigin"  style="width: 100%;" th:field="${td.countryCodeOrigin}"></span>
                         </div>
                         <div class="col-sm-7" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Название страны</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                            <span id="countryNameOrigin"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameOrigin}"></span>
                         </div>
                     </div>
                 </div>
@@ -343,12 +339,12 @@
                 <div style="margin-left: 2%;">
                     <div class="row" style=" margin-top: -5%;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                            <span id="countryCodeDestination"  style="width: 100%;" th:field="${td.countryCodeDestination}"></span>
                         </div>
                         <div class="col-sm-7" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Название страны</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                            <span id="countryNameDestination"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameDestination}"></span>
                         </div>
                     </div>
                 </div>
@@ -359,12 +355,12 @@
                 <div style="margin-left: 2%; margin-top: -5%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
+                            <span id="vehicleCount"  style="width: 100%;" th:field="${td.vehicleCount}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Номера т.с.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Номера т.с.</h5>
+                            <span id="vehicleNumbers"  style="width: 100%; margin-left: -7%" th:field="${td.vehicleNumbers}"></span>
                         </div>
                     </div>
                 </div>
@@ -375,8 +371,8 @@
                 <div style="margin-left: 5%;">
                     <div class="row" style=" margin-top: -5%;">
                         <div class="col-sm-5">
-                            <label class="form-label" style="color: #1a1a1c">Код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                            <span th:text="${td.conteiner}"></span>
                         </div>
                     </div>
                 </div>
@@ -387,12 +383,12 @@
                 <div style="margin-left: 2%; margin-top: -3%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c"> код у.п.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c"> код у.п.</h5>
+                            <span id="YPcode"  style="width: 100%;" th:field="${td.codeYP}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Наименование условий поставки</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Наименование условий поставки</h5>
+                            <span id="YPname"  style="width: 100%; margin-left: -7%" th:field="${td.nameYP}"></span>
                         </div>
                     </div>
                 </div>
@@ -403,12 +399,12 @@
                 <div style="margin-left: 2%; margin-top: -3%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
+                            <span id="vehicleCountOnBorder"  style="width: 100%;" th:field="${td.vehicleCountOnBorder}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Номера транспортного средства</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Номера транспортного средства</h5>
+                            <span id="vehicleNumbersOnBorder"  style="width: 100%; margin-left: -7%" th:field="${td.vehicleNumbersOnBorder}"></span>
                         </div>
                     </div>
                 </div>
@@ -419,16 +415,17 @@
                 <div style="margin-left: 2%; margin-top: -3%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c">Код валюты</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код валюты</h5>
+                            <span id="currencyCode"  style="width: 100%;" th:field="${td.currencyCode}"></span>
                         </div>
                         <div class="col-sm-6" style="margin-left: 5%">
-                            <label class="form-label" style="color: #1a1a1c">Сумма по счету</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Сумма по счету</h5>
+                            <span id="invoiceAmount"  style="width: 100%; margin-left: -7%" th:field="${td.invoiceAmount}"></span>
                         </div>
                         <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
                             <div class="form-check">
-                                <span></span>
+                                <span  id="freeDeliveryCheckbox" th:field="${td.freeDeliveryCheckbox}"></span>
+                                <h5 class="form-check-h5" for="freeDeliveryCheckbox" style="color: #1a1a1c">Безвозмездная поставка</h5>
                             </div>
                         </div>
                     </div>
@@ -440,27 +437,27 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">Валюта</label>
-                            <!--              <span type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;" th:field="${declaration.currencyRateDTO.}">-->
+                            <h5 class="form-h5" style="color: #1a1a1c">Валюта</h5>
+                            <!--              <span id="currency"  style="width: 100%;" th:field="${td.currencyRateDTO.}">-->
                         </div>
                     </div>
                     <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
-                        <label class="form-label" style="color: #1a1a1c">Считать по курсам</label>
-                        <span></span>
+                        <h5 class="form-h5" style="color: #1a1a1c">Считать по курсам</h5>
+                        <span id="exchangeRateDate"  style="width: 100%;" th:field="${td.currencyRateDTO.date}"></span>
                     </div>
 
 
                     <div class="col-sm-5">
-                        <label class="form-label" style="color: #1a1a1c">Курс евро</label>
-                        <span></span>
+                        <h5 class="form-h5" style="color: #1a1a1c">Курс евро</h5>
+                        <span id="euroExchangeRate"  style="width: 100%;" th:field="${td.currencyRateDTO.euroRate}"></span>
                     </div>
                     <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
-                        <label class="form-label" style="color: #1a1a1c">Курс USD</label>
-                        <span></span>
+                        <h5 class="form-h5" style="color: #1a1a1c">Курс USD</h5>
+                        <span id="usdExchangeRate"  style="width: 100%; margin-left: -7%" th:field="${td.currencyRateDTO.usdRate}"></span>
                     </div>
                     <div class="col-sm-12" style="margin-left: 5%">
-                        <label class="form-label" style="color: #1a1a1c">Курс валют для расчета</label>
-                        <span></span>
+                        <h5 class="form-h5" style="color: #1a1a1c">Курс валют для расчета</h5>
+                        <span id="calculationExchangeRate"  style="width: 100%; margin-left: -6%" th:field="${td.currencyRateDTO.currencyRate}"></span>
                     </div>
 
                 </div>
@@ -471,12 +468,12 @@
                 <div style="margin-left: 2%; margin-top: -5%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
-                            <label class="form-label" style="color: #1a1a1c">Код сделки</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код сделки</h5>
+                            <span id="transactionCharacterCode"  style="width: 100%;" th:field="${td.transactionCharacterCode}"></span>
                         </div>
                         <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
-                            <label class="form-label" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</h5>
+                            <span id="foreignTradeFeatureCode"  style="width: 100%;" th:field="${td.foreignTradeFeatureCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -487,8 +484,8 @@
                     <h5 style="margin-left: 10px">22 Вид транспорта на границе</h5>
                     <div style="margin-left: 20px; ">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
+                            <span id="borderTransportTypeCode"  style="width: 100%;" th:field="${td.borderTransportTypeCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -497,8 +494,8 @@
                     <h5 style="margin-left: 1%">23 Вид транспорта внутри страны</h5>
                     <div style="margin-left: 2%;">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
+                            <span id="domesticTransportTypeCode"  style="width: 100%;" th:field="${td.domesticTransportTypeCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -509,7 +506,7 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
-                            <span></span>
+                            <span id="grossWeights"  style="width: 100%;" th:field="${td.grossWeight}"></span>
                         </div>
                     </div>
                 </div>
@@ -520,7 +517,7 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
-                            <span></span>
+                            <span id="netWeights"  style="width: 100%;" th:field="${td.netWeight}"></span>
                         </div>
                     </div>
                 </div>
@@ -531,13 +528,13 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Код таможни</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Код таможни</h5>
+                            <span id="customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:field="${td.customsCode}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-11">
-                            <span></span>
+                            <span class="form-control" id="largeTextArea" rows="8" aria-description="Введите текст" required="" style="height: 160px; width: 100%;" th:field="${td.largeTextArea}"></span>
                         </div>
                     </div>
                 </div>
@@ -548,78 +545,78 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Реестр УЗО</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Реестр УЗО</h5>
+                            <span id="uzoRegister" aria-description="Введите реестр УЗО"  style="width: 100%;" th:field="${td.productLocationDTO.uzoRegistry}"></span>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">код таможни</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">код таможни</h5>
+                            <span id="30customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:field="${td.productLocationDTO.customsCode}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c">Тип</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Тип</h5>
+                            <span id="type" aria-description="Введите тип"  style="width: 100%;" th:field="${td.productLocationDTO.type}"></span>
                         </div>
                         <div class="col-sm-1">
-                            <label class="form-label" style="color: #1a1a1c">1/2/3</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">1/2/3</h5>
+                            <span id="quantity"  style="width: 100%;" th:field="${td.productLocationDTO.quantity}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: -70px; margin-left: 220px">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">Номер документа</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Номер документа</h5>
+                            <span id="documentNumber" aria-description="Введите номер документа"  style="width: 100%;" th:field="${td.productLocationDTO.documentNumber}"></span>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Дата</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дата</h5>
+                            <span id="date" aria-description="Введите дату"  style="width: 100%;" th:field="${td.productLocationDTO.date}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Номер ЗТК</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Номер ЗТК</h5>
+                            <span id="ztkNumber" aria-description="Введите номер ЗТК"  style="width: 100%;" th:field="${td.productLocationDTO.ztkNumber}"></span>
                         </div>
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Вид транспорта</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Вид транспорта</h5>
+                            <span id="transportationType" aria-description="Введите вид транспорта"  style="width: 100%;" th:field="${td.productLocationDTO.transportType}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: -70px; margin-left: 450px">
                         <div class="col-sm-9">
-                            <label class="form-label" style="color: #1a1a1c">Номер транспортного средства</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Номер транспортного средства</h5>
+                            <span id="vehicleNumber" aria-description="Введите номер транспортного средства"  style="width: 100%;" th:field="${td.productLocationDTO.vehicleNumber}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Ж/д станция / порт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Ж/д станция / порт</h5>
+                            <span id="stationPort" aria-description="Введите ж/д станцию / порт"  style="width: 100%;" th:field="${td.productLocationDTO.stationOrPort}"></span>
                         </div>
                         <div class="col-sm-4" >
-                            <label class="form-label" style="color: #1a1a1c">Cтрана</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Cтрана</h5>
+                            <span id="30country" aria-description="Введите страну"  style="width: 100%;" th:field="${td.productLocationDTO.country}"></span>
                         </div>
                         <div class="col-sm-3">
-                            <label class="form-label" style="color: #1a1a1c">Почтовый код</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Почтовый код</h5>
+                            <span id="30postalCode" aria-description="Введите почтовый код"  style="width: 100%;" th:field="${td.productLocationDTO.postalCode}"></span>
                         </div>
                     </div>
 
 
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Область, район</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Область, район</h5>
+                            <span id="30region" aria-description="Введите область, район"  style="width: 100%;" th:field="${td.productLocationDTO.regionOrDistrict}"></span>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                            <span id="locality" aria-description="Введите населённый пункт"  style="width: 100%;" th:field="${td.productLocationDTO.locality}"></span>
                         </div>
                         <div class="col-sm-2">
-                            <label class="form-label" style="color: #1a1a1c">Дом</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                            <span id="30house" aria-description="Введите дом"  style="width: 100%;" th:field="${td.productLocationDTO.houseNumber}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
@@ -634,7 +631,7 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 30px;">
                         <div class="col-sm-12">
-                            <span></span>
+                            <span id="cargoDescription" rows="8" aria-description="Введите описание товаров" required="" style="width: 100%;" th:field="${td.productDescription}"></span>
                         </div>
                     </div>
                 </div>
@@ -642,68 +639,65 @@
 
             <div id="infoDiv" style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
                 <h5 style="margin-left: 1%"><p>Информация о товаре</p></h5>
-                <div style="margin-left: 2%; margin-top: -2%">
+                <div style="margin-left: 2%; margin-top: -2%" th:each="p:${listProduct}">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">29 № товара</label>
-                            <span  style="width: 100%;" ></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">29 № товара</h5>
+                            <span id="itemNumber0" th:text="${p.idProduct}" style="width: 100%;" ></span>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">30 Код товара</label>
-                            <span style="width: 100%;" > </span>
+                            <h5 class="form-h5" style="color: #1a1a1c">30 Код товара</h5>
+                            <span id="productCode0" th:text="${p.productCode}" style="width: 100%;" ></span>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">31 Наименовние товра</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">31 Наименовние товра</h5>
+                            <span id="nameProduct0" th:text="${p.nameProduct}" style="width: 100%;" ></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">32 Код страны происхождения</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">32 Код страны происхождения</h5>
+                            <span id="originCountryCode0" th:text="${p.originCountryCode}" style="width: 100%;" ></span>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">33 Вес брутто</label>
-                            <span></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">34 Преференция</label>
-                            <span></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">35 Процедура</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">33 Вес брутто</h5>
+                            <span id="grossWeight0" th:text="${p.grossWeight}" style="width: 100%;"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">36 Вес нетто</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">34 Преференция</h5>
+                            <span id="preference0" th:text="${p.preference}" style="width: 100%;" ></span>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" style="color: #1a1a1c">37 Квота</label>
-                            <span></span>
+                            <h5 class="form-h5" style="color: #1a1a1c">35 Процедура</h5>
+                            <span id="procedure0" th:text="${p.procedure}" style="width: 100%;"></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-6">
+                            <h5 class="form-h5" style="color: #1a1a1c">36 Вес нетто</h5>
+                            <span id="netWeight0" th:text="${p.netWeight}" style="width: 100%;"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5 class="form-h5" style="color: #1a1a1c">37 Квота</h5>
+                            <span id="quota0" th:text="${p.quota}" style="width: 100%;"></span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!--            <button class="btn" type="button" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" onclick="duplicateAndModifyDiv()">Добавить товар</button>-->
             <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
                 <button class="btn" type="submit"  style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
             </div>
-        </form>
-
     </div>
 
-    <!--    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">-->
+    <!--    <div class="modal fade" id="myModal" tabindex="-1" aria-h5ledby="createRequestModalh5" aria-hidden="true">-->
 <!--        <div class="modal-dialog">-->
 <!--            <div class="modal-content">-->
 
 <!--                <div class="modal-body">-->
-<!--                    <label class="label" style="color: #1a1a1c;">Выберите поставщика</label>-->
+<!--                    <h5 class="h5" style="color: #1a1a1c;">Выберите поставщика</h5>-->
 <!--                    <select th:if="${supplier}" class="form-select" id="supplier" required>-->
 <!--                        <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
 <!--                    </select>-->
@@ -721,5 +715,4 @@
     <script src="/js/main.js"></script>
 </main>
 </body>
-
 </html>

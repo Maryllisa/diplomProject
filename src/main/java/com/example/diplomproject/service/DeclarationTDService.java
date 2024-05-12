@@ -281,4 +281,8 @@ public class DeclarationTDService {
     public List<Product> findAllByDeclarationId(Long declarationId) {
         return productService.getAllProductByDeclaration(declarationId);
     }
+
+    public DeclarationTD getById(Long id) {
+        return declarationTDRepository.getById(id);
+    }
 }

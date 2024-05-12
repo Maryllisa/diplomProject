@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -141,11 +142,14 @@ public class ClientController {
         return "/client/showListTTN";
     }
     @GetMapping("/showListTD")
-    public String getShowListTD() {
+    public String getShowListTD(Model model, Authentication authentication) {
+        model.addAttribute("tdList", declarationTDService.findAllByAccount(authentication.getName()));
         return "/client/showListTD";
     }
-    @GetMapping("/showTD")
-    public String getShowTD() {
+    @GetMapping("/showTD/{id}")
+    public String getShowTD(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("td", declarationTDService.getById(id).build());
+        model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
         return "/client/showTD";
     }
     @GetMapping("/showListCMR")
