@@ -22,13 +22,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:if="" th:each="">
-        <td style="color: #1a1a1c" th:text=""></td>
-        <td style="color: #1a1a1c" th:text=""></td>
-        <td style="color: #1a1a1c" th:text=""></td>
-        <td style="color: #1a1a1c" th:text=""></td>
-        <td style="color: #1a1a1c" th:text=""></td>
-        <button onclick="window.location.href='/client/showCMR'" style="font-weight: bold; background-color: #814de5; color: #f2f0f8">Подробнее</button>
+      <tr th:if="${!crmList.isEmpty()}" th:each="crm:${crmList}">
+        <td style="color: #1a1a1c" th:text="${crm.numbers}"></td>
+        <td style="color: #1a1a1c" th:text="${crm.sender.registrationCode + ': ' + crm.sender.organizationName}"></td>
+        <td style="color: #1a1a1c" th:text="${crm.resipient.registrationCode + ': ' + crm.resipient.organizationName}"></td>
+        <td style="color: #1a1a1c" th:text="${crm.volume}"></td>
+        <td style="color: #1a1a1c" th:text="${crm.cargoReceivedDate}"></td>
+        <td>
+          <button th:onclick="|window.location.href='/client/showCMR/' + ${crm.idCRM}|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8">Подробнее</button>
         </td>
       </tr>
       </tbody>

@@ -11,50 +11,48 @@
 <main>
   <div class="col-md-7 col-lg-8" style=" margin-left: 27%; ">
     <h4 class="mb-3" style="color: #814de5"> Просмотр CMR</h4>
-    <form class="needs-validation" id="formAddCRM" novalidate="" th:object="${crm}" th:action="*{'/client/addCRM'}" method="post">
-
       <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
         <h5 style="margin-left: 1%">1 Отправитель</h5>
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+              <span th:text="${crm.sender.taxId}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+              <span th:text="${crm.sender.organizationName}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.sender.address.city}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+              <span th:text="${crm.sender.address.postalCode}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+              <span th:text="${crm.sender.address.settlement}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+              <span th:text="${crm.sender.address.region}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+              <span th:text="${crm.sender.address.build}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+              <span th:text="${crm.sender.address.ogrnNumber}"></span>
             </div>
           </div>
         </div>
@@ -65,43 +63,43 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+              <span th:text="${crm.resipient.taxId}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+              <span th:text="${crm.resipient.organizationName}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.resipient.address.city}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+              <span th:text="${crm.resipient.address.postalCode}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+              <span th:text="${crm.resipient.address.settlement}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+              <span th:text="${crm.resipient.address.region}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+              <span th:text="${crm.resipient.address.build}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+              <span th:text="${crm.resipient.address.ogrnNumber}"></span>
             </div>
           </div>
         </div>
@@ -113,23 +111,23 @@
 
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.countryWH}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Город</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Город</h5>
+              <span th:text="${crm.cityWH}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Улица</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Улица</h5>
+              <span th:text="${crm.streetWH}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Номер дома</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Номер дома</h5>
+              <span th:text="${crm.houseNumberWH}"></span>
             </div>
           </div>
 
@@ -142,29 +140,29 @@
 
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.loadingCountry}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Город</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Город</h5>
+              <span th:text="${crm.loadingCity}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Улица</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Улица</h5>
+              <span th:text="${crm.loadingStreet}"></span>
             </div>
 
             <div class="col-sm-2">
-              <label class="form-label" style="color: #1a1a1c">Номер дома</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Номер дома</h5>
+              <span th:text="${crm.loadingHouseNumber}"></span>
             </div>
 
 
             <div class="col-sm-4">
-              <label class="form-label" style="color: #1a1a1c">Дата погрузки</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дата погрузки</h5>
+              <span th:text="${crm.loadingDate}"></span>
             </div>
 
         </div>
@@ -176,44 +174,44 @@
 
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Счет-фактура (invoice)</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Счет-фактура (invoice)</h5>
+              <span th:text="${crm.invoiceDocument}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Отгрузочная спецификация</label>
-              <span></span>
-            </div>
-          </div>
-
-          <div class="row" style="margin-top: 5px;">
-            <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Сертификат качества</label>
-              <span></span>
-            </div>
-
-            <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Ветеринарный сертификат</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Отгрузочная спецификация</h5>
+              <span th:text="${crm.shippingSpecificationDocument}"></span>
             </div>
           </div>
 
           <div class="row" style="margin-top: 5px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Карантинный сертификат</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Сертификат качества</h5>
+              <span th:text="${crm.qualityCertificateDocument}"></span>
             </div>
 
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Сертификат о происхождении</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Ветеринарный сертификат</h5>
+              <span th:text="${crm.veterinaryCertificateDocument}"></span>
             </div>
           </div>
 
           <div class="row" style="margin-top: 5px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Акт загрузки</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Карантинный сертификат</h5>
+              <span th:text="${crm.quarantineCertificateDocument}"></span>
+            </div>
+
+            <div class="col-sm-6">
+              <h5 class="form-h5" style="color: #1a1a1c">Сертификат о происхождении</h5>
+              <span th:text="${crm.certificateOfOriginDocument}"></span>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="col-sm-6">
+              <h5 class="form-h5" style="color: #1a1a1c">Акт загрузки</h5>
+              <span th:text="${crm.loadingCertificateDocument}"></span>
             </div>
           </div>
 
@@ -224,25 +222,25 @@
         <h5 style="margin-left: 1%">6-9</h5>
         <div class="row" style="margin-left: 2%; margin-top:  1%;">
           <div class="col-sm-6">
-            <label class="form-label" style="color: #1a1a1c">Количество грузовых мест</label>
-            <span></span>
+            <h5 class="form-h5" style="color: #1a1a1c">Количество грузовых мест</h5>
+            <span th:text="${crm.cargoQuantity}"></span>
           </div>
 
           <div class="col-sm-6">
-            <label class="form-label" style="color: #1a1a1c">Наименование груза</label>
-            <span></span>
+            <h5 class="form-h5" style="color: #1a1a1c">Наименование груза</h5>
+            <span th:text="${crm.cargoName}"></span>
           </div>
         </div>
 
         <div class="row" style="margin-left: 2%; ">
           <div class="col-sm-6">
-            <label class="form-label" style="color: #1a1a1c">Род упаковки</label>
-            <span></span>
+            <h5 class="form-h5" style="color: #1a1a1c">Род упаковки</h5>
+            <span th:text="${crm.nackagingType}"></span>
           </div>
 
           <div class="col-sm-6">
-            <label class="form-label" style="color: #1a1a1c">Номера</label>
-            <span></span>
+            <h5 class="form-h5" style="color: #1a1a1c">Номера</h5>
+            <span th:text="${crm.numbers}"></span>
           </div>
         </div>
       </div>
@@ -254,7 +252,7 @@
           <div style="margin-left: 2%; margin-top: -2%">
             <div class="row" style="margin-top: 20px;">
               <div class="col-sm-11">
-                <span></span>
+                <span th:text="${crm.statistikCode}"></span>
               </div>
             </div>
           </div>
@@ -265,7 +263,7 @@
           <div style="margin-left: 2%; margin-top: -2%">
             <div class="row" style="margin-top: 20px;">
               <div class="col-sm-11">
-                <span></span>
+                <span th:text="${crm.grossWeight}"></span>
               </div>
             </div>
           </div>
@@ -276,7 +274,7 @@
           <div style="margin-left: 2%; margin-top: -2%">
             <div class="row" style="margin-top: 20px;">
               <div class="col-sm-11">
-                <span></span>
+                <span th:text="${crm.volume}"></span>
               </div>
             </div>
           </div>
@@ -288,28 +286,28 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
-              <label class="form-label" style="color: #1a1a1c">Название таможенного поста</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Название таможенного поста</h5>
+              <span th:text="${crm.customsProcessing.customsPostName}"></span>
             </div>
             <div class="col-sm-4">
-              <label class="form-label" style="color: #1a1a1c">Код таможни</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Код таможни</h5>
+              <span th:text="${crm.customsProcessing.customsCode}"></span>
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
-              <label class="form-label" style="color: #1a1a1c">Юридическое название СВХ и его адрес</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Юридическое название СВХ и его адрес</h5>
+              <span th:text="${crm.customsProcessing.svhNameAndAddress}"></span>
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
-              <label class="form-label" style="color: #1a1a1c">Номер лицензии</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Номер лицензии</h5>
+              <span th:text="${crm.customsProcessing.licenseNumber}"></span>
             </div>
             <div class="col-sm-4">
-              <label class="form-label" style="color: #1a1a1c">Дата выдачи</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дата выдачи</h5>
+              <span th:text="${crm.customsProcessing.issueDate}"></span>
             </div>
           </div>
         </div>
@@ -320,22 +318,22 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.returnCountry}"></span>
             </div>
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Город</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Город</h5>
+              <span th:text="${crm.returnCity}"></span>
             </div>
           </div>
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Улица</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Улица</h5>
+              <span th:text="${crm.returnStreet}"></span>
             </div>
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+              <span th:text="${crm.returnHouse}"></span>
             </div>
           </div>
         </div>
@@ -346,8 +344,8 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
-              <label class="form-label" style="color: #1a1a1c">Условия оплаты</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Условия оплаты</h5>
+              <span th:text="${crm.paymentTerms}"></span>
             </div>
           </div>
         </div>
@@ -358,43 +356,43 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+              <span th:text="${crm.carrier.taxId}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+              <span th:text="${crm.carrier.organizationName}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.carrier.address.city}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+              <span th:text="${crm.carrier.address.postalCode}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+              <span th:text="${crm.carrier.address.region}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+              <span th:text="${crm.carrier.address.settlement}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+              <span th:text="${crm.carrier.address.build}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+              <span th:text="${crm.carrier.address.ogrnNumber}"></span>
             </div>
           </div>
         </div>
@@ -405,43 +403,43 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+              <span th:text="${crm.subsequentCarrier.taxId}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+              <span th:text="${crm.subsequentCarrier.organizationName}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+              <span th:text="${crm.subsequentCarrier.address.city}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+              <span th:text="${crm.subsequentCarrier.address.postalCode}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+              <span th:text="${crm.subsequentCarrier.address.region}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+              <span th:text="${crm.subsequentCarrier.address.settlement}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+              <span th:text="${crm.subsequentCarrier.address.build}"></span>
             </div>
 
             <div class="col-sm-3">
-              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+              <span th:text="${crm.subsequentCarrier.address.ogrnNumber}"></span>
             </div>
           </div>
         </div>
@@ -452,8 +450,8 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-12">
-              <label class="form-label" style="color: #1a1a1c">Оговорки и замечания</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Оговорки и замечания</h5>
+              <span th:text="${crm.carrierNotes}"></span>
             </div>
           </div>
         </div>
@@ -465,8 +463,8 @@
           <div style="margin-left: 2%; margin-top: -5%">
             <div class="row" style="margin-top: 20px;">
               <div class="col-sm-12">
-                <label class="form-label" style="color: #1a1a1c">Дата получения</label>
-                <span></span>
+                <h5 class="form-h5" style="color: #1a1a1c">Дата получения</h5>
+                <span th:text="${crm.cargoReceivedDate}"></span>
               </div>
             </div>
           </div>
@@ -477,8 +475,8 @@
           <div style="margin-left: 2%; margin-top: -5%">
             <div class="row" style="margin-top: 20px;">
               <div class="col-sm-12">
-                <label class="form-label" style="color: #1a1a1c">Дата заполнения</label>
-                <span></span>
+                <h5 class="form-h5" style="color: #1a1a1c">Дата заполнения</h5>
+                <span th:text="${crm.cmrFilledDate}"></span>
               </div>
             </div>
           </div>
@@ -490,30 +488,28 @@
         <div style="margin-left: 2%; margin-top: -2%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Регистрационный номер тягача</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Регистрационный номер тягача</h5>
+              <span th:text="${crm.tractorRegistrationNumber}"></span>
             </div>
             <div class="col-sm-6">
-              <label class="form-label" style="color: #1a1a1c">Регистрационный номер прицепа</label>
-              <span></span>
+              <h5 class="form-h5" style="color: #1a1a1c">Регистрационный номер прицепа</h5>
+              <span th:text="${crm.trailerRegistrationNumber}"></span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
-        <button class="btn  " type="submit" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
+        <button class="btn  " type="submit" style="width: 1000px; background-color: #814de5; color: #1a1a1c; " onclick="window.location.href='/client/showListCMR'">ОК</button>
       </div>
       </div>
-    </form>
-
   </div>
-<!--  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">-->
+<!--  <div class="modal fade" id="myModal" tabindex="-1" aria-h5ledby="createRequestModalh5" aria-hidden="true">-->
 <!--    <div class="modal-dialog">-->
 <!--      <div class="modal-content">-->
 
 <!--        <div class="modal-body">-->
-<!--          <label class="label" style="color: #1a1a1c;">Выберите поставщика</label>-->
+<!--          <h5 class="h5" style="color: #1a1a1c;">Выберите поставщика</h5>-->
 <!--          <select th:if="${supplier}" class="form-select" id="supplier" required>-->
 <!--            <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
 <!--          </select>-->

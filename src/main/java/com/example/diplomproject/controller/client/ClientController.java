@@ -153,11 +153,13 @@ public class ClientController {
         return "/client/showTD";
     }
     @GetMapping("/showListCMR")
-    public String getShowListCMR() {
+    public String getShowListCMR(Model model, Authentication authentication) {
+        model.addAttribute("crmList", crmService.getAllCRM(authentication.getName()));
         return "/client/showListCMR";
     }
-    @GetMapping("/showCMR")
-    public String getShowCMR() {
+    @GetMapping("/showCMR/{id}")
+    public String getShowCMR(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("crm", crmService.getCRMByID(id).build());
         return "/client/showCMR";
     }
     @GetMapping("/regProdPoDeclare")

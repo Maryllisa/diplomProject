@@ -244,4 +244,12 @@ public class CRMService {
         });
         return crmdtoList;
     }
+
+    public CRM getCRMByID(Long id) {
+        return crmRepository.getById(id);
+    }
+
+    public List<CRM> getAllCRM(String name) {
+        return crmRepository.findAllByAccount(userRepository.findByLogin(name));
+    }
 }

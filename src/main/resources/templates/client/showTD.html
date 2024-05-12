@@ -143,42 +143,42 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="RecipINN/KPP"  th:field="${td.recipientDTO.taxId}"></span>
+                            <span id="RecipINN/KPP"  th:text="${td.recipientDTO.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="RecipOrganizationName" aria-description="Название организации"  th:field="${td.recipientDTO.organizationName}"></span>
+                            <span id="RecipOrganizationName" aria-description="Название организации"  th:text="${td.recipientDTO.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="RecipCountry" aria-description="Страна"  th:field="${td.recipientDTO.address.city}"></span>
+                            <span id="RecipCountry" aria-description="Страна"  th:text="${td.recipientDTO.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="RecipPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:field="${td.recipientDTO.address.postalCode}"></span>
+                            <span id="RecipPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.recipientDTO.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="RecipRegion" aria-description="Область"  th:field="${td.recipientDTO.address.region}"></span>
+                            <span id="RecipRegion" aria-description="Область"  th:text="${td.recipientDTO.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="RecipCity" aria-description="Населённый пункт"  th:field="${td.recipientDTO.address.settlement}"></span>
+                            <span id="RecipCity" aria-description="Населённый пункт"  th:text="${td.recipientDTO.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="RecipHouse" aria-description="Дом"  th:field="${td.recipientDTO.address.build}"></span>
+                            <span id="RecipHouse" aria-description="Дом"  th:text="${td.recipientDTO.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="RecipOGRN"  style="margin-left: -5px;" th:field="${td.recipientDTO.registrationCode}"></span>
+                            <span id="RecipOGRN"  style="margin-left: -5px;" th:text="${td.recipientDTO.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -190,42 +190,42 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="FinYregINN/KPP"  th:field="${td.otvetstvenoeFace.taxId}"></span>
+                            <span id="FinYregINN/KPP"  th:text="${td.otvetstvenoeFace.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="FinYregOrganizationName" aria-description="Название организации"  th:field="${td.otvetstvenoeFace.organizationName}"></span>
+                            <span id="FinYregOrganizationName" aria-description="Название организации"  th:text="${td.otvetstvenoeFace.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="FinYregCountry" aria-description="Страна"  th:field="${td.otvetstvenoeFace.address.city}"></span>
+                            <span id="FinYregCountry" aria-description="Страна"  th:text="${td.otvetstvenoeFace.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="FinYregPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:field="${td.otvetstvenoeFace.address.postalCode}"></span>
+                            <span id="FinYregPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.otvetstvenoeFace.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="FinYregRegion" aria-description="Область"  th:field="${td.otvetstvenoeFace.address.region}"></span>
+                            <span id="FinYregRegion" aria-description="Область"  th:text="${td.otvetstvenoeFace.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="FinYregCity" aria-description="Населённый пункт"  th:field="${td.otvetstvenoeFace.address.settlement}"></span>
+                            <span id="FinYregCity" aria-description="Населённый пункт"  th:text="${td.otvetstvenoeFace.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="FinYregHouse" aria-description="Дом"  th:field="${td.otvetstvenoeFace.address.build}"></span>
+                            <span id="FinYregHouse" aria-description="Дом"  th:text="${td.otvetstvenoeFace.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="FinYregOGRN"  style="margin-left: -5px;" th:field="${td.otvetstvenoeFace.registrationCode}"></span>
+                            <span id="FinYregOGRN"  style="margin-left: -5px;" th:text="${td.otvetstvenoeFace.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -237,7 +237,7 @@
                 <div style="margin-left: 2%; ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
-                            <span id="tradingCountry"  style="width: 100%;" th:field="${td.tradingCountry}"></span>
+                            <span id="tradingCountry"  style="width: 100%;" th:text="${td.tradingCountry}"></span>
                         </div>
                     </div>
                 </div>
@@ -248,7 +248,7 @@
                 <div style="margin-left: 2%;  ">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-7">
-                            <span id="tamPrice"  style="width: 100%;" th:field="${td.tamPrice}"></span>
+                            <span id="tamPrice"  style="width: 100%;" th:text="${td.tamPrice}"></span>
                         </div>
                     </div>
                 </div>
@@ -261,42 +261,42 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="INN/KPPDeklarant"  th:field="${td.declarator.taxId}"></span>
+                            <span id="INN/KPPDeklarant"  th:text="${td.declarator.taxId}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="organizationNameDeklarant" th:field="${td.declarator.organizationName}"></span>
+                            <span id="organizationNameDeklarant" th:text="${td.declarator.organizationName}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="countryDeklarant"  th:field="${td.declarator.address.city}"></span>
+                            <span id="countryDeklarant"  th:text="${td.declarator.address.city}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="postalCodeDeklarant"   style="margin-left: -5px;" th:field="${td.declarator.address.postalCode}"></span>
+                            <span id="postalCodeDeklarant"   style="margin-left: -5px;" th:text="${td.declarator.address.postalCode}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="regionDeklarant" aria-description="Область"  th:field="${td.declarator.address.region}"></span>
+                            <span id="regionDeklarant" aria-description="Область"  th:text="${td.declarator.address.region}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="cityDeklarant" aria-description="Населённый пункт"  th:field="${td.declarator.address.settlement}"></span>
+                            <span id="cityDeklarant" aria-description="Населённый пункт"  th:text="${td.declarator.address.settlement}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="houseDeklarant" aria-description="Дом"  th:field="${td.declarator.address.build}"></span>
+                            <span id="houseDeklarant" aria-description="Дом"  th:text="${td.declarator.address.build}"></span>
                         </div>
 
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="OGRNDeklarant"  style="margin-left: -5px;" th:field="${td.declarator.registrationCode}"></span>
+                            <span id="OGRNDeklarant"  style="margin-left: -5px;" th:text="${td.declarator.registrationCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -308,11 +308,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeDeparture"  style="width: 100%;" th:field="${td.countryCodeDeparture}"></span>
+                            <span id="countryCodeDeparture"  style="width: 100%;" th:text="${td.countryCodeDeparture}"></span>
                         </div>
                         <div class="col-sm-7"  style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameDeparture"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameDeparture}"></span>
+                            <span id="countryNameDeparture"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameDeparture}"></span>
                         </div>
                     </div>
                 </div>
@@ -324,11 +324,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeOrigin"  style="width: 100%;" th:field="${td.countryCodeOrigin}"></span>
+                            <span id="countryCodeOrigin"  style="width: 100%;" th:text="${td.countryCodeOrigin}"></span>
                         </div>
                         <div class="col-sm-7" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameOrigin"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameOrigin}"></span>
+                            <span id="countryNameOrigin"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameOrigin}"></span>
                         </div>
                     </div>
                 </div>
@@ -340,11 +340,11 @@
                     <div class="row" style=" margin-top: -5%;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeDestination"  style="width: 100%;" th:field="${td.countryCodeDestination}"></span>
+                            <span id="countryCodeDestination"  style="width: 100%;" th:text="${td.countryCodeDestination}"></span>
                         </div>
                         <div class="col-sm-7" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameDestination"  style="width: 100%; margin-left: -7%" th:field="${td.countryNameDestination}"></span>
+                            <span id="countryNameDestination"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameDestination}"></span>
                         </div>
                     </div>
                 </div>
@@ -356,11 +356,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
-                            <span id="vehicleCount"  style="width: 100%;" th:field="${td.vehicleCount}"></span>
+                            <span id="vehicleCount"  style="width: 100%;" th:text="${td.vehicleCount}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Номера т.с.</h5>
-                            <span id="vehicleNumbers"  style="width: 100%; margin-left: -7%" th:field="${td.vehicleNumbers}"></span>
+                            <span id="vehicleNumbers"  style="width: 100%; margin-left: -7%" th:text="${td.vehicleNumbers}"></span>
                         </div>
                     </div>
                 </div>
@@ -384,11 +384,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c"> код у.п.</h5>
-                            <span id="YPcode"  style="width: 100%;" th:field="${td.codeYP}"></span>
+                            <span id="YPcode"  style="width: 100%;" th:text="${td.codeYP}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Наименование условий поставки</h5>
-                            <span id="YPname"  style="width: 100%; margin-left: -7%" th:field="${td.nameYP}"></span>
+                            <span id="YPname"  style="width: 100%; margin-left: -7%" th:text="${td.nameYP}"></span>
                         </div>
                     </div>
                 </div>
@@ -400,11 +400,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
-                            <span id="vehicleCountOnBorder"  style="width: 100%;" th:field="${td.vehicleCountOnBorder}"></span>
+                            <span id="vehicleCountOnBorder"  style="width: 100%;" th:text="${td.vehicleCountOnBorder}"></span>
                         </div>
                         <div class="col-sm-9" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Номера транспортного средства</h5>
-                            <span id="vehicleNumbersOnBorder"  style="width: 100%; margin-left: -7%" th:field="${td.vehicleNumbersOnBorder}"></span>
+                            <span id="vehicleNumbersOnBorder"  style="width: 100%; margin-left: -7%" th:text="${td.vehicleNumbersOnBorder}"></span>
                         </div>
                     </div>
                 </div>
@@ -416,15 +416,15 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c">Код валюты</h5>
-                            <span id="currencyCode"  style="width: 100%;" th:field="${td.currencyCode}"></span>
+                            <span id="currencyCode"  style="width: 100%;" th:text="${td.currencyCode}"></span>
                         </div>
                         <div class="col-sm-6" style="margin-left: 5%">
                             <h5 class="form-h5" style="color: #1a1a1c">Сумма по счету</h5>
-                            <span id="invoiceAmount"  style="width: 100%; margin-left: -7%" th:field="${td.invoiceAmount}"></span>
+                            <span id="invoiceAmount"  style="width: 100%; margin-left: -7%" th:text="${td.invoiceAmount}"></span>
                         </div>
                         <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
                             <div class="form-check">
-                                <span  id="freeDeliveryCheckbox" th:field="${td.freeDeliveryCheckbox}"></span>
+                                <span  id="freeDeliveryCheckbox" th:text="${td.freeDeliveryCheckbox}"></span>
                                 <h5 class="form-check-h5" for="freeDeliveryCheckbox" style="color: #1a1a1c">Безвозмездная поставка</h5>
                             </div>
                         </div>
@@ -438,26 +438,26 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
                             <h5 class="form-h5" style="color: #1a1a1c">Валюта</h5>
-                            <!--              <span id="currency"  style="width: 100%;" th:field="${td.currencyRateDTO.}">-->
+                            <!--              <span id="currency"  style="width: 100%;" th:text="${td.currencyRateDTO.}">-->
                         </div>
                     </div>
                     <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
                         <h5 class="form-h5" style="color: #1a1a1c">Считать по курсам</h5>
-                        <span id="exchangeRateDate"  style="width: 100%;" th:field="${td.currencyRateDTO.date}"></span>
+                        <span id="exchangeRateDate"  style="width: 100%;" th:text="${td.currencyRateDTO.date}"></span>
                     </div>
 
 
                     <div class="col-sm-5">
                         <h5 class="form-h5" style="color: #1a1a1c">Курс евро</h5>
-                        <span id="euroExchangeRate"  style="width: 100%;" th:field="${td.currencyRateDTO.euroRate}"></span>
+                        <span id="euroExchangeRate"  style="width: 100%;" th:text="${td.currencyRateDTO.euroRate}"></span>
                     </div>
                     <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
                         <h5 class="form-h5" style="color: #1a1a1c">Курс USD</h5>
-                        <span id="usdExchangeRate"  style="width: 100%; margin-left: -7%" th:field="${td.currencyRateDTO.usdRate}"></span>
+                        <span id="usdExchangeRate"  style="width: 100%; margin-left: -7%" th:text="${td.currencyRateDTO.usdRate}"></span>
                     </div>
                     <div class="col-sm-12" style="margin-left: 5%">
                         <h5 class="form-h5" style="color: #1a1a1c">Курс валют для расчета</h5>
-                        <span id="calculationExchangeRate"  style="width: 100%; margin-left: -6%" th:field="${td.currencyRateDTO.currencyRate}"></span>
+                        <span id="calculationExchangeRate"  style="width: 100%; margin-left: -6%" th:text="${td.currencyRateDTO.currencyRate}"></span>
                     </div>
 
                 </div>
@@ -469,11 +469,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
                             <h5 class="form-h5" style="color: #1a1a1c">Код сделки</h5>
-                            <span id="transactionCharacterCode"  style="width: 100%;" th:field="${td.transactionCharacterCode}"></span>
+                            <span id="transactionCharacterCode"  style="width: 100%;" th:text="${td.transactionCharacterCode}"></span>
                         </div>
                         <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
                             <h5 class="form-h5" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</h5>
-                            <span id="foreignTradeFeatureCode"  style="width: 100%;" th:field="${td.foreignTradeFeatureCode}"></span>
+                            <span id="foreignTradeFeatureCode"  style="width: 100%;" th:text="${td.foreignTradeFeatureCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -485,7 +485,7 @@
                     <div style="margin-left: 20px; ">
                         <div class="col-sm-6">
                             <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
-                            <span id="borderTransportTypeCode"  style="width: 100%;" th:field="${td.borderTransportTypeCode}"></span>
+                            <span id="borderTransportTypeCode"  style="width: 100%;" th:text="${td.borderTransportTypeCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -495,7 +495,7 @@
                     <div style="margin-left: 2%;">
                         <div class="col-sm-6">
                             <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
-                            <span id="domesticTransportTypeCode"  style="width: 100%;" th:field="${td.domesticTransportTypeCode}"></span>
+                            <span id="domesticTransportTypeCode"  style="width: 100%;" th:text="${td.domesticTransportTypeCode}"></span>
                         </div>
                     </div>
                 </div>
@@ -506,7 +506,7 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
-                            <span id="grossWeights"  style="width: 100%;" th:field="${td.grossWeight}"></span>
+                            <span id="grossWeights"  style="width: 100%;" th:text="${td.grossWeight}"></span>
                         </div>
                     </div>
                 </div>
@@ -517,7 +517,7 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-12">
-                            <span id="netWeights"  style="width: 100%;" th:field="${td.netWeight}"></span>
+                            <span id="netWeights"  style="width: 100%;" th:text="${td.netWeight}"></span>
                         </div>
                     </div>
                 </div>
@@ -529,12 +529,12 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Код таможни</h5>
-                            <span id="customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:field="${td.customsCode}"></span>
+                            <span id="customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:text="${td.customsCode}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-11">
-                            <span class="form-control" id="largeTextArea" rows="8" aria-description="Введите текст" required="" style="height: 160px; width: 100%;" th:field="${td.largeTextArea}"></span>
+                            <span class="form-control" id="largeTextArea" rows="8" aria-description="Введите текст" required="" style="height: 160px; width: 100%;" th:text="${td.largeTextArea}"></span>
                         </div>
                     </div>
                 </div>
@@ -546,61 +546,61 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Реестр УЗО</h5>
-                            <span id="uzoRegister" aria-description="Введите реестр УЗО"  style="width: 100%;" th:field="${td.productLocationDTO.uzoRegistry}"></span>
+                            <span id="uzoRegister" aria-description="Введите реестр УЗО"  style="width: 100%;" th:text="${td.productLocationDTO.uzoRegistry}"></span>
                         </div>
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">код таможни</h5>
-                            <span id="30customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:field="${td.productLocationDTO.customsCode}"></span>
+                            <span id="30customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:text="${td.productLocationDTO.customsCode}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c">Тип</h5>
-                            <span id="type" aria-description="Введите тип"  style="width: 100%;" th:field="${td.productLocationDTO.type}"></span>
+                            <span id="type" aria-description="Введите тип"  style="width: 100%;" th:text="${td.productLocationDTO.type}"></span>
                         </div>
                         <div class="col-sm-1">
                             <h5 class="form-h5" style="color: #1a1a1c">1/2/3</h5>
-                            <span id="quantity"  style="width: 100%;" th:field="${td.productLocationDTO.quantity}"></span>
+                            <span id="quantity"  style="width: 100%;" th:text="${td.productLocationDTO.quantity}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: -70px; margin-left: 220px">
                         <div class="col-sm-6">
                             <h5 class="form-h5" style="color: #1a1a1c">Номер документа</h5>
-                            <span id="documentNumber" aria-description="Введите номер документа"  style="width: 100%;" th:field="${td.productLocationDTO.documentNumber}"></span>
+                            <span id="documentNumber" aria-description="Введите номер документа"  style="width: 100%;" th:text="${td.productLocationDTO.documentNumber}"></span>
                         </div>
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Дата</h5>
-                            <span id="date" aria-description="Введите дату"  style="width: 100%;" th:field="${td.productLocationDTO.date}"></span>
+                            <span id="date" aria-description="Введите дату"  style="width: 100%;" th:text="${td.productLocationDTO.date}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Номер ЗТК</h5>
-                            <span id="ztkNumber" aria-description="Введите номер ЗТК"  style="width: 100%;" th:field="${td.productLocationDTO.ztkNumber}"></span>
+                            <span id="ztkNumber" aria-description="Введите номер ЗТК"  style="width: 100%;" th:text="${td.productLocationDTO.ztkNumber}"></span>
                         </div>
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Вид транспорта</h5>
-                            <span id="transportationType" aria-description="Введите вид транспорта"  style="width: 100%;" th:field="${td.productLocationDTO.transportType}"></span>
+                            <span id="transportationType" aria-description="Введите вид транспорта"  style="width: 100%;" th:text="${td.productLocationDTO.transportType}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: -70px; margin-left: 450px">
                         <div class="col-sm-9">
                             <h5 class="form-h5" style="color: #1a1a1c">Номер транспортного средства</h5>
-                            <span id="vehicleNumber" aria-description="Введите номер транспортного средства"  style="width: 100%;" th:field="${td.productLocationDTO.vehicleNumber}"></span>
+                            <span id="vehicleNumber" aria-description="Введите номер транспортного средства"  style="width: 100%;" th:text="${td.productLocationDTO.vehicleNumber}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Ж/д станция / порт</h5>
-                            <span id="stationPort" aria-description="Введите ж/д станцию / порт"  style="width: 100%;" th:field="${td.productLocationDTO.stationOrPort}"></span>
+                            <span id="stationPort" aria-description="Введите ж/д станцию / порт"  style="width: 100%;" th:text="${td.productLocationDTO.stationOrPort}"></span>
                         </div>
                         <div class="col-sm-4" >
                             <h5 class="form-h5" style="color: #1a1a1c">Cтрана</h5>
-                            <span id="30country" aria-description="Введите страну"  style="width: 100%;" th:field="${td.productLocationDTO.country}"></span>
+                            <span id="30country" aria-description="Введите страну"  style="width: 100%;" th:text="${td.productLocationDTO.country}"></span>
                         </div>
                         <div class="col-sm-3">
                             <h5 class="form-h5" style="color: #1a1a1c">Почтовый код</h5>
-                            <span id="30postalCode" aria-description="Введите почтовый код"  style="width: 100%;" th:field="${td.productLocationDTO.postalCode}"></span>
+                            <span id="30postalCode" aria-description="Введите почтовый код"  style="width: 100%;" th:text="${td.productLocationDTO.postalCode}"></span>
                         </div>
                     </div>
 
@@ -608,15 +608,15 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Область, район</h5>
-                            <span id="30region" aria-description="Введите область, район"  style="width: 100%;" th:field="${td.productLocationDTO.regionOrDistrict}"></span>
+                            <span id="30region" aria-description="Введите область, район"  style="width: 100%;" th:text="${td.productLocationDTO.regionOrDistrict}"></span>
                         </div>
                         <div class="col-sm-4">
                             <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="locality" aria-description="Введите населённый пункт"  style="width: 100%;" th:field="${td.productLocationDTO.locality}"></span>
+                            <span id="locality" aria-description="Введите населённый пункт"  style="width: 100%;" th:text="${td.productLocationDTO.locality}"></span>
                         </div>
                         <div class="col-sm-2">
                             <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="30house" aria-description="Введите дом"  style="width: 100%;" th:field="${td.productLocationDTO.houseNumber}"></span>
+                            <span id="30house" aria-description="Введите дом"  style="width: 100%;" th:text="${td.productLocationDTO.houseNumber}"></span>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
@@ -631,15 +631,15 @@
                 <div style="margin-left: 2%; margin-top: -2%">
                     <div class="row" style="margin-top: 30px;">
                         <div class="col-sm-12">
-                            <span id="cargoDescription" rows="8" aria-description="Введите описание товаров" required="" style="width: 100%;" th:field="${td.productDescription}"></span>
+                            <span id="cargoDescription" rows="8" aria-description="Введите описание товаров" required="" style="width: 100%;" th:text="${td.productDescription}"></span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="infoDiv" style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+            <div id="infoDiv" style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;" th:each="p:${listProduct}">
                 <h5 style="margin-left: 1%"><p>Информация о товаре</p></h5>
-                <div style="margin-left: 2%; margin-top: -2%" th:each="p:${listProduct}">
+                <div style="margin-left: 2%; margin-top: -2%" >
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-6">
                             <h5 class="form-h5" style="color: #1a1a1c">29 № товара</h5>
@@ -688,7 +688,7 @@
             </div>
 
             <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
-                <button class="btn" type="submit"  style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
+                <button class="btn"  type="button"  th:onclick="|window.location.href='/client/showListTD'|" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
             </div>
     </div>
 
