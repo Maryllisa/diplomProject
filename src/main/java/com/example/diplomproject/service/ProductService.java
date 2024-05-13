@@ -1,5 +1,6 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
@@ -9,9 +10,11 @@ import com.example.diplomproject.repository.ProductRepository;
 import com.example.diplomproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -79,5 +82,17 @@ public class ProductService {
 
     public ProductDTO findById(Long id) {
         return productRepository.getById(id).build();
+    }
+
+    public List<Product> getAllProductByApplication(Long id) {
+        return productRepository.getAllByApplication(id);
+    }
+
+    public Map<String, String> check(BindingResult result, DeliveryProductDTO deliveryProductDTO) {
+        return null;
+    }
+
+    public List<Product> getAllProductTrue(String login) {
+        return productRepository.findAllByIsDelivery(true);
     }
 }

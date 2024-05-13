@@ -37,6 +37,7 @@ public class ApplicationForReleaseService {
         Product product = productRepository.findById(applicationForReleaseDTO.getIdProduct()).orElse(null);
         ApplicationForRelease applicationForRelease = applicationForReleaseDTO.build(product, StatusApplicationForRelease.IN_PROCESSING);
         applicationForRelease.setAccount(account);
+        applicationForRelease.setStatusApplicationForRelease(StatusApplicationForRelease.IN_PROCESSING);
         ApplicationForRelease application = applicationForReleaseRepository.save(applicationForRelease);
         if (product != null) {
             product.setApplicationForRelease(applicationForRelease);
@@ -51,5 +52,19 @@ public class ApplicationForReleaseService {
         product.setApplicationForRelease(null);
         productRepository.save(product);
         applicationForReleaseRepository.delete(application);
+    }
+
+    public List<ApplicationForRelease> getAllApplicationForRelease() {
+        return applicationForReleaseRepository.findAll();
+    }
+
+    public void changeStatus(Long id, StatusApplicationForRelease statusApplicationForRelease) {
+        ApplicationForRelease application = applicationForReleaseRepository.getById(id);
+        application.setStatusApplicationForRelease(statusApplicationForRelease);
+        applicationForReleaseRepository.save(application);
+    }
+
+    public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(StatusApplicationForRelease statusApplicationForRelease) {
+        return applicationForReleaseRepository.findAllByStatusApplicationForRelease(statusApplicationForRelease);
     }
 }
