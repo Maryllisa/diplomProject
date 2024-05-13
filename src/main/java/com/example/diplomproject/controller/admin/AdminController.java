@@ -27,4 +27,6 @@ public class AdminController {
     public String getShowAdmins() {return "/admin/showAdmins";}
     @GetMapping("/admin/formKachQuality")
     public String getFormKachQuality() {return "/admin/formKachQuality";}
+    @GetMapping("/admin/showOcForObsl")
+    public String getShowOcForObsl() {return "/admin/showOcForObsl";}
 }
