@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +24,10 @@ public class ApplicationForStorage {
     private Date datePost;
     @Column
     private Date dateZav;
+    @Column
+    private Date dateRelease = Date.valueOf(LocalDate.now()
+            .plusMonths(2));
+
     @Column
     @Enumerated(EnumType.STRING)
     private StatusApplication statusApplication;

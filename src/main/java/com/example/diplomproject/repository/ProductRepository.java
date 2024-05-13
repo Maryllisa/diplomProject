@@ -19,4 +19,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByApplicationForReleaseIsNull();
 
     List<Product> findAllByDeclarationTD(DeclarationTD byId);
+    @Query("SELECT pr FROM Product pr " +
+            "INNER JOIN DeclarationTD d ON d.idDeclaration = pr.declarationTD.idDeclaration " +
+            "INNER JOIN ApplicationForStorage ap ON ap.declarationTD.idDeclaration = d.idDeclaration " +
+            "WHERE ap.idApplication =?1")
+    List<Product> getAllByApplication(Long id);
+
+    List<Product> findAllByIsDelivery(Boolean isDelivery);
 }

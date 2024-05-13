@@ -80,26 +80,30 @@
         <table class="table table-striped table-sm" style="margin-top: 20px">
             <thead>
             <tr>
-                <th style="color: #814de5" scope="col">Номер оплаты</th>
-                <th style="color: #814de5" scope="col">Заявки</th>
+                <th style="color: #814de5" scope="col">Номер заявления</th>
+                <th style="color: #814de5" scope="col">Дата отпуска</th>
+                <th style="color: #814de5" scope="col">Товар</th>
                 <th style="color: #814de5" scope="col">Статус</th>
                 <th></th>
                 <th></th>
             </tr>
             </thead>
-            <!--      <tbody>-->
-            <!--      <tr th:each="">-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--        <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--            <td>-->
-<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details" style="background-color: #814de5; color: #1a1a1c">-->
-<!--                Подробнее-->
-<!--            </button>-->
-<!--            <td><input type="button" value="Отменить заявку" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>-->
-            <!--                </td>-->
-            <!--      </tr>-->
-            <!--      </tbody>-->
+            <tbody>
+            <tr th:if="${!applicationList.isEmpty()}" th:each="ap:${applicationList}" th:class="${ap.date > #dates.createNow()} ? 'table-success' : 'table-danger'" >
+                <td style="color: #1a1a1c" th:text="${ap.idApplicationForRelease}"></td>
+                <td style="color: #1a1a1c" th:text="${ap.date}"></td>
+                <td style="color: #1a1a1c" th:text="${ap.product.nameProduct}"></td>
+                <td style="color: #1a1a1c" th:text="${ap.statusApplicationForRelease.getRussianName().get(ap.statusApplicationForRelease)}"></td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details"
+                            style="background-color: #814de5; color: #1a1a1c">
+                        Подробнее
+                    </button>
+                <td><input type="button" value="Отменить заявку"
+                           style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
+                </td>
+            </tr>
+            </tbody>
         </table>
 
 

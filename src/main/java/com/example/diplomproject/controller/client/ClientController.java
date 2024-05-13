@@ -133,7 +133,8 @@ public class ClientController {
     }
 
     @GetMapping("/priceForSave")
-    public String getPriceForSave() {
+    public String getPriceForSave(Model model, Authentication authentication) {
+        model.addAttribute("applicationList", applicationForRelease.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.AWAITING_PAYMENT));
         return "/client/priceForSave";
     }
 
