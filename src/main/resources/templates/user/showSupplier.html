@@ -58,8 +58,7 @@
         <td style="color: #1a1a1c" th:text="${sup.bankName + ', ' + sup.bankCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.registrationCode}"/>
         <td style="color: #1a1a1c" th:text="${sup.taxId}"/>
-        <td><a th:href="*{'/user/readApplicationBySupplier/'+ sup.idSupplier}"><input type="button" value="Подробнее" style="font-weight: bold; background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal"  data-bs-target="#modalOrganizationInfo"></a>
-        <td/>
+        <td><input type="button" value="Подробнее" th:onclick="|findSuppliers(${sup.idSupplier})|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal"  data-bs-target="#modalOrganizationInfo"></td>
       </tr>
       </tbody>
     </table>
@@ -76,32 +75,28 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="organizationName">Наименование организации:</label>
-            <span id="organizationName"></span>
+            <label for="nameCompany">Наименование организации:</label>
+            <span id="nameCompany"></span>
           </div>
           <div class="form-group">
-            <label for="legalAddress">Юр. адрес:</label>
-            <span id="legalAddress"></span>
+            <label for="legacyAddress">Юр. адрес:</label>
+            <span id="legacyAddress"></span>
           </div>
           <div class="form-group">
-            <label for="phoneNumber">Телефон:</label>
-            <span id="phoneNumber"></span>
+            <label for="bankKode">Код банка (BIC):</label>
+            <span id="bankKode"></span>
           </div>
           <div class="form-group">
-            <label for="bankCode">Код банка (BIC):</label>
-            <span id="bankCode"></span>
+            <label for="nameBank">Наименование банка:</label>
+            <span id="nameBank"></span>
           </div>
           <div class="form-group">
-            <label for="bankName">Наименование банка:</label>
-            <span id="bankName"></span>
+            <label for="UNNCode">УНН:</label>
+            <span id="UNNCode"></span>
           </div>
           <div class="form-group">
-            <label for="taxIdentificationNumber">УНН:</label>
-            <span id="taxIdentificationNumber"></span>
-          </div>
-          <div class="form-group">
-            <label for="enterpriseCode">ОКПО:</label>
-            <span id="enterpriseCode"></span>
+            <label for="OKPOCode">ОКПО:</label>
+            <span id="OKPOCode"></span>
           </div>
         </div>
       </div>
@@ -109,5 +104,6 @@
   </div>
 </main>
 </body>
-
+<script src="/js/changer.js">
+</script>
 </html>

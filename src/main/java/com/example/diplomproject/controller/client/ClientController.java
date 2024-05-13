@@ -30,6 +30,7 @@ public class ClientController {
     private final ApplicationForReleaseService applicationForRelease;
     private final ApplicationForStorageService applicationForStorage;
     private final MarkingInfoService markingInfoService;
+    private final AccountService accountService;
 
     @GetMapping("/")
     public String getClient() {
@@ -150,6 +151,7 @@ public class ClientController {
     public String getShowTD(Model model, Authentication authentication, @PathVariable Long id) {
         model.addAttribute("td", declarationTDService.getById(id).build());
         model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
+        model.addAttribute("role", accountService.getRole(authentication.getName()));
         return "/client/showTD";
     }
     @GetMapping("/showListCMR")

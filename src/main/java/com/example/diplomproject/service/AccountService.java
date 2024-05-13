@@ -382,4 +382,8 @@ public class AccountService {
         account.setStatus(Status.OFFLINE);
         accountRepository.save(account);
     }
+
+    public String getRole(String name) {
+        return accountRepository.findByLogin(name).getRoles().toString();
+    }
 }

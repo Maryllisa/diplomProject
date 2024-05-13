@@ -50,6 +50,7 @@
         <th style="color: #814de5" scope="col">Вес нетто</th>
         <th style="color: #814de5" scope="col">Поставщик</th>
         <th style="color: #814de5" scope="col">Получатель</th>
+        <th style="color: #814de5" scope="col">Подробнее</th>
       </tr>
       </thead>
       <tbody>
@@ -60,8 +61,8 @@
         <td style="color: #1a1a1c" th:text="${dec.grossWeight}"/>
         <td style="color: #1a1a1c" th:text="${dec.senderDTO.organizationName}"/>
         <td style="color: #1a1a1c" th:text="${dec.recipientDTO.organizationName}"/>
-        <td><a th:href="*{'/user/readApplicationBySupplier/'+ dec.idDeclaration}">
-          <input onclick="window.location.href='/user/showTD'" type="button" value="Подробнее" style="font-weight: bold; background-color: #814de5; color: #f2f0f8" ></a>
+        <td>
+          <input th:onclick="|window.location.href='/user/showTD/' + ${dec.idDeclaration}|" type="button" value="Подробнее" style="font-weight: bold; background-color: #814de5; color: #f2f0f8" >
         <td/>
       </tr>
       </tbody>

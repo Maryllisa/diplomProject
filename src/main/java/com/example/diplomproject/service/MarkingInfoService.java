@@ -73,8 +73,8 @@ public class MarkingInfoService {
         applicationForMarkingRepository.save(applicationForMarking);
     }
 
-    public MarkingInfo findById(int i) {
-        return markingInfoRepository.findById(Long.valueOf(i)).orElse(null);
+    public MarkingInfo findById(Long i) {
+        return markingInfoRepository.findById(i).orElse(null);
     }
 
     public List<MarkingInfo> getAllMarking() {

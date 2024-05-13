@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @AllArgsConstructor
@@ -17,6 +18,8 @@ public class UserController {
     private final DeclarationTDService declarationTDService;
     private final ApplicationForMarkingService applicationForMarking;
     private final MarkingInfoService markingInfoService;
+    private final ProductService productService;
+    private final AccountService accountService;
 
     @GetMapping("/user")
     public String getStart() {
@@ -53,8 +56,8 @@ public class UserController {
         return "/user/regMark";
     }
     @GetMapping("/user/showAllDeclaration")
-    public String getAllDeclaration(Model model) {
-        model.addAttribute("declaration", declarationTDService.getAllDeclaration());
+    public String getAllDeclaration(Model model, Authentication authentication) {
+        model.addAttribute("declaration", declarationTDService.getAllDeclarationByAccount(authentication.getName()));
         return "/user/showAllDeclaration";
     }
     @GetMapping("/user/showOfDeclaration")
@@ -72,7 +75,12 @@ public class UserController {
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
         return "/user/showAllMarkedProd";
     }
-    @GetMapping("/user/showTD")
-    public String getShowTD() {return "/user/showTD";}
+    @GetMapping("/user/showTD/{id}")
+    public String getShowTDUser(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("td", declarationTDService.getById(id).build());
+        model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
+        model.addAttribute("role", accountService.getRole(authentication.getName()));
+        return "/client/showTD";
+    }
 
 }

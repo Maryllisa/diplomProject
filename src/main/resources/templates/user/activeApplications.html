@@ -42,8 +42,8 @@
                 <th style="color: #814de5" scope="col">Количество видов товара</th>
                 <th style="color: #814de5" scope="col">Номер договора СВХ</th>
                 <th style="color: #814de5" scope="col">Статус заявки</th>
-                <th></th>
-                <th></th>
+                <th style="color: #814de5" scope="col">Подробнее</th>
+                <th style="color: #814de5" scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@
                 <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
                 <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
                 <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
-                <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Подробнее"style="font-weight: bold; background-color: #814de5; color: #f2f0f8" data-bs-toggle="modal"  data-bs-target="#modalDetails"></a><td/>
+                <td><input type="button" value="Подробнее"  th:onclick="|findApplication(${ap.idApplication})|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></td>
                 <td><input type="button" value="Завершить обработку" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/COMPLETED/' + ${ap.idApplication}|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
             </tr>
             </tbody>
@@ -119,5 +119,30 @@
 
 </main>
 </body>
+<script>
+    function findApplication(id){
+        fetch('/user/findApplication/' + id,{
+            method: 'GET'
+        }).then(response=> response.json())
+            .then(data=>{
+                const orderNumber = document.getElementById("orderNumber");
+                const itemCount = document.getElementById("itemCount");
+                const deliveryDate = document.getElementById("deliveryDate");
+                const orderDate = document.getElementById("orderDate");
+                const orderStatus = document.getElementById("orderStatus");
+                const ttn = document.getElementById("ttn");
+                const declaration = document.getElementById("declaration");
+                const cmr = document.getElementById("cmr");
 
+                orderNumber.textContent = data.idApplication;
+                itemCount.textContent = data.countPositionProducts;
+                deliveryDate.textContent = data.datePost;
+                orderDate.textContent = data.dateZav;
+                orderStatus.textContent = "В обработке";
+                ttn.textContent = data.goodTransportDocument.goodsTransportDocumentNumbers;
+                declaration.textContent = data.declarationTD.declarationNumber;
+                cmr.textContent = data.crm;
+            });
+    }
+</script>
 </html>

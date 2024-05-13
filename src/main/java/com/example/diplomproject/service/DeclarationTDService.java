@@ -285,4 +285,13 @@ public class DeclarationTDService {
     public DeclarationTD getById(Long id) {
         return declarationTDRepository.getById(id);
     }
+
+    public List<DeclarationDTO> getAllDeclarationByAccount(String name) {
+        List<DeclarationTD> declarationTDList = declarationTDRepository.getAllByApplicationForStorage(userRepository.findByLogin(name).getId());
+        List<DeclarationDTO> declarationDTOList = new ArrayList<>();
+        declarationTDList.forEach(x->{
+            declarationDTOList.add(x.build());
+        });
+        return declarationDTOList;
+    }
 }

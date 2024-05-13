@@ -214,4 +214,8 @@ public class ApplicationForStorageService {
     public ApplicationForStorage findAllById(Long id) {
         return applicationForStorageRepository.getById(id);
     }
+
+    public ApplicationForStorage findById(Long id) {
+        return applicationForStorageRepository.findById(id).orElse(null);
+    }
 }

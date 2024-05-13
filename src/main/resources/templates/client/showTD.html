@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/security/tags ">
+
 <head>
     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 
@@ -10,703 +13,770 @@
 <div th:insert="blocks/links :: div"></div>
 <body style="background-color: #f2f0f8">
 <div th:insert="blocks/header :: header"></div>
-<div th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<div th:if="${role.equals('[CLIENT]')}" th:insert="blocks/clientSidebare :: clientSidebare"></div>
+<div th:if="${role.equals('[EMPLOYEE]')}" th:insert="blocks/userSidebare :: userSidebare"></div>
 <main>
     <div class="col-md-7 col-lg-8" style=" margin-left: 27%; ">
         <h4 class="mb-3" style="color: #814de5"> Декларации на товар к заявке</h4>
-            <div style="height: 80px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px">
-                <h5 style="margin-left: 1%">1 Декларация</h5>
-                <div style="margin-left: 15%; margin-top: -5%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4" style="margin-top: 3.8%">
-                            <span id="ED" aria-description="ЭД"  th:text="${td.customEDCode}"></span>
-                        </div>
+        <div style="height: 80px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px">
+            <h5 style="margin-left: 1%">1 Декларация</h5>
+            <div style="margin-left: 15%; margin-top: -5%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4" style="margin-top: 3.8%">
+                        <span id="ED" aria-description="ЭД" th:text="${td.customEDCode}"></span>
+                    </div>
 
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c;">Направление перемещения</h5>
-                            <span id="directionOfMovement" list="marking-types" aria-description="ИМ/ЭК" th:text="${td.directionOfMovement}">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c;">Направление перемещения</h5>
+                        <span id="directionOfMovement" list="marking-types" aria-description="ИМ/ЭК"
+                              th:text="${td.directionOfMovement}">
                             </span>
-                        </div>
+                    </div>
 
-                        <div class="col-sm-4" style="margin-left: -1%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код таможенной процедуры</h5>
-                            <span id="procedureCode"  th:text="${td.procedureCode}"></span>
-                        </div>
+                    <div class="col-sm-4" style="margin-left: -1%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код таможенной процедуры</h5>
+                        <span id="procedureCode" th:text="${td.procedureCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
-                <h5 style="margin-left: 1%">2 Отправитель</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="INN/KPP"  th:text="${td.senderDTO.taxId}" ></span>
-                        </div>
+        <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+            <h5 style="margin-left: 1%">2 Отправитель</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                        <span id="INN/KPP" th:text="${td.senderDTO.taxId}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="organizationName" aria-description="Название организации"  th:text="${td.senderDTO.organizationName}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                        <span id="organizationName" aria-description="Название организации"
+                              th:text="${td.senderDTO.organizationName}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="country" aria-description="Страна"  th:text="${td.senderDTO.address.city}" ></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                        <span id="country" aria-description="Страна" th:text="${td.senderDTO.address.city}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="postalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.senderDTO.address.postalCode}" ></span>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                        <span id="postalCode" aria-description="Почтовый код" style="margin-left: -5px;"
+                              th:text="${td.senderDTO.address.postalCode}"></span>
 
-                        </div>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="region" aria-description="Область"  th:text="${td.senderDTO.address.region}" ></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                        <span id="region" aria-description="Область" th:text="${td.senderDTO.address.region}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="city" aria-description="Населённый пункт"  th:text="${td.senderDTO.address.settlement}" ></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                        <span id="city" aria-description="Населённый пункт"
+                              th:text="${td.senderDTO.address.settlement}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="house" aria-description="Дом"  th:text="${td.senderDTO.address.build}" ></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                        <span id="house" aria-description="Дом" th:text="${td.senderDTO.address.build}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="OGRN"  style="margin-left: -5px;" th:text="${td.senderDTO.registrationCode}" ></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                        <span id="OGRN" style="margin-left: -5px;" th:text="${td.senderDTO.registrationCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">3 Формы</h5>
-                <div style="margin-left: 2%; margin-top: -15%">
-                    <div class="row" style="margin-top: 20px;">
-                        <h5 class="form-h5" style="color: #1a1a1c">№/колличество листов</h5>
-                        <div class="col-sm-6">
-                            <span id="numbList"  style="width: 100%;" th:text="${td.numbList}"></span>
-                        </div>
-                        <div class="col-sm-6" >
-                            <span id="colList"  style="width: 100%; margin-left: -7%" th:text="${td.colList}"></span>
-                        </div>
+        <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">3 Формы</h5>
+            <div style="margin-left: 2%; margin-top: -15%">
+                <div class="row" style="margin-top: 20px;">
+                    <h5 class="form-h5" style="color: #1a1a1c">№/колличество листов</h5>
+                    <div class="col-sm-6">
+                        <span id="numbList" style="width: 100%;" th:text="${td.numbList}"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span id="colList" style="width: 100%; margin-left: -7%" th:text="${td.colList}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 280px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">4 Спецификации</h5>
-                <div style="margin-left: 2%; margin-top: -15%">
-                    <div class="row" style="margin-top: 20px;">
-                        <h5 class="form-h5" style="color: #1a1a1c">Кол.специф./кол.листов</h5>
-                        <div class="col-sm-6">
-                            <span id="colSpec"  style="width: 100%;"  th:text="${td.colSpec}"></span>
-                        </div>
-                        <div class="col-sm-6" >
-                            <span id="colListSpec"  style="width: 100%; margin-left: -7%" th:text="${td.colListSpec}"></span>
-                        </div>
+        <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 280px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">4 Спецификации</h5>
+            <div style="margin-left: 2%; margin-top: -15%">
+                <div class="row" style="margin-top: 20px;">
+                    <h5 class="form-h5" style="color: #1a1a1c">Кол.специф./кол.листов</h5>
+                    <div class="col-sm-6">
+                        <span id="colSpec" style="width: 100%;" th:text="${td.colSpec}"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span id="colListSpec" style="width: 100%; margin-left: -7%" th:text="${td.colListSpec}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 170px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 550px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">5 Всего товаров</h5>
-                <div style="margin-left: 2%; ">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-7">
-                            <span id="colProd"  style="width: 100%;" th:text="${td.colProd}"></span>
-                        </div>
+        <div style="height: 100px; width: 170px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 550px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">5 Всего товаров</h5>
+            <div style="margin-left: 2%; ">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-7">
+                        <span id="colProd" style="width: 100%;" th:text="${td.colProd}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div style="height: 90px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
-                <h5 style="margin-left: 1%">6 Особенности декларирования</h5>
-                <div style="margin-left: 2%; ">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-7">
-                            <span id="osobenOfDeclar"  style="width: 100%;" th:text="${td.osobenOfDeclar}"></span>
-                        </div>
+        <div style="height: 90px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+            <h5 style="margin-left: 1%">6 Особенности декларирования</h5>
+            <div style="margin-left: 2%; ">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-7">
+                        <span id="osobenOfDeclar" style="width: 100%;" th:text="${td.osobenOfDeclar}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
-                <h5 style="margin-left: 1%">7 Получатель</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="RecipINN/KPP"  th:text="${td.recipientDTO.taxId}"></span>
-                        </div>
+        <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
+            <h5 style="margin-left: 1%">7 Получатель</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                        <span id="RecipINN/KPP" th:text="${td.recipientDTO.taxId}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="RecipOrganizationName" aria-description="Название организации"  th:text="${td.recipientDTO.organizationName}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                        <span id="RecipOrganizationName" aria-description="Название организации"
+                              th:text="${td.recipientDTO.organizationName}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="RecipCountry" aria-description="Страна"  th:text="${td.recipientDTO.address.city}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                        <span id="RecipCountry" aria-description="Страна"
+                              th:text="${td.recipientDTO.address.city}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="RecipPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.recipientDTO.address.postalCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                        <span id="RecipPostalCode" aria-description="Почтовый код" style="margin-left: -5px;"
+                              th:text="${td.recipientDTO.address.postalCode}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="RecipRegion" aria-description="Область"  th:text="${td.recipientDTO.address.region}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                        <span id="RecipRegion" aria-description="Область"
+                              th:text="${td.recipientDTO.address.region}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="RecipCity" aria-description="Населённый пункт"  th:text="${td.recipientDTO.address.settlement}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                        <span id="RecipCity" aria-description="Населённый пункт"
+                              th:text="${td.recipientDTO.address.settlement}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="RecipHouse" aria-description="Дом"  th:text="${td.recipientDTO.address.build}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                        <span id="RecipHouse" aria-description="Дом" th:text="${td.recipientDTO.address.build}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="RecipOGRN"  style="margin-left: -5px;" th:text="${td.recipientDTO.registrationCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                        <span id="RecipOGRN" style="margin-left: -5px;"
+                              th:text="${td.recipientDTO.registrationCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
-                <h5 style="margin-left: 1%">8 Лицо, ответственное за финансовое урегулирование</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="FinYregINN/KPP"  th:text="${td.otvetstvenoeFace.taxId}"></span>
-                        </div>
+        <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+            <h5 style="margin-left: 1%">8 Лицо, ответственное за финансовое урегулирование</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                        <span id="FinYregINN/KPP" th:text="${td.otvetstvenoeFace.taxId}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="FinYregOrganizationName" aria-description="Название организации"  th:text="${td.otvetstvenoeFace.organizationName}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                        <span id="FinYregOrganizationName" aria-description="Название организации"
+                              th:text="${td.otvetstvenoeFace.organizationName}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="FinYregCountry" aria-description="Страна"  th:text="${td.otvetstvenoeFace.address.city}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                        <span id="FinYregCountry" aria-description="Страна"
+                              th:text="${td.otvetstvenoeFace.address.city}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="FinYregPostalCode" aria-description="Почтовый код"  style="margin-left: -5px;" th:text="${td.otvetstvenoeFace.address.postalCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                        <span id="FinYregPostalCode" aria-description="Почтовый код" style="margin-left: -5px;"
+                              th:text="${td.otvetstvenoeFace.address.postalCode}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="FinYregRegion" aria-description="Область"  th:text="${td.otvetstvenoeFace.address.region}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                        <span id="FinYregRegion" aria-description="Область"
+                              th:text="${td.otvetstvenoeFace.address.region}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="FinYregCity" aria-description="Населённый пункт"  th:text="${td.otvetstvenoeFace.address.settlement}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                        <span id="FinYregCity" aria-description="Населённый пункт"
+                              th:text="${td.otvetstvenoeFace.address.settlement}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="FinYregHouse" aria-description="Дом"  th:text="${td.otvetstvenoeFace.address.build}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                        <span id="FinYregHouse" aria-description="Дом"
+                              th:text="${td.otvetstvenoeFace.address.build}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="FinYregOGRN"  style="margin-left: -5px;" th:text="${td.otvetstvenoeFace.registrationCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                        <span id="FinYregOGRN" style="margin-left: -5px;"
+                              th:text="${td.otvetstvenoeFace.registrationCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">9 Торгующая страна</h5>
-                <div style="margin-left: 2%; ">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <span id="tradingCountry"  style="width: 100%;" th:text="${td.tradingCountry}"></span>
-                        </div>
+        <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">9 Торгующая страна</h5>
+            <div style="margin-left: 2%; ">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <span id="tradingCountry" style="width: 100%;" th:text="${td.tradingCountry}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 450px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">10 Общая таможенная стоимость</h5>
-                <div style="margin-left: 2%;  ">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-7">
-                            <span id="tamPrice"  style="width: 100%;" th:text="${td.tamPrice}"></span>
-                        </div>
+        <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 450px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">10 Общая таможенная стоимость</h5>
+            <div style="margin-left: 2%;  ">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-7">
+                        <span id="tamPrice" style="width: 100%;" th:text="${td.tamPrice}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
-                <h5 style="margin-left: 1%">11 Декларант</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
-                            <span id="INN/KPPDeklarant"  th:text="${td.declarator.taxId}"></span>
-                        </div>
+        <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+            <h5 style="margin-left: 1%">11 Декларант</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">ИНН/КПП</h5>
+                        <span id="INN/KPPDeklarant" th:text="${td.declarator.taxId}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
-                            <span id="organizationNameDeklarant" th:text="${td.declarator.organizationName}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название организации</h5>
+                        <span id="organizationNameDeklarant" th:text="${td.declarator.organizationName}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
-                            <span id="countryDeklarant"  th:text="${td.declarator.address.city}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Страна</h5>
+                        <span id="countryDeklarant" th:text="${td.declarator.address.city}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
-                            <span id="postalCodeDeklarant"   style="margin-left: -5px;" th:text="${td.declarator.address.postalCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c; margin-left: -1%">Почтовый код</h5>
+                        <span id="postalCodeDeklarant" style="margin-left: -5px;"
+                              th:text="${td.declarator.address.postalCode}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
-                            <span id="regionDeklarant" aria-description="Область"  th:text="${td.declarator.address.region}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Область</h5>
+                        <span id="regionDeklarant" aria-description="Область"
+                              th:text="${td.declarator.address.region}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="cityDeklarant" aria-description="Населённый пункт"  th:text="${td.declarator.address.settlement}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                        <span id="cityDeklarant" aria-description="Населённый пункт"
+                              th:text="${td.declarator.address.settlement}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="houseDeklarant" aria-description="Дом"  th:text="${td.declarator.address.build}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                        <span id="houseDeklarant" aria-description="Дом"
+                              th:text="${td.declarator.address.build}"></span>
+                    </div>
 
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
-                            <span id="OGRNDeklarant"  style="margin-left: -5px;" th:text="${td.declarator.registrationCode}"></span>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c;">ОГРН</h5>
+                        <span id="OGRNDeklarant" style="margin-left: -5px;"
+                              th:text="${td.declarator.registrationCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">12 Страна отправления</h5>
-                <div style="margin-left: 2%; margin-top: -12%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeDeparture"  style="width: 100%;" th:text="${td.countryCodeDeparture}"></span>
-                        </div>
-                        <div class="col-sm-7"  style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameDeparture"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameDeparture}"></span>
-                        </div>
+        <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">12 Страна отправления</h5>
+            <div style="margin-left: 2%; margin-top: -12%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                        <span id="countryCodeDeparture" style="width: 100%;"
+                              th:text="${td.countryCodeDeparture}"></span>
+                    </div>
+                    <div class="col-sm-7" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                        <span id="countryNameDeparture" style="width: 100%; margin-left: -7%"
+                              th:text="${td.countryNameDeparture}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 270px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 350px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">13 Страна происхождения</h5>
-                <div style="margin-left: 2%; margin-top: -12%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeOrigin"  style="width: 100%;" th:text="${td.countryCodeOrigin}"></span>
-                        </div>
-                        <div class="col-sm-7" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameOrigin"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameOrigin}"></span>
-                        </div>
+        <div style="height: 100px; width: 270px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 350px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">13 Страна происхождения</h5>
+            <div style="margin-left: 2%; margin-top: -12%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                        <span id="countryCodeOrigin" style="width: 100%;" th:text="${td.countryCodeOrigin}"></span>
+                    </div>
+                    <div class="col-sm-7" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                        <span id="countryNameOrigin" style="width: 100%; margin-left: -7%"
+                              th:text="${td.countryNameOrigin}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">14 Страна назначения</h5>
-                <div style="margin-left: 2%;">
-                    <div class="row" style=" margin-top: -5%;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span id="countryCodeDestination"  style="width: 100%;" th:text="${td.countryCodeDestination}"></span>
-                        </div>
-                        <div class="col-sm-7" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
-                            <span id="countryNameDestination"  style="width: 100%; margin-left: -7%" th:text="${td.countryNameDestination}"></span>
-                        </div>
+        <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">14 Страна назначения</h5>
+            <div style="margin-left: 2%;">
+                <div class="row" style=" margin-top: -5%;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                        <span id="countryCodeDestination" style="width: 100%;"
+                              th:text="${td.countryCodeDestination}"></span>
+                    </div>
+                    <div class="col-sm-7" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Название страны</h5>
+                        <span id="countryNameDestination" style="width: 100%; margin-left: -7%"
+                              th:text="${td.countryNameDestination}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 650px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">15 Идентификация и страна регистрации транспортного средства</h5>
-                <div style="margin-left: 2%; margin-top: -5%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
-                            <span id="vehicleCount"  style="width: 100%;" th:text="${td.vehicleCount}"></span>
-                        </div>
-                        <div class="col-sm-9" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Номера т.с.</h5>
-                            <span id="vehicleNumbers"  style="width: 100%; margin-left: -7%" th:text="${td.vehicleNumbers}"></span>
-                        </div>
+        <div style="height: 100px; width: 650px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">15 Идентификация и страна регистрации транспортного средства</h5>
+            <div style="margin-left: 2%; margin-top: -5%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
+                        <span id="vehicleCount" style="width: 100%;" th:text="${td.vehicleCount}"></span>
+                    </div>
+                    <div class="col-sm-9" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Номера т.с.</h5>
+                        <span id="vehicleNumbers" style="width: 100%; margin-left: -7%"
+                              th:text="${td.vehicleNumbers}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">16 Контейнер</h5>
-                <div style="margin-left: 5%;">
-                    <div class="row" style=" margin-top: -5%;">
-                        <div class="col-sm-5">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
-                            <span th:text="${td.conteiner}"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">17 Условия поставки</h5>
-                <div style="margin-left: 2%; margin-top: -3%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c"> код у.п.</h5>
-                            <span id="YPcode"  style="width: 100%;" th:text="${td.codeYP}"></span>
-                        </div>
-                        <div class="col-sm-9" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Наименование условий поставки</h5>
-                            <span id="YPname"  style="width: 100%; margin-left: -7%" th:text="${td.nameYP}"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">18 Идентификация и страна регистрации активного транспортного средства на границе</h5>
-                <div style="margin-left: 2%; margin-top: -3%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
-                            <span id="vehicleCountOnBorder"  style="width: 100%;" th:text="${td.vehicleCountOnBorder}"></span>
-                        </div>
-                        <div class="col-sm-9" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Номера транспортного средства</h5>
-                            <span id="vehicleNumbersOnBorder"  style="width: 100%; margin-left: -7%" th:text="${td.vehicleNumbersOnBorder}"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">19 Валюта и общая сумма по счету</h5>
-                <div style="margin-left: 2%; margin-top: -3%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код валюты</h5>
-                            <span id="currencyCode"  style="width: 100%;" th:text="${td.currencyCode}"></span>
-                        </div>
-                        <div class="col-sm-6" style="margin-left: 5%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Сумма по счету</h5>
-                            <span id="invoiceAmount"  style="width: 100%; margin-left: -7%" th:text="${td.invoiceAmount}"></span>
-                        </div>
-                        <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
-                            <div class="form-check">
-                                <span  id="freeDeliveryCheckbox" th:text="${td.freeDeliveryCheckbox}"></span>
-                                <h5 class="form-check-h5" for="freeDeliveryCheckbox" style="color: #1a1a1c">Безвозмездная поставка</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="height: 270px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">20 Курс валюты</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">Валюта</h5>
-                            <!--              <span id="currency"  style="width: 100%;" th:text="${td.currencyRateDTO.}">-->
-                        </div>
-                    </div>
-                    <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
-                        <h5 class="form-h5" style="color: #1a1a1c">Считать по курсам</h5>
-                        <span id="exchangeRateDate"  style="width: 100%;" th:text="${td.currencyRateDTO.date}"></span>
-                    </div>
-
-
+        <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">16 Контейнер</h5>
+            <div style="margin-left: 5%;">
+                <div class="row" style=" margin-top: -5%;">
                     <div class="col-sm-5">
-                        <h5 class="form-h5" style="color: #1a1a1c">Курс евро</h5>
-                        <span id="euroExchangeRate"  style="width: 100%;" th:text="${td.currencyRateDTO.euroRate}"></span>
-                    </div>
-                    <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
-                        <h5 class="form-h5" style="color: #1a1a1c">Курс USD</h5>
-                        <span id="usdExchangeRate"  style="width: 100%; margin-left: -7%" th:text="${td.currencyRateDTO.usdRate}"></span>
-                    </div>
-                    <div class="col-sm-12" style="margin-left: 5%">
-                        <h5 class="form-h5" style="color: #1a1a1c">Курс валют для расчета</h5>
-                        <span id="calculationExchangeRate"  style="width: 100%; margin-left: -6%" th:text="${td.currencyRateDTO.currencyRate}"></span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div style="height: 150px; width: 350px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
-                <h5 style="margin-left: 1%">21 Характер сделки</h5>
-                <div style="margin-left: 2%; margin-top: -5%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код сделки</h5>
-                            <span id="transactionCharacterCode"  style="width: 100%;" th:text="${td.transactionCharacterCode}"></span>
-                        </div>
-                        <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</h5>
-                            <span id="foreignTradeFeatureCode"  style="width: 100%;" th:text="${td.foreignTradeFeatureCode}"></span>
-                        </div>
+                        <h5 class="form-h5" style="color: #1a1a1c">Код</h5>
+                        <span th:text="${td.conteiner}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="display: flex; flex-direction: row; margin-top: -173px; margin-left: 400px">
-                <div style="height: 150px; width: 260px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 25px; margin-right: 10px;">
-                    <h5 style="margin-left: 10px">22 Вид транспорта на границе</h5>
-                    <div style="margin-left: 20px; ">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
-                            <span id="borderTransportTypeCode"  style="width: 100%;" th:text="${td.borderTransportTypeCode}"></span>
-                        </div>
+        <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">17 Условия поставки</h5>
+            <div style="margin-left: 2%; margin-top: -3%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c"> код у.п.</h5>
+                        <span id="YPcode" style="width: 100%;" th:text="${td.codeYP}"></span>
                     </div>
-                </div>
-
-                <div style="height: 150px; width: 255px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 23px; margin-left: 20px">
-                    <h5 style="margin-left: 1%">23 Вид транспорта внутри страны</h5>
-                    <div style="margin-left: 2%;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
-                            <span id="domesticTransportTypeCode"  style="width: 100%;" th:text="${td.domesticTransportTypeCode}"></span>
-                        </div>
+                    <div class="col-sm-9" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Наименование условий поставки</h5>
+                        <span id="YPname" style="width: 100%; margin-left: -7%" th:text="${td.nameYP}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
-                <h5 style="margin-left: 1%">24 Суммарный вес брутто</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-12">
-                            <span id="grossWeights"  style="width: 100%;" th:text="${td.grossWeight}"></span>
-                        </div>
+        <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">18 Идентификация и страна регистрации активного транспортного средства на
+                границе</h5>
+            <div style="margin-left: 2%; margin-top: -3%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c">кол-во тс.</h5>
+                        <span id="vehicleCountOnBorder" style="width: 100%;"
+                              th:text="${td.vehicleCountOnBorder}"></span>
+                    </div>
+                    <div class="col-sm-9" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Номера транспортного средства</h5>
+                        <span id="vehicleNumbersOnBorder" style="width: 100%; margin-left: -7%"
+                              th:text="${td.vehicleNumbersOnBorder}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 500px">
-                <h5 style="margin-left: 1%">25 Суммарный вес нетто</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-12">
-                            <span id="netWeights"  style="width: 100%;" th:text="${td.netWeight}"></span>
+        <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">19 Валюта и общая сумма по счету</h5>
+            <div style="margin-left: 2%; margin-top: -3%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код валюты</h5>
+                        <span id="currencyCode" style="width: 100%;" th:text="${td.currencyCode}"></span>
+                    </div>
+                    <div class="col-sm-6" style="margin-left: 5%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Сумма по счету</h5>
+                        <span id="invoiceAmount" style="width: 100%; margin-left: -7%"
+                              th:text="${td.invoiceAmount}"></span>
+                    </div>
+                    <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
+                        <div class="form-check">
+                            <span id="freeDeliveryCheckbox" th:text="${td.freeDeliveryCheckbox}"></span>
+                            <h5 class="form-check-h5" for="freeDeliveryCheckbox" style="color: #1a1a1c">Безвозмездная
+                                поставка</h5>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="height: 300px; width: 950px;border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
-                <h5 style="margin-left: 1%">26 Таможня на границе</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Код таможни</h5>
-                            <span id="customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:text="${td.customsCode}"></span>
-                        </div>
+        <div style="height: 270px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">20 Курс валюты</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">Валюта</h5>
+                        <!--              <span id="currency"  style="width: 100%;" th:text="${td.currencyRateDTO.}">-->
                     </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-11">
-                            <span class="form-control" id="largeTextArea" rows="8" aria-description="Введите текст" required="" style="height: 160px; width: 100%;" th:text="${td.largeTextArea}"></span>
-                        </div>
+                </div>
+                <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
+                    <h5 class="form-h5" style="color: #1a1a1c">Считать по курсам</h5>
+                    <span id="exchangeRateDate" style="width: 100%;" th:text="${td.currencyRateDTO.date}"></span>
+                </div>
+
+
+                <div class="col-sm-5">
+                    <h5 class="form-h5" style="color: #1a1a1c">Курс евро</h5>
+                    <span id="euroExchangeRate" style="width: 100%;" th:text="${td.currencyRateDTO.euroRate}"></span>
+                </div>
+                <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
+                    <h5 class="form-h5" style="color: #1a1a1c">Курс USD</h5>
+                    <span id="usdExchangeRate" style="width: 100%; margin-left: -7%"
+                          th:text="${td.currencyRateDTO.usdRate}"></span>
+                </div>
+                <div class="col-sm-12" style="margin-left: 5%">
+                    <h5 class="form-h5" style="color: #1a1a1c">Курс валют для расчета</h5>
+                    <span id="calculationExchangeRate" style="width: 100%; margin-left: -6%"
+                          th:text="${td.currencyRateDTO.currencyRate}"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="height: 150px; width: 350px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+            <h5 style="margin-left: 1%">21 Характер сделки</h5>
+            <div style="margin-left: 2%; margin-top: -5%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код сделки</h5>
+                        <span id="transactionCharacterCode" style="width: 100%;"
+                              th:text="${td.transactionCharacterCode}"></span>
+                    </div>
+                    <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</h5>
+                        <span id="foreignTradeFeatureCode" style="width: 100%;"
+                              th:text="${td.foreignTradeFeatureCode}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: row; margin-top: -173px; margin-left: 400px">
+            <div style="height: 150px; width: 260px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 25px; margin-right: 10px;">
+                <h5 style="margin-left: 10px">22 Вид транспорта на границе</h5>
+                <div style="margin-left: 20px; ">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
+                        <span id="borderTransportTypeCode" style="width: 100%;"
+                              th:text="${td.borderTransportTypeCode}"></span>
                     </div>
                 </div>
             </div>
 
-            <div style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
-                <h5 style="margin-left: 1%">27 Местонахождение товара</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Реестр УЗО</h5>
-                            <span id="uzoRegister" aria-description="Введите реестр УЗО"  style="width: 100%;" th:text="${td.productLocationDTO.uzoRegistry}"></span>
-                        </div>
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">код таможни</h5>
-                            <span id="30customsCode" aria-description="Введите код таможни"  style="width: 100%;" th:text="${td.productLocationDTO.customsCode}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c">Тип</h5>
-                            <span id="type" aria-description="Введите тип"  style="width: 100%;" th:text="${td.productLocationDTO.type}"></span>
-                        </div>
-                        <div class="col-sm-1">
-                            <h5 class="form-h5" style="color: #1a1a1c">1/2/3</h5>
-                            <span id="quantity"  style="width: 100%;" th:text="${td.productLocationDTO.quantity}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: -70px; margin-left: 220px">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">Номер документа</h5>
-                            <span id="documentNumber" aria-description="Введите номер документа"  style="width: 100%;" th:text="${td.productLocationDTO.documentNumber}"></span>
-                        </div>
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дата</h5>
-                            <span id="date" aria-description="Введите дату"  style="width: 100%;" th:text="${td.productLocationDTO.date}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Номер ЗТК</h5>
-                            <span id="ztkNumber" aria-description="Введите номер ЗТК"  style="width: 100%;" th:text="${td.productLocationDTO.ztkNumber}"></span>
-                        </div>
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Вид транспорта</h5>
-                            <span id="transportationType" aria-description="Введите вид транспорта"  style="width: 100%;" th:text="${td.productLocationDTO.transportType}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: -70px; margin-left: 450px">
-                        <div class="col-sm-9">
-                            <h5 class="form-h5" style="color: #1a1a1c">Номер транспортного средства</h5>
-                            <span id="vehicleNumber" aria-description="Введите номер транспортного средства"  style="width: 100%;" th:text="${td.productLocationDTO.vehicleNumber}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Ж/д станция / порт</h5>
-                            <span id="stationPort" aria-description="Введите ж/д станцию / порт"  style="width: 100%;" th:text="${td.productLocationDTO.stationOrPort}"></span>
-                        </div>
-                        <div class="col-sm-4" >
-                            <h5 class="form-h5" style="color: #1a1a1c">Cтрана</h5>
-                            <span id="30country" aria-description="Введите страну"  style="width: 100%;" th:text="${td.productLocationDTO.country}"></span>
-                        </div>
-                        <div class="col-sm-3">
-                            <h5 class="form-h5" style="color: #1a1a1c">Почтовый код</h5>
-                            <span id="30postalCode" aria-description="Введите почтовый код"  style="width: 100%;" th:text="${td.productLocationDTO.postalCode}"></span>
-                        </div>
-                    </div>
-
-
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Область, район</h5>
-                            <span id="30region" aria-description="Введите область, район"  style="width: 100%;" th:text="${td.productLocationDTO.regionOrDistrict}"></span>
-                        </div>
-                        <div class="col-sm-4">
-                            <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
-                            <span id="locality" aria-description="Введите населённый пункт"  style="width: 100%;" th:text="${td.productLocationDTO.locality}"></span>
-                        </div>
-                        <div class="col-sm-2">
-                            <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
-                            <span id="30house" aria-description="Введите дом"  style="width: 100%;" th:text="${td.productLocationDTO.houseNumber}"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div style="height: 250px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
-                <h5 style="margin-left: 1%">28 Грузовые места и описание товаров</h5>
-                <div style="margin-left: 2%; margin-top: -2%">
-                    <div class="row" style="margin-top: 30px;">
-                        <div class="col-sm-12">
-                            <span id="cargoDescription" rows="8" aria-description="Введите описание товаров" required="" style="width: 100%;" th:text="${td.productDescription}"></span>
-                        </div>
+            <div style="height: 150px; width: 255px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 23px; margin-left: 20px">
+                <h5 style="margin-left: 1%">23 Вид транспорта внутри страны</h5>
+                <div style="margin-left: 2%;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код вида т.с.</h5>
+                        <span id="domesticTransportTypeCode" style="width: 100%;"
+                              th:text="${td.domesticTransportTypeCode}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="infoDiv" style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;" th:each="p:${listProduct}">
-                <h5 style="margin-left: 1%"><p>Информация о товаре</p></h5>
-                <div style="margin-left: 2%; margin-top: -2%" >
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">29 № товара</h5>
-                            <span id="itemNumber0" th:text="${p.idProduct}" style="width: 100%;" ></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">30 Код товара</h5>
-                            <span id="productCode0" th:text="${p.productCode}" style="width: 100%;" ></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">31 Наименовние товра</h5>
-                            <span id="nameProduct0" th:text="${p.nameProduct}" style="width: 100%;" ></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">32 Код страны происхождения</h5>
-                            <span id="originCountryCode0" th:text="${p.originCountryCode}" style="width: 100%;" ></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">33 Вес брутто</h5>
-                            <span id="grossWeight0" th:text="${p.grossWeight}" style="width: 100%;"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">34 Преференция</h5>
-                            <span id="preference0" th:text="${p.preference}" style="width: 100%;" ></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">35 Процедура</h5>
-                            <span id="procedure0" th:text="${p.procedure}" style="width: 100%;"></span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">36 Вес нетто</h5>
-                            <span id="netWeight0" th:text="${p.netWeight}" style="width: 100%;"></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <h5 class="form-h5" style="color: #1a1a1c">37 Квота</h5>
-                            <span id="quota0" th:text="${p.quota}" style="width: 100%;"></span>
-                        </div>
+        <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+            <h5 style="margin-left: 1%">24 Суммарный вес брутто</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-12">
+                        <span id="grossWeights" style="width: 100%;" th:text="${td.grossWeight}"></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
-                <button class="btn"  type="button"  th:onclick="|window.location.href='/client/showListTD'|" style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
+        <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 500px">
+            <h5 style="margin-left: 1%">25 Суммарный вес нетто</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-12">
+                        <span id="netWeights" style="width: 100%;" th:text="${td.netWeight}"></span>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div style="height: 300px; width: 950px;border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+            <h5 style="margin-left: 1%">26 Таможня на границе</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Код таможни</h5>
+                        <span id="customsCode" aria-description="Введите код таможни" style="width: 100%;"
+                              th:text="${td.customsCode}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-11">
+                        <span class="form-control" id="largeTextArea" rows="8" aria-description="Введите текст"
+                              required="" style="height: 160px; width: 100%;" th:text="${td.largeTextArea}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+            <h5 style="margin-left: 1%">27 Местонахождение товара</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Реестр УЗО</h5>
+                        <span id="uzoRegister" aria-description="Введите реестр УЗО" style="width: 100%;"
+                              th:text="${td.productLocationDTO.uzoRegistry}"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">код таможни</h5>
+                        <span id="30customsCode" aria-description="Введите код таможни" style="width: 100%;"
+                              th:text="${td.productLocationDTO.customsCode}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c">Тип</h5>
+                        <span id="type" aria-description="Введите тип" style="width: 100%;"
+                              th:text="${td.productLocationDTO.type}"></span>
+                    </div>
+                    <div class="col-sm-1">
+                        <h5 class="form-h5" style="color: #1a1a1c">1/2/3</h5>
+                        <span id="quantity" style="width: 100%;" th:text="${td.productLocationDTO.quantity}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: -70px; margin-left: 220px">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">Номер документа</h5>
+                        <span id="documentNumber" aria-description="Введите номер документа" style="width: 100%;"
+                              th:text="${td.productLocationDTO.documentNumber}"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дата</h5>
+                        <span id="date" aria-description="Введите дату" style="width: 100%;"
+                              th:text="${td.productLocationDTO.date}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Номер ЗТК</h5>
+                        <span id="ztkNumber" aria-description="Введите номер ЗТК" style="width: 100%;"
+                              th:text="${td.productLocationDTO.ztkNumber}"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Вид транспорта</h5>
+                        <span id="transportationType" aria-description="Введите вид транспорта" style="width: 100%;"
+                              th:text="${td.productLocationDTO.transportType}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: -70px; margin-left: 450px">
+                    <div class="col-sm-9">
+                        <h5 class="form-h5" style="color: #1a1a1c">Номер транспортного средства</h5>
+                        <span id="vehicleNumber" aria-description="Введите номер транспортного средства"
+                              style="width: 100%;" th:text="${td.productLocationDTO.vehicleNumber}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Ж/д станция / порт</h5>
+                        <span id="stationPort" aria-description="Введите ж/д станцию / порт" style="width: 100%;"
+                              th:text="${td.productLocationDTO.stationOrPort}"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Cтрана</h5>
+                        <span id="30country" aria-description="Введите страну" style="width: 100%;"
+                              th:text="${td.productLocationDTO.country}"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5 class="form-h5" style="color: #1a1a1c">Почтовый код</h5>
+                        <span id="30postalCode" aria-description="Введите почтовый код" style="width: 100%;"
+                              th:text="${td.productLocationDTO.postalCode}"></span>
+                    </div>
+                </div>
+
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Область, район</h5>
+                        <span id="30region" aria-description="Введите область, район" style="width: 100%;"
+                              th:text="${td.productLocationDTO.regionOrDistrict}"></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5 class="form-h5" style="color: #1a1a1c">Населённый пункт</h5>
+                        <span id="locality" aria-description="Введите населённый пункт" style="width: 100%;"
+                              th:text="${td.productLocationDTO.locality}"></span>
+                    </div>
+                    <div class="col-sm-2">
+                        <h5 class="form-h5" style="color: #1a1a1c">Дом</h5>
+                        <span id="30house" aria-description="Введите дом" style="width: 100%;"
+                              th:text="${td.productLocationDTO.houseNumber}"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div style="height: 250px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+            <h5 style="margin-left: 1%">28 Грузовые места и описание товаров</h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-sm-12">
+                        <span id="cargoDescription" rows="8" aria-description="Введите описание товаров" required=""
+                              style="width: 100%;" th:text="${td.productDescription}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="infoDiv"
+             style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;"
+             th:each="p:${listProduct}">
+            <h5 style="margin-left: 1%"><p>Информация о товаре</p></h5>
+            <div style="margin-left: 2%; margin-top: -2%">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">29 № товара</h5>
+                        <span id="itemNumber0" th:text="${p.idProduct}" style="width: 100%;"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">30 Код товара</h5>
+                        <span id="productCode0" th:text="${p.productCode}" style="width: 100%;"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">31 Наименовние товра</h5>
+                        <span id="nameProduct0" th:text="${p.nameProduct}" style="width: 100%;"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">32 Код страны происхождения</h5>
+                        <span id="originCountryCode0" th:text="${p.originCountryCode}" style="width: 100%;"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">33 Вес брутто</h5>
+                        <span id="grossWeight0" th:text="${p.grossWeight}" style="width: 100%;"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">34 Преференция</h5>
+                        <span id="preference0" th:text="${p.preference}" style="width: 100%;"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">35 Процедура</h5>
+                        <span id="procedure0" th:text="${p.procedure}" style="width: 100%;"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">36 Вес нетто</h5>
+                        <span id="netWeight0" th:text="${p.netWeight}" style="width: 100%;"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5 class="form-h5" style="color: #1a1a1c">37 Квота</h5>
+                        <span id="quota0" th:text="${p.quota}" style="width: 100%;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${role.equals('[CLIENT]')}" class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
+            <button class="btn" type="button" th:onclick="|window.location.href='/client/showListTD'|"
+                    style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК
+            </button>
+        </div>
+        <div th:if="${role.equals('[EMPLOYEE]')}" class="d-flex justify-content-center"
+             style="margin-top: 20px; margin-left: 40px ">
+            <button class="btn" type="button" th:onclick="|window.location.href='/user/showAllDeclaration'|"
+                    style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК
+            </button>
+        </div>
     </div>
 
     <!--    <div class="modal fade" id="myModal" tabindex="-1" aria-h5ledby="createRequestModalh5" aria-hidden="true">-->
-<!--        <div class="modal-dialog">-->
-<!--            <div class="modal-content">-->
+    <!--        <div class="modal-dialog">-->
+    <!--            <div class="modal-content">-->
 
-<!--                <div class="modal-body">-->
-<!--                    <h5 class="h5" style="color: #1a1a1c;">Выберите поставщика</h5>-->
-<!--                    <select th:if="${supplier}" class="form-select" id="supplier" required>-->
-<!--                        <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
-<!--                    </select>-->
-<!--                    <button class="btn" type="button" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Выбрать</button>-->
+    <!--                <div class="modal-body">-->
+    <!--                    <h5 class="h5" style="color: #1a1a1c;">Выберите поставщика</h5>-->
+    <!--                    <select th:if="${supplier}" class="form-select" id="supplier" required>-->
+    <!--                        <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
+    <!--                    </select>-->
+    <!--                    <button class="btn" type="button" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Выбрать</button>-->
 
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>

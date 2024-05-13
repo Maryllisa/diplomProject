@@ -48,9 +48,9 @@
         <th  style="color: #814de5" scope="col">Номер декларации</th>
         <th  style="color: #814de5" scope="col">Номер CRM</th>
         <th  style="color: #814de5" scope="col">Статус</th>
-          <th></th>
-          <th></th>
-        <th></th>
+          <th  style="color: #814de5" scope="col">Подробнее</th>
+          <th  style="color: #814de5" scope="col">Принять</th>
+          <th  style="color: #814de5" scope="col">Отклонить</th>
       </tr>
           </thead>
    <tbody>
@@ -60,7 +60,7 @@
         <td  style="color: #1a1a1c" th:text="${ap.declarationTD.declarationNumber}"/>
         <td  style="color: #1a1a1c" th:text="${ap.crm.numbers}"/>
         <td  style="color: #1a1a1c" th:text="${ap.statusApplication.getRussianName().get(ap.statusApplication)}"/>
-        <td><a th:href="*{'/user/readApplication/'+ ap.idApplication}"><input type="button" value="Подробнее" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></a><td/>
+        <td><input type="button" value="Подробнее"  th:onclick="|findApplication(${ap.idApplication})|" style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></td>
         <td><input type="button" value="Принять" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/PROCESSING/' + ${ap.idApplication}|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8 "></td>
         <td><input type="button" value="Отклонить" th:onclick="|window.location.href='/user/changeStatusApplicationForStorage/CANCELLED/' + ${ap.idApplication}|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8"></td>
     </tr>
@@ -127,7 +127,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/changer.js">
+<script>
+   function findApplication(id){
+        fetch('/user/findApplication/' + id,{
+            method: 'GET'
+        }).then(response=> response.json())
+            .then(data=>{
+                const orderNumber = document.getElementById("orderNumber");
+                const itemCount = document.getElementById("itemCount");
+                const deliveryDate = document.getElementById("deliveryDate");
+                const orderDate = document.getElementById("orderDate");
+                const orderStatus = document.getElementById("orderStatus");
+                const ttn = document.getElementById("ttn");
+                const declaration = document.getElementById("declaration");
+                const cmr = document.getElementById("cmr");
 
+                orderNumber.textContent = data.idApplication;
+                itemCount.textContent = data.countPositionProducts;
+                deliveryDate.textContent = data.datePost;
+                orderDate.textContent = data.dateZav;
+                orderStatus.textContent = "В ожидании";
+                ttn.textContent = data.goodTransportDocument.goodsTransportDocumentNumbers;
+                declaration.textContent = data.declarationTD.declarationNumber;
+                cmr.textContent = data.crm;
+            });
+    }
 </script>
 </html>

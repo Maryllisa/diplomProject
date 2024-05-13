@@ -1,7 +1,9 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.marking.ApplicationForMarking;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
 import com.example.diplomproject.repository.ApplicationForMarkingRepository;
@@ -53,5 +55,13 @@ public class ApplicationForMarkingService {
 
     public void deleteApplication(Long id) {
         applicationForMarkingRepository.delete(applicationForMarkingRepository.getById(id));
+    }
+
+
+    public String changeStatus(Long idMark, StatusMarkingApplication statusApplication) {
+        ApplicationForMarking application = applicationForMarkingRepository.getById(idMark);
+        application.setStatusMarkingApplication(statusApplication);
+        applicationForMarkingRepository.save(application);
+        return "УСПЕШНО";
     }
 }
