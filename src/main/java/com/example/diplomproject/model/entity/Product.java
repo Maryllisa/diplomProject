@@ -5,7 +5,6 @@ import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -43,17 +42,11 @@ public class Product {
     private double netWeight;
     @Column
     private String quota;
-    @Column
-    private Boolean isDelivery = false;
     @JsonIgnore
     @ManyToOne
     private DeclarationTD declarationTD;
-    @JsonIgnore
     @OneToOne
     private ApplicationForRelease applicationForRelease;
-    @JsonIgnore
-    @OneToOne
-    private ApplicationForStorage applicationForStorage;
 
     public ProductDTO build() {
         return ProductDTO.builder()

@@ -50,13 +50,20 @@
     <div class="table-responsive " style="width:960px; margin-top:-88%; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5"> Оформить отгрузку товара</h4>
 
-        <form class="needs-validation" novalidate="" style="width: 950px" >
+        <form class="needs-validation" novalidate="" style="width: 950px">
             <div class="row g-3">
                 <div class="col-sm-3">
                     <label class="form-label" style="color: #814de5">№ Заявки</label>
                     <input type="text" class="form-control" id="numZav" placeholder="" value="" required="">
                     <div class="invalid-feedback" style="color: red">
                         Проверьте корректность заполнения № заявки.
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label" style="color: #814de5">№ Декларации</label>
+                    <input type="text" class="form-control" id="numDec" placeholder="" value="" required="">
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность заполнения № декларации.
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -71,7 +78,7 @@
             <div class="row g-3">
                 <div class="col-6">
                     <label class="form-label" style="color: #814de5">Дата отгрузки</label>
-                    <input type="date" class="form-control" id="arrangeDate" placeholder="">
+                    <input type="date" class="form-control" id="arrange Date" placeholder="">
                     <div class="invalid-feedback" style="color: red">
                         Неверная дата
                     </div>
@@ -89,19 +96,91 @@
 
                 <div class="col-sm-6">
                     <label class="form-label" style="color: #814de5">Наименование товаров</label>
-                    <table id="tableProduct">
+                    <table>
+                        <tr>
+                            <td>Товар 1</td>
+                            <td>
+                                <select class="form-select" id="productMarking1" required="">
+                                    <option value="">Выберите маркировку товара</option>
+                                    <option value="Маркировка 1">Маркировка 1</option>
+                                    <option value="Маркировка 2">Маркировка 2</option>
+                                    <option value="Маркировка 3">Маркировка 3</option>
+                                    <!-- Добавьте другие варианты маркировки товара -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Товар 2</td>
+                            <td>
+                                <select class="form-select" id="productMarking2" required="">
+                                    <option value="">Выберите маркировку товара</option>
+                                    <option value="Маркировка 1">Маркировка 1</option>
+                                    <option value="Маркировка 2">Маркировка 2</option>
+                                    <option value="Маркировка 3">Маркировка 3</option>
+                                    <!-- Добавьте другие варианты маркировки товара -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Товар 3</td>
+                            <td>
+                                <select class="form-select" id="productMarking3" required="">
+                                    <option value="">Выберите маркировку товара</option>
+                                    <option value="Маркировка 1">Маркировка 1</option>
+                                    <option value="Маркировка 2">Маркировка 2</option>
+                                    <option value="Маркировка 3">Маркировка 3</option>
 
-                     </table>
+                                </select>
+                            </td>
+                        </tr>
+
+
+                    </table>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label" style="color: #814de5">Оценка доставки</label>
-                    <input type="text" class="form-control" id="deliveryEvaluation" placeholder="" value="" required="">
+                    <input type="text" class="form-control" id="dekiverOchenka" placeholder="" value="" required="">
                     <div class="invalid-feedback" style="color: red">
                         Проверьте корректность заполнения оценки доставки.
                     </div>
                 </div>
             </div>
-            <button class="w-100 btn btn-primary btn-lg" th:onclick="arrangeShipment()" type="button" style="background-color: #814de5; color: #1a1a1c; margin-top: 20px">Оформить</button>
+
+
+
+
+    <div class="row g-3">
+
+        <div class="col-sm-6">
+            <label class="form-label" style="color: #814de5">Поставщики</label>
+            <select class="form-select" id="suppliers" required="">
+                <option value="">Выберите поставщика</option>
+                <option value="Поставщик 1">Поставщик 1</option>
+                <option value="Поставщик 2">Поставщик 2</option>
+                <option value="Поставщик 3">Поставщик 3</option>
+                <!-- Добавьте других поставщиков -->
+            </select>
+            <div class="invalid-feedback" style="color: red">
+                Проверьте корректность выбора поставщика.
+            </div>
+        </div>
+
+                <div class="col-sm-6">
+                    <label class="form-label" style="color: #814de5">Сотрудники</label>
+                    <select class="form-select" id="employees" required="">
+                        <option value="">Выберите сотрудника</option>
+                        <option value="Сотруждник 1">Сотрудник 1</option>
+                        <option value="Сотрудник 2">Сотрудник 2</option>
+                        <option value="Сотрудник 3">Сотрудник 3</option>
+                        <!-- Добавьте других сотрудников -->
+                    </select>
+                    <div class="invalid-feedback" style="color: red">
+                        Проверьте корректность выбора сотрудника.
+                    </div>
+                </div>
+            </div>
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: #814de5; color: #1a1a1c; margin-top: 20px">Оформить</button>
         </form>
         <div>
 
@@ -115,14 +194,24 @@
        <div style="margin-left: 5%; margin-top: -7%">
            <h2 style="color: #814de5">Список заявок на отгрузку</h2>
         <select id="requestsDropdown" onchange="showSelectedRequest()" style="width: 100%">
-            <option>Выбрать заявление</option>
-            <option th:if="${!applicationForStorage.isEmpty()}"
-                    th:each="ap:${applicationForStorage}"
-                    th:value="${ap.idApplication}"
-                    th:text="${ap.dateZav}"></option>
+            <option value="">Выберите заявку</option>
+            <option value="Заявка 1">Заявка 1</option>
+            <option value="Заявка 2">Заявка 2</option>
+            <option value="Заявка 3">Заявка 3</option>
+            <!-- Добавьте остальные заявки в соответствии с вашими данными -->
+        </select>
+
+        <h2 style="color: #814de5">Список деклараций</h2>
+        <select id="declarationsDropdown" multiple onchange="showSelectedDeclaration()" style="width: 100%">
+            <option value="Декларация 1">Декларация 1</option>
+            <option value="Декларация 2">Декларация 2</option>
+            <option value="Декларация 3">Декларация 3</option>
+            <!-- Добавьте остальные декларации в соответствии с вашими данными -->
         </select>
 
         <div id="selectedRequest"></div>
+        <div id="selectedDeclaration"></div>
+
         <button onclick="submitForm()" style="width: 500px; background-color: #814de5; color: #1a1a1c; border-radius: 10px; border-color: #814de5; margin-left: 2%">Оформить отгрузку</button>
     </div>
     </div>
@@ -133,7 +222,6 @@
 <div id="selectedDeclarationInfo"></div>
 
 <script>
-    let countProduct = 0;
     function openModal() {
         var modal = document.getElementById("modal");
         modal.style.display = "block";
@@ -151,78 +239,47 @@
         var selectedOption = dropdown.options[dropdown.selectedIndex].value;
         selectedRequest.textContent = "Выбранная заявка: " + selectedOption;
     }
+
+    function showSelectedDeclaration() {
+        var dropdown = document.getElementById("declarationsDropdown");
+        var selectedDeclaration = document.getElementById("selectedDeclaration");
+
+        var selectedOptions = [];
+        for (var i = 0; i <dropdown.options.length; i++) {
+            if (dropdown.options[i].selected) {
+                selectedOptions.push(dropdown.options[i].value);
+            }
+        }
+
+        selectedDeclaration.textContent = "Выбранные декларации: " + selectedOptions.join(", ");
+    }
+
     function submitForm() {
+        // Действия по оформлению отгрузки
+
+        // Получить выбранные значения заявки и декларации
         var dropdownRequest = document.getElementById("requestsDropdown");
         var selectedRequest = dropdownRequest.options[dropdownRequest.selectedIndex].value;
 
+        var dropdownDeclaration = document.getElementById("declarationsDropdown");
+        var selectedDeclarations = [];
+        for (var i = 0; i < dropdownDeclaration.options.length; i++) {
+            if (dropdownDeclaration.options[i].selected) {
+                selectedDeclarations.push(dropdownDeclaration.options[i].value);
+            }
+        }
+
+        // Установить выбранные значения в соответствующие <input> на странице
         document.getElementById("numZav").value = selectedRequest;
-        fetch('/user/findProductByApplication/' + selectedRequest, {
-            method: 'GET'
-        }).then(response => response.json())
-            .then(data => {
-            data.forEach(p => {
-                const tableProduct = document.getElementById("tableProduct");
-                let htmlTr = `<tr>
-                        <input type="hidden" id="idProduct${countProduct}" value="${p.idProduct}"/>
-                        <td id="product${countProduct}">${p.nameProduct}</td>
-                        <td>
-                            <input type="checkbox" id="isDelivery${countProduct}">
-                        </td>
-                    </tr>`;
-                countProduct++;
-                tableProduct.innerHTML += htmlTr; // Используйте += для добавления строки, а не замены
-            });
-        });
+        document.getElementById("numDec").value = selectedDeclarations.join(", ");
+
+        // Закрыть модальное окно
         closeModal();
     }
+    // Открытие модального окна при загрузке страницы
     window.onload = function() {
         openModal();
     };
-   async function arrangeShipment() {
-       const numZav = document.getElementById("numZav").value;
-       const weight = document.getElementById("weight").value;
-       const arrangeDate = document.getElementById("arrangeDate").value;
-       const prodCondition = document.getElementById("prodCondition").value;
-       const deliveryEvaluation = document.getElementById("deliveryEvaluation").value;
-
-       let checkProduct = {}
-       for (let i = 0; i < countProduct; i++) {
-           const product = document.getElementById("idProduct" + i).value;
-           const isDelivery = document.getElementById("isDelivery" + i).checked;
-           checkProduct[product] = isDelivery;
-       }
-       const deliveryProductDTO = {
-           idDeliveryProduct: 0,
-           weightProduct: weight,
-           arrangeDate: arrangeDate,
-           prodCondition: prodCondition,
-           deliveryEvalution: deliveryEvaluation,
-           idApplicationForStorage: numZav,
-           checkProduct: checkProduct
-       }
-       console.log();
-       await fetch('/user/addDelivery', {
-           method: 'POST',
-           headers: {
-               "Content-Type": "application/json"
-           },
-           body: JSON.stringify(deliveryProductDTO)
-       }).then(response => response.json())
-           .then(data => {
-               if (data.status === "success") {
-                   alert(data.message);
-               } else if (data.status === "bad") {
-                   for (const x in data) {
-                       if (x !== "bad") {
-                           alert(data[x]);
-
-                       }
-                   }
-               } else {
-                   console.error('Произошла ошибка:', data.message);
-               }
-           });
-   }
 </script>
 
 </body>

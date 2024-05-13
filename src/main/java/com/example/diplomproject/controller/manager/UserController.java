@@ -1,9 +1,6 @@
 package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
-import com.example.diplomproject.model.entity.ApplicationForRelease;
-import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
-import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
@@ -12,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/user")
 public class UserController {
     private final ApplicationService applicationService;
     private final IndividualsService individualsService;
@@ -25,77 +20,64 @@ public class UserController {
     private final MarkingInfoService markingInfoService;
     private final ProductService productService;
     private final AccountService accountService;
-    private final ApplicationForStorageService applicationForStorageService;
-    private final DeliveryProductService deliveryProductService;
-    private final ApplicationForReleaseService applicationForReleaseService;
 
-    @GetMapping("")
+    @GetMapping("/user")
     public String getStart() {
         return "/user/userPanel";
     }
-    @GetMapping("/obrApp")
+    @GetMapping("/user/obrApp")
     public String getObrApplication(Model model, Authentication authentication) {
 
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.PENDING));
         return "/user/obrApplication";
     }
-    @GetMapping("/activeApp")
+    @GetMapping("/user/activeApp")
     public String getActiveApplication(Model model) {
 
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.PROCESSING));
         return "/user/activeApplications";
     }
-    @GetMapping("/appHistory")
+    @GetMapping("/user/appHistory")
     public String getApplicationHistory(Model model) {
 
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.COMPLETED));
         return "/user/applicationHistory";
     }
-    @GetMapping("/showSuppliers")
+    @GetMapping("/user/showSuppliers")
     public String getSupplierReg(Model model) {
         model.addAttribute("suppliers", individualsService.getAllSuppliers());
         return "/user/showSupplier";
     }
-    @GetMapping("/regMark")
+    @GetMapping("/user/regMark")
     public String getRegistrationMark(Model model) {
         model.addAttribute("applicationList", applicationForMarking.getAllApplicationsForMarking());
         model.addAttribute("newMarking", new MarkingInfoDTO());
         model.addAttribute("typeMarking", TypeMarking.getRussianName());
         return "/user/regMark";
     }
-    @GetMapping("/showAllDeclaration")
+    @GetMapping("/user/showAllDeclaration")
     public String getAllDeclaration(Model model, Authentication authentication) {
         model.addAttribute("declaration", declarationTDService.getAllDeclarationByAccount(authentication.getName()));
         return "/user/showAllDeclaration";
     }
-    @GetMapping("/showOfDeclaration")
+    @GetMapping("/user/showOfDeclaration")
     public String getRegOfDeclaration() {return "/user/showDeclaration";}
-    @GetMapping("/showShipment")
-    public String getShipmentList(Model model, Authentication authentication) {
-        model.addAttribute("shipmentList", deliveryProductService.getAllShipment(authentication.getName()));
-        return "/user/showShipment";
-    }
-    @GetMapping("/arrangeShipment")
-    public String getArrangeShipment(Model model, Authentication authentication) {
-        model.addAttribute("applicationForStorage", applicationForStorageService.getAllApplictionByAccountManagerAndStatus(authentication.getName()));
-        return "/user/arrangeShipment";
-    }
-    @GetMapping("/showProductOnWH")
-    public String getShowProductOnWH(Model model, Authentication authentication) {
-        model.addAttribute("delivery", deliveryProductService.getAllShipment(authentication.getName()));
-        return "/user/showProductOnWH";
-    }
-    @GetMapping("/relesionReg")
-    public String getRelesionReg(Model model, Authentication authentication) {
-        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.IN_PROCESSING));
-        return "/user/relesionReg";
-    }
-    @GetMapping("/showAllMarkedProd")
+    @GetMapping("/user/showShipment")
+    public String getShipmentList() {return "/user/showShipment";}
+    @GetMapping("/user/arrangeShipment")
+    public String getArrangeShipment() {return "/user/arrangeShipment";}
+    @GetMapping("/user/showProductOnWH")
+    public String getShowProductOnWH() {return "/user/showProductOnWH";}
+    @GetMapping("/user/relesionReg")
+    public String getRelesionReg() {return "/user/relesionReg";}
+    @GetMapping("/user/relesionHistory")
+    public String getRelesionHistory() {return "/user/relesionHistory";}
+    @GetMapping("/user/showAllMarkedProd")
     public String getShowAllMarkedProd(Model model) {
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
         return "/user/showAllMarkedProd";
     }
-    @GetMapping("/showTD/{id}")
+    @GetMapping("/user/showTD/{id}")
     public String getShowTDUser(Model model, Authentication authentication, @PathVariable Long id) {
         model.addAttribute("td", declarationTDService.getById(id).build());
         model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
