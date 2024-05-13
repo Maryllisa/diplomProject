@@ -8,6 +8,7 @@ import com.example.diplomproject.model.entity.DeliveryProduct;
 import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class UserRestController {
     private final ApplicationForMarkingService applicationForMarking;
     private final ProductService productService;
     private final DeliveryProductService deliveryProductService;
+    private final ApplicationForReleaseService applicationForReleaseService;
     @PostMapping("/registration/marking")
     public ResponseEntity<String> addNewMarking(@ModelAttribute MarkingInfoDTO markingInfoDTO,
                                                 Model model){
@@ -96,5 +98,10 @@ public class UserRestController {
     @GetMapping("/findAllInfoProduct/{id}")
     public DeliveryProduct getDeliveryById(Model model, Authentication authentication, @PathVariable Long id) {
         return deliveryProductService.getById(id);
+    }
+    @GetMapping("/changeStatusApplicationForRelease/{id}")
+    public ResponseEntity<String> changeStatusApplicationForRelease(@PathVariable Long id){
+        applicationForReleaseService.changeStatus(id, StatusApplicationForRelease.AWAITING_PAYMENT);
+        return ResponseEntity.ok("");
     }
 }

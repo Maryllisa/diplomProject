@@ -1,7 +1,9 @@
 package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
+import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,7 @@ public class UserController {
     private final AccountService accountService;
     private final ApplicationForStorageService applicationForStorageService;
     private final DeliveryProductService deliveryProductService;
+    private final ApplicationForReleaseService applicationForReleaseService;
 
     @GetMapping("")
     public String getStart() {
@@ -83,7 +86,8 @@ public class UserController {
         return "/user/showProductOnWH";
     }
     @GetMapping("/relesionReg")
-    public String getRelesionReg() {
+    public String getRelesionReg(Model model, Authentication authentication) {
+        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.IN_PROCESSING));
         return "/user/relesionReg";
     }
     @GetMapping("/showAllMarkedProd")
