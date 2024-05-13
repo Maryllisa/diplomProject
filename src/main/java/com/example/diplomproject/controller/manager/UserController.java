@@ -70,6 +70,8 @@ public class UserController {
     public String getShowProductOnWH() {return "/user/showProductOnWH";}
     @GetMapping("/user/relesionReg")
     public String getRelesionReg() {return "/user/relesionReg";}
+    @GetMapping("/user/relesionHistory")
+    public String getRelesionHistory() {return "/user/relesionHistory";}
     @GetMapping("/user/showAllMarkedProd")
     public String getShowAllMarkedProd(Model model) {
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
