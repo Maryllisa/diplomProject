@@ -19,6 +19,8 @@ public class AdminController {
     private final DeclarationTDService declarationTDService;
 
     @GetMapping("/admin")
-    public String getClient() {return "/admin/adminPanel";}
+    public String getAdmin() {return "/admin/adminPanel";}
 
+    @GetMapping("/admin/showAccounts")
+    public String getShowAccounts() {return "/admin/showAccounts";}
 }
