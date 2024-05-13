@@ -45,6 +45,14 @@ public class ApplicationForStorageService {
         });
         return applicationForStorageDTOS;
     }
+    public List<ApplicationForStorageDTO> getAllApplictionByAccountManager(String name) {
+        List<ApplicationForStorageDTO> applicationForStorageDTOS = new ArrayList<>();
+        List<ApplicationForStorage> applicationForStorages = applicationForStorageRepository.findAllByAccountManager(accountRepository.findByLogin(name));
+        applicationForStorages.forEach(x -> {
+            applicationForStorageDTOS.add(x.build());
+        });
+        return applicationForStorageDTOS;
+    }
 
     public Map<String, String> checkApplication(ApplicationForStorageDTO applicationForStorageDTO, BindingResult result) {
         Map<String, String> resultDescription = new HashMap<>();
@@ -217,5 +225,10 @@ public class ApplicationForStorageService {
 
     public ApplicationForStorage findById(Long id) {
         return applicationForStorageRepository.findById(id).orElse(null);
+    }
+
+    public List<ApplicationForStorage> getAllApplictionByAccountManagerAndStatus(String name) {
+        return applicationForStorageRepository.findAllByAccountManagerAndStatusApplication(
+          accountRepository.findByLogin(name), StatusApplication.PROCESSING);
     }
 }

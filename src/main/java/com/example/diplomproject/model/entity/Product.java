@@ -42,9 +42,12 @@ public class Product {
     private double netWeight;
     @Column
     private String quota;
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean isDelivery;
     @JsonIgnore
     @ManyToOne
     private DeclarationTD declarationTD;
+    @JsonIgnore
     @OneToOne
     private ApplicationForRelease applicationForRelease;
 
