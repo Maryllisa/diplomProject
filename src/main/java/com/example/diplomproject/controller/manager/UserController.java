@@ -24,6 +24,7 @@ public class UserController {
     private final ProductService productService;
     private final AccountService accountService;
     private final ApplicationForStorageService applicationForStorageService;
+    private final DeliveryProductService deliveryProductService;
 
     @GetMapping("")
     public String getStart() {
@@ -67,7 +68,10 @@ public class UserController {
     @GetMapping("/showOfDeclaration")
     public String getRegOfDeclaration() {return "/user/showDeclaration";}
     @GetMapping("/showShipment")
-    public String getShipmentList() {return "/user/showShipment";}
+    public String getShipmentList(Model model, Authentication authentication) {
+        model.addAttribute("shipmentList", deliveryProductService.getAllShipment(authentication.getName()));
+        return "/user/showShipment";
+    }
     @GetMapping("/arrangeShipment")
     public String getArrangeShipment(Model model, Authentication authentication) {
         model.addAttribute("applicationForStorage", applicationForStorageService.getAllApplictionByAccountManagerAndStatus(authentication.getName()));

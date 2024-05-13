@@ -88,7 +88,9 @@ public class UserRestController {
         }
         deliveryProductService.addNewDelivery(deliveryProductDTO, authentication.getName());
         return ResponseEntity.ok(AnswerMessage.getOKMessage("Отгрузка успешно оформлена"));
-
-
+    }
+    @GetMapping("/deleteShipment/{id}")
+    public ResponseEntity<String> deleteShipment(@PathVariable Long id){
+        return ResponseEntity.ok(deliveryProductService.deleteShipment(id));
     }
 }

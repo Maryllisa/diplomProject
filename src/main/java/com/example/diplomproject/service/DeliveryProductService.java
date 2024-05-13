@@ -1,6 +1,7 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.DeliveryProduct;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.repository.ApplicationForReleaseRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -64,5 +66,18 @@ public class DeliveryProductService {
         product.setProdCondition(deliveryProductDTO.getProdCondition());
         product.setAccount(userRepository.findByLogin(login));
         deliveryProductRepository.save(product);
+    }
+
+    public List<DeliveryProduct> getAllShipment(String name) {
+        return deliveryProductRepository.findAllByAccount(userRepository.findByLogin(name));
+    }
+
+    public String deleteShipment(Long id) {
+        DeliveryProduct deliveryProduct =deliveryProductRepository.getById(id);
+        ApplicationForStorage applicationForStorage = applicationForStorageRepository.getById(deliveryProduct.getApplicationForStorage().getIdApplication());
+        applicationForStorage.setStatusApplication(StatusApplication.PROCESSING);
+        applicationForStorageRepository.save(applicationForStorage);
+        deliveryProductRepository.delete(deliveryProduct);
+        return "Удаление записи";
     }
 }
