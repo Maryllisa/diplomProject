@@ -93,4 +93,8 @@ public class UserRestController {
     public ResponseEntity<String> deleteShipment(@PathVariable Long id){
         return ResponseEntity.ok(deliveryProductService.deleteShipment(id));
     }
+    @GetMapping("/findAllInfoProduct/{id}")
+    public DeliveryProduct getDeliveryById(Model model, Authentication authentication, @PathVariable Long id) {
+        return deliveryProductService.getById(id);
+    }
 }

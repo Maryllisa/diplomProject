@@ -3,15 +3,14 @@ package com.example.diplomproject.service;
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.DeliveryProduct;
+import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
-import com.example.diplomproject.repository.ApplicationForReleaseRepository;
-import com.example.diplomproject.repository.ApplicationForStorageRepository;
-import com.example.diplomproject.repository.DeliveryProductRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ public class DeliveryProductService {
     private final DeliveryProductRepository deliveryProductRepository;
     private final ApplicationForStorageRepository applicationForStorageRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
     public Map<String, String> check(BindingResult result,
                                      DeliveryProductDTO deliveryProductDTO) {
@@ -54,7 +54,14 @@ public class DeliveryProductService {
     }
     public void addNewDelivery(DeliveryProductDTO deliveryProductDTO, String login){
         DeliveryProduct product = new DeliveryProduct();
-        product.setCheckProduct(deliveryProductDTO.getCheckProduct());
+        List<Product> productsList = new ArrayList<>();
+        deliveryProductDTO.getCheckProduct().forEach((x,y)->{
+            Product p = productRepository.getById(x);
+            p.setIsDelivery(y);
+            productsList.add(productRepository.save(p));
+
+        });
+        product.setProductList(productsList);
         product.setApplicationForStorage(applicationForStorageRepository.getById(deliveryProductDTO.getIdApplicationForStorage()));
         product.getApplicationForStorage().setStatusApplication(StatusApplication.COMPLETED);
         product.setApplicationForStorage(
@@ -66,6 +73,7 @@ public class DeliveryProductService {
         product.setProdCondition(deliveryProductDTO.getProdCondition());
         product.setAccount(userRepository.findByLogin(login));
         deliveryProductRepository.save(product);
+
     }
 
     public List<DeliveryProduct> getAllShipment(String name) {
@@ -79,5 +87,9 @@ public class DeliveryProductService {
         applicationForStorageRepository.save(applicationForStorage);
         deliveryProductRepository.delete(deliveryProduct);
         return "Удаление записи";
+    }
+
+    public DeliveryProduct getById(Long id) {
+        return deliveryProductRepository.getById(id);
     }
 }

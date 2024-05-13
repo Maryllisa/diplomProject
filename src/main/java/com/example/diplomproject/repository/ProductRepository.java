@@ -24,4 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "INNER JOIN ApplicationForStorage ap ON ap.declarationTD.idDeclaration = d.idDeclaration " +
             "WHERE ap.idApplication =?1")
     List<Product> getAllByApplication(Long id);
+
+    List<Product> findAllByIsDelivery(Boolean isDelivery);
 }

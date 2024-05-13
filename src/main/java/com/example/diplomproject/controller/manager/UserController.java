@@ -78,9 +78,14 @@ public class UserController {
         return "/user/arrangeShipment";
     }
     @GetMapping("/showProductOnWH")
-    public String getShowProductOnWH() {return "/user/showProductOnWH";}
+    public String getShowProductOnWH(Model model, Authentication authentication) {
+        model.addAttribute("delivery", deliveryProductService.getAllShipment(authentication.getName()));
+        return "/user/showProductOnWH";
+    }
     @GetMapping("/relesionReg")
-    public String getRelesionReg() {return "/user/relesionReg";}
+    public String getRelesionReg() {
+        return "/user/relesionReg";
+    }
     @GetMapping("/showAllMarkedProd")
     public String getShowAllMarkedProd(Model model) {
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());

@@ -91,4 +91,8 @@ public class ProductService {
     public Map<String, String> check(BindingResult result, DeliveryProductDTO deliveryProductDTO) {
         return null;
     }
+
+    public List<Product> getAllProductTrue(String login) {
+        return productRepository.findAllByIsDelivery(true);
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ public class ApplicationForStorageService {
     private final DeclarationTDRepository declarationTDRepository;
     private final TruckRepository truckRepository;
     private final CRMRepository crmRepository;
+    private final ProductRepository productRepository;
 
     public void addNewApplication(ApplicationForStorageDTO applicationForStorageDTO, String name) {
         Account account = accountRepository.findByLogin(name);
@@ -231,4 +234,5 @@ public class ApplicationForStorageService {
         return applicationForStorageRepository.findAllByAccountManagerAndStatusApplication(
           accountRepository.findByLogin(name), StatusApplication.PROCESSING);
     }
+
 }
