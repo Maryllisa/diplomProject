@@ -23,4 +23,6 @@ public class AdminController {
 
     @GetMapping("/admin/showAccounts")
     public String getShowAccounts() {return "/admin/showAccounts";}
+    @GetMapping("/admin/showAdmins")
+    public String getShowAdmins() {return "/admin/showAdmins";}
 }
