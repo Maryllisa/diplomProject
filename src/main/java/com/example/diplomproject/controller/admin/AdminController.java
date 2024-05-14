@@ -25,4 +25,23 @@ public class AdminController {
     public String getShowAccounts() {return "/admin/showAccounts";}
     @GetMapping("/admin/showAdmins")
     public String getShowAdmins() {return "/admin/showAdmins";}
+    @GetMapping("/admin/formKachQuality")
+    public String getFormKachQuality() {return "/admin/formKachQuality";}
+    @GetMapping("/admin/showOcForObsl")
+    public String getShowOcForObsl() {return "/admin/showOcForObsl";}
+    @GetMapping("/admin/otchOfProvisionServ")
+    public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
+    @GetMapping("/admin/showAppJournal")
+    public String getShowAppJournal() {return "/admin/showAppJournal";}
+    @GetMapping("/admin/showOtgrJournal")
+    public String getShowOtgrJournal() {return "/admin/showOtgrJournal";}
+    @GetMapping("/admin/showOtpJournal")
+    public String getShowOtpJournal() {return "/admin/showOtpJournal";}
+    @GetMapping("/admin/showMarkedProd")
+    public String getShowMarkedProd() {return "/admin/showMarkedProd";}
+    @GetMapping("/admin/ShowProdOnWH")
+    public String getShowProdOnWH() {return "/admin/ShowProdOnWH";}
+    @GetMapping("/admin/showTD")
+    public String getShowTD() {return "/admin/showTD";}
 }
+

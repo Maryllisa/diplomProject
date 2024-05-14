@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/adminSidebare :: adminSidebare"></div>
+<main>
+    <div class="table-responsive " style="width:1000px;  margin-left: 27%">
+        <h4 class="mb-3" style="color: #814de5">Сформировать оценку качества</h4>
+        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <select class="form-select" style="margin-left: 10px; width: 150px">
+                    <option value="" selected disabled>По признаку</option>
+                    <option value="признак1">Признак 1</option>
+                    <option value="признак2">Признак 2</option>
+                    <option value="признак3">Признак 3</option>
+                </select>
+            </div>
+            <div style="width: 475px; display: flex; align-items: end;">
+                <span>с</span>
+                <input class="form-control" type="date" placeholder="С" style="margin-left: 10px; width: 120px">
+                <span>по</span>
+                <input class="form-control" type="date" placeholder="По" style="margin-left: 10px; width: 120px">
+            </div>
+
+            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                </form>
+                <select class="form-select" style="margin-left: 10px; width: 160px">
+                    <option value="" selected disabled>По параметру</option>
+                    <option value="признак1">Параметр 1</option>
+                    <option value="признак2">Параметр 2</option>
+                    <option value="признак3">Параметр 3</option>
+                </select>
+            </div>
+        </div>
+
+        <table class="table table-striped table-sm" style="margin-top: 20px">
+            <thead>
+            <tr>
+                <th style="color: #814de5" scope="col">ID заявки</th>
+                <th  style="color: #814de5" scope="col">№ТД</th>
+                <th  style="color: #814de5" scope="col">№CMR</th>
+                <th  style="color: #814de5" scope="col">№ТТН</th>
+                <th  style="color: #814de5" scope="col">Поставщик</th>
+                <th  style="color: #814de5" scope="col">Водитель</th>
+                <th  style="color: #814de5" scope="col">Оценка за маркировку</th>
+                <th  style="color: #814de5" scope="col">Оценка за отгрузку</th>
+                <th  style="color: #814de5" scope="col">Оценка за отпуск</th>
+                <th  style="color: #814de5" scope="col">Оценка за связь</th>
+                <th  style="color: #814de5" scope="col">Оценка за состояние товара</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr> <!--th:if="${applications}" th:each="ap:${applications}"-->
+                <td  style="color: #1a1a1c"><a></a></td> <!--th:text="${}"-->
+                <td  style="color: #1a1a1c"><a></a></td>
+                <td  style="color: #1a1a1c"><a></a></td>
+                <td  style="color: #1a1a1c"><a></a></td>
+                <td  style="color: #1a1a1c"><a></a></td>
+                <td  style="color: #1a1a1c"><a></a></td>
+                <td >7<input type="number" id="ochMark" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
+                <td>7<input type="number" id="ochOtgr" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
+                <td>7<input type="number" id="ochOtp" svalue="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
+                <td>7<input type="number" id="ochSviaz" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
+                <td>7<input type="number" id="ochSost" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
+                <td><input type="button" value="Сохранить веса"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  ></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    // function findApplication(id){
+    //     fetch('/user/findApplication/' + id,{
+    //         method: 'GET'
+    //     }).then(response=> response.json())
+    //         .then(data=>{
+    //             const orderNumber = document.getElementById("orderNumber");
+    //             const itemCount = document.getElementById("itemCount");
+    //             const deliveryDate = document.getElementById("deliveryDate");
+    //             const orderDate = document.getElementById("orderDate");
+    //             const orderStatus = document.getElementById("orderStatus");
+    //             const ttn = document.getElementById("ttn");
+    //             const declaration = document.getElementById("declaration");
+    //             const cmr = document.getElementById("cmr");
+    //
+    //             orderNumber.textContent = data.idApplication;
+    //             itemCount.textContent = data.countPositionProducts;
+    //             deliveryDate.textContent = data.datePost;
+    //             orderDate.textContent = data.dateZav;
+    //             orderStatus.textContent = "В ожидании";
+    //             ttn.textContent = data.goodTransportDocument.goodsTransportDocumentNumbers;
+    //             declaration.textContent = data.declarationTD.declarationNumber;
+    //             cmr.textContent = data.crm;
+    //         });
+    // }
+</script>
+</html>

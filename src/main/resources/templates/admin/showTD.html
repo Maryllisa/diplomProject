@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<div th:insert="blocks/links :: div"></div>
+<body style="background-color: #f2f0f8">
+<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/adminSidebare :: adminSidebare"></div>
+<main>
+  <div class="col-md-7 col-lg-8" style=" margin-left: 27%; ">
+    <h4 class="mb-3" style="color: #814de5"> Просмотр декларации на товар к заявке</h4>
+    <form class="needs-validation" novalidate="" id="form" th:action="*{'/client/regOfDeclaration'}" method="post" th:object="${declaration}">
+      <div style="height: 80px; width: 945px; border-color: #814de5; border-style: solid; border-radius: 10px">
+        <h5 style="margin-left: 1%">1 Декларация</h5>
+        <div style="margin-left: 15%; margin-top: -5%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4" style="margin-top: 3.8%">
+              <span id="spanDeclaration"></span>
+            </div>
+
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c;">Направление перемещения</label>
+              <span id="spanDirection"></span>
+              <datalist id="marking-types">
+                <option value="ИМ">
+                <option value="ЭК">
+              </datalist>
+            </div>
+
+            <div class="col-sm-4" style="margin-left: -1%">
+              <label class="form-label" style="color: #1a1a1c">Код таможенной процедуры</label>
+              <span id="spanCustoms"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">2 Отправитель</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span id="spanSenderINN"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span id="spanSenderOrganization"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span id="spanSenderCountry"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span id="spanSenderPostalCode"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span id="spanSenderRegion"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span id="spanSenderCity"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span id="spanSenderHouse"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span id="spanSenderOGRN"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">3 Формы</h5>
+        <div style="margin-left: 2%; margin-top: -15%">
+          <div class="row" style="margin-top: 20px;">
+            <label class="form-label" style="color: #1a1a1c">№/количество листов</label>
+            <div class="col-sm-6">
+              <span id="spanFormNumber"></span>
+            </div>
+            <div class="col-sm-6" >
+              <span id="spanFormSheets"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 210px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 280px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">4 Спецификации</h5>
+        <div style="margin-left: 2%; margin-top: -15%">
+          <div class="row" style="margin-top: 20px;">
+            <label class="form-label" style="color: #1a1a1c">Количество специф./количество листов</label>
+            <div class="col-sm-6">
+              <span id="spanSpecificationsNumber"></span>
+            </div>
+            <div class="col-sm-6" >
+              <span id="spanSpecificationsSheets"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 170px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 550px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">5 Всего товаров</h5>
+        <div style="margin-left: 2%; ">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-7">
+              <span id="spanTotalItems"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 90px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">6 Особенности декларирования</h5>
+        <div style="margin-left: 2%; ">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-7">
+              <span id="osobDeklar"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">7 Получатель</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span id="poluchINN/KPP"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span id="poluchorgName"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span id="poluchCountry"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span id="poluchPostCode"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span id="poluchObl"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span id="poluchNaselPunkt"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span id="poluchHouse"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span id="poluchOGRN"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">8 Лицо, ответственное за финансовое урегулирование</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span id="finINN/KPP"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span id="finOrgName"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span id="finCountry"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span id="finPostCode"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span id="finObl"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span id="finNaselPunkt"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span id="finHouse"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span id="finOGRN"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">9 Торгующая страна</h5>
+        <div style="margin-left: 2%; ">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <span id="torgCountry"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 400px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 450px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">10 Общая таможенная стоимость</h5>
+        <div style="margin-left: 2%;  ">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-7">
+              <span id="tamStoim"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div style="height: 200px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
+        <h5 style="margin-left: 1%">11 Декларант</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
+              <span id="deklarINN/KPP"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Название организации</label>
+              <span id="deklarOrgName"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Страна</label>
+              <span id="deklarCountry"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
+              <span id="deklarPostCode"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Область</label>
+              <span id="deklarObl"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span id="deklarNaselPunkt"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span id="deklarHouse"></span>
+            </div>
+
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
+              <span id="deklarOGRN"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">12 Страна отправления</h5>
+        <div style="margin-left: 2%; margin-top: -12%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Код</label>
+              <span id="otpCountryCode"></span>
+            </div>
+            <div class="col-sm-7"  style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Название страны</label>
+              <span id="otpCountryName"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 270px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 350px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">13 Страна происхождения</h5>
+        <div style="margin-left: 2%; margin-top: -12%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Код</label>
+              <span id="proisxCountryCode"></span>
+            </div>
+            <div class="col-sm-7" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Название страны</label>
+              <span  id="proisxCountryName"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">14 Страна назначения</h5>
+        <div style="margin-left: 2%;">
+          <div class="row" style=" margin-top: -5%;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Код</label>
+              <span id="naznachCountryCode"></span>
+            </div>
+            <div class="col-sm-7" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Название страны</label>
+              <span  id="naznachCountryName"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 650px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">15 Идентификация и страна регистрации транспортного средства</h5>
+        <div style="margin-left: 2%; margin-top: -5%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
+              <span></span>
+            </div>
+            <div class="col-sm-9" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Номера т.с.</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 250px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 700px; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">16 Контейнер</h5>
+        <div style="margin-left: 5%;">
+          <div class="row" style=" margin-top: -5%;">
+            <div class="col-sm-5">
+              <label class="form-label" style="color: #1a1a1c">Код</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">17 Условия поставки</h5>
+        <div style="margin-left: 2%; margin-top: -3%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c"> код у.п.</label>
+              <span></span>
+            </div>
+            <div class="col-sm-9" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Наименование условий поставки</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">18 Идентификация и страна регистрации активного транспортного средства на границе</h5>
+        <div style="margin-left: 2%; margin-top: -3%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">кол-во тс.</label>
+              <span></span>
+            </div>
+            <div class="col-sm-9" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Номера транспортного средства</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">19 Валюта и общая сумма по счету</h5>
+        <div style="margin-left: 2%; margin-top: -3%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">Код валюты</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6" style="margin-left: 5%">
+              <label class="form-label" style="color: #1a1a1c">Сумма по счету</label>
+              <span></span>
+            </div>
+            <div class="col-sm-3" style="margin-left: 70%; margin-top: -4%">
+              <div class="form-check">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 270px; width: 950px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">20 Курс валюты</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Валюта</label>
+              <!--              <span type="text" class="form-control" id="currency" placeholder="" value="" required="" style="width: 100%;" th:text="${declaration.currencyRateDTO.}">-->
+            </div>
+          </div>
+          <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
+            <label class="form-label" style="color: #1a1a1c">Считать по курсам</label>
+            <span></span>
+          </div>
+
+
+          <div class="col-sm-5">
+            <label class="form-label" style="color: #1a1a1c">Курс евро</label>
+            <span></span>
+          </div>
+          <div class="col-sm-5" style="margin-left: 50%; margin-top: -7.5%">
+            <label class="form-label" style="color: #1a1a1c">Курс USD</label>
+            <span></span>
+          </div>
+          <div class="col-sm-12" style="margin-left: 5%">
+            <label class="form-label" style="color: #1a1a1c">Курс валют для расчета</label>
+            <span></span>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="height: 150px; width: 350px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; display: flex; flex-direction: column;">
+        <h5 style="margin-left: 1%">21 Характер сделки</h5>
+        <div style="margin-left: 2%; margin-top: -5%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4" style="display: inline-block;margin-top: 10%">
+              <label class="form-label" style="color: #1a1a1c">Код сделки</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4" style="display: inline-block; margin-left: 5%; margin-top: -3%">
+              <label class="form-label" style="color: #1a1a1c">Код особ. внешнэкономич. сделки</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: row; margin-top: -173px; margin-left: 400px">
+        <div style="height: 150px; width: 260px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 25px; margin-right: 10px;">
+          <h5 style="margin-left: 10px">22 Вид транспорта на границе</h5>
+          <div style="margin-left: 20px; ">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 150px; width: 255px;  border-color: #814de5; border-style: solid;; border-radius: 10px; margin-top: 23px; margin-left: 20px">
+          <h5 style="margin-left: 1%">23 Вид транспорта внутри страны</h5>
+          <div style="margin-left: 2%;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Код вида т.с.</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%; margin-right: 10px;">
+        <h5 style="margin-left: 1%">24 Суммарный вес брутто</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 100px; width: 450px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: -100px; margin-left: 500px">
+        <h5 style="margin-left: 1%">25 Суммарный вес нетто</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-12">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 300px; width: 950px;border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">26 Таможня на границе</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Код таможни</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-11">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">27 Местонахождение товара</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Реестр УЗО</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">код таможни</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">Тип</label>
+              <span></span>
+            </div>
+            <div class="col-sm-1">
+              <label class="form-label" style="color: #1a1a1c">1/2/3</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: -70px; margin-left: 220px">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">Номер документа</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Дата</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Номер ЗТК</label>
+              <span></span>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Вид транспорта</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: -70px; margin-left: 450px">
+            <div class="col-sm-9">
+              <label class="form-label" style="color: #1a1a1c">Номер транспортного средства</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Ж/д станция / порт</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4" >
+              <label class="form-label" style="color: #1a1a1c">Cтрана</label>
+              <span></span>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-label" style="color: #1a1a1c">Почтовый код</label>
+              <span></span>
+            </div>
+          </div>
+
+
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Область, район</label>
+              <span></span>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
+              <span></span>
+            </div>
+            <div class="col-sm-2">
+              <label class="form-label" style="color: #1a1a1c">Дом</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+
+          </div>
+
+        </div>
+      </div>
+
+      <div style="height: 250px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%">28 Грузовые места и описание товаров</h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-sm-12">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="infoDiv" style="height: 500px; width: 950px; border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%;">
+        <h5 style="margin-left: 1%"><p>Информация о товаре</p></h5>
+        <div style="margin-left: 2%; margin-top: -2%">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">29 № товара</label>
+              <span  style="width: 100%;" ></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">30 Код товара</label>
+              <span style="width: 100%;" > </span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">31 Наименовние товра</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">32 Код страны происхождения</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">33 Вес брутто</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">34 Преференция</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">35 Процедура</label>
+              <span></span>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">36 Вес нетто</label>
+              <span></span>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" style="color: #1a1a1c">37 Квота</label>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--            <button class="btn" type="button" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" onclick="duplicateAndModifyDiv()">Добавить товар</button>-->
+      <div class="d-flex justify-content-center" style="margin-top: 20px; margin-left: 40px ">
+        <button class="btn" type="submit"  style="width: 1000px; background-color: #814de5; color: #1a1a1c; ">ОК</button>
+      </div>
+    </form>
+
+  </div>
+
+  <!--    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">-->
+  <!--        <div class="modal-dialog">-->
+  <!--            <div class="modal-content">-->
+
+  <!--                <div class="modal-body">-->
+  <!--                    <label class="label" style="color: #1a1a1c;">Выберите поставщика</label>-->
+  <!--                    <select th:if="${supplier}" class="form-select" id="supplier" required>-->
+  <!--                        <option th:each="sup:${supplier}" th:value="${sup.idSupplier}" th:text="${sup.organizationName}"/>-->
+  <!--                    </select>-->
+  <!--                    <button class="btn" type="button" id="selectButton" style="display: block; background-color: #814de5; color: #1a1a1c; margin: 0 auto; margin-top: 20px;" >Выбрать</button>-->
+
+  <!--                </div>-->
+  <!--            </div>-->
+  <!--        </div>-->
+  <!--    </div>-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="/js/model.js"></script>
+  <script src="/js/main.js"></script>
+</main>
+</body>
+
+</html>
