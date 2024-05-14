@@ -19,13 +19,12 @@
         <div style="margin-left: 15%; margin-top: -5%">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4" style="margin-top: 3.8%">
-
-              <span></span>
+              <span id="spanDeclaration"></span>
             </div>
 
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c;">Направление перемещения</label>
-              <span></span>
+              <span id="spanDirection"></span>
               <datalist id="marking-types">
                 <option value="ИМ">
                 <option value="ЭК">
@@ -34,7 +33,7 @@
 
             <div class="col-sm-4" style="margin-left: -1%">
               <label class="form-label" style="color: #1a1a1c">Код таможенной процедуры</label>
-              <span></span>
+              <span id="spanCustoms"></span>
             </div>
           </div>
         </div>
@@ -46,42 +45,42 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <span id="spanSenderINN"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <span id="spanSenderOrganization"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <span id="spanSenderCountry"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <span id="spanSenderPostalCode"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <span id="spanSenderRegion"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <span id="spanSenderCity"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <span id="spanSenderHouse"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <span id="spanSenderOGRN"></span>
             </div>
           </div>
         </div>
@@ -91,12 +90,12 @@
         <h5 style="margin-left: 1%">3 Формы</h5>
         <div style="margin-left: 2%; margin-top: -15%">
           <div class="row" style="margin-top: 20px;">
-            <label class="form-label" style="color: #1a1a1c">№/колличество листов</label>
+            <label class="form-label" style="color: #1a1a1c">№/количество листов</label>
             <div class="col-sm-6">
-              <span></span>
+              <span id="spanFormNumber"></span>
             </div>
             <div class="col-sm-6" >
-              <span></span>
+              <span id="spanFormSheets"></span>
             </div>
           </div>
         </div>
@@ -106,12 +105,12 @@
         <h5 style="margin-left: 1%">4 Спецификации</h5>
         <div style="margin-left: 2%; margin-top: -15%">
           <div class="row" style="margin-top: 20px;">
-            <label class="form-label" style="color: #1a1a1c">Кол.специф./кол.листов</label>
+            <label class="form-label" style="color: #1a1a1c">Количество специф./количество листов</label>
             <div class="col-sm-6">
-              <span></span>
+              <span id="spanSpecificationsNumber"></span>
             </div>
             <div class="col-sm-6" >
-              <span></span>
+              <span id="spanSpecificationsSheets"></span>
             </div>
           </div>
         </div>
@@ -122,19 +121,18 @@
         <div style="margin-left: 2%; ">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
-              <span></span>
+              <span id="spanTotalItems"></span>
             </div>
           </div>
         </div>
       </div>
-
 
       <div style="height: 90px; width: 945px;  border-color: #814de5; border-style: solid; border-radius: 10px; margin-top: 2%">
         <h5 style="margin-left: 1%">6 Особенности декларирования</h5>
         <div style="margin-left: 2%; ">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
-              <span></span>
+              <span id="osobDeklar"></span>
             </div>
           </div>
         </div>
@@ -146,42 +144,42 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <span id="poluchINN/KPP"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <span id="poluchorgName"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <span id="poluchCountry"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <span id="poluchPostCode"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <span id="poluchObl"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <span id="poluchNaselPunkt"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <span id="poluchHouse"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <span id="poluchOGRN"></span>
             </div>
           </div>
         </div>
@@ -193,42 +191,42 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <span id="finINN/KPP"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <span id="finOrgName"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <span id="finCountry"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <span id="finPostCode"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <span id="finObl"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <span id="finNaselPunkt"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <span id="finHouse"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <span id="finOGRN"></span>
             </div>
           </div>
         </div>
@@ -240,7 +238,7 @@
         <div style="margin-left: 2%; ">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-6">
-              <span></span>
+              <span id="torgCountry"></span>
             </div>
           </div>
         </div>
@@ -251,7 +249,7 @@
         <div style="margin-left: 2%;  ">
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-7">
-              <span></span>
+              <span id="tamStoim"></span>
             </div>
           </div>
         </div>
@@ -264,42 +262,42 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">ИНН/КПП</label>
-              <span></span>
+              <span id="deklarINN/KPP"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Название организации</label>
-              <span></span>
+              <span id="deklarOrgName"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Страна</label>
-              <span></span>
+              <span id="deklarCountry"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c; margin-left: -1%">Почтовый код</label>
-              <span></span>
+              <span id="deklarPostCode"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Область</label>
-              <span></span>
+              <span id="deklarObl"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Населённый пункт</label>
-              <span></span>
+              <span id="deklarNaselPunkt"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c">Дом</label>
-              <span></span>
+              <span id="deklarHouse"></span>
             </div>
 
             <div class="col-sm-3">
               <label class="form-label" style="color: #1a1a1c;">ОГРН</label>
-              <span></span>
+              <span id="deklarOGRN"></span>
             </div>
           </div>
         </div>
@@ -311,11 +309,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <span></span>
+              <span id="otpCountryCode"></span>
             </div>
             <div class="col-sm-7"  style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
-              <span></span>
+              <span id="otpCountryName"></span>
             </div>
           </div>
         </div>
@@ -327,11 +325,11 @@
           <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <span></span>
+              <span id="proisxCountryCode"></span>
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
-              <span></span>
+              <span  id="proisxCountryName"></span>
             </div>
           </div>
         </div>
@@ -343,11 +341,11 @@
           <div class="row" style=" margin-top: -5%;">
             <div class="col-sm-4">
               <label class="form-label" style="color: #1a1a1c">Код</label>
-              <span></span>
+              <span id="naznachCountryCode"></span>
             </div>
             <div class="col-sm-7" style="margin-left: 5%">
               <label class="form-label" style="color: #1a1a1c">Название страны</label>
-              <span></span>
+              <span  id="naznachCountryName"></span>
             </div>
           </div>
         </div>
