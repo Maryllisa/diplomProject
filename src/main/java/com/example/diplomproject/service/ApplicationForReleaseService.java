@@ -1,13 +1,9 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
-import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.ApplicationForRelease;
-import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
-import com.example.diplomproject.repository.ApplicationForReleaseRepository;
-import com.example.diplomproject.repository.ProductRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +16,8 @@ public class ApplicationForReleaseService {
     private final ApplicationForReleaseRepository applicationForReleaseRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final DeliveryProductRepository deliveryProductRepository;
+    private final CustomsAgencyRepository customsAgencyRepository;
 
     public List<ApplicationForReleaseDTO> getAllApplicationForRelease(String name) {
         List<ApplicationForRelease> applicationForReleaseList = applicationForReleaseRepository
@@ -61,10 +59,21 @@ public class ApplicationForReleaseService {
     public void changeStatus(Long id, StatusApplicationForRelease statusApplicationForRelease) {
         ApplicationForRelease application = applicationForReleaseRepository.getById(id);
         application.setStatusApplicationForRelease(statusApplicationForRelease);
+
         applicationForReleaseRepository.save(application);
     }
 
-    public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(StatusApplicationForRelease statusApplicationForRelease) {
-        return applicationForReleaseRepository.findAllByStatusApplicationForRelease(statusApplicationForRelease);
+    public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(StatusApplicationForRelease statusApplicationForRelease, String login) {
+        List<ApplicationForRelease> applicationForReleaseList = applicationForReleaseRepository.findAllByStatusApplicationForReleaseAndAccount(statusApplicationForRelease, userRepository.findByLogin(login));
+        applicationForReleaseList.addAll(applicationForReleaseRepository.findAllByStatusApplicationForReleaseAndAccount(StatusApplicationForRelease.PAID, userRepository.findByLogin(login)));
+        return applicationForReleaseList;
+    }
+
+    public ApplicationForRelease getApplicationForReleaseById(Long id) {
+        return applicationForReleaseRepository.getById(id);
+    }
+
+    public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(String login, StatusApplicationForRelease statusApplicationForRelease) {
+        return applicationForReleaseRepository.findAllByStatusApplicationForReleaseAndAccount(statusApplicationForRelease, userRepository.findByLogin(login));
     }
 }

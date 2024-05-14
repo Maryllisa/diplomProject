@@ -87,7 +87,7 @@ public class UserController {
     }
     @GetMapping("/relesionReg")
     public String getRelesionReg(Model model, Authentication authentication) {
-        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.IN_PROCESSING));
+        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(authentication.getName(),StatusApplicationForRelease.IN_PROCESSING));
         return "/user/relesionReg";
     }
     @GetMapping("/showAllMarkedProd")

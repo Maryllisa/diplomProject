@@ -3,18 +3,24 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
 import com.example.diplomproject.model.entity.*;
+import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
 import com.example.diplomproject.model.entity.enumStatus.Brand;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
-import org.dom4j.rule.Mode;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,6 +37,9 @@ public class ClientController {
     private final ApplicationForStorageService applicationForStorage;
     private final MarkingInfoService markingInfoService;
     private final AccountService accountService;
+    private final OtpuskService otpuskService;
+    private final DeliveryProductService deliveryProductService;
+    private final ChatRoomService chatRoomService;
 
     @GetMapping("/")
     public String getClient() {
@@ -70,7 +79,7 @@ public class ClientController {
 
     @GetMapping("/zavStatus")
     public String getZavStatus(Model model, Authentication authentication) {
-        model.addAttribute("applicationList", applicationForStorage.getAllApplictionByAccount(authentication.getName()));
+        model.addAttribute("applicationList", applicationForStorage.getAllApplicationByAccount(authentication.getName()));
         return "/client/zavStatus";
     }
 
@@ -128,13 +137,15 @@ public class ClientController {
     }
 
     @GetMapping("/showBillForSave")
-    public String getShowBillForSave() {
+    public String getShowBillForSave(Model model, Authentication authentication) {
+        model.addAttribute("oplataList", otpuskService.getAllByLogin(authentication.getName()));
         return "/client/showBillForSave";
     }
 
     @GetMapping("/priceForSave")
     public String getPriceForSave(Model model, Authentication authentication) {
-        model.addAttribute("applicationList", applicationForRelease.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.AWAITING_PAYMENT));
+        model.addAttribute("applicationList", applicationForRelease.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.AWAITING_PAYMENT, authentication.getName()));
+        model.addAttribute("newOtpusk", new Otpusk());
         return "/client/priceForSave";
     }
 
@@ -177,19 +188,33 @@ public class ClientController {
         return "/client/markQuality";
     }
     @GetMapping("/prinProdQuality")
-    public String getPrinProdQuality() {
-
+    public String getPrinProdQuality(Model model, Authentication authentication) {
+        model.addAttribute("deliveryList", deliveryProductService.getAllShipmentByClient(authentication.getName()));
+        model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/prinProdQuality";
     }
     @GetMapping("/otpProdQuality")
-    public String getOtpProdQuality() {
-
+    public String getOtpProdQuality(Model model, Authentication authentication) {
+        model.addAttribute("otpuskList", otpuskService.getAllByAccountClient(authentication.getName()));
+        model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/otpProdQuality";
     }
     @GetMapping("/comunicationQuality")
-    public String getComunicationQuality() {
-
+    public String getComunicationQuality(Model model, Authentication authentication) {
+        model.addAttribute("chatRoomList", chatRoomService.getAllByAccount(authentication.getName()));
+        model.addAttribute("newMarkForAgency", new MarkForAgency());
+        model.addAttribute("login", authentication.getName());
         return "/client/comunicationQuality";
+    }
+    @GetMapping("/chekOplata/{id}")
+    private ResponseEntity<?> getImageByIDUser(@PathVariable Long id)
+    {
+        Otpusk qr = otpuskService.getByApplicationForRelease(id);
+        Base64.Decoder decoder = Base64.getDecoder();
+        return ResponseEntity.ok()
+                .header("fileName", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(decoder.decode(qr.getSrc()))));
     }
 
 }

@@ -12,7 +12,9 @@
         <h4 class="mb-3" style="color: #814de5">Оценка отпуска товара</h4>
         <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
             <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
-                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
+                <button class="btn btn-primary rounded-pill px-3" type="button"
+                        style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать
+                </button>
                 <select class="form-select" style="margin-left: 10px; width: 150px">
                     <option value="" selected disabled>По признаку</option>
                     <option value="признак1">Признак 1</option>
@@ -29,7 +31,8 @@
 
             <div th:name="search" style="width: 475px; display: flex; align-items: end;">
                 <form role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                           style="background-color: #814de5; color: #f2f0f8">
                 </form>
                 <select class="form-select" style="margin-left: 10px; width: 160px">
                     <option value="" selected disabled>По параметру</option>
@@ -44,30 +47,36 @@
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">Дата отгрузки</th>
-                <th  style="color: #814de5" scope="col">Состояние товара </th>
-                <th  style="color: #814de5" scope="col">Вес товара</th>
-                <th  style="text-align: center; color: #814de5" scope="col">Список наименований товара и номер декларации </th>
+                <th style="color: #814de5" scope="col">Состояние товара</th>
+                <th style="color: #814de5" scope="col">Вес товара</th>
+                <th style="text-align: center; color: #814de5" scope="col">Список наименований товара и номер
+                    декларации
+                </th>
                 <th style="color: #814de5; vertical-align: top;" scope="col">Поставщик</th>
-                <th  style="color: #814de5;  vertical-align: top;" scope="col">Сотрудник </th>
                 <th style="color: #814de5;  vertical-align: top;" scope="col">Оценка</th>
                 <th></th>
             </tr>
             </thead>
-            <!--         <tbody>-->
-            <!--          <tr th:each="">-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--         <td  style="color: #1a1a1c" th:text="${}"/>-->
-            <!--            <td style="color: #1a1a1c">Тут поставишь оценку</td>-->
-<!--            <td><input type="button" value="Оценить"-->
-<!--                       style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal"-->
-<!--                       data-bs-target="#createRequestModal"></td>-->
+            <tbody>
+            <tr th:if="${!otpuskList.isEmpty()}" th:each="ot:${otpuskList}"
+                th:class="${ot.markForAgency!=null && ot.markForAgency.evaluation>7} ? 'table-success' : 'table-danger'">
+                <td style="color: #1a1a1c" th:text="${ot.applicationForRelease.date}"/>
+                <td style="color: #1a1a1c"
+                    th:text="${ot.applicationForRelease.product.applicationForStorage.datePost}"/>
+                <td style="color: #1a1a1c" th:text="${ot.applicationForRelease.product.netWeight}"/>
+                <td style="color: #1a1a1c"
+                    th:text="${ot.applicationForRelease.product.nameProduct + ', ' + ot.applicationForRelease.product.declarationTD.declarationNumber}"/>
+                <td style="color: #1a1a1c"
+                    th:text="${ot.applicationForRelease.product.declarationTD.individuals.organizationName}"/>
+                <td style="color: #1a1a1c"
+                    th:if="${ot.markForAgency!=null}" th:text="${ot.markForAgency.evaluation}"/>
 
-            <!--          </tr>-->
-            <!--               </tbody>-->
+                <td><input type="button" value="Оценить" th:onclick="|setId(${ot.id})|"
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal"
+                           data-bs-target="#createRequestModal"></td>
+
+            </tr>
+            </tbody>
 
         </table>
 
@@ -80,17 +89,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" id="otpProdQuality" novalidate="" >
-
+                        <form class="needs-validation" id="otpProdQuality" th:action="*{'/client/otpProdQuality'}"
+                              method="post">
                             <div class="row g-3">
                                 <div class="col-sm-12">
-                                    <label class="form-label" style="color: #814de5">Оцените пожалуйста качество отпуска товара</label>
-                                    <input type="number" class="form-control" id="Ocenka" required="">
-                                    <div class="invalid-feedback" style="color: red">
-                                        Проверьте корректность заполнения оценки.
-                                    </div>
+                                    <label class="form-label" style="color: #814de5">Оцените пожалуйста качество
+                                        маркировки</label>
+                                    <input type="number" class="form-control" id="Ocenka" min="1" max="10" required
+                                           th:field="${newMarkForAgency.evaluation}">
                                 </div>
-
+                                <input type="hidden" name="idMark" id="idMark">
                                 <div class="modal-footer">
                                     <button class="w-100 btn btn-primary btn-lg" type="submit"
                                             style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить
@@ -109,5 +117,10 @@
     </div>
 </main>
 </body>
-
+<script>
+    function setId(id) {
+        const idMark = document.getElementById("idMark");
+        idMark.value = id;
+    }
+</script>
 </html>

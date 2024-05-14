@@ -45,6 +45,7 @@ public class ApplicationForStorage {
     private Account accountManager;
 
 
+
     public ApplicationForStorageDTO build() {
         return ApplicationForStorageDTO.builder()
                 .idApplication(idApplication)

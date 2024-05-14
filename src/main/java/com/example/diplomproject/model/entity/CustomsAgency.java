@@ -1,5 +1,6 @@
 package com.example.diplomproject.model.entity;
 
+import com.example.diplomproject.model.entity.chat.ChatRoom;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,16 @@ public class CustomsAgency {
     private Long idCustomsAgency;
     @Column
     private double mark;
+    @OneToOne
+    private DeliveryProduct deliveryProduct;
+    @OneToOne
+    private Otpusk otpusk;
+    @OneToOne
+    private MarkingInfo markingInfo;
+    @OneToOne
+    private ChatRoom chatRoom;
+    @ManyToOne
+    private Account account;
     @OneToMany
     private List<MarkForAgency> markForAgencies;
 }

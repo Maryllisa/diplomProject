@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
 public interface ApplicationForReleaseRepository extends JpaRepository<ApplicationForRelease,  Long> {
 
     List<ApplicationForRelease> findAllByAccount(Account byLogin);
-    List<ApplicationForRelease> findAllByStatusApplicationForRelease(StatusApplicationForRelease statusApplicationForRelease);
+    List<ApplicationForRelease> findAllByStatusApplicationForReleaseAndAccount(StatusApplicationForRelease statusApplicationForRelease, Account account);
 
 }

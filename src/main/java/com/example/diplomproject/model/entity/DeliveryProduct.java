@@ -35,6 +35,8 @@ public class DeliveryProduct {
     private List<Product> productList = new ArrayList<>();
     @ManyToOne
     private Account account;
+    @OneToOne
+    private MarkForAgency markForAgency;
 
 
 }

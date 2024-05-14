@@ -14,38 +14,47 @@
             <thead>
             <tr>
                 <th style="color: #814de5" scope="col">Дата отгрузки</th>
-                <th  style="color: #814de5" scope="col">Состояние товара </th>
-                <th  style="color: #814de5" scope="col">Вес товара</th>
-                <th  style="text-align: center; color: #814de5" scope="col">Список наименований товара и номер декларации </th>
+                <th style="color: #814de5" scope="col">Состояние товара</th>
+                <th style="color: #814de5" scope="col">Вес товара</th>
+                <th style="text-align: center; color: #814de5" scope="col">Список наименований товара и номер
+                    декларации
+                </th>
                 <th style="color: #814de5; vertical-align: top;" scope="col">Поставщик</th>
-                <th  style="color: #814de5;  vertical-align: top;" scope="col">Сотрудник </th>
-                <th  style="color: #814de5;  vertical-align: top;" scope="col">Отменить отгрузку </th>
+                <th style="color: #814de5;  vertical-align: top;" scope="col">Сотрудник</th>
+                <th style="color: #814de5;  vertical-align: top;" scope="col">Отменить отгрузку</th>
             </tr>
             </thead>
-               <tbody>
-                <tr th:if="${!shipmentList.isEmpty()}" th:each="sh:${shipmentList}">
-               <td  style="color: #1a1a1c" th:text="${sh.getArrangeDate()}"/>
-               <td  style="color: #1a1a1c" th:text="${sh.getProdCondition()}"/>
-               <td  style="color: #1a1a1c" th:text="${sh.getWeightProduct()}"/>
-               <td  style="color: #1a1a1c" >
-                    <span th:each="pr:${sh.getApplicationForStorage().declarationTD.productList}"
-                          th:text="${pr.nameProduct + ', '}"></span>
-               </td>
-               <td  style="color: #1a1a1c" th:text="${sh.getApplicationForStorage().getAccount().getSurname() + ' ' + sh.getApplicationForStorage().getAccount().getName() + ' ' + sh.getApplicationForStorage().getAccount().getPatronymic()}"/>
-               <td  style="color: #1a1a1c" th:text="${sh.getApplicationForStorage().getAccountManager().getSurname() + ' ' + sh.getApplicationForStorage().getAccountManager().getName() + ' ' + sh.getApplicationForStorage().getAccountManager().getPatronymic()}"/>
-               <td><input type="button" value="Отменить отгрузку" th:onclick="|deleteShipment(${sh.getIdDeliveryProduct()})|" style="font-weight: bold; background-color: #814de5; color: #f2f0f8 "></td>
-                </tr>
-                     </tbody>
+            <tbody>
+            <tr th:if="${!shipmentList.isEmpty()}" th:each="sh:${shipmentList}">
+                <td style="color: #1a1a1c" th:text="${sh.getArrangeDate()}"/>
+                <td style="color: #1a1a1c" th:text="${sh.getProdCondition()}"/>
+                <td style="color: #1a1a1c" th:text="${sh.getWeightProduct()}"/>
+                <td style="color: #1a1a1c">
+
+                   <span th:each="p, index:${sh.getApplicationForStorage().declarationTD.productList}">
+                            <span th:if="${index.index == sh.getApplicationForStorage().declarationTD.productList.size()-1}" th:text="${p.nameProduct}"/>
+                            <span th:if="${index.index != sh.getApplicationForStorage().declarationTD.productList.size()-1}" th:text="${p.nameProduct + ', '}"/>
+                        </span>
+                </td>
+                <td style="color: #1a1a1c"
+                    th:text="${sh.getApplicationForStorage().getAccount().getSurname() + ' ' + sh.getApplicationForStorage().getAccount().getName() + ' ' + sh.getApplicationForStorage().getAccount().getPatronymic()}"/>
+                <td style="color: #1a1a1c"
+                    th:text="${sh.getApplicationForStorage().getAccountManager().getSurname() + ' ' + sh.getApplicationForStorage().getAccountManager().getName() + ' ' + sh.getApplicationForStorage().getAccountManager().getPatronymic()}"/>
+                <td><input type="button" value="Отменить отгрузку"
+                           th:onclick="|deleteShipment(${sh.getIdDeliveryProduct()})|"
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 "></td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </main>
 </body>
 <script>
-    function deleteShipment(id){
-        fetch('/user/deleteShipment/' + id,{
+    function deleteShipment(id) {
+        fetch('/user/deleteShipment/' + id, {
             method: 'GET'
-        }).then(response=> response.json())
-            .then(data=>{
+        }).then(response => response.json())
+            .then(data => {
                 alert("Отгрузка отменена!");
             });
     }

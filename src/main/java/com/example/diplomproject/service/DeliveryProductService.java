@@ -2,6 +2,7 @@ package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
+import com.example.diplomproject.model.entity.CustomsAgency;
 import com.example.diplomproject.model.entity.DeliveryProduct;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
@@ -22,6 +23,7 @@ public class DeliveryProductService {
     private final ApplicationForStorageRepository applicationForStorageRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final CustomsAgencyRepository customsAgencyRepository;
 
     public Map<String, String> check(BindingResult result,
                                      DeliveryProductDTO deliveryProductDTO) {
@@ -55,24 +57,28 @@ public class DeliveryProductService {
     public void addNewDelivery(DeliveryProductDTO deliveryProductDTO, String login){
         DeliveryProduct product = new DeliveryProduct();
         List<Product> productsList = new ArrayList<>();
+        product.setApplicationForStorage(
+                applicationForStorageRepository
+                        .save(product.getApplicationForStorage()));
         deliveryProductDTO.getCheckProduct().forEach((x,y)->{
             Product p = productRepository.getById(x);
             p.setIsDelivery(y);
+            p.setApplicationForStorage(product.getApplicationForStorage());
             productsList.add(productRepository.save(p));
 
         });
         product.setProductList(productsList);
         product.setApplicationForStorage(applicationForStorageRepository.getById(deliveryProductDTO.getIdApplicationForStorage()));
         product.getApplicationForStorage().setStatusApplication(StatusApplication.COMPLETED);
-        product.setApplicationForStorage(
-                applicationForStorageRepository
-                        .save(product.getApplicationForStorage()));
         product.setWeightProduct(deliveryProductDTO.getWeightProduct());
         product.setDeliveryEvalution(deliveryProductDTO.getDeliveryEvalution());
         product.setArrangeDate(deliveryProductDTO.getArrangeDate());
         product.setProdCondition(deliveryProductDTO.getProdCondition());
         product.setAccount(userRepository.findByLogin(login));
         deliveryProductRepository.save(product);
+        CustomsAgency agency = new CustomsAgency();
+        agency.setDeliveryProduct(deliveryProductRepository.save(product));
+        customsAgencyRepository.save(agency);
 
     }
 
@@ -91,5 +97,9 @@ public class DeliveryProductService {
 
     public DeliveryProduct getById(Long id) {
         return deliveryProductRepository.getById(id);
+    }
+
+    public List<DeliveryProduct> getAllShipmentByClient(String name) {
+        return deliveryProductRepository.findAllByClient(userRepository.findByLogin(name));
     }
 }

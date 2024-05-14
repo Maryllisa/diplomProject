@@ -4,8 +4,11 @@ import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.Type;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -16,6 +19,8 @@ import java.sql.Date;
 @Builder
 @Entity
 @ToString
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +56,6 @@ public class Product {
     @JsonIgnore
     @OneToOne
     private ApplicationForRelease applicationForRelease;
-    @JsonIgnore
     @OneToOne
     private ApplicationForStorage applicationForStorage;
 

@@ -1,16 +1,11 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
-import com.example.diplomproject.model.entity.Account;
-import com.example.diplomproject.model.entity.MarkingInfo;
-import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.marking.ApplicationForMarking;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
-import com.example.diplomproject.repository.ApplicationForMarkingRepository;
-import com.example.diplomproject.repository.MarkingInfoRepository;
-import com.example.diplomproject.repository.ProductRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.repository.*;
 import com.example.diplomproject.service.mark.BarcodeService;
 import com.example.diplomproject.service.mark.DataMatrixCodeService;
 import com.example.diplomproject.service.mark.QRCodeService;
@@ -35,6 +30,9 @@ public class MarkingInfoService {
     private final BarcodeService barcodeService;
     private final ApplicationForMarkingRepository applicationForMarkingRepository;
     private final UserRepository userRepository;
+    private final CustomsAgencyRepository customsAgencyRepository;
+    private final DeliveryProductRepository deliveryProductRepository;
+
     @SneakyThrows
     public void addNewMarking(MarkingInfoDTO markingInfoDTO) {
         Product product = productRepository.findById(markingInfoDTO.getIdProduct()).orElse(null);
@@ -68,8 +66,24 @@ public class MarkingInfoService {
             markingInfo.addMarking(file);
             markingInfo.setProduct(product);
         }
-        applicationForMarking.setMarkingInfo(markingInfoRepository.save(markingInfo));
+        markingInfo = markingInfoRepository.save(markingInfo);
+        applicationForMarking.setMarkingInfo(markingInfo);
         applicationForMarking.setStatusMarkingApplication(StatusMarkingApplication.COMPLETED);
+        DeliveryProduct deliveryProduct = null;
+        List<DeliveryProduct> deliveryProducts = deliveryProductRepository.findAll();
+        for(DeliveryProduct x : deliveryProducts){
+            if (x.getProductList().stream().map(Product::getIdProduct)
+                    .anyMatch(y->y.equals(product.getIdProduct()))) {
+                deliveryProduct = x;
+                break;
+            }
+        }
+        CustomsAgency customsAgency = new CustomsAgency();
+        if (deliveryProduct!=null) {
+            customsAgency = customsAgencyRepository.findByDeliveryProduct(deliveryProduct).orElse(null);
+        }
+        customsAgency.setMarkingInfo(markingInfo);
+        customsAgencyRepository.save(customsAgency);
         applicationForMarkingRepository.save(applicationForMarking);
     }
 

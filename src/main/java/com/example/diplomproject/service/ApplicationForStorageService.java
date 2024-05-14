@@ -1,11 +1,9 @@
 package com.example.diplomproject.service;
 
-import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
-import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +38,7 @@ public class ApplicationForStorageService {
         applicationForStorageRepository.save(applicationForStorage);
     }
 
-    public List<ApplicationForStorageDTO> getAllApplictionByAccount(String name) {
+    public List<ApplicationForStorageDTO> getAllApplicationByAccount(String name) {
         List<ApplicationForStorageDTO> applicationForStorageDTOS = new ArrayList<>();
         List<ApplicationForStorage> applicationForStorages = applicationForStorageRepository.findAllByAccount(accountRepository.findByLogin(name));
         applicationForStorages.forEach(x -> {
@@ -235,4 +233,7 @@ public class ApplicationForStorageService {
           accountRepository.findByLogin(name), StatusApplication.PROCESSING);
     }
 
+    public List<ApplicationForStorage> getAllApplicationByAccount(String name, StatusApplication statusApplication) {
+        return applicationForStorageRepository.findAllByAccountAndStatusApplication(accountRepository.findByLogin(name), statusApplication);
+    }
 }

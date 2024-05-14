@@ -109,7 +109,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form th:object="${newApplicationForRelease}" id="formZavForOtp" th:action="*{'/client/maleZavForOtp'}" method="post">
+                        <form th:object="${newApplicationForRelease}" id="formZavForOtp" th:action="*{'/client/priceForSave'}" method="post">
                             <div class="mb-3">
                                 <label for="productSelect" class="form-label">Товар</label>
                                 <select class="form-select" id="productSelect" th:field="${newApplicationForRelease.idProduct}">

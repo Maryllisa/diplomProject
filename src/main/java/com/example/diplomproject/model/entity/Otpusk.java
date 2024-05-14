@@ -1,6 +1,5 @@
 package com.example.diplomproject.model.entity;
 
-import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +10,23 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class MarkForAgency {
+public class Otpusk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMarkForAgency;
+    private Long id;
     @Column
-    private TypeEvaluation typeEvaluation;
-    @Column
-    private double evaluation;
-    @Column
-    private double weightCoefficient;
+    private double sumForStorage;
     @OneToOne
-    private Account client;
-    @ManyToOne
-    private CustomsAgency customsAgency;
-
+    private ApplicationForRelease applicationForRelease;
+    @Column
+    @Lob
+    private String src;
+    @Column
+    private String nameSrc;
+    @Column
+    private String type;
+    @Column
+    private long size;
+    @OneToOne
+    private MarkForAgency markForAgency;
 }

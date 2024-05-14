@@ -54,7 +54,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${!marks.isEmpty()}" th:each="m:${marks}">
+            <tr th:if="${!marks.isEmpty()}" th:each="m:${marks}" th:class="${m.markForAgency!=null && m.markForAgency.evaluation>7} ? 'table-success' : 'table-danger'">
                 <td style="color: #1a1a1c" th:text="${m.idMarkingInfo}"></td>
                 <td style="color: #1a1a1c" th:text="${m.typeMarking.getRussianName().get(m.typeMarking)}"></td>
                 <td style="color: #1a1a1c" th:text="${m.product.productCode}"></td>

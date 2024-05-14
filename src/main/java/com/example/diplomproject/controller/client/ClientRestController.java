@@ -3,13 +3,17 @@ package com.example.diplomproject.controller.client;
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.*;
 import com.example.diplomproject.model.dto.marking.ApplicationForMarkingDTO;
+import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.model.entity.MarkForAgency;
+import com.example.diplomproject.model.entity.Otpusk;
 import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
@@ -20,6 +24,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +43,9 @@ public class ClientRestController {
     private final ApplicationForMarkingService applicationForMarkingService;
     private final ApplicationForReleaseService applicationForReleaseService;
     private final MarkForAgencyService markForAgencyService;
+    private final OtpuskService otpuskService;
+    private final ChatRoomService chatRoomService;
+
     @SneakyThrows
     @PostMapping("/regOfDeclaration")
     private ResponseEntity<Map<String, String>> checkAddNewDeclaration(@Valid @ModelAttribute DeclarationDTO declarationDTO,
@@ -147,7 +156,7 @@ public class ClientRestController {
 
     @PostMapping("/maleZavForOtp")
     public RedirectView addApplicationForRelease(@ModelAttribute ApplicationForReleaseDTO applicationForReleaseDTO,
-                                           Authentication authentication, RedirectView redirectView) {
+                                                 Authentication authentication, RedirectView redirectView) {
         applicationForReleaseService.addNewApplicationForRelease
                 (applicationForReleaseDTO, authentication.getName());
         redirectView.setUrl("/client/makeZavForOtp");
@@ -156,13 +165,69 @@ public class ClientRestController {
 
     @PostMapping("/markQuality")
     public RedirectView addMarkQuality(Model model,
-                                            Authentication authentication,
-                                            @RequestParam("idMark") Long idMark,
-                                            @ModelAttribute MarkForAgency markForAgency,
-                                       RedirectView redirectView){
+                                       Authentication authentication,
+                                       @RequestParam("idMark") Long idMark,
+                                       @ModelAttribute MarkForAgency markForAgency,
+                                       RedirectView redirectView) {
         markForAgency.setTypeEvaluation(TypeEvaluation.markQuality);
         markForAgencyService.addNewMarkQuality(idMark, markForAgency, authentication.getName());
         redirectView.setUrl("/client/markQuality");
         return redirectView;
     }
+
+    @PostMapping("/prinProdQuality")
+    public RedirectView addPrinProdQuality(Model model,
+                                           Authentication authentication,
+                                           @RequestParam("idMark") Long idMark,
+                                           @ModelAttribute MarkForAgency markForAgency,
+                                           RedirectView redirectView) {
+        markForAgency.setTypeEvaluation(TypeEvaluation.prinProdQuality);
+        markForAgencyService.addNewPrinProdQuality(idMark, markForAgency, authentication.getName());
+        redirectView.setUrl("/client/prinProdQuality");
+        return redirectView;
+    }
+
+    @PostMapping("/communicationQuality")
+    public RedirectView addComunicationQuality(Model model,
+                                               Authentication authentication,
+                                               @RequestParam("idMark") String idMark,
+                                               @ModelAttribute MarkForAgency markForAgency,
+                                               RedirectView redirectView) {
+        markForAgency.setTypeEvaluation(TypeEvaluation.comunicationQuality);
+        markForAgencyService.addCommunication(idMark, markForAgency, authentication.getName());
+        redirectView.setUrl("/client/communicationQuality");
+        return redirectView;
+    }
+
+    @PostMapping("/otpProdQuality")
+    public RedirectView addOtpProdQuality(Model model,
+                                          Authentication authentication,
+                                          @RequestParam("idMark") Long idMark,
+                                          @ModelAttribute MarkForAgency markForAgency,
+                                          RedirectView redirectView) {
+        markForAgency.setTypeEvaluation(TypeEvaluation.otpProdQuality);
+        markForAgencyService.addOtpusck(idMark, markForAgency, authentication.getName());
+        redirectView.setUrl("/client/otpProdQuality");
+        return redirectView;
+    }
+
+    @PostMapping("/addOplata")
+    public RedirectView addOplata(@ModelAttribute Otpusk otpusk,
+                                  @RequestParam("file") MultipartFile file, RedirectView redirectView) {
+        otpuskService.addOtpusk(otpusk.getApplicationForRelease().getIdApplicationForRelease(), otpusk.getSumForStorage(), file);
+        redirectView.setUrl("/client/priceForSave");
+        return redirectView;
+
+    }
+
+    @GetMapping("/findApplicationForRelease/{id}")
+    public ApplicationForRelease getApplicationForRelease(@PathVariable Long id) {
+        return applicationForReleaseService.getApplicationForReleaseById(id);
+    }
+
+    @GetMapping("/findOplata/{id}")
+    public Otpusk getOtpusk(@PathVariable Long id) {
+        return otpuskService.getByApplicationForRelease(id);
+    }
+
 }

@@ -13,4 +13,6 @@ public interface ApplicationForStorageRepository extends JpaRepository<Applicati
     List<ApplicationForStorage> findAllByAccount(Account byLogin);
     List<ApplicationForStorage> findAllByAccountManager(Account byLogin);
     List<ApplicationForStorage> findAllByAccountManagerAndStatusApplication(Account accountManager, StatusApplication statusApplication);
+
+    List<ApplicationForStorage> findAllByAccountAndStatusApplication(Account byLogin, StatusApplication statusApplication);
 }

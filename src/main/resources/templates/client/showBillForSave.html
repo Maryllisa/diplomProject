@@ -45,24 +45,20 @@
             <tr>
                 <th style="color: #814de5" scope="col">Номер чека</th>
                 <th style="color: #814de5" scope="col">Номер товара</th>
-                <th style="color: #814de5" scope="col">Маркировка</th>
                 <th style="color: #814de5" scope="col">Дата</th>
                 <th style="color: #814de5" scope="col">Сумма</th>
                 <th></th>
             </tr>
             </thead>
-            <!--            <tbody>-->
-            <!--            <tr th:each="">-->
-            <!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--                <td style="color: #1a1a1c" th:text="${}"></td>-->
-            <!--                <td>-->
-            <!--                    <input type="button" value="Подробнее" style="font-weight: bold;">-->
-            <!--                </td>-->
-            <!--            </tr>-->
-            <!--            </tbody>-->
+            <tbody>
+            <tr th:if="${!oplataList.isEmpty()}" th:each="ot:${oplataList}">
+                <td style="color: #1a1a1c" th:text="${ot.id}"></td>
+                <td style="color: #1a1a1c" th:text="${ot.applicationForRelease.product.productCode}"></td>
+                <td style="color: #1a1a1c" th:text="${ot.applicationForRelease.date}"></td>
+                <td style="color: #1a1a1c" th:text="${ot.sumForStorage + ' BYN'}"></td>
+
+            </tr>
+            </tbody>
         </table>
     </div>
 </main>

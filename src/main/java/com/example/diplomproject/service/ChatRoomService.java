@@ -34,7 +34,7 @@ public class ChatRoomService {
                 chatRoom = new ChatRoom(chatId,
                         sender,
                         recipient,
-                        null);
+                        null, null);
                 chatRoom = chatRoomRepository.save(chatRoom);
             }
         }
@@ -81,5 +81,9 @@ public class ChatRoomService {
             chatRoomDTOList.add(chatRoomDTO);
         }
         return chatRoomDTOList;
+    }
+
+    public List<ChatRoom> getAllByAccount(String name) {
+        return chatRoomRepository.findBySenderOrRecipient(userRepository.findByLogin(name), userRepository.findByLogin(name));
     }
 }

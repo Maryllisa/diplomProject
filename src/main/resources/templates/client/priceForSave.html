@@ -89,63 +89,57 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${!applicationList.isEmpty()}" th:each="ap:${applicationList}" th:class="${ap.date > #dates.createNow()} ? 'table-success' : 'table-danger'" >
+            <tr th:if="${!applicationList.isEmpty()}" th:each="ap:${applicationList}" th:class="${ap.statusApplicationForRelease.getRussianName().get(ap.statusApplicationForRelease).equals('Ожидает оплаты')} ? 'table-danger' : 'table-success'" >
                 <td style="color: #1a1a1c" th:text="${ap.idApplicationForRelease}"></td>
                 <td style="color: #1a1a1c" th:text="${ap.date}"></td>
                 <td style="color: #1a1a1c" th:text="${ap.product.nameProduct}"></td>
                 <td style="color: #1a1a1c" th:text="${ap.statusApplicationForRelease.getRussianName().get(ap.statusApplicationForRelease)}"></td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details"
-                            style="background-color: #814de5; color: #1a1a1c">
-                        Подробнее
-                    </button>
-                <td><input type="button" value="Отменить заявку"
-                           style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>
-                </td>
+
+<!--                <td><input type="button" value="Отменить заявку" th:onclick="|deleteZa|"-->
+<!--                           style="font-weight: bold;background-color: #814de5; color: #f2f0f8"></td>-->
+<!--                </td>-->
+                <td>
+                <button th:if="${ap.statusApplicationForRelease.getRussianName().get(ap.statusApplicationForRelease).equals('Ожидает оплаты')}" type="button" th:onclick="|addSavePrise(${ap.idApplicationForRelease})|" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
+                    Оплатить
+                </button>
+                <button th:if="${ap.statusApplicationForRelease.getRussianName().get(ap.statusApplicationForRelease).equals('Оплачено')}" type="button" th:onclick="|findSavePrise(${ap.idApplicationForRelease})|" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details"
+                        style="background-color: #814de5; color: #1a1a1c">
+                    Подробнее
+                </button>
+            </td>
             </tr>
             </tbody>
         </table>
 
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal" style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
-            Подать новое заявление
-        </button>
+
 
         <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createRequestModalLabel"> Подать заявление</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="productSelect" class="form-label">Заявка</label>
-                                <select class="form-select" id="productSelect">
-                                    <option value="option1">Опция 1</option>
-                                    <option value="option2">Опция 2</option>
-                                    <option value="option3">Опция 3</option>
-                                </select>
-                            </div>
-                            <div class="form-check text-start my-3">
-                                <input class="form-check-input" type="checkbox" value="НАЖМИ НА МЕНЯ" id="flexCheckDefault"> //МАША ВОТ ЧЕКБОКС КОТОРЫЙ НАДО ВПИХНУТЬ В СКРИПТ))))))
+                        <form id="ModalBodyCreate" th:action="*{'/client/addOplata'}" enctype="multipart/form-data" method="post" th:object="${newOtpusk}">
+                            <div class="modal-footer">
+                                <div class="mb-3">
+                                    <label class="form-label">Заявка</label>
+                                    <input type="text" id="idApplicationForRelease" th:field="${newOtpusk.applicationForRelease.idApplicationForRelease}" readonly>
 
-                            </div>
-                            <div class="mb-3">
-                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
-                                <input type="number" class="form-control" id="costInput">
-                            </div>
-                            <div class="mb-3">
-                                <label for="receiptFileInput" class="form-label">Файл с чеком</label>
-                                <input type="file" class="form-control" id="receiptFileInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Сумма за содержание товара</label>
+                                    <input type="number" readonly id="sumForStorage" th:field="${newOtpusk.sumForStorage}" value="${sum}" class="form-control" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="receiptFileInput" class="form-label">Файл с чеком</label>
+                                    <input type="file" name="file" class="form-control" required id="receiptFileInput">
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                        <button type="button" class="btn btn-primary" style="background-color: #814de5; color: #1a1a1c">Сохранить</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -156,21 +150,8 @@
                         <h5 class="modal-title" id="detailslLabel"> Подробнее</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Заявка</label>
-                                <span>Заявка</span>
-                            </div>
-                            <div class="mb-3">
-                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
-                                <span>поститаешь цену</span>
-                            </div>
-                            <div class="mb-3">
-                                <label for="receiptFileInput" class="form-label">Файл с чеком</label>
-                                <span>а тут вероятно файл</span>
-                            </div>
-                        </form>
+                    <div class="modal-body" id="modelBody">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -182,4 +163,80 @@
     </div>
 </main>
 </body>
+<script>
+    function addSavePrise(id){
+        fetch('/client/findApplicationForRelease/' + id,{
+            method: 'GET'
+        }).then(response => response.json())
+            .then(data=>{
+                const date = new Date(data.product.applicationForStorage.datePost);
+                const dateRelease = new Date(data.date);
+                const timeDiff = Math.abs(dateRelease.getTime() - date.getTime());
+                const sum = Math.ceil(timeDiff / (1000 * 3600 * 24))  * 24.85;
+                const div = document.getElementById("ModalBodyCreate");
+                const idApplicationForRelease = document.getElementById("idApplicationForRelease");
+                const sumForStorage = document.getElementById("sumForStorage");
+                idApplicationForRelease.value = data.idApplicationForRelease;
+                sumForStorage.value =sum;
+            })
+
+    }
+    function save() {
+        const div = document.getElementById("ModalBodyCreate");
+        const form = new FormData(div)
+        if (div.checkValidity()){
+            fetch('/client/addOplata', {
+                method: 'POST',
+                body: JSON.stringify(form)
+            }).then(response=> response.json())
+                .then(data=>{
+                    alert(data.success)
+                });
+        }
+        else {
+            alert("Некорректное заполнение опалты!");
+        }
+
+    }
+    function findSavePrise(id){
+        fetch('/client/findOplata/' + id, {
+            method: 'GET',
+        }).then(response=> response.json())
+            .then(data=>{
+                console.log(data);
+                fetch("/client/chekOplata/"+id, {
+                    method: 'GET'
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                }).then(blob => {
+                    const div = document.getElementById("modelBody");
+                    div.innerHTML +=`   <div class="mb-3">
+                                <label class="form-label">Заявка</label>
+                                <span>${data.id}</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="costInput" class="form-label">Сумма за содержание товара</label>
+                                <span>${data.sumForStorage}</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="receiptFileInput" class="form-label">Файл с чеком</label>
+                                <iframe id="pdf"></iframe>
+                            </div>`;
+                    const url = URL.createObjectURL(blob);
+
+                    // Создание iframe для отображения PDF файла
+                    const iframe = document.getElementById('pdf');
+                    iframe.src = url;
+                    iframe.width = '450px';
+                });
+                }).catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+
+
+    }
+</script>
 </html>
