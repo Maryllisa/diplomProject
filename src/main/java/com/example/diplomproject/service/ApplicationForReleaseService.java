@@ -74,6 +74,6 @@ public class ApplicationForReleaseService {
     }
 
     public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(String login, StatusApplicationForRelease statusApplicationForRelease) {
-        return applicationForReleaseRepository.findAllByStatusApplicationForReleaseAndAccount(statusApplicationForRelease, userRepository.findByLogin(login));
+        return applicationForReleaseRepository.findAllByStatusApplicationForRelease(statusApplicationForRelease);
     }
 }

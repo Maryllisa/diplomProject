@@ -57,9 +57,6 @@ public class DeliveryProductService {
     public void addNewDelivery(DeliveryProductDTO deliveryProductDTO, String login){
         DeliveryProduct product = new DeliveryProduct();
         List<Product> productsList = new ArrayList<>();
-        product.setApplicationForStorage(
-                applicationForStorageRepository
-                        .save(product.getApplicationForStorage()));
         deliveryProductDTO.getCheckProduct().forEach((x,y)->{
             Product p = productRepository.getById(x);
             p.setIsDelivery(y);
@@ -75,9 +72,9 @@ public class DeliveryProductService {
         product.setArrangeDate(deliveryProductDTO.getArrangeDate());
         product.setProdCondition(deliveryProductDTO.getProdCondition());
         product.setAccount(userRepository.findByLogin(login));
-        deliveryProductRepository.save(product);
-        CustomsAgency agency = new CustomsAgency();
-        agency.setDeliveryProduct(deliveryProductRepository.save(product));
+        DeliveryProduct delivery = deliveryProductRepository.save(product);
+         CustomsAgency agency = new CustomsAgency();
+        agency.setDeliveryProduct(delivery);
         customsAgencyRepository.save(agency);
 
     }

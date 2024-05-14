@@ -16,5 +16,7 @@ public interface ApplicationForReleaseRepository extends JpaRepository<Applicati
 
     List<ApplicationForRelease> findAllByAccount(Account byLogin);
     List<ApplicationForRelease> findAllByStatusApplicationForReleaseAndAccount(StatusApplicationForRelease statusApplicationForRelease, Account account);
+    List<ApplicationForRelease> findAllByStatusApplicationForRelease(StatusApplicationForRelease statusApplicationForRelease);
+
 
 }

@@ -57,8 +57,10 @@
                 <td style="color: #1a1a1c" th:if="${ch.recipient.login != login}" th:text="${ch.recipient.surname +' ' + ch.recipient.name + ' ' + ch.recipient.patronymic}"/>
                 <td style="color: #1a1a1c" th:if="${ch.markForAgency!=null}" th:text="${ch.markForAgency.evaluation}"/>
                 <td><input type="button" value="Оценить"
-                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" th:onclick="setId('' + ${ch.idChatRoom} + '')"
-                           data-bs-target="#createRequestModal"></td>
+                           style="font-weight: bold; background-color: #814de5; color: #f2f0f8 " data-bs-toggle="modal" th:onclick="|setId()|"
+                           data-bs-target="#createRequestModal"/>
+                    <input hidden="hidden" id="ID" th:value="${ch.idChatRoom}">
+                </td>
             </tr>
             </tbody>
         </table>
@@ -98,9 +100,9 @@
 </main>
 </body>
 <script>
-    function setId(id){
+    function setId(){
         const idMark = document.getElementById("idMark");
-        idMark.value = id.toString();
+        idMark.value = document.getElementById("ID").value;
     }
 </script>
 </html>

@@ -24,29 +24,45 @@ public class MarkForAgencyService {
     public void addNewMarkQuality(Long idMark, MarkForAgency markForAgency, String name) {
         Account account = userRepository.findByLogin(name);
         markForAgency.setClient(account);
-        DeliveryProduct deliveryProduct = deliveryProductRepository.getById(idMark);
-        deliveryProduct.setMarkForAgency(markForAgencyRepository.save(markForAgency));
-        deliveryProductRepository.save(deliveryProduct);
+        MarkingInfo markingInfo = markingInfoRepository.getById(idMark);
+        CustomsAgency customsAgency = customsAgencyRepository.findAllByMarkingInfo(markingInfo);
+        markForAgency.setCustomsAgency(customsAgency);
+        markingInfo.setMarkForAgency(markForAgencyRepository.save(markForAgency));
+        customsAgency.setListMarkForAgency(markForAgency);
+        customsAgencyRepository.save(customsAgency);
+        markingInfoRepository.save(markingInfo);
     }
     public void addNewPrinProdQuality(Long idMark, MarkForAgency markForAgency, String name) {
         Account account = userRepository.findByLogin(name);
         markForAgency.setClient(account);
         DeliveryProduct deliveryProduct = deliveryProductRepository.getById(idMark);
+        CustomsAgency customsAgency = customsAgencyRepository.findAllByDeliveryProduct(deliveryProduct);
+        markForAgency.setCustomsAgency(customsAgency);
         deliveryProduct.setMarkForAgency(markForAgencyRepository.save(markForAgency));
+        customsAgency.setListMarkForAgency(markForAgency);
+        customsAgencyRepository.save(customsAgency);
         deliveryProductRepository.save(deliveryProduct);
     }
     public void addOtpusck(Long idMark, MarkForAgency markForAgency, String name) {
         Account account = userRepository.findByLogin(name);
         markForAgency.setClient(account);
         Otpusk otpusk = otpuskRepository.getById(idMark);
+        CustomsAgency customsAgency = customsAgencyRepository.findAllByOtpusk(otpusk);
+        markForAgency.setCustomsAgency(customsAgency);
         otpusk.setMarkForAgency(markForAgencyRepository.save(markForAgency));
+        customsAgency.setListMarkForAgency(markForAgency);
+        customsAgencyRepository.save(customsAgency);
         otpuskRepository.save(otpusk);
     }
     public void addCommunication(String idMark, MarkForAgency markForAgency, String name) {
         Account account = userRepository.findByLogin(name);
         markForAgency.setClient(account);
         ChatRoom chatRoom = chatRoomRepository.getById(idMark);
+        CustomsAgency customsAgency = customsAgencyRepository.findAllByChatRoom(chatRoom);
+        markForAgency.setCustomsAgency(customsAgency);
         chatRoom.setMarkForAgency(markForAgencyRepository.save(markForAgency));
+        customsAgency.setListMarkForAgency(markForAgency);
+        customsAgencyRepository.save(customsAgency);
         chatRoomRepository.save(chatRoom);
     }
 }

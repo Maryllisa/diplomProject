@@ -30,4 +30,8 @@ public class CustomsAgency {
     private Account account;
     @OneToMany
     private List<MarkForAgency> markForAgencies;
+
+    public void setListMarkForAgency (MarkForAgency markForAgency){
+        this.markForAgencies.add(markForAgency);
+    }
 }
