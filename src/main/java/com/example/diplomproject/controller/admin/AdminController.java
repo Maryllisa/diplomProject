@@ -35,4 +35,6 @@ public class AdminController {
     public String getShowAppJournal() {return "/admin/showAppJournal";}
     @GetMapping("/admin/showOtgrJournal")
     public String getShowOtgrJournal() {return "/admin/showOtgrJournal";}
+    @GetMapping("/admin/showOtpJournal")
+    public String getShowOtpJournal() {return "/admin/showOtpJournal";}
 }
