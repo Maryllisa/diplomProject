@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 </head>
@@ -8,7 +8,7 @@
 <div th:insert="blocks/header :: header"></div>
 <div th:insert="blocks/adminSidebare :: adminSidebare"></div>
 <main>
-    <div class="table-responsive " style="width:1000px;  margin-left: 27%">
+    <div class="table-responsive " style="width:950px;  margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">Сформировать оценку качества</h4>
         <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
             <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
@@ -49,11 +49,6 @@
                 <th  style="color: #814de5" scope="col">№ТТН</th>
                 <th  style="color: #814de5" scope="col">Поставщик</th>
                 <th  style="color: #814de5" scope="col">Водитель</th>
-                <th  style="color: #814de5" scope="col">Оценка за маркировку</th>
-                <th  style="color: #814de5" scope="col">Оценка за отгрузку</th>
-                <th  style="color: #814de5" scope="col">Оценка за отпуск</th>
-                <th  style="color: #814de5" scope="col">Оценка за связь</th>
-                <th  style="color: #814de5" scope="col">Оценка за состояние товара</th>
                 <th></th>
             </tr>
             </thead>
@@ -65,19 +60,89 @@
                 <td  style="color: #1a1a1c"><a></a></td>
                 <td  style="color: #1a1a1c"><a></a></td>
                 <td  style="color: #1a1a1c"><a></a></td>
-                <td >7<input type="number" id="ochMark" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td>7<input type="number" id="ochOtgr" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td>7<input type="number" id="ochOtp" svalue="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td>7<input type="number" id="ochSviaz" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td>7<input type="number" id="ochSost" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td><input type="button" value="Сохранить веса"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  ></td>
+
+                <td><input type="button" value="Расставить веса оценок"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalVesa" ></td>
 
             </tr>
             </tbody>
         </table>
 
-    </div>
 
+        <div class="modal fade" id="modalVesa" tabindex="-1" role="dialog" aria-labelledby="modalVesaLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalVesaLabel">Расставить веса оценок</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form  class="needs-validation" id="vesaOch" novalidate="">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Оценка за маркировку:</label>
+                                <span id="ochMark"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Вес маркировки</label>
+                                <input type="number" id="vesochMark" value="0"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Оценка за отгрузку:</label>
+                                <span id="ochOtgr"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Вес отгрузки</label>
+                                <input type="number" id="vesochOtgr" value="0"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Оценка за отпуск:</label>
+                                <span id="ochOtp"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Вес отпуска</label>
+                                <input type="number" id="vesochOtp" value="0"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Оценка за связь:</label>
+                                <span id="ochSviaz"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Вес связи:</label>
+                                <input type="number" id="vesochSviaz" value="0"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="form-label">Оценка за состояние товара:</label>
+                                <span id="ochSost"></span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Вес состояния товара:</label>
+                                <input type="number" id="vesochSost" value="0"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8" >
+                            </div>
+                        </div>
+
+                            <div class="modal-footer">
+                                <button class="w-100 btn btn-primary btn-lg" type="submit"
+                                        style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">
+                                    Сохранить веса
+                                </button>
+                            </div>
+                        </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
 
 
 </main>
