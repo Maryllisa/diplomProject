@@ -103,4 +103,6 @@ public class UserController {
         return "/client/showTD";
     }
 
+    @GetMapping("/relesionHistory")
+    public String getRelesionHistory() {return "/user/relesionHistory";}
 }
