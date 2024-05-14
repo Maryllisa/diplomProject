@@ -33,4 +33,6 @@ public class AdminController {
     public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
     @GetMapping("/admin/showAppJournal")
     public String getShowAppJournal() {return "/admin/showAppJournal";}
+    @GetMapping("/admin/showOtgrJournal")
+    public String getShowOtgrJournal() {return "/admin/showOtgrJournal";}
 }
