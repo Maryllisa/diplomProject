@@ -31,4 +31,6 @@ public class AdminController {
     public String getShowOcForObsl() {return "/admin/showOcForObsl";}
     @GetMapping("/admin/otchOfProvisionServ")
     public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
+    @GetMapping("/admin/showAppJournal")
+    public String getShowAppJournal() {return "/admin/showAppJournal";}
 }
