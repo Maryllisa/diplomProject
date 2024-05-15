@@ -2,7 +2,9 @@ package com.example.diplomproject.controller.admin;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
+import com.example.diplomproject.model.entity.CustomsAgency;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.service.CustomsAgencyService;
 import com.example.diplomproject.service.DeclarationTDService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
     private final DeclarationTDService declarationTDService;
+    private final CustomsAgencyService customsAgencyService;
 
     @GetMapping("/admin")
     public String getAdmin() {return "/admin/adminPanel";}
@@ -26,7 +29,10 @@ public class AdminController {
     @GetMapping("/admin/showAdmins")
     public String getShowAdmins() {return "/admin/showAdmins";}
     @GetMapping("/admin/formKachQuality")
-    public String getFormKachQuality() {return "/admin/formKachQuality";}
+    public String getFormKachQuality(Model model) {
+        model.addAttribute("customsAgencyList", customsAgencyService.getAll());
+        return "/admin/formKachQuality";
+    }
     @GetMapping("/admin/showOcForObsl")
     public String getShowOcForObsl() {return "/admin/showOcForObsl";}
     @GetMapping("/admin/otchOfProvisionServ")

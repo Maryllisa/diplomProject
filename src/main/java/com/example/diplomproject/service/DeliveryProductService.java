@@ -1,11 +1,9 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
-import com.example.diplomproject.model.entity.ApplicationForStorage;
-import com.example.diplomproject.model.entity.CustomsAgency;
-import com.example.diplomproject.model.entity.DeliveryProduct;
-import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,7 @@ public class DeliveryProductService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final CustomsAgencyRepository customsAgencyRepository;
+    private final MarkForAgencyRepository markForAgencyRepository;
 
     public Map<String, String> check(BindingResult result,
                                      DeliveryProductDTO deliveryProductDTO) {
@@ -73,8 +72,14 @@ public class DeliveryProductService {
         product.setProdCondition(deliveryProductDTO.getProdCondition());
         product.setAccount(userRepository.findByLogin(login));
         DeliveryProduct delivery = deliveryProductRepository.save(product);
-         CustomsAgency agency = new CustomsAgency();
+        CustomsAgency agency = new CustomsAgency();
         agency.setDeliveryProduct(delivery);
+        agency= customsAgencyRepository.save(agency);
+        MarkForAgency mark = new MarkForAgency();
+        mark.setCustomsAgency(agency);
+        mark.setEvaluation(deliveryProductDTO.getDeliveryEvalution());
+        mark.setTypeEvaluation(TypeEvaluation.qualityProduct);
+        agency.setListMarkForAgency(markForAgencyRepository.save(mark));
         customsAgencyRepository.save(agency);
 
     }
