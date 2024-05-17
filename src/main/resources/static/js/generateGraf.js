@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
     fetch("/admin/getListMarkForAgency", {
         method: 'GET'
@@ -17,24 +15,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: {
                     labels: xValues,
                     datasets: [{
-                        data: x.markQuality,
-                        borderColor: "red",
+                        data: data.markQuality,
+                        borderColor: "#F8BBD0",
                         fill: false
                     }, {
-                        data: x.prinProdQuality,
-                        borderColor: "green",
+                        data: data.prinProdQuality,
+                        borderColor: "#E1BEE7",
                         fill: false
                     }, {
-                        data: x.otpProdQuality,
-                        borderColor: "blue",
+                        data: data.otpProdQuality,
+                        borderColor: "#B3E5FC",
                         fill: false
                     }, {
-                        data: x.qualityProduct,
-                        borderColor: "yellow",
+                        data: data.qualityProduct,
+                        borderColor: "#C5E1A5",
                         fill: false
                     }, {
-                        data: x.qualityProduct,
-                        borderColor: "pink",
+                        data: data.comunicationQuality,
+                        borderColor: "#E6EE9C",
                         fill: false
                     }]
                 },
@@ -49,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     fetch('/admin/getCustomAgency', {
         method: 'GET'
-    }).then(res=>res.json())
-        .then(data=>{
-            var xValues = [10,20,30,40,50,60,70,80,90,100,110];
+    }).then(res => res.json())
+        .then(data => {
+            var xValues = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
             var yValues = data;
 
             new Chart("newChart", {
@@ -59,13 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: {
                     labels: xValues,
                     datasets: [{
-                        backgroundColor: "rgba(0,0,0,1.0)",
-                        borderColor: "rgba(0,0,0,0.1)",
-                        data: yValues
+                        label: "Оценки качества оказания таможеннх услуг",
+                        backgroundColor: "#E6EE9C",
+                        borderColor: "#E6EE9C",
+                        data: yValues,
                     }]
-                },
-                options:{...}
-            });
+                }
+               });
+
         });
 });
 

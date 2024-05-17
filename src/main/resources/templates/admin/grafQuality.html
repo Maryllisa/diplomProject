@@ -2,72 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <style>
+        .info-container {
+            float: right;
+            width: 300px;
+            margin-left: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <div th:insert="blocks/links :: div"></div>
 <body style="background-color: #f2f0f8">
 <div th:insert="blocks/header :: header"></div>
 <div th:insert="blocks/adminSidebare :: adminSidebare"></div>
 <main>
-    <div class="table-responsive " style="width:950px;  margin-left: 27%">
+    <div class="table-responsive" style="width: 950px; margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5">График качества оказания услуг</h4>
-        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
-            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
-                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
-                <select class="form-select" style="margin-left: 10px; width: 150px">
-                    <option value="" selected disabled>По признаку</option>
-                    <option value="признак1">Признак 1</option>
-                    <option value="признак2">Признак 2</option>
-                    <option value="признак3">Признак 3</option>
-                </select>
-            </div>
-            <div style="width: 475px; display: flex; align-items: end;">
-                <span>с</span>
-                <input class="form-control" type="date" placeholder="С" style="margin-left: 10px; width: 120px">
-                <span>по</span>
-                <input class="form-control" type="date" placeholder="По" style="margin-left: 10px; width: 120px">
-            </div>
+        <div class="chart-container">
+            <canvas id="myChart" style="width: 100%; max-width: 600px; float: left;"></canvas>
 
-            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
-                <form role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
-                </form>
-                <select class="form-select" style="margin-left: 10px; width: 160px">
-                    <option value="" selected disabled>По параметру</option>
-                    <option value="признак1">Параметр 1</option>
-                    <option value="признак2">Параметр 2</option>
-                    <option value="признак3">Параметр 3</option>
-                </select>
-            </div>
+        <div class="info-container">
+            <h5>Информация о графике оценок</h5>
+            <p>Каждая линия демонстрирует отдельный критерий оценок:
+                <br> 1. Розовый - оценка маркировки
+                <br> 2. Фиолетовый  - оценка состояния товара
+                <br> 3. Голубой - оценка состояния товара
+                <br> 4. Зеленый - оценка состояния товара
+                <br> 5. Лавандовый  - оценка состояния товара
+            </p>
+        </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="newChart" style="width: 100%; max-width: 600px; float: left;"></canvas>
+
+        <div class="info-container">
+            <h5>Информация о графике роста качества оказания услуг</h5>
+        </div>
         </div>
 
-        <table class="table table-striped table-sm" style="margin-top: 20px">
-            <thead>
-            <tr>
-                <th style="color: #814de5" scope="col"></th>
-                <th  style="color: #814de5" scope="col"></th>
-                <th  style="color: #814de5" scope="col"></th>
-                <th  style="color: #814de5" scope="col"></th>
-                <th  style="color: #814de5" scope="col"></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td  style="color: #1a1a1c" ></td>
-                <td  style="color: #1a1a1c"></td>
-                <td  style="color: #1a1a1c" ></td>
-                <td  style="color: #1a1a1c" ></td>
-                <td  style="color: #1a1a1c" ></td>
-
-            </tr>
-            </tbody>
-
-        </table>
-
-
-
-
+    </div>
 </main>
 </body>
-
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script src="/js/generateGraf.js"></script>
 </html>
