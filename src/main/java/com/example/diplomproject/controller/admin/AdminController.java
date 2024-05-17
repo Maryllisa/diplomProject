@@ -52,5 +52,7 @@ public class AdminController {
     public String getShowProdOnWH() {return "/admin/ShowProdOnWH";}
     @GetMapping("/admin/showTD")
     public String getShowTD() {return "/admin/showTD";}
+    @GetMapping("/admin/grafQuality")
+    public String getGrafQuality() {return "/admin/grafQuality";}
 }
 
