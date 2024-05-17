@@ -21,8 +21,11 @@ public class CustomsAgencyService {
     private final CustomsAgencyRepository customsAgencyRepository;
     private final MarkForAgencyRepository markForAgencyRepository;
 
-    public List<CustomsAgency> getAll() {
-        return customsAgencyRepository.findAll();
+    public List<CustomsAgency> getAllNotMark() {
+        return customsAgencyRepository.findAllByIsMark(false);
+    }
+    public List<CustomsAgency> getAllTrueMark() {
+        return customsAgencyRepository.findAllByIsMark(true);
     }
 
     public List<MarkForAgency> getById(Long id) {
@@ -58,11 +61,19 @@ public class CustomsAgencyService {
             markVesochSviaz.setWeightCoefficient(vesochSviaz);
         if (markVesochSost!=null)
             markVesochSost.setWeightCoefficient(vesochSost);
-        customsAgency.setMarkForAgencies(List.of(markForAgencyRepository.save(Objects.requireNonNull(markVesochMark)),
-                markForAgencyRepository.save(Objects.requireNonNull(markVesochOtgr)),
-                markForAgencyRepository.save(Objects.requireNonNull(markVesochOtp)),
-                markForAgencyRepository.save(Objects.requireNonNull(markVesochSviaz)),
-                markForAgencyRepository.save(Objects.requireNonNull(markVesochSost))));
+        List<MarkForAgency> markList = new ArrayList<>();
+        markList.add(markForAgencyRepository.save(Objects.requireNonNull(markVesochMark)));
+        markList.add(markForAgencyRepository.save(Objects.requireNonNull(markVesochOtgr)));
+        markList.add(markForAgencyRepository.save(Objects.requireNonNull(markVesochOtp)));
+        markList.add(markForAgencyRepository.save(Objects.requireNonNull(markVesochSviaz)));
+        markList.add(markForAgencyRepository.save(Objects.requireNonNull(markVesochSost)));
+        customsAgency.setMarkForAgencies(markList);
+        customsAgency.setIsMark(true);
+        customsAgency.setMark(getMark(customsAgency.getMarkForAgencies()));
         customsAgencyRepository.save(customsAgency);
+    }
+
+    public double getMark(List<MarkForAgency> markForAgencies){
+        return markForAgencies.stream().mapToDouble(x->x.getWeightCoefficient()*x.getEvaluation()).sum();
     }
 }

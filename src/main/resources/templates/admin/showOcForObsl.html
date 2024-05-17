@@ -48,22 +48,18 @@
                 <th  style="color: #814de5" scope="col">№CMR</th>
                 <th  style="color: #814de5" scope="col">№ТТН</th>
                 <th  style="color: #814de5" scope="col">Поставщик</th>
-                <th  style="color: #814de5" scope="col">Водитель</th>
                 <th  style="color: #814de5" scope="col">Оценка качества</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr> <!--th:if="${applications}" th:each="ap:${applications}"-->
-                <td  style="color: #1a1a1c"><a></a></td> <!--th:text="${}"-->
-                <td  style="color: #1a1a1c"><a></a></td>
-                <td  style="color: #1a1a1c"><a></a></td>
-                <td  style="color: #1a1a1c"><a></a></td>
-                <td  style="color: #1a1a1c"><a></a></td>
-                <td  style="color: #1a1a1c"><a></a></td>
-                <td >7<input type="number" id="ochKach" value="0"   style="width: 50px;font-weight: bold;background-color: #814de5; color: #f2f0f8" ></td>
-                <td><input type="button" value="Сохранить " style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  ></td>
-
+            <tr th:if="${!customsAgencyList.isEmpty()}" th:each="c:${customsAgencyList}">
+                <td  style="color: #1a1a1c" th:text="${c.idCustomsAgency}"></td>
+                <td  style="color: #1a1a1c" th:text="${c.deliveryProduct.applicationForStorage.declarationTD.declarationNumber}"></td>
+                <td  style="color: #1a1a1c" th:text="${c.deliveryProduct.applicationForStorage.crm.idCRM}"></td>
+                <td  style="color: #1a1a1c" th:text="${c.deliveryProduct.applicationForStorage.goodTransportDocument.goodsTransportDocumentNumbers}"></td>
+                <td  style="color: #1a1a1c" th:text="${c.deliveryProduct.applicationForStorage.declarationTD.individuals.organizationName}"></td>
+                <td  style="color: #1a1a1c" th:text="${c.mark}"></td>
             </tr>
             </tbody>
         </table>

@@ -30,11 +30,14 @@ public class AdminController {
     public String getShowAdmins() {return "/admin/showAdmins";}
     @GetMapping("/admin/formKachQuality")
     public String getFormKachQuality(Model model) {
-        model.addAttribute("customsAgencyList", customsAgencyService.getAll());
+        model.addAttribute("customsAgencyList", customsAgencyService.getAllNotMark());
         return "/admin/formKachQuality";
     }
     @GetMapping("/admin/showOcForObsl")
-    public String getShowOcForObsl() {return "/admin/showOcForObsl";}
+    public String getShowOcForObsl(Model model) {
+        model.addAttribute("customsAgencyList", customsAgencyService.getAllTrueMark());
+        return "/admin/showOcForObsl";
+    }
     @GetMapping("/admin/otchOfProvisionServ")
     public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
     @GetMapping("/admin/showAppJournal")

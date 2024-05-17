@@ -24,5 +24,6 @@ public interface CustomsAgencyRepository extends JpaRepository<CustomsAgency, Lo
     CustomsAgency findAllByDeliveryProduct(DeliveryProduct deliveryProduct);
     CustomsAgency findAllByOtpusk(Otpusk otpusk);
     CustomsAgency findAllByChatRoom(ChatRoom chatRoom);
+    List<CustomsAgency> findAllByIsMark(Boolean isMark);
 
 }

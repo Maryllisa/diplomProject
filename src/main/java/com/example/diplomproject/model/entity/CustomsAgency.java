@@ -24,6 +24,8 @@ public class CustomsAgency {
     private Otpusk otpusk;
     @OneToOne
     private MarkingInfo markingInfo;
+    @Column
+    private Boolean isMark = false;
     @OneToOne
     private ChatRoom chatRoom;
     @ManyToOne

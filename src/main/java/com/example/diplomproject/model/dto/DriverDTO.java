@@ -14,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class DriverDTO {
     @NotNull
     @NotEmpty
@@ -22,4 +23,5 @@ public class DriverDTO {
     @NotNull
     @NotEmpty
     private String LicenseNumber;
+
 }
