@@ -6,12 +6,14 @@ import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface MarkForAgencyRepository extends JpaRepository<MarkForAgency, Long> {
     Optional<MarkForAgency> findAllByCustomsAgency(CustomsAgency customsAgency);
     Optional<MarkForAgency> findAllByCustomsAgencyAndTypeEvaluation(CustomsAgency customsAgency, TypeEvaluation typeEvaluation);
+    List<MarkForAgency> findAllByTypeEvaluation(TypeEvaluation typeEvaluation);
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.diplomproject.service;
 
+import com.example.diplomproject.model.dto.MarkForAgencyDTO;
 import com.example.diplomproject.model.entity.CustomsAgency;
 import com.example.diplomproject.model.entity.MarkForAgency;
 import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
@@ -75,5 +76,30 @@ public class CustomsAgencyService {
 
     public double getMark(List<MarkForAgency> markForAgencies){
         return markForAgencies.stream().mapToDouble(x->x.getWeightCoefficient()*x.getEvaluation()).sum();
+    }
+
+    public MarkForAgencyDTO getAllMarksForGraf() {
+        MarkForAgencyDTO markForAgencyDTO = new MarkForAgencyDTO();
+        List<MarkForAgency> markForAgencies = markForAgencyRepository.findAllByTypeEvaluation(TypeEvaluation.markQuality);
+        markForAgencyDTO.setMarkQuality(markForAgencies.stream().mapToDouble(MarkForAgency::getEvaluation).boxed().toList());
+
+        markForAgencies = markForAgencyRepository.findAllByTypeEvaluation(TypeEvaluation.otpProdQuality);
+        markForAgencyDTO.setOtpProdQuality(markForAgencies.stream().mapToDouble(MarkForAgency::getEvaluation).boxed().toList());
+
+        markForAgencies = markForAgencyRepository.findAllByTypeEvaluation(TypeEvaluation.qualityProduct);
+        markForAgencyDTO.setQualityProduct(markForAgencies.stream().mapToDouble(MarkForAgency::getEvaluation).boxed().toList());
+
+        markForAgencies = markForAgencyRepository.findAllByTypeEvaluation(TypeEvaluation.comunicationQuality);
+        markForAgencyDTO.setComunicationQuality(markForAgencies.stream().mapToDouble(MarkForAgency::getEvaluation).boxed().toList());
+
+        markForAgencies = markForAgencyRepository.findAllByTypeEvaluation(TypeEvaluation.prinProdQuality);
+        markForAgencyDTO.setPrinProdQuality(markForAgencies.stream().mapToDouble(MarkForAgency::getEvaluation).boxed().toList());
+        return markForAgencyDTO;
+    }
+
+    public List<Double> getAllCustomsAgency() {
+        return customsAgencyRepository.findAll().stream()
+                .mapToDouble(CustomsAgency::getMark)
+                .boxed().toList();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.diplomproject.controller.admin;
 
+import com.example.diplomproject.model.dto.MarkForAgencyDTO;
 import com.example.diplomproject.model.entity.MarkForAgency;
 import com.example.diplomproject.service.CustomsAgencyService;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AdminResController {
     private final CustomsAgencyService customsAgencyService;
+
     @GetMapping("/admin/customsAgency/{id}")
     public List<MarkForAgency> getListMarkForAgency(@PathVariable Long id){
         return customsAgencyService.getById(id);
@@ -29,5 +31,13 @@ public class AdminResController {
         customsAgencyService.registrationMark(id, vesochMark,vesochOtgr, vesochOtp, vesochSviaz, vesochSost);
         redirectView.setUrl("/admin/formKachQuality");
         return redirectView;
+    }
+    @GetMapping("/admin/getListMarkForAgency")
+    private MarkForAgencyDTO getAllMarkGorGRAF(){
+        return customsAgencyService.getAllMarksForGraf();
+    }
+    @GetMapping("/admin/getCustomAgency")
+    private List<Double> getAllCustomAgencyorGRAF(){
+        return customsAgencyService.getAllCustomsAgency();
     }
 }
