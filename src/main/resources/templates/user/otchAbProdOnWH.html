@@ -53,6 +53,24 @@
 
   </div>
 </main>
+<script>
+  fetch("/generate-report", {
+    method: 'GET'
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.blob();
+  }).then(blob => {
+    const url = URL.createObjectURL(blob);
+
+    // Создание iframe для отображения PDF файла
+    const iframe = document.getElementById('word-preview');
+    iframe.src = url;
+  }).catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
+</script>
 </body>
 
 </html>
