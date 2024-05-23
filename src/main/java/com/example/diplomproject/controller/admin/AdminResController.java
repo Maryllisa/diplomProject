@@ -1,7 +1,9 @@
 package com.example.diplomproject.controller.admin;
 
 import com.example.diplomproject.model.dto.MarkForAgencyDTO;
+import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.MarkForAgency;
+import com.example.diplomproject.service.AccountService;
 import com.example.diplomproject.service.CustomsAgencyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AdminResController {
     private final CustomsAgencyService customsAgencyService;
+    private final AccountService accountService;
 
     @GetMapping("/admin/customsAgency/{id}")
     public List<MarkForAgency> getListMarkForAgency(@PathVariable Long id){
@@ -39,5 +42,9 @@ public class AdminResController {
     @GetMapping("/admin/getCustomAgency")
     private List<Double> getAllCustomAgencyorGRAF(){
         return customsAgencyService.getAllCustomsAgency();
+    }
+    @GetMapping("/admin/findUser/{id}")
+    public Account getUserById(@PathVariable Long id){
+        return accountService.findUserById(id);
     }
 }

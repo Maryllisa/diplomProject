@@ -4,6 +4,7 @@ import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.CustomsAgency;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
+import com.example.diplomproject.service.AccountService;
 import com.example.diplomproject.service.CustomsAgencyService;
 import com.example.diplomproject.service.DeclarationTDService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,16 @@ import java.util.List;
 public class AdminController {
     private final DeclarationTDService declarationTDService;
     private final CustomsAgencyService customsAgencyService;
+    private final AccountService accountService;
 
     @GetMapping("/admin")
     public String getAdmin() {return "/admin/adminPanel";}
 
     @GetMapping("/admin/showAccounts")
-    public String getShowAccounts() {return "/admin/showAccounts";}
+    public String getShowAccounts(Model model) {
+        model.addAttribute("userList", accountService.getAllUserWithoutAdmin());
+        return "/admin/showAccounts";
+    }
     @GetMapping("/admin/showAdmins")
     public String getShowAdmins() {return "/admin/showAdmins";}
     @GetMapping("/admin/formKachQuality")

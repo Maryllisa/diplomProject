@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller.manager;
+package com.example.diplomproject.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

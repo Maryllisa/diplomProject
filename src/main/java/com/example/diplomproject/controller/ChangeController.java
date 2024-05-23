@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller.client;
+package com.example.diplomproject.controller;
 
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.service.GoodTransportDocumentService;

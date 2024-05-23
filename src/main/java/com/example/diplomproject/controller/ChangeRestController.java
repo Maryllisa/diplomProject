@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller.client;
+package com.example.diplomproject.controller;
 
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;

@@ -17,10 +17,6 @@ import com.example.diplomproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -385,5 +381,13 @@ public class AccountService {
 
     public String getRole(String name) {
         return accountRepository.findByLogin(name).getRoles().toString();
+    }
+
+    public List<Account> getAllUserWithoutAdmin() {
+        return accountRepository.findAll();
+    }
+
+    public Account findUserById(Long id) {
+    return accountRepository.getById(id);
     }
 }

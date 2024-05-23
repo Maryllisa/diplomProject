@@ -48,17 +48,18 @@
                 <th  style="color: #814de5" scope="col">Имя</th>
                 <th  style="color: #814de5" scope="col">Фамилия</th>
                 <th  style="color: #814de5" scope="col">Статус</th>
+                <th  style="color: #814de5" scope="col">Системная роль</th>
                 <th  style="color: #814de5" scope="col">Подробнее</th>
             </tr>
             </thead>
             <tbody>
-            <tr> <!--th:if="${applications}" th:each="ap:${applications}"-->
-                <td  style="color: #1a1a1c"></td> <!--th:text="${}"-->
-                <td  style="color: #1a1a1c"> <th/>
-                <td  style="color: #1a1a1c"> <th/>
-                <td  style="color: #1a1a1c" > <th/>
-                <td  style="color: #1a1a1c" > <th/>
-                <td><input type="button" value="Подробнее"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></td>
+            <tr th:if="${userList}" th:each="list:${userList}"> <!---->
+                <td  style="color: #1a1a1c" th:text="${list.id}"></td>
+                <td  style="color: #1a1a1c" th:text="${list.login}"> <th/>
+                <td  style="color: #1a1a1c" th:text="${list.name}"> <th/>
+                <td  style="color: #1a1a1c" th:text="${list.surname}"> <th/>
+                <td  style="color: #1a1a1c" th:text="${list.roles}"> <th/>
+                <td><input type="button" value="Подробнее" th:onclick="|findAccount(${list.id})|"   style="font-weight: bold;background-color: #814de5; color: #f2f0f8"  data-bs-toggle="modal"  data-bs-target="#modalDetails"></td>
             </tr>
             </tbody>
         </table>
@@ -145,81 +146,8 @@
     </div>
 
     <div class="modal fade" id="changeAccountModal" tabindex="-1" role="dialog" aria-labelledby="changeAccountModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changeAccountModalLabel">Подробности о пользователе</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">ID:</label>
-                            <input type="text" id="changeUserId" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label">Логин:</label>
-                            <input type="text" id="changeUserLogin" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">Email:</label>
-                            <input type="email" id="changeUserEmail" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label">Пароль:</label>
-                            <input type="password" id="changeUserPassword" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">Активация аккаунта:</label>
-                            <select id="changeAccountActivation" class="form-select">
-                                <option value="true">true</option>
-                                <option value="false">false</option>
-                            </select>
+        <div class="modal-dialog" role="document" id="moreInfoAboutUser">
 
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label">Статус:</label>
-                            <input type="text" id="changeUserStatus" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">Дата рождения:</label>
-                            <input type="date" id="changeUserBirthdate" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label">Имя:</label>
-                            <input type="text" id="changeUserFirstName" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">Фамилия:</label>
-                            <input type="text" id="changeUserLastName" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label">Отчество:</label>
-                            <input type="text" id="changeUserMiddleName" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="form-label">Телефон:</label>
-                            <input type="tel" id="changeUserPhone" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit"
-                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить
-                    </button>
-
-                </div>
-            </div>
         </div>
     </div>
 </main>
@@ -229,29 +157,78 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
-    // function findApplication(id){
-    //     fetch('/user/findApplication/' + id,{
-    //         method: 'GET'
-    //     }).then(response=> response.json())
-    //         .then(data=>{
-    //             const orderNumber = document.getElementById("orderNumber");
-    //             const itemCount = document.getElementById("itemCount");
-    //             const deliveryDate = document.getElementById("deliveryDate");
-    //             const orderDate = document.getElementById("orderDate");
-    //             const orderStatus = document.getElementById("orderStatus");
-    //             const ttn = document.getElementById("ttn");
-    //             const declaration = document.getElementById("declaration");
-    //             const cmr = document.getElementById("cmr");
-    //
-    //             orderNumber.textContent = data.idApplication;
-    //             itemCount.textContent = data.countPositionProducts;
-    //             deliveryDate.textContent = data.datePost;
-    //             orderDate.textContent = data.dateZav;
-    //             orderStatus.textContent = "В ожидании";
-    //             ttn.textContent = data.goodTransportDocument.goodsTransportDocumentNumbers;
-    //             declaration.textContent = data.declarationTD.declarationNumber;
-    //             cmr.textContent = data.crm;
-    //         });
-    // }
+    function findAccount(id){
+        fetch('/admin/findUser/'+id, {
+            method: 'GET'
+        }).then(res=>res.json())
+            .then(data=>{
+                const moreInfoAboutUser = document.getElementById("moreInfoAboutUser");
+                moreInfoAboutUser.innerHTML+=`
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeAccountModalLabel">Подробности о пользователе</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">ID:</label>
+                            <input readonly value="${data.id}" type="text" id="changeUserId" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Логин:</label>
+                            <input readonly value="${data.login}" type="text" id="changeUserLogin" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Email:</label>
+                            <input readonly  value="${data.email}" type="email" id="changeUserEmail" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Пароль:</label>
+                            <input readonly  value="${data.password}" type="password" id="changeUserPassword" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Дата рождения:</label>
+                            <input readonly value="${data.dateBirthday}" type="date" id="changeUserBirthdate" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Имя:</label>
+                            <input readonly value="${data.name}" type="text" id="changeUserFirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Фамилия:</label>
+                            <input readonly value="${data.surname}" type="text" id="changeUserLastName" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Отчество:</label>
+                            <input readonly value="${data.patronymic}" type="text" id="changeUserMiddleName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="form-label">Телефон:</label>
+                            <input readonly value="${data.phone}" type="tel" id="changeUserPhone" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="w-100 btn btn-primary btn-lg" type="button"
+                            style="margin-top: 20px;background-color: #814de5; color: #1a1a1c">Сохранить
+                    </button>
+
+                </div>
+            </div>
+                `;
+            });
+    }
 </script>
 </html>
