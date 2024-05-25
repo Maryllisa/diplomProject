@@ -364,22 +364,22 @@ public class DeclarationTDService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "customEDCode":
-                    predicates.add(builder.equal(root.get("customEDCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("customEDCode"), searchData.getSearchQuery()));
                     break;
                 case "colProd":
-                    predicates.add(builder.equal(root.get("colProd"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("colProd"), searchData.getSearchQuery()));
                     break;
                 case "netWeight":
-                    predicates.add(builder.equal(root.get("netWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("netWeight"), searchData.getSearchQuery()));
                     break;
                 case "grossWeight":
-                    predicates.add(builder.equal(root.get("grossWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("grossWeight"), searchData.getSearchQuery()));
                     break;
                 case "senderDTO.organizationName":
-                    predicates.add(builder.equal(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
                     break;
                 case "recipientDTO.organizationName":
-                    predicates.add(builder.equal(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -402,6 +402,148 @@ public class DeclarationTDService {
         List<DeclarationTD> declarationTDList = typedQuery.getResultList();
         List<DeclarationDTO> declarationDTOList = new ArrayList<>();
         declarationTDList.forEach(x->{
+            declarationDTOList.add(x.build());
+        });
+        return declarationDTOList;
+    }
+
+    public List<DeclarationDTO> findAllByAccount(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<DeclarationTD> query = builder.createQuery(DeclarationTD.class);
+        Root<DeclarationTD> root = query.from(DeclarationTD.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "declarationNumber":
+                        orders.add(builder.asc(root.get("declarationNumber")));
+                        break;
+                    case "colProd":
+                        orders.add(builder.asc(root.get("colProd")));
+                        break;
+                    case "osobenOfDeclar":
+                        orders.add(builder.asc(root.get("osobenOfDeclar")));
+                        break;
+                    case "senderDTO.registrationCode":
+                        orders.add(builder.asc(root.get("senderDTO").get("registrationCode")));
+                        break;
+                    case "senderDTO.organizationName":
+                        orders.add(builder.asc(root.get("senderDTO").get("organizationName")));
+                        break;
+                    case "recipientDTO.registrationCode":
+                        orders.add(builder.asc(root.get("recipientDTO").get("registrationCode")));
+                        break;
+                    case "recipientDTO.organizationName":
+                        orders.add(builder.asc(root.get("recipientDTO").get("organizationName")));
+                        break;
+                    case "declarator.registrationCode":
+                        orders.add(builder.asc(root.get("declarator").get("registrationCode")));
+                        break;
+                    case "declarator.organizationName":
+                        orders.add(builder.asc(root.get("declarator").get("organizationName")));
+                        break;
+                    case "otvetstvenoeFace.registrationCode":
+                        orders.add(builder.asc(root.get("otvetstvenoeFace").get("registrationCode")));
+                        break;
+                    case "otvetstvenoeFace.organizationName":
+                        orders.add(builder.asc(root.get("otvetstvenoeFace").get("organizationName")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "declarationNumber":
+                        orders.add(builder.desc(root.get("declarationNumber")));
+                        break;
+                    case "colProd":
+                        orders.add(builder.desc(root.get("colProd")));
+                        break;
+                    case "osobenOfDeclar":
+                        orders.add(builder.desc(root.get("osobenOfDeclar")));
+                        break;
+                    case "senderDTO.registrationCode":
+                        orders.add(builder.desc(root.get("senderDTO").get("registrationCode")));
+                        break;
+                    case "senderDTO.organizationName":
+                        orders.add(builder.desc(root.get("senderDTO").get("organizationName")));
+                        break;
+                    case "recipientDTO.registrationCode":
+                        orders.add(builder.desc(root.get("recipientDTO").get("registrationCode")));
+                        break;
+                    case "recipientDTO.organizationName":
+                        orders.add(builder.desc(root.get("recipientDTO").get("organizationName")));
+                        break;
+                    case "declarator.registrationCode":
+                        orders.add(builder.desc(root.get("declarator").get("registrationCode")));
+                        break;
+                    case "declarator.organizationName":
+                        orders.add(builder.desc(root.get("declarator").get("organizationName")));
+                        break;
+                    case "otvetstvenoeFace.registrationCode":
+                        orders.add(builder.desc(root.get("otvetstvenoeFace").get("registrationCode")));
+                        break;
+                    case "otvetstvenoeFace.organizationName":
+                        orders.add(builder.desc(root.get("otvetstvenoeFace").get("organizationName")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+
+                case "declarationNumber":
+                    predicates.add(builder.like(root.get("declarationNumber"), searchData.getSearchQuery()));
+                    break;
+                case "colProd":
+                    predicates.add(builder.like(root.get("colProd"), searchData.getSearchQuery()));
+                    break;
+                case "osobenOfDeclar":
+                    predicates.add(builder.like(root.get("osobenOfDeclar"), searchData.getSearchQuery()));
+                    break;
+                case "senderDTO.registrationCode":
+                    predicates.add(builder.like(root.get("senderDTO").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "senderDTO.organizationName":
+                    predicates.add(builder.like(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "recipientDTO.registrationCode":
+                    predicates.add(builder.like(root.get("recipientDTO").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "recipientDTO.organizationName":
+                    predicates.add(builder.like(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "declarator.registrationCode":
+                    predicates.add(builder.like(root.get("declarator").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "declarator.organizationName":
+                    predicates.add(builder.like(root.get("declarator").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "otvetstvenoeFace.registrationCode":
+                    predicates.add(builder.like(root.get("otvetstvenoeFace").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "otvetstvenoeFace.organizationName":
+                    predicates.add(builder.like(root.get("otvetstvenoeFace").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
+        TypedQuery<DeclarationTD> typedQuery = entityManager.createQuery(query);
+        List<DeclarationDTO> declarationDTOList = new ArrayList<>();
+        typedQuery.getResultList().forEach(x->{
             declarationDTOList.add(x.build());
         });
         return declarationDTOList;

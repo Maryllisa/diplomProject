@@ -6,6 +6,7 @@ import javax.persistence.criteria.*;
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
 import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
+import com.example.diplomproject.model.entity.chat.ChatRoom;
 import com.example.diplomproject.model.entity.marking.ApplicationForMarking;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
 import com.example.diplomproject.model.entity.marking.TypeMarking;
@@ -157,13 +158,13 @@ public class MarkingInfoService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "product.nameProduct":
-                    predicates.add(builder.equal(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
                     break;
                 case "product.grossWeight":
-                    predicates.add(builder.equal(root.get("product").get("grossWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("product").get("grossWeight"), searchData.getSearchQuery()));
                     break;
                 case "product.netWeight":
-                    predicates.add(builder.equal(root.get("product").get("netWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("product").get("netWeight"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -179,6 +180,62 @@ public class MarkingInfoService {
         Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
         query.where(searchPredicate);
 
+        TypedQuery<MarkingInfo> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    public List<MarkingInfo> getAllMarking(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<MarkingInfo> query = builder.createQuery(MarkingInfo.class);
+        Root<MarkingInfo> root = query.from(MarkingInfo.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.asc(root.get("idMarkingInfo")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.asc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.desc(root.get("idMarkingInfo")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.desc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "idMarkingInfo":
+                    predicates.add(builder.like(root.get("idMarkingInfo"), searchData.getSearchQuery()));
+                    break;
+                case "markForAgency.evaluation":
+                    predicates.add(builder.like(root.get("markForAgency").get("evaluation"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
         TypedQuery<MarkingInfo> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }

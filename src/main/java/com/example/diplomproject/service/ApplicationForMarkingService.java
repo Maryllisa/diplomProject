@@ -119,10 +119,10 @@ public class ApplicationForMarkingService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "product.idProduct":
-                    predicates.add(builder.equal(root.get("product").get("idProduct"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("product").get("idProduct"), searchData.getSearchQuery()));
                     break;
                 case "product.nameProduct":
-                    predicates.add(builder.equal(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -141,6 +141,91 @@ public class ApplicationForMarkingService {
 
         TypedQuery<ApplicationForMarking> typedQuery = entityManager.createQuery(query);
         List<ApplicationForMarking> applicationForMarking =typedQuery.getResultList();
+        List<ApplicationForMarkingDTO> applicationForMarkingDTOList = new ArrayList<>();
+        applicationForMarking.forEach(x->{
+            applicationForMarkingDTOList.add(x.build());
+        });
+        return applicationForMarkingDTOList;
+    }
+
+    public List<ApplicationForMarkingDTO>  getAllApplicationsForMarking(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<ApplicationForMarking> query = builder.createQuery(ApplicationForMarking.class);
+        Root<ApplicationForMarking> root = query.from(ApplicationForMarking.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "product.productCode":
+                        orders.add(builder.asc(root.get("product").get("productCode")));
+                        break;
+                    case "product.nameProduct":
+                        orders.add(builder.asc(root.get("product").get("nameProduct")));
+                        break;
+                    case "statusMarkingApplication":
+                        orders.add(builder.asc(root.get("statusMarkingApplication")));
+                        break;
+                    case "date":
+                        orders.add(builder.asc(root.get("date")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "product.productCode":
+                        orders.add(builder.desc(root.get("product").get("productCode")));
+                        break;
+                    case "product.nameProduct":
+                        orders.add(builder.desc(root.get("product").get("nameProduct")));
+                        break;
+                    case "statusMarkingApplication":
+                        orders.add(builder.desc(root.get("statusMarkingApplication")));
+                        break;
+                    case "date":
+                        orders.add(builder.desc(root.get("date")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "product.productCode":
+                    predicates.add(builder.like(root.get("product").get("productCode"), searchData.getSearchQuery()));
+                    break;
+                case "product.nameProduct":
+                    predicates.add(builder.like(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
+                    break;
+                case "statusMarkingApplication":
+                    predicates.add(builder.like(root.get("statusMarkingApplication"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("date"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("date"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), accountRepository.findByLogin(name)));
+        query.where(searchPredicate);
+        TypedQuery<ApplicationForMarking> typedQuery = entityManager.createQuery(query);
+
+        List<ApplicationForMarking> applicationForMarking = typedQuery.getResultList();
         List<ApplicationForMarkingDTO> applicationForMarkingDTOList = new ArrayList<>();
         applicationForMarking.forEach(x->{
             applicationForMarkingDTOList.add(x.build());

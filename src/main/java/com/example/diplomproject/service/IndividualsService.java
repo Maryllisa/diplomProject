@@ -335,25 +335,25 @@ public class IndividualsService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "organizationName":
-                    predicates.add(builder.equal(root.get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("organizationName"), searchData.getSearchQuery()));
                     break;
                 case "legalAddress":
-                    predicates.add(builder.equal(root.get("legalAddress"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("legalAddress"), searchData.getSearchQuery()));
                     break;
                 case "phone":
-                    predicates.add(builder.equal(root.get("phone"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("phone"), searchData.getSearchQuery()));
                     break;
                 case "bankCode":
-                    predicates.add(builder.equal(root.get("bankCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("bankCode"), searchData.getSearchQuery()));
                     break;
                 case "bankName":
-                    predicates.add(builder.equal(root.get("bankName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("bankName"), searchData.getSearchQuery()));
                     break;
                 case "taxId":
-                    predicates.add(builder.equal(root.get("taxId"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("taxId"), searchData.getSearchQuery()));
                     break;
                 case "registrationCode":
-                    predicates.add(builder.equal(root.get("registrationCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("registrationCode"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -363,6 +363,72 @@ public class IndividualsService {
         query.where(searchPredicate);
         query.where(searchPredicate);
 
+        TypedQuery<Individuals> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    public List<Individuals> getSuppliers(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Individuals> query = builder.createQuery(Individuals.class);
+        Root<Individuals> root = query.from(Individuals.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "organizationName":
+                        orders.add(builder.asc(root.get("organizationName")));
+                        break;
+                    case "legalAddress":
+                        orders.add(builder.asc(root.get("legalAddress")));
+                        break;
+                    case "taxId":
+                        orders.add(builder.asc(root.get("taxId")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "organizationName":
+                        orders.add(builder.desc(root.get("organizationName")));
+                        break;
+                    case "legalAddress":
+                        orders.add(builder.desc(root.get("legalAddress")));
+                        break;
+                    case "taxId":
+                        orders.add(builder.desc(root.get("taxId")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "organizationName":
+                    predicates.add(builder.like(root.get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "legalAddress":
+                    predicates.add(builder.like(root.get("legalAddress"), searchData.getSearchQuery()));
+                    break;
+                case "taxId":
+                    predicates.add(builder.like(root.get("taxId"), searchData.getSearchQuery()));
+                    break;
+
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), accountRepository.findByLogin(name)));
+        query.where(searchPredicate);
         TypedQuery<Individuals> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }

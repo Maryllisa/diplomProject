@@ -1,6 +1,7 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
@@ -10,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +30,7 @@ public class ApplicationForStorageService {
     private final TruckRepository truckRepository;
     private final CRMRepository crmRepository;
     private final ProductRepository productRepository;
+    private final EntityManager entityManager;
 
     public void addNewApplication(ApplicationForStorageDTO applicationForStorageDTO, String name) {
         Account account = accountRepository.findByLogin(name);
@@ -236,4 +241,90 @@ public class ApplicationForStorageService {
     public List<ApplicationForStorage> getAllApplicationByAccount(String name, StatusApplication statusApplication) {
         return applicationForStorageRepository.findAllByAccountAndStatusApplication(accountRepository.findByLogin(name), statusApplication);
     }
+
+    public List<ApplicationForStorage> getAllApplicationByAccount(String name, SearchData searchData) {
+
+            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+            CriteriaQuery<ApplicationForStorage> query = builder.createQuery(ApplicationForStorage.class);
+            Root<ApplicationForStorage> root = query.from(ApplicationForStorage.class);
+            query.select(root);
+
+            List<Order> orders = new ArrayList<>();
+
+            if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+                if (searchData.getHowSort().equals("asc")) {
+                    switch (searchData.getSortCriteria()) {
+                        case "idApplication":
+                            orders.add(builder.asc(root.get("idApplication")));
+                            break;
+                        case "dateZav":
+                            orders.add(builder.asc(root.get("dateZav")));
+                            break;
+                        case "datePost":
+                            orders.add(builder.asc(root.get("datePost")));
+                            break;
+                        case "product.netWeight":
+                            orders.add(builder.asc(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName")));
+                            break;
+                        case "statusApplication":
+                            orders.add(builder.asc(root.get("statusApplication")));
+                            break;
+                    }
+                } else {
+                    switch (searchData.getSortCriteria()) {
+                        case "idApplication":
+                            orders.add(builder.desc(root.get("idApplication")));
+                            break;
+                        case "dateZav":
+                            orders.add(builder.desc(root.get("dateZav")));
+                            break;
+                        case "datePost":
+                            orders.add(builder.desc(root.get("datePost")));
+                            break;
+                        case "product.netWeight":
+                            orders.add(builder.desc(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName")));
+                            break;
+                        case "statusApplication":
+                            orders.add(builder.desc(root.get("statusApplication")));
+                            break;
+                    }
+                }
+            }
+
+            if (!orders.isEmpty()) {
+                query.orderBy(orders);
+            }
+
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+                switch (searchData.getSearchParam()) {
+                    case "idApplication":
+                        predicates.add(builder.like(root.get("idApplication"), searchData.getSearchQuery()));
+                        break;
+                    case "statusApplication":
+                        predicates.add(builder.like(root.get("statusApplication"), searchData.getSearchQuery()));
+                        break;
+                    case "applicationForStorage.declarationTD.productList.productName":
+                        predicates.add(builder.like(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName"), searchData.getSearchQuery()));
+                        break;
+                }
+            }
+
+            if (searchData.getDateFrom() != null) {
+                predicates.add(builder.greaterThanOrEqualTo(root.get("datePost"), searchData.getDateFrom()));
+            }
+
+            if (searchData.getDateTo() != null) {
+                predicates.add(builder.lessThanOrEqualTo(root.get("datePost"), searchData.getDateTo()));
+            }
+
+            Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+            query.where(searchPredicate);
+            predicates.add(builder.equal(root.get("account"), accountRepository.findByLogin(name)));
+            query.where(searchPredicate);
+            TypedQuery<ApplicationForStorage> typedQuery = entityManager.createQuery(query);
+            return typedQuery.getResultList();
+        }
 }

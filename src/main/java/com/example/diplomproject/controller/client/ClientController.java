@@ -46,12 +46,6 @@ public class ClientController {
         return "/client/clientPanel";
     }
 
-//    @GetMapping("/supplierReg")
-//    public String getSupplierReg() {
-//
-//        return "/client/supplierReg";
-//    }
-
     @GetMapping("/regOfDeclaration")
     public String getRegOfDeclaration(Model model, Authentication authentication) {
         String login = authentication.getName();

@@ -6,6 +6,7 @@ import javax.persistence.criteria.*;
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
+import com.example.diplomproject.model.entity.chat.ChatRoom;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.repository.*;
@@ -161,13 +162,13 @@ public class DeliveryProductService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "prodCondition":
-                    predicates.add(builder.equal(root.get("prodCondition"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("prodCondition"), searchData.getSearchQuery()));
                     break;
                 case "weightProduct":
-                    predicates.add(builder.equal(root.get("weightProduct"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("weightProduct"), searchData.getSearchQuery()));
                     break;
                 case "applicationForStorage.declarationTD.productList.productName":
-                    predicates.add(builder.equal(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -185,6 +186,63 @@ public class DeliveryProductService {
         predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
         query.where(searchPredicate);
 
+        TypedQuery<DeliveryProduct> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
+    }
+
+    public List<DeliveryProduct> getAllShipmentByClient(String name, SearchData searchData) {
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<DeliveryProduct> query = builder.createQuery(DeliveryProduct.class);
+        Root<DeliveryProduct> root = query.from(DeliveryProduct.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.asc(root.get("idMarkingInfo")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.asc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.desc(root.get("idMarkingInfo")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.desc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "idMarkingInfo":
+                    predicates.add(builder.like(root.get("idMarkingInfo"), searchData.getSearchQuery()));
+                    break;
+                case "markForAgency.evaluation":
+                    predicates.add(builder.like(root.get("markForAgency").get("evaluation"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
         TypedQuery<DeliveryProduct> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }

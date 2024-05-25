@@ -96,16 +96,16 @@ public class ApplicationService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "countPositionProducts":
-                    predicates.add(builder.equal(root.get("countPositionProducts"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("countPositionProducts"), searchData.getSearchQuery()));
                     break;
                 case "datePost":
-                    predicates.add(builder.equal(root.get("datePost"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("datePost"), searchData.getSearchQuery()));
                     break;
                 case "dateZav":
-                    predicates.add(builder.equal(root.get("dateZav"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("dateZav"), searchData.getSearchQuery()));
                     break;
                 case "statusApplication":
-                    predicates.add(builder.equal(root.get("statusApplication"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("statusApplication"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -120,7 +120,7 @@ public class ApplicationService {
 
         Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
         query.where(searchPredicate);
-        predicates.add(builder.equal(root.get("statusApplication"), statusApplication));
+        predicates.add(builder.like(root.get("statusApplication"), statusApplication));
         query.where(searchPredicate);
 
         TypedQuery<ApplicationForStorage> typedQuery = entityManager.createQuery(query);

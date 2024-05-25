@@ -1,6 +1,10 @@
 package com.example.diplomproject.service;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+
 import com.example.diplomproject.model.dto.CRMDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
 import com.example.diplomproject.repository.*;
@@ -251,5 +255,105 @@ public class CRMService {
 
     public List<CRM> getAllCRM(String name) {
         return crmRepository.findAllByAccount(userRepository.findByLogin(name));
+    }
+
+    public List<CRM> getAllCRM(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<CRM> query = builder.createQuery(CRM.class);
+        Root<CRM> root = query.from(CRM.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "numbers":
+                        orders.add(builder.asc(root.get("idApplication")));
+                        break;
+                    case "volume":
+                        orders.add(builder.asc(root.get("dateZav")));
+                        break;
+                    case "sender.registrationCode":
+                        orders.add(builder.asc(root.get("sender").get("registrationCode")));
+                        break;
+                    case "sender.organizationName":
+                        orders.add(builder.asc(root.get("sender").get("organizationName")));
+                        break;
+                    case "resipient.registrationCode":
+                        orders.add(builder.asc(root.get("resipient").get("registrationCode")));
+                        break;
+                    case "resipient.organizationName":
+                        orders.add(builder.asc(root.get("resipient").get("organizationName")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "numbers":
+                        orders.add(builder.desc(root.get("idApplication")));
+                        break;
+                    case "volume":
+                        orders.add(builder.desc(root.get("dateZav")));
+                        break;
+                    case "sender.registrationCode":
+                        orders.add(builder.desc(root.get("sender").get("registrationCode")));
+                        break;
+                    case "sender.organizationName":
+                        orders.add(builder.desc(root.get("sender").get("organizationName")));
+                        break;
+                    case "resipient.registrationCode":
+                        orders.add(builder.desc(root.get("resipient").get("registrationCode")));
+                        break;
+                    case "resipient.organizationName":
+                        orders.add(builder.desc(root.get("resipient").get("organizationName")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "numbers":
+                    predicates.add(builder.like(root.get("idApplication"), searchData.getSearchQuery()));
+                    break;
+                case "volume":
+                    predicates.add(builder.like(root.get("dateZav"), searchData.getSearchQuery()));
+                    break;
+                case "sender.registrationCode":
+                    predicates.add(builder.like(root.get("sender").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "sender.organizationName":
+                    predicates.add(builder.like(root.get("sender").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "resipient.registrationCode":
+                    predicates.add(builder.like(root.get("resipient").get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+                case "resipient.organizationName":
+                    predicates.add(builder.like(root.get("resipient").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("cargoReceivedDate"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("cargoReceivedDate"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
+        TypedQuery<CRM> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
     }
 }
