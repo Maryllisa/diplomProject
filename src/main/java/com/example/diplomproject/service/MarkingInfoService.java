@@ -197,7 +197,7 @@ public class MarkingInfoService {
             if (searchData.getHowSort().equals("asc")) {
                 switch (searchData.getSortCriteria()) {
                     case "idMarkingInfo":
-                        orders.add(builder.asc(root.get("idMarkingInfo")));
+                        orders.add(builder.asc(root.get("markForAgency").get("idMarkForAgency")));
                         break;
                     case "markForAgency.evaluation":
                         orders.add(builder.asc(root.get("markForAgency").get("evaluation")));
@@ -206,7 +206,7 @@ public class MarkingInfoService {
             } else {
                 switch (searchData.getSortCriteria()) {
                     case "idMarkingInfo":
-                        orders.add(builder.desc(root.get("idMarkingInfo")));
+                        orders.add(builder.desc(root.get("markForAgency").get("idMarkForAgency")));
                         break;
                     case "markForAgency.evaluation":
                         orders.add(builder.desc(root.get("markForAgency").get("evaluation")));
@@ -224,7 +224,7 @@ public class MarkingInfoService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "idMarkingInfo":
-                    predicates.add(builder.like(root.get("idMarkingInfo"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("markForAgency").get("idMarkForAgency"), searchData.getSearchQuery()));
                     break;
                 case "markForAgency.evaluation":
                     predicates.add(builder.like(root.get("markForAgency").get("evaluation"), searchData.getSearchQuery()));
@@ -234,8 +234,8 @@ public class MarkingInfoService {
 
         Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
         query.where(searchPredicate);
-        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
-        query.where(searchPredicate);
+//        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+//        query.where(searchPredicate);
         TypedQuery<MarkingInfo> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }

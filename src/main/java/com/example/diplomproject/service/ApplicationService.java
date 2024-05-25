@@ -120,7 +120,7 @@ public class ApplicationService {
 
         Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
         query.where(searchPredicate);
-        predicates.add(builder.like(root.get("statusApplication"), statusApplication));
+        predicates.add(builder.equal(root.get("statusApplication"), statusApplication));
         query.where(searchPredicate);
 
         TypedQuery<ApplicationForStorage> typedQuery = entityManager.createQuery(query);

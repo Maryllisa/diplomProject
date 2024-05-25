@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/client/filter/")
-public class FilterController {
+public class FilterControllerClient {
 
     private final DeclarationTDService declarationTDService;
     private final IndividualsService individualsService;
