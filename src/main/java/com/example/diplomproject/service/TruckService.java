@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.TruckDTO;
 import com.example.diplomproject.model.entity.*;

@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.message.MessageDTO;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.chat.ChatMessage;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ChatMessageService {
-    private final ChatMessageRepository messageRepository;
+    private final EntityManager entityManager;private final ChatMessageRepository messageRepository;
     private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
     public ChatMessage save(ChatMessage chatMessage) {

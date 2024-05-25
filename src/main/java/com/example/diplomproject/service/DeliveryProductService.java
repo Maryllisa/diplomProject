@@ -1,6 +1,10 @@
 package com.example.diplomproject.service;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
@@ -17,7 +21,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class DeliveryProductService {
-    private final DeliveryProductRepository deliveryProductRepository;
+    private final EntityManager entityManager;private final DeliveryProductRepository deliveryProductRepository;
     private final ApplicationForStorageRepository applicationForStorageRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
@@ -103,5 +107,85 @@ public class DeliveryProductService {
 
     public List<DeliveryProduct> getAllShipmentByClient(String name) {
         return deliveryProductRepository.findAllByClient(userRepository.findByLogin(name));
+    }
+
+    public List<DeliveryProduct> getAllShipment(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<DeliveryProduct> query = builder.createQuery(DeliveryProduct.class);
+        Root<DeliveryProduct> root = query.from(DeliveryProduct.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "arrangeDate":
+                        orders.add(builder.asc(root.get("arrangeDate")));
+                        break;
+                    case "prodCondition":
+                        orders.add(builder.asc(root.get("prodCondition")));
+                        break;
+                    case "weightProduct":
+                        orders.add(builder.asc(root.get("weightProduct")));
+                        break;
+                    case "applicationForStorage.declarationTD.productList.productName":
+                        orders.add(builder.asc(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "arrangeDate":
+                        orders.add(builder.desc(root.get("arrangeDate")));
+                        break;
+                    case "prodCondition":
+                        orders.add(builder.desc(root.get("prodCondition")));
+                        break;
+                    case "weightProduct":
+                        orders.add(builder.desc(root.get("weightProduct")));
+                        break;
+                    case "applicationForStorage.declarationTD.productList.productName":
+                        orders.add(builder.desc(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "prodCondition":
+                    predicates.add(builder.equal(root.get("prodCondition"), searchData.getSearchQuery()));
+                    break;
+                case "weightProduct":
+                    predicates.add(builder.equal(root.get("weightProduct"), searchData.getSearchQuery()));
+                    break;
+                case "applicationForStorage.declarationTD.productList.productName":
+                    predicates.add(builder.equal(root.get("applicationForStorage").get("declarationTD").get("productList").get("productName"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("arrangeDate"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("arrangeDate"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
+
+        TypedQuery<DeliveryProduct> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
     }
 }

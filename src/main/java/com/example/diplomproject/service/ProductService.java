@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.Product;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-    private final ProductRepository productRepository;
+    private final EntityManager entityManager;private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final DeclarationTDRepository declarationTDRepository;
     private final ApplicationForReleaseRepository applicationForReleaseRepository;

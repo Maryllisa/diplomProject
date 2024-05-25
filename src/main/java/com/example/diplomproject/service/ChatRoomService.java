@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.message.ChatRoomDTO;
 import com.example.diplomproject.model.dto.message.MessageDTO;
 import com.example.diplomproject.model.entity.Account;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ChatRoomService {
-    private final ChatRoomRepository chatRoomRepository;
+    private final EntityManager entityManager;private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
     private final ChatMessageRepository messageRepository;
     public ChatRoomDTO findChatMessages(String senderLogin, String recipientLogin) {

@@ -1,4 +1,4 @@
-package com.example.diplomproject.controller;
+package com.example.diplomproject.controller.manager;
 
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
 import com.example.diplomproject.model.dto.SearchData;

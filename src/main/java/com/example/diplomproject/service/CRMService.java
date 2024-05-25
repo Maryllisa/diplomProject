@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
@@ -18,7 +18,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Slf4j
 public class CRMService {
-    private final CRMRepository crmRepository;
+    private final EntityManager entityManager;private final CRMRepository crmRepository;
     private final CustomsProcessingRepository customsProcessingRepository;
     private final AddressRepository addressRepository;
     private final IndividualsRepository individualsRepository;

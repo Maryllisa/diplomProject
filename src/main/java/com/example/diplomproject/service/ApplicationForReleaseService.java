@@ -1,11 +1,16 @@
 package com.example.diplomproject.service;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 
 import com.example.diplomproject.model.dto.ApplicationForReleaseDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +18,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ApplicationForReleaseService {
-    private final ApplicationForReleaseRepository applicationForReleaseRepository;
+    private final EntityManager entityManager;private final ApplicationForReleaseRepository applicationForReleaseRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final DeliveryProductRepository deliveryProductRepository;
@@ -75,5 +80,89 @@ public class ApplicationForReleaseService {
 
     public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(String login, StatusApplicationForRelease statusApplicationForRelease) {
         return applicationForReleaseRepository.findAllByStatusApplicationForRelease(statusApplicationForRelease);
+    }
+
+    public List<ApplicationForRelease> getAllApplicationForReleaseAndStatus(String name,
+                                                                            StatusApplicationForRelease statusApplicationForRelease,
+                                                                            SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<ApplicationForRelease> query = builder.createQuery(ApplicationForRelease.class);
+        Root<ApplicationForRelease> root = query.from(ApplicationForRelease.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "date":
+                        orders.add(builder.asc(root.get("date")));
+                        break;
+                    case "product.nameProduct":
+                        orders.add(builder.asc(root.get("product").get("nameProduct")));
+                        break;
+                    case "product.grossWeight":
+                        orders.add(builder.asc(root.get("product").get("grossWeight")));
+                        break;
+                    case "product.netWeight":
+                        orders.add(builder.asc(root.get("product").get("netWeight")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "date":
+                        orders.add(builder.desc(root.get("date")));
+                        break;
+                    case "product.nameProduct":
+                        orders.add(builder.desc(root.get("product").get("nameProduct")));
+                        break;
+                    case "product.grossWeight":
+                        orders.add(builder.desc(root.get("product").get("grossWeight")));
+                        break;
+                    case "product.netWeight":
+                        orders.add(builder.desc(root.get("product").get("netWeight")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "product.nameProduct":
+                    predicates.add(builder.equal(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
+                    break;
+                case "product.grossWeight":
+                    predicates.add(builder.equal(root.get("product").get("grossWeight"), searchData.getSearchQuery()));
+                    break;
+                case "product.netWeight":
+                    predicates.add(builder.equal(root.get("product").get("netWeight"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("date"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("date"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("statusApplicationForRelease"), statusApplicationForRelease));
+        query.where(searchPredicate);
+
+        TypedQuery<ApplicationForRelease> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
     }
 }

@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.MarkForAgencyDTO;
 import com.example.diplomproject.model.entity.CustomsAgency;
 import com.example.diplomproject.model.entity.MarkForAgency;
@@ -19,7 +19,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Slf4j
 public class CustomsAgencyService {
-    private final CustomsAgencyRepository customsAgencyRepository;
+    private final EntityManager entityManager;private final CustomsAgencyRepository customsAgencyRepository;
     private final MarkForAgencyRepository markForAgencyRepository;
 
     public List<CustomsAgency> getAllNotMark() {

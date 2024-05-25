@@ -1,9 +1,11 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.CRMDTO;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.IndividualsDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.Account;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.declaration.Address;
 import com.example.diplomproject.model.entity.enumStatus.RoleIndividuals;
@@ -12,6 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +31,7 @@ public class IndividualsService {
     private final DeclarationTDRepository declarationTDRepository;
     private final CRMRepository crmRepository;
     private final AddressRepository addressRepository;
+    private final EntityManager entityManager;
 
     public List<Individuals> getAllSuppliers() {
         return individualsRepository.findAll();
@@ -255,5 +262,108 @@ public class IndividualsService {
         supplier.change(individualsDTO);
         supplier.setAddress(addressRepository.save(supplier.getAddress()));
         individualsRepository.save(supplier);
+    }
+
+    public List<Individuals> getAllSuppliers(SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Individuals> query = builder.createQuery(Individuals.class);
+        Root<Individuals> root = query.from(Individuals.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "organizationName":
+                        orders.add(builder.asc(root.get("organizationName")));
+                        break;
+                    case "legalAddress":
+                        orders.add(builder.asc(root.get("legalAddress")));
+                        break;
+                    case "phone":
+                        orders.add(builder.asc(root.get("phone")));
+                        break;
+                    case "bankCode":
+                        orders.add(builder.asc(root.get("bankCode")));
+                        break;
+                    case "bankName":
+                        orders.add(builder.asc(root.get("bankName")));
+                        break;
+                    case "taxId":
+                        orders.add(builder.asc(root.get("taxId")));
+                        break;
+                    case "registrationCode":
+                        orders.add(builder.asc(root.get("registrationCode")));
+                        break;
+                }
+            }
+            else {
+                switch (searchData.getSortCriteria()) {
+                    case "organizationName":
+                        orders.add(builder.desc(root.get("organizationName")));
+                        break;
+                    case "legalAddress":
+                        orders.add(builder.desc(root.get("legalAddress")));
+                        break;
+                    case "phone":
+                        orders.add(builder.desc(root.get("phone")));
+                        break;
+                    case "bankCode":
+                        orders.add(builder.desc(root.get("bankCode")));
+                        break;
+                    case "bankName":
+                        orders.add(builder.desc(root.get("bankName")));
+                        break;
+                    case "taxId":
+                        orders.add(builder.desc(root.get("taxId")));
+                        break;
+                    case "registrationCode":
+                        orders.add(builder.desc(root.get("registrationCode")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "organizationName":
+                    predicates.add(builder.equal(root.get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "legalAddress":
+                    predicates.add(builder.equal(root.get("legalAddress"), searchData.getSearchQuery()));
+                    break;
+                case "phone":
+                    predicates.add(builder.equal(root.get("phone"), searchData.getSearchQuery()));
+                    break;
+                case "bankCode":
+                    predicates.add(builder.equal(root.get("bankCode"), searchData.getSearchQuery()));
+                    break;
+                case "bankName":
+                    predicates.add(builder.equal(root.get("bankName"), searchData.getSearchQuery()));
+                    break;
+                case "taxId":
+                    predicates.add(builder.equal(root.get("taxId"), searchData.getSearchQuery()));
+                    break;
+                case "registrationCode":
+                    predicates.add(builder.equal(root.get("registrationCode"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        query.where(searchPredicate);
+
+        TypedQuery<Individuals> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
     }
 }

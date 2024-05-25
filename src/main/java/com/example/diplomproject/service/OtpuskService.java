@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.repository.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class OtpuskService {
-    private final OtpuskRepository otpuskRepository;
+    private final EntityManager entityManager;private final OtpuskRepository otpuskRepository;
     private final ApplicationForReleaseRepository applicationForRelease;
     private final UserRepository userRepository;
     private final DeliveryProductRepository deliveryProductRepository;

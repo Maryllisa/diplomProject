@@ -1,6 +1,10 @@
 package com.example.diplomproject.service;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.marking.ApplicationForMarking;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
@@ -17,13 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
 @AllArgsConstructor
 public class MarkingInfoService {
-    private final MarkingInfoRepository markingInfoRepository;
+    private final EntityManager entityManager;private final MarkingInfoRepository markingInfoRepository;
     private final ProductRepository productRepository;
     private final QRCodeService qrCodeService;
     private final DataMatrixCodeService dataMatrixCodeService;
@@ -98,5 +103,83 @@ public class MarkingInfoService {
     public List<MarkingInfo> getAllMarking(String login) {
         Account account = userRepository.findByLogin(login);
         return markingInfoRepository.findAllByAccount(account);
+    }
+
+    public List<MarkingInfo> getAllMarking(SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<MarkingInfo> query = builder.createQuery(MarkingInfo.class);
+        Root<MarkingInfo> root = query.from(MarkingInfo.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "product.nameProduct":
+                        orders.add(builder.asc(root.get("product").get("nameProduct")));
+                        break;
+                    case "product.productCode":
+                        orders.add(builder.asc(root.get("product").get("productCode")));
+                        break;
+                    case "product.date":
+                        orders.add(builder.asc(root.get("product").get("date")));
+                        break;
+                    case "product.typeMarking":
+                        orders.add(builder.asc(root.get("product").get("typeMarking")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "product.date":
+                        orders.add(builder.desc(root.get("product").get("date")));
+                        break;
+                    case "product.nameProduct":
+                        orders.add(builder.desc(root.get("product").get("nameProduct")));
+                        break;
+                    case "product.productCode":
+                        orders.add(builder.desc(root.get("product").get("productCode")));
+                        break;
+                    case "product.typeMarking":
+                        orders.add(builder.desc(root.get("product").get("typeMarking")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "product.nameProduct":
+                    predicates.add(builder.equal(root.get("product").get("nameProduct"), searchData.getSearchQuery()));
+                    break;
+                case "product.grossWeight":
+                    predicates.add(builder.equal(root.get("product").get("grossWeight"), searchData.getSearchQuery()));
+                    break;
+                case "product.netWeight":
+                    predicates.add(builder.equal(root.get("product").get("netWeight"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("date"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("date"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+
+        TypedQuery<MarkingInfo> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
     }
 }

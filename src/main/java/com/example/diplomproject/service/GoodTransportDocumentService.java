@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.entity.Account;
 import com.example.diplomproject.model.entity.GoodTransportDocument;
 import com.example.diplomproject.repository.GoodTransportDocumentRepository;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class GoodTransportDocumentService {
-    private final GoodTransportDocumentRepository goodTransportDocumentRepository;
+    private final EntityManager entityManager;private final GoodTransportDocumentRepository goodTransportDocumentRepository;
     private final UserRepository userRepository;
 
     @SneakyThrows

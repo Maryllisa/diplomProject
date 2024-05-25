@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.chat.ChatRoom;
 import com.example.diplomproject.repository.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class MarkForAgencyService {
-    private final MarkForAgencyRepository markForAgencyRepository;
+    private final EntityManager entityManager;private final MarkForAgencyRepository markForAgencyRepository;
     private final UserRepository userRepository;
     private final MarkingInfoRepository markingInfoRepository;
     private final DeliveryProductRepository deliveryProductRepository;

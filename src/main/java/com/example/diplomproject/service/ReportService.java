@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.repository.ProductRepository;
 import com.itextpdf.text.BaseColor;

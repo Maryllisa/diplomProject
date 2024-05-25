@@ -1,5 +1,5 @@
 package com.example.diplomproject.service;
-
+import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;

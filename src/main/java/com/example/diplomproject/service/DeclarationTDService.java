@@ -1,7 +1,12 @@
 package com.example.diplomproject.service;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 
 import com.example.diplomproject.model.dto.DeclarationDTO;
+import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.Account;
+import com.example.diplomproject.model.entity.ApplicationForStorage;
 import com.example.diplomproject.model.entity.Individuals;
 import com.example.diplomproject.model.entity.Product;
 import com.example.diplomproject.model.entity.declaration.CurrencyRate;
@@ -24,7 +29,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Slf4j
 public class DeclarationTDService {
-    private final DeclarationTDRepository declarationTDRepository;
+    private final EntityManager entityManager;private final DeclarationTDRepository declarationTDRepository;
     private final UserRepository userRepository;
     private final IndividualsRepository individualsRepository;
     private final ProductService productService;
@@ -288,6 +293,113 @@ public class DeclarationTDService {
 
     public List<DeclarationDTO> getAllDeclarationByAccount(String name) {
         List<DeclarationTD> declarationTDList = declarationTDRepository.getAllByApplicationForStorage(userRepository.findByLogin(name).getId());
+        List<DeclarationDTO> declarationDTOList = new ArrayList<>();
+        declarationTDList.forEach(x->{
+            declarationDTOList.add(x.build());
+        });
+        return declarationDTOList;
+    }
+
+    public List<DeclarationDTO> getAllDeclarationByAccount(String name, SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<DeclarationTD> query = builder.createQuery(DeclarationTD.class);
+        Root<DeclarationTD> root = query.from(DeclarationTD.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "customEDCode":
+                        orders.add(builder.asc(root.get("customEDCode")));
+                        break;
+                    case "colProd":
+                        orders.add(builder.asc(root.get("colProd")));
+                        break;
+                    case "netWeight":
+                        orders.add(builder.asc(root.get("netWeight")));
+                        break;
+                    case "grossWeight":
+                        orders.add(builder.asc(root.get("grossWeight")));
+                        break;
+                    case "senderDTO.organizationName":
+                        orders.add(builder.asc(root.get("senderDTO").get("organizationName")));
+                        break;
+                    case "recipientDTO.organizationName":
+                        orders.add(builder.asc(root.get("recipientDTO").get("organizationName")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "customEDCode":
+                        orders.add(builder.desc(root.get("customEDCode")));
+                        break;
+                    case "colProd":
+                        orders.add(builder.desc(root.get("colProd")));
+                        break;
+                    case "netWeight":
+                        orders.add(builder.desc(root.get("netWeight")));
+                        break;
+                    case "grossWeight":
+                        orders.add(builder.desc(root.get("grossWeight")));
+                        break;
+                    case "senderDTO.organizationName":
+                        orders.add(builder.desc(root.get("senderDTO").get("organizationName")));
+                        break;
+                    case "recipientDTO.organizationName":
+                        orders.add(builder.desc(root.get("recipientDTO").get("organizationName")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "customEDCode":
+                    predicates.add(builder.equal(root.get("customEDCode"), searchData.getSearchQuery()));
+                    break;
+                case "colProd":
+                    predicates.add(builder.equal(root.get("colProd"), searchData.getSearchQuery()));
+                    break;
+                case "netWeight":
+                    predicates.add(builder.equal(root.get("netWeight"), searchData.getSearchQuery()));
+                    break;
+                case "grossWeight":
+                    predicates.add(builder.equal(root.get("grossWeight"), searchData.getSearchQuery()));
+                    break;
+                case "senderDTO.organizationName":
+                    predicates.add(builder.equal(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+                case "recipientDTO.organizationName":
+                    predicates.add(builder.equal(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        if (searchData.getDateFrom() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("datePost"), searchData.getDateFrom()));
+        }
+
+        if (searchData.getDateTo() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("datePost"), searchData.getDateTo()));
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        predicates.add(builder.equal(root.get("account"), userRepository.findByLogin(name)));
+        query.where(searchPredicate);
+
+        TypedQuery<DeclarationTD> typedQuery = entityManager.createQuery(query);
+
+        List<DeclarationTD> declarationTDList = typedQuery.getResultList();
         List<DeclarationDTO> declarationDTOList = new ArrayList<>();
         declarationTDList.forEach(x->{
             declarationDTOList.add(x.build());
