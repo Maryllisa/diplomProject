@@ -1,4 +1,5 @@
 package com.example.diplomproject.controller.manager;
+
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
 import com.example.diplomproject.model.entity.ApplicationForRelease;
 import com.example.diplomproject.model.entity.ApplicationForStorage;
@@ -30,73 +31,102 @@ public class UserController {
     private final ApplicationForReleaseService applicationForReleaseService;
 
     @GetMapping("")
-    public String getStart() {
+    public String getStart(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         return "/user/userPanel";
     }
+
     @GetMapping("/obrApp")
     public String getObrApplication(Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.PENDING));
         return "/user/obrApplication";
     }
-    @GetMapping("/activeApp")
-    public String getActiveApplication(Model model) {
 
+    @GetMapping("/activeApp")
+    public String getActiveApplication(Model model, Authentication authentication) {
+
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.PROCESSING));
         return "/user/activeApplications";
     }
-    @GetMapping("/appHistory")
-    public String getApplicationHistory(Model model) {
 
+    @GetMapping("/appHistory")
+    public String getApplicationHistory(Model model, Authentication authentication) {
+
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applications", applicationService.getApplicationTrue(StatusApplication.COMPLETED));
         return "/user/applicationHistory";
     }
+
     @GetMapping("/showSuppliers")
-    public String getSupplierReg(Model model) {
+    public String getSupplierReg(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("suppliers", individualsService.getAllSuppliers());
         return "/user/showSupplier";
     }
+
     @GetMapping("/regMark")
-    public String getRegistrationMark(Model model) {
+    public String getRegistrationMark(Model model, Authentication authentication) {
         model.addAttribute("applicationList", applicationForMarking.getAllApplicationsForMarking());
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("newMarking", new MarkingInfoDTO());
         model.addAttribute("typeMarking", TypeMarking.getRussianName());
         return "/user/regMark";
     }
+
     @GetMapping("/showAllDeclaration")
     public String getAllDeclaration(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("declaration", declarationTDService.getAllDeclarationByAccount(authentication.getName()));
         return "/user/showAllDeclaration";
     }
+
     @GetMapping("/showOfDeclaration")
-    public String getRegOfDeclaration() {return "/user/showDeclaration";}
+    public String getRegOfDeclaration(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/user/showDeclaration";
+    }
+
     @GetMapping("/showShipment")
     public String getShipmentList(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("shipmentList", deliveryProductService.getAllShipment(authentication.getName()));
         return "/user/showShipment";
     }
+
     @GetMapping("/arrangeShipment")
     public String getArrangeShipment(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationForStorage", applicationForStorageService.getAllApplictionByAccountManagerAndStatus(authentication.getName()));
         return "/user/arrangeShipment";
     }
+
     @GetMapping("/showProductOnWH")
     public String getShowProductOnWH(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("delivery", deliveryProductService.getAllShipment(authentication.getName()));
         return "/user/showProductOnWH";
     }
+
     @GetMapping("/relesionReg")
     public String getRelesionReg(Model model, Authentication authentication) {
-        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(authentication.getName(),StatusApplicationForRelease.IN_PROCESSING));
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        model.addAttribute("applicationList", applicationForReleaseService.getAllApplicationForReleaseAndStatus(authentication.getName(), StatusApplicationForRelease.IN_PROCESSING));
         return "/user/relesionReg";
     }
+
     @GetMapping("/showAllMarkedProd")
-    public String getShowAllMarkedProd(Model model) {
+    public String getShowAllMarkedProd(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
         return "/user/showAllMarkedProd";
     }
+
     @GetMapping("/showTD/{id}")
     public String getShowTDUser(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("td", declarationTDService.getById(id).build());
         model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
         model.addAttribute("role", accountService.getRole(authentication.getName()));
@@ -104,16 +134,41 @@ public class UserController {
     }
 
     @GetMapping("/otchPoMarkProd")
-    public String getOtchPoMarkProd() {return "/user/otchPoMarkProd";}
+    public String getOtchPoMarkProd(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/user/otchPoMarkProd";
+    }
+
     @GetMapping("/otchAbProdOnWH")
-    public String getOtchAbProdOnWH() {return "/user/otchAbProdOnWH";}
+    public String getOtchAbProdOnWH(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/user/otchAbProdOnWH";
+    }
+
     @GetMapping("/otchPoActApp")
-    public String getOtchPoActApp() {return "/user/otchPoActApp";}
+    public String getOtchPoActApp(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/user/otchPoActApp";
+    }
+
     @GetMapping("/otchAppHistory")
-    public String getOtchAppHistory() {return "/user/otchAppHistory";}
+    public String getOtchAppHistory(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/user/otchAppHistory";
+    }
+
     @GetMapping("/otchPoOtgr")
-    public String getOtchPoOtgr() {return "/user/otchPoOtgr";}
+    public String getOtchPoOtgr(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+
+        return "/user/otchPoOtgr";
+    }
+
     @GetMapping("/otchPoOtpProd")
-    public String getOtchPoOtpProd() {return "/user/otchPoOtpProd";}
+    public String getOtchPoOtpProd(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+
+        return "/user/otchPoOtpProd";
+    }
 
 }

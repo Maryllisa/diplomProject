@@ -1,5 +1,4 @@
 package com.example.diplomproject.service;
-import javax.persistence.EntityManager;
 import com.example.diplomproject.model.dto.AccountDTO;
 import com.example.diplomproject.model.dto.message.ChatRoomDTO;
 import com.example.diplomproject.model.dto.message.MessageDTO;
@@ -389,5 +388,9 @@ public class AccountService {
 
     public Account findUserById(Long id) {
     return accountRepository.getById(id);
+    }
+
+    public Account getAccount(String name) {
+        return accountRepository.findByLogin(name);
     }
 }

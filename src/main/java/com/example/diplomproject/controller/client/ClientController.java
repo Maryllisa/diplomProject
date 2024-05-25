@@ -42,12 +42,14 @@ public class ClientController {
     private final ChatRoomService chatRoomService;
 
     @GetMapping("/")
-    public String getClient() {
+    public String getClient(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         return "/client/clientPanel";
     }
 
     @GetMapping("/regOfDeclaration")
     public String getRegOfDeclaration(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         String login = authentication.getName();
         model.addAttribute("supplier", declarationTDService.getSupplier(login));
         model.addAttribute("declaration", new DeclarationDTO());
@@ -57,6 +59,7 @@ public class ClientController {
     @GetMapping("/addStorageRequest")
     public String getAddStorageRequest(Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("gpd", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
         model.addAttribute("declaration", declarationTDService.findAllByAccount(authentication.getName()));
         model.addAttribute("crm", crmService.findAllByAccount(authentication.getName()));
@@ -67,24 +70,28 @@ public class ClientController {
 
     @GetMapping("/addTTN")
     public String getAddTTN(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("gtd", new GoodTransportDocument());
         return "/client/addTTN";
     }
 
     @GetMapping("/zavStatus")
     public String getZavStatus(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList", applicationForStorage.getAllApplicationByAccount(authentication.getName()));
         return "/client/zavStatus";
     }
 
     @GetMapping("/prodStatus")
     public String getProdStatus(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
         return "/client/prodStatus";
     }
 
     @GetMapping("/addCMR")
     public String getAddCMR(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("supplier", declarationTDService.getSupplier(authentication.getName()));
         model.addAttribute("crm", new CRMDTO());
         return "/client/addCMR";
@@ -92,6 +99,7 @@ public class ClientController {
 
     @GetMapping("/regAsAComp")
     public String getRegAsAComp(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("supplier", individualsService.getSuppliers(authentication.getName()));
         model.addAttribute("newSupplier", new IndividualsDTO());
         return "/client/regAsAComp";
@@ -99,6 +107,7 @@ public class ClientController {
 
     @GetMapping("/regAuto")
     public String getRegAuto(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("brand", Brand.getRussianName());
         model.addAttribute("truck", new TruckDTO());
         model.addAttribute("trucks", truckService.getTruck(authentication.getName()));
@@ -107,12 +116,14 @@ public class ClientController {
 
     @GetMapping("/showMarkedProduct")
     public String getShowMarkedProduct(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName()));
         return "/client/showMarkedProduct";
     }
 
     @GetMapping("/addZavForMark")
     public String getAddZavForMark(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationsForMarking" , applicationForMarkingService.getAllApplicationsForMarking(authentication.getName()));
         model.addAttribute("applicationForMarking", new ApplicationForMarkingDTO());
         model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
@@ -123,6 +134,7 @@ public class ClientController {
     @GetMapping("/makeZavForOtp")
     public String getMakeZavForOtp(Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("productList", productService.getAllProductByApplication(authentication.getName()));
         model.addAttribute("applicationForRelease", applicationForRelease.getAllApplicationForRelease(authentication.getName()));
         model.addAttribute("newApplicationForRelease", new ApplicationForReleaseDTO());
@@ -132,12 +144,14 @@ public class ClientController {
 
     @GetMapping("/showBillForSave")
     public String getShowBillForSave(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("oplataList", otpuskService.getAllByLogin(authentication.getName()));
         return "/client/showBillForSave";
     }
 
     @GetMapping("/priceForSave")
     public String getPriceForSave(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList", applicationForRelease.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.AWAITING_PAYMENT, authentication.getName()));
         model.addAttribute("newOtpusk", new Otpusk());
         return "/client/priceForSave";
@@ -145,16 +159,19 @@ public class ClientController {
 
     @GetMapping("/showListTTN")
     public String getShowListTTN(Authentication authentication, Model model) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("ttn", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
         return "/client/showListTTN";
     }
     @GetMapping("/showListTD")
     public String getShowListTD(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("tdList", declarationTDService.findAllByAccount(authentication.getName()));
         return "/client/showListTD";
     }
     @GetMapping("/showTD/{id}")
     public String getShowTD(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("td", declarationTDService.getById(id).build());
         model.addAttribute("listProduct", productService.getAllProductByDeclaration(id));
         model.addAttribute("role", accountService.getRole(authentication.getName()));
@@ -162,39 +179,46 @@ public class ClientController {
     }
     @GetMapping("/showListCMR")
     public String getShowListCMR(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("crmList", crmService.getAllCRM(authentication.getName()));
         return "/client/showListCMR";
     }
     @GetMapping("/showCMR/{id}")
     public String getShowCMR(Model model, Authentication authentication, @PathVariable Long id) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("crm", crmService.getCRMByID(id).build());
         return "/client/showCMR";
     }
     @GetMapping("/regProdPoDeclare")
     public String getRegProdPoDeclare(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("declarationList", declarationTDService.getAllDeclaration());
         return "/client/regProdPoDeclare";
     }
     @GetMapping("/markQuality")
     public String getMarkQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/markQuality";
     }
     @GetMapping("/prinProdQuality")
     public String getPrinProdQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("deliveryList", deliveryProductService.getAllShipmentByClient(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/prinProdQuality";
     }
     @GetMapping("/otpProdQuality")
     public String getOtpProdQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("otpuskList", otpuskService.getAllByAccountClient(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/otpProdQuality";
     }
     @GetMapping("/comunicationQuality")
     public String getComunicationQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("chatRoomList", chatRoomService.getAllByAccount(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         model.addAttribute("login", authentication.getName());

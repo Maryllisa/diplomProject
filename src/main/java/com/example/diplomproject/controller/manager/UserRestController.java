@@ -3,13 +3,11 @@ package com.example.diplomproject.controller.manager;
 import com.example.diplomproject.message.AnswerMessage;
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.MarkingInfoDTO;
-import com.example.diplomproject.model.entity.ApplicationForStorage;
-import com.example.diplomproject.model.entity.DeliveryProduct;
-import com.example.diplomproject.model.entity.MarkingInfo;
-import com.example.diplomproject.model.entity.Product;
+import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplicationForRelease;
 import com.example.diplomproject.model.entity.marking.StatusMarkingApplication;
+import com.example.diplomproject.repository.ImageRepository;
 import com.example.diplomproject.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
@@ -36,6 +34,7 @@ public class UserRestController {
     private final ProductService productService;
     private final DeliveryProductService deliveryProductService;
     private final ApplicationForReleaseService applicationForReleaseService;
+    private final ImageRepository imageRepository;
     @PostMapping("/registration/marking")
     public ResponseEntity<String> addNewMarking(@ModelAttribute MarkingInfoDTO markingInfoDTO,
                                                 Model model){
@@ -104,4 +103,5 @@ public class UserRestController {
         applicationForReleaseService.changeStatus(id, StatusApplicationForRelease.AWAITING_PAYMENT);
         return ResponseEntity.ok("");
     }
+
 }

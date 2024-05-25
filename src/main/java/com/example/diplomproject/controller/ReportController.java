@@ -1,6 +1,8 @@
 package com.example.diplomproject.controller;
 
+import com.example.diplomproject.model.entity.Photo;
 import com.example.diplomproject.report.GenerateReport;
+import com.example.diplomproject.repository.ImageRepository;
 import com.example.diplomproject.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.ByteArrayInputStream;
@@ -23,6 +26,7 @@ public class ReportController {
 
     private final ReportService reportService;
     private final GenerateReport generateReport;
+    private final ImageRepository imageRepository;
 
     @GetMapping("/preview")
     public String previewReport() {
@@ -89,5 +93,16 @@ public class ReportController {
                 .header("pdf", "src")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+    @GetMapping("/profile/{id}")
+    private ResponseEntity<?> getImageByID(@PathVariable Long id)
+    {
+        Photo image = imageRepository.findById(id).orElse(null);
+        Base64.Decoder decoder = Base64.getDecoder();
+        return ResponseEntity.ok()
+                .header("fileName", image.getNamePhoto())
+                .contentType(MediaType.IMAGE_PNG)
+                .contentLength((long) image.getSizePhoto())
+                .body(new InputStreamResource(new ByteArrayInputStream(decoder.decode(image.getPhoto()))));
     }
 }

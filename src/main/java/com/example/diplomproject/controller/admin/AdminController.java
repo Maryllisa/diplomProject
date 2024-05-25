@@ -1,19 +1,11 @@
 package com.example.diplomproject.controller.admin;
 
-import com.example.diplomproject.model.dto.DeclarationDTO;
-import com.example.diplomproject.model.dto.ProductDTO;
-import com.example.diplomproject.model.entity.CustomsAgency;
-import com.example.diplomproject.model.entity.MarkingInfo;
-import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,47 +18,61 @@ public class AdminController {
     private final MarkingInfoService markingInfoService;
 
     @GetMapping("/admin")
-    public String getAdmin() {return "/admin/adminPanel";}
+    public String getAdmin(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/admin/adminPanel";
+    }
 
     @GetMapping("/admin/showAccounts")
-    public String getShowAccounts(Model model) {
+    public String getShowAccounts(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("userList", accountService.getAllUserWithoutAdmin());
         return "/admin/showAccounts";
     }
     @GetMapping("/admin/formKachQuality")
-    public String getFormKachQuality(Model model) {
+    public String getFormKachQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("customsAgencyList", customsAgencyService.getAllNotMark());
         return "/admin/formKachQuality";
     }
     @GetMapping("/admin/showOcForObsl")
-    public String getShowOcForObsl(Model model) {
+    public String getShowOcForObsl(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("customsAgencyList", customsAgencyService.getAllTrueMark());
         return "/admin/showOcForObsl";
     }
     @GetMapping("/admin/otchOfProvisionServ")
-    public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
+    public String getOtchOfProvisionServ(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/admin/otchOfProvisionServ";}
     @GetMapping("/admin/showAppJournal")
-    public String getShowAppJournal(Model model) {
+    public String getShowAppJournal(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("application", applicationForStorageService.getAll());
         return "/admin/showAppJournal";
     }
     @GetMapping("/admin/showOtgrJournal")
-    public String getShowOtgrJournal(Model model) {
+    public String getShowOtgrJournal(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("shipmentList", deliveryProductService.getAll());
         return "/admin/showOtgrJournal";
     }
     @GetMapping("/admin/showOtpJournal")
-    public String getShowOtpJournal(Model model) {
+    public String getShowOtpJournal(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("otpusk", otpuskService.getAll());
         return "/admin/showOtpJournal";
     }
     @GetMapping("/admin/showMarkedProd")
-    public String getShowMarkedProd(Model model) {
+    public String getShowMarkedProd(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
         return "/admin/showMarkedProd";
     }
     @GetMapping("/admin/ShowProdOnWH")
-    public String getShowProdOnWH(Model model) {
+    public String getShowProdOnWH(Model model
+            , Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("delivery", deliveryProductService.getAll());
         return "/admin/ShowProdOnWH";
     }

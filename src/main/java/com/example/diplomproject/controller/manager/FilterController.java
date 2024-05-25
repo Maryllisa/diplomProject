@@ -31,37 +31,42 @@ public class FilterController {
 
 
     @GetMapping("/obrApp")
-    public String getObrApplication(@ModelAttribute SearchData searchData, Model model) {
+    public String getObrApplication(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
 
         model.addAttribute("applications", applicationService
                 .getApplicationTrue(StatusApplication.PENDING, searchData));
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         return "/user/obrApplication";
     }
 
     @GetMapping("/activeApp")
-    public String getActiveApplication(@ModelAttribute SearchData searchData, Model model) {
+    public String getActiveApplication(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applications", applicationService
                 .getApplicationTrue(StatusApplication.PROCESSING, searchData));
         return "/user/activeApplications";
     }
 
     @GetMapping("/appHistory")
-    public String getApplicationHistory(@ModelAttribute SearchData searchData, Model model) {
+    public String getApplicationHistory(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applications", applicationService
                 .getApplicationTrue(StatusApplication.COMPLETED, searchData));
         return "/user/applicationHistory";
     }
 
     @GetMapping("/showSuppliers")
-    public String getSupplierReg(@ModelAttribute SearchData searchData, Model model) {
+    public String getSupplierReg(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("suppliers", individualsService.getAllSuppliers(searchData));
         return "/user/showSupplier";
     }
 
     @GetMapping("/regMark")
-    public String getRegistrationMark(@ModelAttribute SearchData searchData, Model model) {
+    public String getRegistrationMark(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList", applicationForMarking.getAllApplicationsForMarking(searchData));
         model.addAttribute("newMarking", new MarkingInfoDTO());
         model.addAttribute("typeMarking", TypeMarking.getRussianName());
@@ -71,12 +76,14 @@ public class FilterController {
     @GetMapping("/showAllDeclaration")
     public String getAllDeclaration(@ModelAttribute SearchData searchData, Model model,
                                     Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("declaration", declarationTDService.getAllDeclarationByAccount(authentication.getName(), searchData));
         return "/user/showAllDeclaration";
     }
     @GetMapping("/showShipment")
     public String getShipmentList(@ModelAttribute SearchData searchData, Model model,
                                   Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("shipmentList", deliveryProductService.getAllShipment(authentication.getName(), searchData));
         return "/user/showShipment";
     }
@@ -84,18 +91,21 @@ public class FilterController {
     @GetMapping("/relesionReg")
     public String getRelesionReg(@ModelAttribute SearchData searchData, Model model
             , Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList",
                 applicationForReleaseService.getAllApplicationForReleaseAndStatus(authentication.getName(), StatusApplicationForRelease.IN_PROCESSING, searchData));
         return "/user/relesionReg";
     }
     @GetMapping("/showAllMarkedProd")
-    public String getShowAllMarkedProd(@ModelAttribute SearchData searchData, Model model) {
+    public String getShowAllMarkedProd(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("markingInfoList", markingInfoService.getAllMarking(searchData));
         return "/user/showAllMarkedProd";
     }
 
     @GetMapping("/showProductOnWH")
     public String getShowProductOnWH(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("delivery", deliveryProductService.getAllShipment(authentication.getName(), searchData));
         return "/user/showProductOnWH";
     }
