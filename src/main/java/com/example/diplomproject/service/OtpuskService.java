@@ -208,4 +208,62 @@ public class OtpuskService {
         TypedQuery<Otpusk> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }
+
+    public List<Otpusk> getAll() {
+        return otpuskRepository.findAll();
+    }
+
+    public List<Otpusk>  getAll(SearchData searchData) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Otpusk> query = builder.createQuery(Otpusk.class);
+        Root<Otpusk> root = query.from(Otpusk.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.asc(root.get("markForAgency").get("idMarkForAgency")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.asc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.desc(root.get("markForAgency").get("idMarkForAgency")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.desc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "idMarkingInfo":
+                    predicates.add(builder.like(root.get("markForAgency").get("idMarkForAgency"), searchData.getSearchQuery()));
+                    break;
+                case "markForAgency.evaluation":
+                    predicates.add(builder.like(root.get("markForAgency").get("evaluation"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        TypedQuery<Otpusk> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
+    }
 }

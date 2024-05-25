@@ -246,4 +246,63 @@ public class DeliveryProductService {
         TypedQuery<DeliveryProduct> typedQuery = entityManager.createQuery(query);
         return typedQuery.getResultList();
     }
+
+    public List<DeliveryProduct> getAll() {
+        return deliveryProductRepository.findAll();
+    }
+
+    public List<DeliveryProduct> getAll(SearchData searchData) {
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<DeliveryProduct> query = builder.createQuery(DeliveryProduct.class);
+        Root<DeliveryProduct> root = query.from(DeliveryProduct.class);
+        query.select(root);
+
+        List<Order> orders = new ArrayList<>();
+
+        if (searchData.getSortCriteria() != null && !searchData.getSortCriteria().isEmpty()) {
+            if (searchData.getHowSort().equals("asc")) {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.asc(root.get("markForAgency").get("idMarkForAgency")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.asc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            } else {
+                switch (searchData.getSortCriteria()) {
+                    case "idMarkingInfo":
+                        orders.add(builder.desc(root.get("markForAgency").get("idMarkForAgency")));
+                        break;
+                    case "markForAgency.evaluation":
+                        orders.add(builder.desc(root.get("markForAgency").get("evaluation")));
+                        break;
+                }
+            }
+        }
+
+        if (!orders.isEmpty()) {
+            query.orderBy(orders);
+        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
+            switch (searchData.getSearchParam()) {
+                case "idMarkingInfo":
+                    predicates.add(builder.like(root.get("markForAgency").get("idMarkForAgency"), searchData.getSearchQuery()));
+                    break;
+                case "markForAgency.evaluation":
+                    predicates.add(builder.like(root.get("markForAgency").get("evaluation"), searchData.getSearchQuery()));
+                    break;
+            }
+        }
+
+        Predicate searchPredicate = builder.and(predicates.toArray(new Predicate[0]));
+        query.where(searchPredicate);
+        TypedQuery<DeliveryProduct> typedQuery = entityManager.createQuery(query);
+        return typedQuery.getResultList();
+    }
 }

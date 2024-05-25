@@ -3,10 +3,9 @@ package com.example.diplomproject.controller.admin;
 import com.example.diplomproject.model.dto.DeclarationDTO;
 import com.example.diplomproject.model.dto.ProductDTO;
 import com.example.diplomproject.model.entity.CustomsAgency;
+import com.example.diplomproject.model.entity.MarkingInfo;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
-import com.example.diplomproject.service.AccountService;
-import com.example.diplomproject.service.CustomsAgencyService;
-import com.example.diplomproject.service.DeclarationTDService;
+import com.example.diplomproject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,9 +18,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
-    private final DeclarationTDService declarationTDService;
     private final CustomsAgencyService customsAgencyService;
+    private final ApplicationForStorageService applicationForStorageService;
     private final AccountService accountService;
+    private final DeliveryProductService deliveryProductService;
+    private final OtpuskService otpuskService;
+    private final MarkingInfoService markingInfoService;
 
     @GetMapping("/admin")
     public String getAdmin() {return "/admin/adminPanel";}
@@ -31,8 +33,6 @@ public class AdminController {
         model.addAttribute("userList", accountService.getAllUserWithoutAdmin());
         return "/admin/showAccounts";
     }
-    @GetMapping("/admin/showAdmins")
-    public String getShowAdmins() {return "/admin/showAdmins";}
     @GetMapping("/admin/formKachQuality")
     public String getFormKachQuality(Model model) {
         model.addAttribute("customsAgencyList", customsAgencyService.getAllNotMark());
@@ -46,18 +46,30 @@ public class AdminController {
     @GetMapping("/admin/otchOfProvisionServ")
     public String getOtchOfProvisionServ() {return "/admin/otchOfProvisionServ";}
     @GetMapping("/admin/showAppJournal")
-    public String getShowAppJournal() {return "/admin/showAppJournal";}
+    public String getShowAppJournal(Model model) {
+        model.addAttribute("application", applicationForStorageService.getAll());
+        return "/admin/showAppJournal";
+    }
     @GetMapping("/admin/showOtgrJournal")
-    public String getShowOtgrJournal() {return "/admin/showOtgrJournal";}
+    public String getShowOtgrJournal(Model model) {
+        model.addAttribute("shipmentList", deliveryProductService.getAll());
+        return "/admin/showOtgrJournal";
+    }
     @GetMapping("/admin/showOtpJournal")
-    public String getShowOtpJournal() {return "/admin/showOtpJournal";}
+    public String getShowOtpJournal(Model model) {
+        model.addAttribute("otpusk", otpuskService.getAll());
+        return "/admin/showOtpJournal";
+    }
     @GetMapping("/admin/showMarkedProd")
-    public String getShowMarkedProd() {return "/admin/showMarkedProd";}
+    public String getShowMarkedProd(Model model) {
+        model.addAttribute("markingInfoList", markingInfoService.getAllMarking());
+        return "/admin/showMarkedProd";
+    }
     @GetMapping("/admin/ShowProdOnWH")
-    public String getShowProdOnWH() {return "/admin/ShowProdOnWH";}
-    @GetMapping("/admin/showTD")
-    public String getShowTD() {return "/admin/showTD";}
-    @GetMapping("/admin/grafQuality")
-    public String getGrafQuality() {return "/admin/grafQuality";}
+    public String getShowProdOnWH(Model model) {
+        model.addAttribute("delivery", deliveryProductService.getAll());
+        return "/admin/ShowProdOnWH";
+    }
+
 }
 

@@ -10,35 +10,34 @@
 <main>
     <div class="table-responsive " style="width:950px;  margin-left: 27%">
         <h4 class="mb-3" style="color: #814de5"> Просмотреть все товары на складе</h4>
-        <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
-            <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
-                <button class="btn btn-primary rounded-pill px-3" type="button" style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">Отсортировать</button>
-                <select class="form-select" style="margin-left: 10px; width: 150px">
-                    <option value="" selected disabled>По признаку</option>
-                    <option value="признак1">Признак 1</option>
-                    <option value="признак2">Признак 2</option>
-                    <option value="признак3">Признак 3</option>
-                </select>
+        <form action="/admin/filter/ShowProdOnWH" method="get">
+            <div th:name="search-sort" style="width: 950px; display: flex; align-items: center;">
+                <div th:name="sort" style="width: 475px; display: flex; align-items: center;">
+                    <select name="howSort"
+                            class="form-select">
+                        <option value="asc" selected disabled>По возрастанию</option>
+                        <option value="desc">По убыванию</option>
+                    </select>
+                    <select class="form-select" name="sortCriteria" style="margin-left: 10px; width: 150px">
+                        <option value="" selected disabled>По признаку</option>
+                        <option value="idMarkingInfo">По номеру оценки</option>
+                        <option value="markForAgency">По оценкам</option>
+                    </select>
+                </div>
+                <div th:name="search" style="width: 475px; display: flex; align-items: end;">
+                    <input class="form-control" name="searchQuery" type="search" placeholder="Search" aria-label="Search"
+                           style="background-color: #814de5; color: #f2f0f8">
+                    <select class="form-select" name="searchParam" style="margin-left: 10px; width: 160px">
+                        <option value="" selected disabled>По признаку</option>
+                        <option value="idMarkingInfo">По номеру оценки</option>
+                        <option value="markForAgency">По оценкам</option>
+                    </select>
+                </div>
             </div>
-            <div style="width: 475px; display: flex; align-items: end;">
-                <span>с</span>
-                <input class="form-control" name="dateForm" type="date" placeholder="С" style="margin-left: 10px; width: 120px">
-                <span>по</span>
-                <input class="form-control" name="dateTo" type="date" placeholder="По" style="margin-left: 10px; width: 120px">
-            </div>
-
-            <div th:name="search" style="width: 475px; display: flex; align-items: end;">
-                <form role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: #814de5; color: #f2f0f8">
-                </form>
-                <select class="form-select" style="margin-left: 10px; width: 160px">
-                    <option value="" selected disabled>По параметру</option>
-                    <option value="признак1">Параметр 1</option>
-                    <option value="признак2">Параметр 2</option>
-                    <option value="признак3">Параметр 3</option>
-                </select>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary rounded-pill px-3"  style="color: #f2f0f8; background-color: #814de5; border-color: #814de5">
+                Отфилтровать данные
+            </button>
+        </form>
 
         <table class="table table-striped table-sm" style="margin-top: 20px">
             <thead>
