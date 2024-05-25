@@ -103,20 +103,16 @@ public class UserController {
         return "/client/showTD";
     }
 
-    @GetMapping("/relesionHistory")
-    public String getRelesionHistory() {return "/user/relesionHistory";}
-    @GetMapping("/otchAbProdOnWH")
-    public String getOtchAbProdOnWH() {return "/user/otchAbProdOnWH";}
     @GetMapping("/otchPoMarkProd")
     public String getOtchPoMarkProd() {return "/user/otchPoMarkProd";}
+    @GetMapping("/otchAbProdOnWH")
+    public String getOtchAbProdOnWH() {return "/user/otchAbProdOnWH";}
     @GetMapping("/otchPoActApp")
     public String getOtchPoActApp() {return "/user/otchPoActApp";}
     @GetMapping("/otchAppHistory")
     public String getOtchAppHistory() {return "/user/otchAppHistory";}
     @GetMapping("/otchPoOtgr")
     public String getOtchPoOtgr() {return "/user/otchPoOtgr";}
-    @GetMapping("/otchPoOtgrHistory")
-    public String getOtchPoOtgrHistory() {return "/user/otchPoOtgrHistory";}
     @GetMapping("/otchPoOtpProd")
     public String getOtchPoOtpProd() {return "/user/otchPoOtpProd";}
 

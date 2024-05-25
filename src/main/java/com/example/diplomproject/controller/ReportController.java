@@ -1,5 +1,6 @@
 package com.example.diplomproject.controller;
 
+import com.example.diplomproject.report.GenerateReport;
 import com.example.diplomproject.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Base64;
 public class ReportController {
 
     private final ReportService reportService;
+    private final GenerateReport generateReport;
 
     @GetMapping("/preview")
     public String previewReport() {
@@ -34,6 +36,57 @@ public class ReportController {
         ByteArrayResource resource = new ByteArrayResource(reportBytes);
         return ResponseEntity.ok()
                 .header("fileName", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+
+    @GetMapping("/generate-marking-report")
+    @ResponseBody
+    public ResponseEntity<Resource> generateMarkinReport() throws IOException {
+        byte[] reportBytes = generateReport.generateMarkingProd();
+        ByteArrayResource resource = new ByteArrayResource(reportBytes);
+        return ResponseEntity.ok()
+                .header("pdf", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+    @GetMapping("/generate-active-report")
+    @ResponseBody
+    public ResponseEntity<Resource> generateActiveReport() throws IOException {
+        byte[] reportBytes = generateReport.generateActiveWord();
+        ByteArrayResource resource = new ByteArrayResource(reportBytes);
+        return ResponseEntity.ok()
+                .header("pdf", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+    @GetMapping("/generate-history-report")
+    @ResponseBody
+    public ResponseEntity<Resource> generateHistoryReport() throws IOException {
+        byte[] reportBytes = generateReport.generateHistoryWord();
+        ByteArrayResource resource = new ByteArrayResource(reportBytes);
+        return ResponseEntity.ok()
+                .header("pdf", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+    @GetMapping("/generate-delivery-report")
+    @ResponseBody
+    public ResponseEntity<Resource> generateDeliveryReport() throws IOException {
+        byte[] reportBytes = generateReport.generateDeliveryWord();
+        ByteArrayResource resource = new ByteArrayResource(reportBytes);
+        return ResponseEntity.ok()
+                .header("pdf", "src")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
+    }
+    @GetMapping("/generate-otpusk-report")
+    @ResponseBody
+    public ResponseEntity<Resource> generateOtpuskReport() throws IOException {
+        byte[] reportBytes = generateReport.generateOtpuskWord();
+        ByteArrayResource resource = new ByteArrayResource(reportBytes);
+        return ResponseEntity.ok()
+                .header("pdf", "src")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(new ByteArrayInputStream(reportBytes)));
     }
