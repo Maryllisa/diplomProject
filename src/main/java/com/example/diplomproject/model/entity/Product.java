@@ -20,7 +20,6 @@ import java.sql.Date;
 @Entity
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

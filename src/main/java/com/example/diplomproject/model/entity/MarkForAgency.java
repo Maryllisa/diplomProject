@@ -17,6 +17,7 @@ public class MarkForAgency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMarkForAgency;
     @Column
+    @Enumerated(EnumType.STRING)
     private TypeEvaluation typeEvaluation;
     @Column
     private double evaluation;

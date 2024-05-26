@@ -42,6 +42,7 @@ public class FilterControllerClient {
 
     @GetMapping("/zavStatus")
     public String getZavStatus(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList", applicationForStorage.
                 getAllApplicationByAccount(authentication.getName(), searchData));
         return "/client/zavStatus";
@@ -49,6 +50,7 @@ public class FilterControllerClient {
 
     @GetMapping("/prodStatus")
     public String getProdStatus(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("productList", productService.getAllProduct(authentication.getName(), searchData));
         return "/client/prodStatus";
     }
@@ -56,6 +58,7 @@ public class FilterControllerClient {
 
     @GetMapping("/regAsAComp")
     public String getRegAsAComp(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("supplier", individualsService.getSuppliers(authentication.getName(), searchData));
         model.addAttribute("newSupplier", new IndividualsDTO());
         return "/client/regAsAComp";
@@ -63,6 +66,7 @@ public class FilterControllerClient {
 
     @GetMapping("/regAuto")
     public String getRegAuto(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("brand", Brand.getRussianName());
         model.addAttribute("truck", new TruckDTO());
         model.addAttribute("trucks", truckService.getTruck(authentication.getName(), searchData));
@@ -71,12 +75,14 @@ public class FilterControllerClient {
 
     @GetMapping("/showMarkedProduct")
     public String getShowMarkedProduct(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName(), searchData));
         return "/client/showMarkedProduct";
     }
 
     @GetMapping("/addZavForMark")
     public String getAddZavForMark(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationsForMarking" , applicationForMarkingService.getAllApplicationsForMarking(authentication.getName(), searchData));
         model.addAttribute("applicationForMarking", new ApplicationForMarkingDTO());
         model.addAttribute("productList", productService.getAllProduct(authentication.getName()));
@@ -87,6 +93,7 @@ public class FilterControllerClient {
     @GetMapping("/makeZavForOtp")
     public String getMakeZavForOtp(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
 
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("productList", productService.getAllProductByApplication(authentication.getName()));
         model.addAttribute("applicationForRelease", applicationForRelease.getAllApplicationForRelease(authentication.getName(), searchData));
         model.addAttribute("newApplicationForRelease", new ApplicationForReleaseDTO());
@@ -96,12 +103,14 @@ public class FilterControllerClient {
 
     @GetMapping("/showBillForSave")
     public String getShowBillForSave(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("oplataList", otpuskService.getAllByLogin(authentication.getName(), searchData));
         return "/client/showBillForSave";
     }
 
     @GetMapping("/priceForSave")
     public String getPriceForSave(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("applicationList", applicationForRelease.getAllApplicationForReleaseAndStatus(StatusApplicationForRelease.AWAITING_PAYMENT, authentication.getName(), searchData));
         model.addAttribute("newOtpusk", new Otpusk());
         return "/client/priceForSave";
@@ -109,34 +118,40 @@ public class FilterControllerClient {
 
     @GetMapping("/showListTTN")
     public String getShowListTTN(Authentication authentication, @ModelAttribute SearchData searchData, Model model) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("ttn", goodTransportDocumentService.getAllByAccaount(authentication.getName()));
         return "/client/showListTTN";
     }
     @GetMapping("/showListTD")
     public String getShowListTD(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("tdList", declarationTDService.findAllByAccount(authentication.getName(), searchData));
         return "/client/showListTD";
     }
     @GetMapping("/showListCMR")
     public String getShowListCMR(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("crmList", crmService.getAllCRM(authentication.getName(), searchData));
         return "/client/showListCMR";
     }
     @GetMapping("/markQuality")
     public String getMarkQuality(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
         model.addAttribute("marks", markingInfoService.getAllMarking(authentication.getName(), searchData));
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/markQuality";
     }
     @GetMapping("/prinProdQuality")
     public String getPrinProdQuality(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
         model.addAttribute("deliveryList", deliveryProductService.getAllShipmentByClient(authentication.getName(), searchData));
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/prinProdQuality";
     }
     @GetMapping("/otpProdQuality")
     public String getOtpProdQuality(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
         model.addAttribute("otpuskList", otpuskService.getAllByAccountClient(authentication.getName(), searchData));
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
         return "/client/otpProdQuality";
     }
@@ -144,6 +159,7 @@ public class FilterControllerClient {
     public String getComunicationQuality(@ModelAttribute SearchData searchData, Model model, Authentication authentication) {
         model.addAttribute("chatRoomList", chatRoomService.getAllByAccount(authentication.getName(), searchData));
         model.addAttribute("newMarkForAgency", new MarkForAgency());
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("login", authentication.getName());
         return "/client/comunicationQuality";
     }

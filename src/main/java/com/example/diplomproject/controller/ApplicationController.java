@@ -16,4 +16,9 @@ public class ApplicationController {
         // вывод подробный всех документов, относящихся к заявки
         return "Тут пока ничего нет";
     }
+    @GetMapping("/about")
+    public String getAbout(){
+
+        return "/temp/about";
+    }
 }

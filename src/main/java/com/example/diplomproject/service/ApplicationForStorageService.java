@@ -1,10 +1,12 @@
 package com.example.diplomproject.service;
 
 import com.example.diplomproject.model.dto.ApplicationForStorageDTO;
+import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
 import com.example.diplomproject.model.entity.declaration.DeclarationTD;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
+import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,8 @@ public class ApplicationForStorageService {
     private final CRMRepository crmRepository;
     private final ProductRepository productRepository;
     private final EntityManager entityManager;
+    private final CustomsAgencyRepository customsAgencyRepository;
+    private final MarkForAgencyRepository markForAgencyRepository;
 
     public void addNewApplication(ApplicationForStorageDTO applicationForStorageDTO, String name) {
         Account account = accountRepository.findByLogin(name);
@@ -40,7 +44,14 @@ public class ApplicationForStorageService {
                 crmRepository.getById(applicationForStorageDTO.getIdCRM()),
                 truckRepository.getById(applicationForStorageDTO.getIdTruck()));
         applicationForStorage.setAccount(account);
-        applicationForStorageRepository.save(applicationForStorage);
+        applicationForStorage = applicationForStorageRepository.save(applicationForStorage);
+        List<Product> products = productRepository.findAllByDeclarationTD(applicationForStorage.getDeclarationTD());
+          ApplicationForStorage finalApplicationForStorage = applicationForStorage;
+        products.forEach(product -> {
+            product.setApplicationForStorage(finalApplicationForStorage);
+            productRepository.save(product);
+
+        });
     }
 
     public List<ApplicationForStorageDTO> getAllApplicationByAccount(String name) {

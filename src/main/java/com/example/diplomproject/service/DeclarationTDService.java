@@ -313,43 +313,43 @@ public class DeclarationTDService {
             if (searchData.getHowSort().equals("asc")) {
                 switch (searchData.getSortCriteria()) {
                     case "customEDCode":
-                        orders.add(builder.asc(root.get("customEDCode")));
+                        orders.add(builder.asc(root.get("declarationNumber")));
                         break;
                     case "colProd":
-                        orders.add(builder.asc(root.get("colProd")));
+                        orders.add(builder.asc(root.get("colProducts")));
                         break;
                     case "netWeight":
-                        orders.add(builder.asc(root.get("netWeight")));
+                        orders.add(builder.asc(root.get("totalNetWeight")));
                         break;
                     case "grossWeight":
-                        orders.add(builder.asc(root.get("grossWeight")));
+                        orders.add(builder.asc(root.get("totalGrossWeight")));
                         break;
                     case "senderDTO.organizationName":
-                        orders.add(builder.asc(root.get("senderDTO").get("organizationName")));
+                        orders.add(builder.asc(root.get("individuals").get("organizationName")));
                         break;
                     case "recipientDTO.organizationName":
-                        orders.add(builder.asc(root.get("recipientDTO").get("organizationName")));
+                        orders.add(builder.asc(root.get("recipientAddress").get("organizationName")));
                         break;
                 }
             } else {
                 switch (searchData.getSortCriteria()) {
                     case "customEDCode":
-                        orders.add(builder.desc(root.get("customEDCode")));
+                        orders.add(builder.desc(root.get("declarationNumber")));
                         break;
                     case "colProd":
-                        orders.add(builder.desc(root.get("colProd")));
+                        orders.add(builder.desc(root.get("colProducts")));
                         break;
                     case "netWeight":
-                        orders.add(builder.desc(root.get("netWeight")));
+                        orders.add(builder.desc(root.get("totalNetWeight")));
                         break;
                     case "grossWeight":
-                        orders.add(builder.desc(root.get("grossWeight")));
+                        orders.add(builder.desc(root.get("totalGrossWeight")));
                         break;
                     case "senderDTO.organizationName":
-                        orders.add(builder.desc(root.get("senderDTO").get("organizationName")));
+                        orders.add(builder.desc(root.get("individuals").get("organizationName")));
                         break;
                     case "recipientDTO.organizationName":
-                        orders.add(builder.desc(root.get("recipientDTO").get("organizationName")));
+                        orders.add(builder.desc(root.get("recipientAddress").get("organizationName")));
                         break;
                 }
             }
@@ -364,22 +364,22 @@ public class DeclarationTDService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "customEDCode":
-                    predicates.add(builder.like(root.get("customEDCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("declarationNumber"), searchData.getSearchQuery()));
                     break;
                 case "colProd":
-                    predicates.add(builder.like(root.get("colProd"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("colProducts"), searchData.getSearchQuery()));
                     break;
                 case "netWeight":
-                    predicates.add(builder.like(root.get("netWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("totalNetWeight"), searchData.getSearchQuery()));
                     break;
                 case "grossWeight":
-                    predicates.add(builder.like(root.get("grossWeight"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("totalGrossWeight"), searchData.getSearchQuery()));
                     break;
                 case "senderDTO.organizationName":
-                    predicates.add(builder.like(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("individuals").get("organizationName"), searchData.getSearchQuery()));
                     break;
                 case "recipientDTO.organizationName":
-                    predicates.add(builder.like(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("recipientAddress").get("organizationName"), searchData.getSearchQuery()));
                     break;
             }
         }
@@ -423,34 +423,34 @@ public class DeclarationTDService {
                         orders.add(builder.asc(root.get("declarationNumber")));
                         break;
                     case "colProd":
-                        orders.add(builder.asc(root.get("colProd")));
+                        orders.add(builder.asc(root.get("colProducts")));
                         break;
                     case "osobenOfDeclar":
-                        orders.add(builder.asc(root.get("osobenOfDeclar")));
+                        orders.add(builder.asc(root.get("declarationDetails")));
                         break;
                     case "senderDTO.registrationCode":
-                        orders.add(builder.asc(root.get("senderDTO").get("registrationCode")));
+                        orders.add(builder.asc(root.get("individuals").get("registrationCode")));
                         break;
                     case "senderDTO.organizationName":
-                        orders.add(builder.asc(root.get("senderDTO").get("organizationName")));
+                        orders.add(builder.asc(root.get("individuals").get("organizationName")));
                         break;
                     case "recipientDTO.registrationCode":
-                        orders.add(builder.asc(root.get("recipientDTO").get("registrationCode")));
+                        orders.add(builder.asc(root.get("recipientAddress").get("registrationCode")));
                         break;
                     case "recipientDTO.organizationName":
-                        orders.add(builder.asc(root.get("recipientDTO").get("organizationName")));
+                        orders.add(builder.asc(root.get("recipientAddress").get("organizationName")));
                         break;
                     case "declarator.registrationCode":
-                        orders.add(builder.asc(root.get("declarator").get("registrationCode")));
+                        orders.add(builder.asc(root.get("declarant").get("registrationCode")));
                         break;
                     case "declarator.organizationName":
-                        orders.add(builder.asc(root.get("declarator").get("organizationName")));
+                        orders.add(builder.asc(root.get("declarant").get("organizationName")));
                         break;
                     case "otvetstvenoeFace.registrationCode":
-                        orders.add(builder.asc(root.get("otvetstvenoeFace").get("registrationCode")));
+                        orders.add(builder.asc(root.get("financialRegulator").get("registrationCode")));
                         break;
                     case "otvetstvenoeFace.organizationName":
-                        orders.add(builder.asc(root.get("otvetstvenoeFace").get("organizationName")));
+                        orders.add(builder.asc(root.get("financialRegulator").get("organizationName")));
                         break;
                 }
             } else {
@@ -459,34 +459,34 @@ public class DeclarationTDService {
                         orders.add(builder.desc(root.get("declarationNumber")));
                         break;
                     case "colProd":
-                        orders.add(builder.desc(root.get("colProd")));
+                        orders.add(builder.desc(root.get("colProducts")));
                         break;
                     case "osobenOfDeclar":
-                        orders.add(builder.desc(root.get("osobenOfDeclar")));
+                        orders.add(builder.desc(root.get("declarationDetails")));
                         break;
                     case "senderDTO.registrationCode":
-                        orders.add(builder.desc(root.get("senderDTO").get("registrationCode")));
+                        orders.add(builder.desc(root.get("individuals").get("registrationCode")));
                         break;
                     case "senderDTO.organizationName":
-                        orders.add(builder.desc(root.get("senderDTO").get("organizationName")));
+                        orders.add(builder.desc(root.get("individuals").get("organizationName")));
                         break;
                     case "recipientDTO.registrationCode":
-                        orders.add(builder.desc(root.get("recipientDTO").get("registrationCode")));
+                        orders.add(builder.desc(root.get("recipientAddress").get("registrationCode")));
                         break;
                     case "recipientDTO.organizationName":
-                        orders.add(builder.desc(root.get("recipientDTO").get("organizationName")));
+                        orders.add(builder.desc(root.get("recipientAddress").get("organizationName")));
                         break;
                     case "declarator.registrationCode":
-                        orders.add(builder.desc(root.get("declarator").get("registrationCode")));
+                        orders.add(builder.desc(root.get("declarant").get("registrationCode")));
                         break;
                     case "declarator.organizationName":
-                        orders.add(builder.desc(root.get("declarator").get("organizationName")));
+                        orders.add(builder.desc(root.get("declarant").get("organizationName")));
                         break;
                     case "otvetstvenoeFace.registrationCode":
-                        orders.add(builder.desc(root.get("otvetstvenoeFace").get("registrationCode")));
+                        orders.add(builder.desc(root.get("financialRegulator").get("registrationCode")));
                         break;
                     case "otvetstvenoeFace.organizationName":
-                        orders.add(builder.desc(root.get("otvetstvenoeFace").get("organizationName")));
+                        orders.add(builder.desc(root.get("financialRegulator").get("organizationName")));
                         break;
                 }
             }
@@ -500,39 +500,38 @@ public class DeclarationTDService {
 
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
-
                 case "declarationNumber":
-                    predicates.add(builder.like(root.get("declarationNumber"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("declarationNumber"),searchData.getSearchQuery()));
                     break;
                 case "colProd":
-                    predicates.add(builder.like(root.get("colProd"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("colProducts"),searchData.getSearchQuery()));
                     break;
                 case "osobenOfDeclar":
-                    predicates.add(builder.like(root.get("osobenOfDeclar"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("declarationDetails"),searchData.getSearchQuery()));
                     break;
                 case "senderDTO.registrationCode":
-                    predicates.add(builder.like(root.get("senderDTO").get("registrationCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("individuals").get("registrationCode"),searchData.getSearchQuery()));
                     break;
                 case "senderDTO.organizationName":
-                    predicates.add(builder.like(root.get("senderDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("individuals").get("organizationName"),searchData.getSearchQuery()));
                     break;
                 case "recipientDTO.registrationCode":
-                    predicates.add(builder.like(root.get("recipientDTO").get("registrationCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("recipientAddress").get("registrationCode"),searchData.getSearchQuery()));
                     break;
                 case "recipientDTO.organizationName":
-                    predicates.add(builder.like(root.get("recipientDTO").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("recipientAddress").get("organizationName"),searchData.getSearchQuery()));
                     break;
                 case "declarator.registrationCode":
-                    predicates.add(builder.like(root.get("declarator").get("registrationCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("declarant").get("registrationCode"),searchData.getSearchQuery()));
                     break;
                 case "declarator.organizationName":
-                    predicates.add(builder.like(root.get("declarator").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("declarant").get("organizationName"),searchData.getSearchQuery()));
                     break;
                 case "otvetstvenoeFace.registrationCode":
-                    predicates.add(builder.like(root.get("otvetstvenoeFace").get("registrationCode"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("financialRegulator").get("registrationCode"),searchData.getSearchQuery()));
                     break;
                 case "otvetstvenoeFace.organizationName":
-                    predicates.add(builder.like(root.get("otvetstvenoeFace").get("organizationName"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("financialRegulator").get("organizationName"),searchData.getSearchQuery()));
                     break;
             }
         }

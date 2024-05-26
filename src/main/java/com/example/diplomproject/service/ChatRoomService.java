@@ -7,13 +7,14 @@ import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.dto.message.ChatRoomDTO;
 import com.example.diplomproject.model.dto.message.MessageDTO;
 import com.example.diplomproject.model.entity.Account;
+import com.example.diplomproject.model.entity.CustomsAgency;
+import com.example.diplomproject.model.entity.MarkForAgency;
 import com.example.diplomproject.model.entity.Otpusk;
 import com.example.diplomproject.model.entity.chat.ChatMessage;
 import com.example.diplomproject.model.entity.chat.ChatRoom;
 import com.example.diplomproject.model.entity.enumStatus.MessageStatus;
-import com.example.diplomproject.repository.ChatMessageRepository;
-import com.example.diplomproject.repository.ChatRoomRepository;
-import com.example.diplomproject.repository.UserRepository;
+import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
+import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,12 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ChatRoomService {
-    private final EntityManager entityManager;private final ChatRoomRepository chatRoomRepository;
+    private final EntityManager entityManager;
+    private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
     private final ChatMessageRepository messageRepository;
+    private final CustomsAgencyRepository customsAgencyRepository;
+    private final MarkForAgencyRepository markForAgencyRepository;
     public ChatRoomDTO findChatMessages(String senderLogin, String recipientLogin) {
         Account sender = userRepository.findByLogin(senderLogin);
         Account recipient = userRepository.findByLogin(recipientLogin);
@@ -41,6 +45,27 @@ public class ChatRoomService {
                         recipient,
                         null, null);
                 chatRoom = chatRoomRepository.save(chatRoom);
+                List<CustomsAgency> customsAgencyList = customsAgencyRepository.findAllByAccount(sender);
+                if (sender!=null){
+                    CustomsAgency customsAgency = customsAgencyList.get(customsAgencyList.size()-1);
+                    MarkForAgency markForAgency = new MarkForAgency();
+                    markForAgency.setCustomsAgency(customsAgency);
+                    markForAgency.setTypeEvaluation(TypeEvaluation.comunicationQuality);
+                    markForAgency.setClient(sender);
+                    customsAgency.setListMarkForAgency(markForAgencyRepository.save(markForAgency));
+                    customsAgency.setChatRoom(chatRoom);
+                    customsAgencyRepository.save(customsAgency);
+                }
+                else {
+                    CustomsAgency customsAgency = customsAgencyList.get(customsAgencyList.size()-1);
+                    MarkForAgency markForAgency = new MarkForAgency();
+                    markForAgency.setCustomsAgency(customsAgency);
+                    markForAgency.setTypeEvaluation(TypeEvaluation.comunicationQuality);
+                    markForAgency.setClient(recipient);
+                    customsAgency.setListMarkForAgency(markForAgencyRepository.save(markForAgency));
+                    customsAgency.setChatRoom(chatRoom);
+                    customsAgencyRepository.save(customsAgency);
+                }
             }
         }
         ChatRoomDTO chatRoomDTO = new ChatRoomDTO();

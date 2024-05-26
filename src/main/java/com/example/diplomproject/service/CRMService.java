@@ -270,10 +270,10 @@ public class CRMService {
             if (searchData.getHowSort().equals("asc")) {
                 switch (searchData.getSortCriteria()) {
                     case "numbers":
-                        orders.add(builder.asc(root.get("idApplication")));
+                        orders.add(builder.asc(root.get("numbers")));
                         break;
                     case "volume":
-                        orders.add(builder.asc(root.get("dateZav")));
+                        orders.add(builder.asc(root.get("volume")));
                         break;
                     case "sender.registrationCode":
                         orders.add(builder.asc(root.get("sender").get("registrationCode")));
@@ -291,10 +291,10 @@ public class CRMService {
             } else {
                 switch (searchData.getSortCriteria()) {
                     case "numbers":
-                        orders.add(builder.desc(root.get("idApplication")));
+                        orders.add(builder.desc(root.get("numbers")));
                         break;
                     case "volume":
-                        orders.add(builder.desc(root.get("dateZav")));
+                        orders.add(builder.desc(root.get("volume")));
                         break;
                     case "sender.registrationCode":
                         orders.add(builder.desc(root.get("sender").get("registrationCode")));
@@ -321,10 +321,10 @@ public class CRMService {
         if (searchData.getSearchQuery() != null && !searchData.getSearchQuery().isEmpty()) {
             switch (searchData.getSearchParam()) {
                 case "numbers":
-                    predicates.add(builder.like(root.get("idApplication"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("numbers"), searchData.getSearchQuery()));
                     break;
                 case "volume":
-                    predicates.add(builder.like(root.get("dateZav"), searchData.getSearchQuery()));
+                    predicates.add(builder.like(root.get("volume"), searchData.getSearchQuery()));
                     break;
                 case "sender.registrationCode":
                     predicates.add(builder.like(root.get("sender").get("registrationCode"), searchData.getSearchQuery()));

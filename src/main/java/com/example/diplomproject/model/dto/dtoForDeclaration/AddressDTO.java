@@ -38,7 +38,6 @@ public class AddressDTO {
     private String build;
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "[АВЕКМНОРСТУХABEKMHOPCTYX]\\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\\d{2,3}")
     private String ogrnNumber;
 
     public Address build() {

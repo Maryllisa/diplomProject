@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -31,7 +32,7 @@ public class CustomsAgency {
     @ManyToOne
     private Account account;
     @OneToMany
-    private List<MarkForAgency> markForAgencies;
+    private List<MarkForAgency> markForAgencies = new ArrayList<>();
 
     public void setListMarkForAgency (MarkForAgency markForAgency){
         this.markForAgencies.add(markForAgency);

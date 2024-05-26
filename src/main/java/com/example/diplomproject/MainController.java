@@ -34,11 +34,12 @@ public class MainController {
         return "main/login";
     }
     @GetMapping("/openChat")
-    public String getChat(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String getChat(Model model, Authentication authentication){
         String login = authentication.getName();
         accountService.changeStatusOnline(login);
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
         model.addAttribute("login", login);
+        model.addAttribute("role", accountService.getRole(login));
         return "chat/chatApp";
     }
     @GetMapping("/openChat/logout")

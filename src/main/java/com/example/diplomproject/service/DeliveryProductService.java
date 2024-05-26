@@ -6,12 +6,12 @@ import javax.persistence.criteria.*;
 import com.example.diplomproject.model.dto.DeliveryProductDTO;
 import com.example.diplomproject.model.dto.SearchData;
 import com.example.diplomproject.model.entity.*;
-import com.example.diplomproject.model.entity.chat.ChatRoom;
 import com.example.diplomproject.model.entity.enumStatus.StatusApplication;
 import com.example.diplomproject.model.entity.enumStatus.TypeEvaluation;
 import com.example.diplomproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
@@ -107,7 +107,7 @@ public class DeliveryProductService {
     }
 
     public List<DeliveryProduct> getAllShipmentByClient(String name) {
-        return deliveryProductRepository.findAllByClient(userRepository.findByLogin(name));
+        return deliveryProductRepository.findAll();
     }
 
     public List<DeliveryProduct> getAllShipment(String name, SearchData searchData) {

@@ -76,6 +76,11 @@ public class AdminController {
         model.addAttribute("delivery", deliveryProductService.getAll());
         return "/admin/ShowProdOnWH";
     }
+    @GetMapping("/admin/grafQuality")
+    public String getGrafQuality(Model model, Authentication authentication) {
+        model.addAttribute("person", accountService.getAccount(authentication.getName()));
+        return "/admin/grafQuality";
+    }
 
 }
 

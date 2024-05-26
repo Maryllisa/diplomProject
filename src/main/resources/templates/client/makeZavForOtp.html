@@ -156,20 +156,22 @@
         const status = document.getElementById("status" + id).textContent;
         if (status !== "В обработке")
             alert("К сожелению заявку нельзя отменить, так как заявление в обработке у работников склада. Для подробной информации можете свявться с нами через чат...");
-        fetch('/client/deleteZavForOtp/' + id, {
-            method: 'GET',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert("Заяка отменена");
-                    window.location.href = '/client/makeZavForOtp';
-                } else if (data.status === "bad") {
-                    alert("Ошибка на сервере, попробуйте позже!");
-                } else {
-                    console.error('Произошла ошибка:', data.message);
-                }
-            });
+        else {
+            fetch('/client/deleteZavForOtp/' + id, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        alert("Заяка отменена");
+                        window.location.href = '/client/makeZavForOtp';
+                    } else if (data.status === "bad") {
+                        alert("Ошибка на сервере, попробуйте позже!");
+                    } else {
+                        console.error('Произошла ошибка:', data.message);
+                    }
+                });
+        }
     }
 </script>
 </html>
