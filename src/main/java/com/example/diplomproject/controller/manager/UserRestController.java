@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
@@ -36,10 +37,11 @@ public class UserRestController {
     private final ApplicationForReleaseService applicationForReleaseService;
     private final ImageRepository imageRepository;
     @PostMapping("/registration/marking")
-    public ResponseEntity<String> addNewMarking(@ModelAttribute MarkingInfoDTO markingInfoDTO,
-                                                Model model){
+    public RedirectView addNewMarking(@ModelAttribute MarkingInfoDTO markingInfoDTO,
+                                      Model model, RedirectView redirectView){
         markingInfoService.addNewMarking(markingInfoDTO);
-        return ResponseEntity.ok("Добавлено");
+        redirectView.setUrl("/user/regMark");
+        return redirectView;
     }
     @GetMapping("/qr/{id}")
     private ResponseEntity<?> getImageByIDUser(@PathVariable Long id)

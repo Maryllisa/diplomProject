@@ -195,7 +195,7 @@ public class ClientRestController {
                                                RedirectView redirectView) {
         markForAgency.setTypeEvaluation(TypeEvaluation.comunicationQuality);
         markForAgencyService.addCommunication(idMark, markForAgency, authentication.getName());
-        redirectView.setUrl("/client/communicationQuality");
+        redirectView.setUrl("/client/comunicationQuality");
         return redirectView;
     }
 

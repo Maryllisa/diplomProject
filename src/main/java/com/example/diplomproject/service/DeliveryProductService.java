@@ -64,7 +64,7 @@ public class DeliveryProductService {
         deliveryProductDTO.getCheckProduct().forEach((x,y)->{
             Product p = productRepository.getById(x);
             p.setIsDelivery(y);
-            p.setApplicationForStorage(product.getApplicationForStorage());
+            product.setApplicationForStorage(p.getApplicationForStorage());
             productsList.add(productRepository.save(p));
 
         });
@@ -78,11 +78,13 @@ public class DeliveryProductService {
         product.setAccount(userRepository.findByLogin(login));
         DeliveryProduct delivery = deliveryProductRepository.save(product);
         CustomsAgency agency = new CustomsAgency();
+        agency.setAccount(product.getApplicationForStorage().getAccount());
         agency.setDeliveryProduct(delivery);
         agency= customsAgencyRepository.save(agency);
         MarkForAgency mark = new MarkForAgency();
         mark.setCustomsAgency(agency);
         mark.setEvaluation(deliveryProductDTO.getDeliveryEvalution());
+        mark.setClient(product.getApplicationForStorage().getAccount());
         mark.setTypeEvaluation(TypeEvaluation.qualityProduct);
         agency.setListMarkForAgency(markForAgencyRepository.save(mark));
         customsAgencyRepository.save(agency);
