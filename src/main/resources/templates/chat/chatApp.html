@@ -18,7 +18,8 @@
 <div th:if="${role.equals('[EMPLOYEE]')}" th:insert="blocks/links :: div"></div>
 <div th:if="${role.equals('[EMPLOYEE]')}" th:insert="blocks/header :: header"></div>
 <div th:if="${role.equals('[EMPLOYEE]')}" th:insert="blocks/userSidebare :: userSidebare"></div>
-<body ><div th:style="${role.equals('[EMPLOYEE]') ? 'position: fixed; background-color: #f2f0f8; z-index: -1; top: 100px!important;' : 'background-color: #f2f0f8;'}"><div class="container" style="margin-left: 400px;!important; width: 800px;!important;">
+<body>
+    <div class="container" style="margin-left: 400px;!important; width: 800px;!important;">
     <input type="hidden" id="loginInput" name="login" th:value="${login}"/>
     <div class="chat-container" id="chat-page">
         <div class="users-list">
@@ -53,7 +54,6 @@
     </div>
 </div>
 
-</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
